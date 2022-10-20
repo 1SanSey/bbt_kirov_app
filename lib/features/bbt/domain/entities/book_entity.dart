@@ -17,6 +17,5 @@ class BookEntity extends Equatable {
       required this.singleOrSet});
 
   @override
-  List<Object?> get props =>
-      [name, price, image, description, size, singleOrSet];
+  List<Object?> get props => [name, price];
 }
