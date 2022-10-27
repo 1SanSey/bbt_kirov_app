@@ -1,4 +1,4 @@
-import 'package:bbt_kirov_app/features/bbt/data/datasources/remote_data_source.dart';
+import 'package:bbt_kirov_app/features/home/data/datasources/remote_data_source.dart';
 import 'package:flutter/material.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 

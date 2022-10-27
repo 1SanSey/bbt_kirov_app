@@ -3,14 +3,16 @@ import 'package:equatable/equatable.dart';
 class BookEntity extends Equatable {
   final String name;
   final int price;
-  final String image;
-  final String description;
-  final String size;
-  final String singleOrSet;
+  final bool isPopular;
+  final String? image;
+  final String? description;
+  final String? size;
+  final String? singleOrSet;
 
   const BookEntity(
       {required this.name,
       required this.price,
+      required this.isPopular,
       required this.image,
       required this.description,
       required this.size,

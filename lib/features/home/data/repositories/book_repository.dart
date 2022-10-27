@@ -1,10 +1,10 @@
 import 'package:bbt_kirov_app/core/error/exception.dart';
 import 'package:bbt_kirov_app/core/platform/network_info.dart';
-import 'package:bbt_kirov_app/features/bbt/data/datasources/remote_data_source.dart';
-import 'package:bbt_kirov_app/features/bbt/data/models/book_model.dart';
-import 'package:bbt_kirov_app/features/bbt/domain/entities/book_entity.dart';
+import 'package:bbt_kirov_app/features/home/data/datasources/remote_data_source.dart';
+import 'package:bbt_kirov_app/features/home/data/models/book_model.dart';
+import 'package:bbt_kirov_app/features/home/domain/entities/book_entity.dart';
 import 'package:bbt_kirov_app/core/error/failure.dart';
-import 'package:bbt_kirov_app/features/bbt/domain/repositories/book_repository.dart';
+import 'package:bbt_kirov_app/features/home/domain/repositories/book_repository.dart';
 import 'package:dartz/dartz.dart';
 
 class BookRepositoryImpl implements BookRepository {
@@ -17,7 +17,7 @@ class BookRepositoryImpl implements BookRepository {
   @override
   Future<Either<Failure, List<BookEntity>>> getAllBooks() async {
     return _getBooks(() {
-      return remoteDataSource.getAllBooks();
+      return remoteDataSource.getBooksByPopularity();
     });
   }
 
