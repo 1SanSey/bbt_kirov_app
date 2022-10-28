@@ -15,9 +15,9 @@ class BookRepositoryImpl implements BookRepository {
       {required this.networkInfo, required this.remoteDataSource});
 
   @override
-  Future<Either<Failure, List<BookEntity>>> getAllBooks() async {
+  Future<Either<Failure, List<BookEntity>>> getPopularBooks() async {
     return _getBooks(() {
-      return remoteDataSource.getBooksByPopularity();
+      return remoteDataSource.getPopularBooks();
     });
   }
 

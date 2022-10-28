@@ -1,18 +1,18 @@
 import 'package:bbt_kirov_app/core/error/failure.dart';
 import 'package:bbt_kirov_app/core/usecases/usecases.dart';
-import 'package:bbt_kirov_app/features/bbt/domain/entities/book_entity.dart';
-import 'package:bbt_kirov_app/features/bbt/domain/repositories/book_repository.dart';
+import 'package:bbt_kirov_app/features/home/domain/entities/book_entity.dart';
+import 'package:bbt_kirov_app/features/home/domain/repositories/book_repository.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 
-class AllBooks extends UseCase<List<BookEntity>> {
+class PopularBooks extends UseCase<List<BookEntity>> {
   final BookRepository bookRepository;
 
-  AllBooks(this.bookRepository);
+  PopularBooks(this.bookRepository);
 
   @override
   Future<Either<Failure, List<BookEntity>>> call() async {
-    return await bookRepository.getAllBooks();
+    return await bookRepository.getPopularBooks();
   }
 }
 

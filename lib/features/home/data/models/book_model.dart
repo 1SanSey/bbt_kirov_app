@@ -22,7 +22,7 @@ class BookModel extends BookEntity {
   factory BookModel.fromDb(ParseObject object) {
     return BookModel(
       name: object.get<String>('name'),
-      price: object.get<String>('price'),
+      price: object.get<int>('price'),
       isPopular: object.get<bool>('isPopular'),
       image: object.get<String>('image') ?? '',
       description: object.get<String>('description') ?? '',

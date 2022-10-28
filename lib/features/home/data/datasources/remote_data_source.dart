@@ -1,8 +1,14 @@
-import 'package:bbt_kirov_app/core/error/exception.dart';
 import 'package:bbt_kirov_app/features/home/data/models/book_model.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 
-class BookRemoteDataSource {
+abstract class BookRemoteDataSource {
+  Future<List<BookModel>> getPopularBooks();
+  Future<List<BookModel>> getBooksByName(String name);
+  Future<List<BookModel>> getBooksBySize(String size);
+  Future<List<BookModel>> getSetBooks(String singleOrSet);
+}
+
+class BookRemoteDataSourceImpl extends BookRemoteDataSource {
   // static const String _baseUrl = 'https://parseapi.back4app.com/classes';
 
   static Future<void> initParse() async {
@@ -29,29 +35,33 @@ class BookRemoteDataSource {
     return books;
   } */
 
-  Future<List<BookModel>> getBooksByPopularity() async {
+  @override
+  Future<List<BookModel>> getPopularBooks() async {
     final QueryBuilder<ParseObject> parseQuery =
         QueryBuilder<ParseObject>(ParseObject('Books'));
-    parseQuery.whereEqualTo('isPopular', 'True');
+    parseQuery.whereEqualTo('isPopular', true);
     final apiResponse = await parseQuery.query();
+    // final apiResponse = await ParseObject('Books').getAll();
 
     if (apiResponse.success && apiResponse.results != null) {
       for (var object in apiResponse.results as List<ParseObject>) {
         books.add(BookModel.fromDb(object));
       }
     }
-
     return books;
   }
 
+  @override
   Future<List<BookModel>> getBooksByName(String name) async {
     return _getBooksByQuery('name', name);
   }
 
+  @override
   Future<List<BookModel>> getBooksBySize(String size) async {
     return _getBooksByQuery('size', size);
   }
 
+  @override
   Future<List<BookModel>> getSetBooks(String singleOrSet) async {
     return _getBooksByQuery('singleOrSet', singleOrSet);
   }
