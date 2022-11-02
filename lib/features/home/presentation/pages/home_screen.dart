@@ -1,10 +1,17 @@
 import 'package:bbt_kirov_app/common/app_colors.dart';
 import 'package:bbt_kirov_app/features/home/presentation/widgets/book_list_widget.dart';
+import 'package:bbt_kirov_app/features/home/presentation/widgets/top_home_widget.dart';
+
 import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,37 +29,11 @@ class HomePage extends StatelessWidget {
           )
         ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: const <Widget>[
-            SizedBox(height: 8),
-            Padding(
-              padding: EdgeInsets.only(right: 12, left: 12),
-              child: TextField(
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: AppColors.greyColor,
-                  hintText: 'Поиск',
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide.none,
-                    borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(height: 16),
-            Text(
-              'Популярные',
-              textAlign: TextAlign.left,
-              style: TextStyle(
-                  color: AppColors.greyColor2,
-                  fontSize: 25,
-                  fontWeight: FontWeight.w900),
-            ),
-            SizedBox(height: 16),
-            BooksListHome(),
-          ],
-        ),
+      body: const CustomScrollView(
+        slivers: <Widget>[
+          TopHomeWidget(),
+          BooksListHome(),
+        ],
       ),
     );
   }

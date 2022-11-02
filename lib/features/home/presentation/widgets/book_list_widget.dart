@@ -11,52 +11,77 @@ class BooksListHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     BlocProvider.of<HomeBooksBloc>(context).add(HomeLoadBooksEvent());
+
     return BlocBuilder<HomeBooksBloc, HomeBooksState>(
         builder: (context, state) {
       List<BookEntity> homeBooks = [];
 
       if (state is HomeBooksLoading) {
-        loadingIndicator();
+        return SliverList(
+          delegate: SliverChildBuilderDelegate(
+            (context, index) {
+              return loadingIndicator();
+            },
+          ),
+        );
       }
       if (state is HomeBooksLoaded) {
         homeBooks = state.books;
         if (homeBooks.isEmpty) {
-          return _showErrorText('Books are not loaded');
+          return SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (context, index) {
+                return _showErrorText('Books are not loaded');
+              },
+            ),
+          );
         }
       } else if (state is HomeBooksError) {
-        return Center(child: _showErrorText(state.message));
+        return SliverList(
+          delegate: SliverChildBuilderDelegate(
+            (context, index) {
+              return _showErrorText(state.message);
+            },
+          ),
+        );
       } else {
-        return Center(
-          child: loadingIndicator(),
-          //child: Icon(Icons.now_wallpaper),
+        return SliverList(
+          delegate: SliverChildBuilderDelegate(
+            (context, index) {
+              return loadingIndicator();
+            },
+          ),
         );
       }
 
-      return Padding(
-        padding: const EdgeInsets.only(bottom: 8, right: 12, left: 12),
-        child: GridView.builder(
-            scrollDirection: Axis.vertical,
-            shrinkWrap: true,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              mainAxisSpacing: 8.0,
-              crossAxisSpacing: 8.0,
-              mainAxisExtent: 270,
-            ),
-            itemBuilder: (context, index) {
+      return SliverPadding(
+        padding: const EdgeInsets.only(bottom: 8, right: 8, left: 8),
+        sliver: SliverGrid(
+          delegate: SliverChildBuilderDelegate(
+            (context, index) {
               return BookCard(book: homeBooks[index]);
             },
-            itemCount: homeBooks.length),
+            childCount: homeBooks.length,
+          ),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            mainAxisSpacing: 8.0,
+            crossAxisSpacing: 8.0,
+            mainAxisExtent: 270,
+          ),
+        ),
       );
     });
   }
 
   Widget _showErrorText(String errorMessage) {
-    return Container(
-      color: Colors.black,
-      child: Text(
-        errorMessage,
-        style: const TextStyle(color: Colors.white, fontSize: 25),
+    return Center(
+      child: Container(
+        color: Colors.white,
+        child: Text(
+          errorMessage,
+          style: const TextStyle(color: Colors.black, fontSize: 25),
+        ),
       ),
     );
   }
