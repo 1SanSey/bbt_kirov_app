@@ -1,22 +1,25 @@
 import 'package:bbt_kirov_app/common/loading_indicator.dart';
+import 'package:bbt_kirov_app/common/error_text.dart';
+import 'package:bbt_kirov_app/features/category/presentation/bloc/category_bloc.dart';
 import 'package:bbt_kirov_app/features/home/domain/entities/book_entity.dart';
-import 'package:bbt_kirov_app/features/home/presentation/bloc/home_bloc.dart';
 import 'package:bbt_kirov_app/features/home/presentation/widgets/book_card_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class BooksListHome extends StatelessWidget {
-  const BooksListHome({super.key});
+class BooksCategory extends StatelessWidget {
+  const BooksCategory({super.key, required this.idCategory});
+  final int idCategory;
 
   @override
   Widget build(BuildContext context) {
-    BlocProvider.of<HomeBooksBloc>(context).add(HomeLoadBooksEvent());
+    BlocProvider.of<CategoryBooksBySizeBloc>(context)
+        .add(const CategoryLoadBooksEvent(param: 'small'));
 
-    return BlocBuilder<HomeBooksBloc, HomeBooksState>(
+    return BlocBuilder<CategoryBooksBySizeBloc, CategoryBooksState>(
         builder: (context, state) {
-      List<BookEntity> homeBooks = [];
+      List<BookEntity> categoryBooks = [];
 
-      if (state is HomeBooksLoading) {
+      if (state is CategoryBooksLoading) {
         return SliverList(
           delegate: SliverChildBuilderDelegate(
             (context, index) {
@@ -25,22 +28,22 @@ class BooksListHome extends StatelessWidget {
           ),
         );
       }
-      if (state is HomeBooksLoaded) {
-        homeBooks = state.books;
-        if (homeBooks.isEmpty) {
+      if (state is CategoryBooksLoaded) {
+        categoryBooks = state.books;
+        if (categoryBooks.isEmpty) {
           return SliverList(
             delegate: SliverChildBuilderDelegate(
               (context, index) {
-                return _showErrorText('Books are not loaded');
+                return showErrorText('Books are not loaded');
               },
             ),
           );
         }
-      } else if (state is HomeBooksError) {
+      } else if (state is CategoryBooksError) {
         return SliverList(
           delegate: SliverChildBuilderDelegate(
             (context, index) {
-              return _showErrorText(state.message);
+              return showErrorText(state.message);
             },
           ),
         );
@@ -59,9 +62,9 @@ class BooksListHome extends StatelessWidget {
         sliver: SliverGrid(
           delegate: SliverChildBuilderDelegate(
             (context, index) {
-              return BookCard(book: homeBooks[index]);
+              return BookCard(book: categoryBooks[index]);
             },
-            childCount: homeBooks.length,
+            childCount: categoryBooks.length,
           ),
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,

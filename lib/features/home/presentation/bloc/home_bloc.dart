@@ -9,8 +9,8 @@ import 'package:equatable/equatable.dart';
 part 'home_event.dart';
 part 'home_state.dart';
 
-const SERVER_FAILURE_MESSAGE = 'Server Failure';
-const INTERNET_CONNECTION_FAILURE_MESSAGE = 'Internet Connection Failure';
+const serverFailureMessage = 'Server Failure';
+const internetConnectionFailureMessage = 'Internet Connection Failure';
 
 class HomeBooksBloc extends Bloc<HomeBooksEvent, HomeBooksState> {
   final PopularBooks popularBooks;
@@ -24,13 +24,11 @@ class HomeBooksBloc extends Bloc<HomeBooksEvent, HomeBooksState> {
     emit(HomeBooksLoading());
 
     final failureOrBooks = await popularBooks();
-    //print(failureOrBooks);
 
     failureOrBooks.fold(
         (failure) =>
             emit(HomeBooksError(message: _mapFailureToMessage(failure))),
         (books) {
-      //print(books);
       emit(HomeBooksLoaded(books: books));
     });
   }
@@ -38,9 +36,9 @@ class HomeBooksBloc extends Bloc<HomeBooksEvent, HomeBooksState> {
   String _mapFailureToMessage(Failure failure) {
     switch (failure.runtimeType) {
       case ServerFailure:
-        return SERVER_FAILURE_MESSAGE;
+        return serverFailureMessage;
       case InternetConnectionFailure:
-        return INTERNET_CONNECTION_FAILURE_MESSAGE;
+        return internetConnectionFailureMessage;
       default:
         return 'Unexpected Error';
     }

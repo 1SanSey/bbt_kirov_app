@@ -1,3 +1,4 @@
+import 'package:bbt_kirov_app/features/category/presentation/pages/category_screen.dart';
 import 'package:bbt_kirov_app/features/home/data/datasources/remote_data_source.dart';
 import 'package:bbt_kirov_app/features/home/presentation/bloc/home_bloc.dart';
 import 'package:bbt_kirov_app/features/home/presentation/pages/home_screen.dart';
@@ -43,6 +44,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return const HomePage();
+    return const CategoryPage();
   }
 }

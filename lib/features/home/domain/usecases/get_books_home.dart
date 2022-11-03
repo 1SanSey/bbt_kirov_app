@@ -50,7 +50,7 @@ class BooksByName extends UseCaseByParams<List<BookEntity>, BookNameParams> {
 class BookNameParams extends Equatable {
   final String name;
 
-  const BookNameParams(this.name);
+  const BookNameParams({required this.name});
 
   @override
   List<Object?> get props => [name];
@@ -70,7 +70,7 @@ class SetBooks extends UseCaseByParams<List<BookEntity>, BookSetParams> {
 class BookSetParams extends Equatable {
   final String singleOrSet;
 
-  const BookSetParams(this.singleOrSet);
+  const BookSetParams({required this.singleOrSet});
 
   @override
   List<Object?> get props => [singleOrSet];
