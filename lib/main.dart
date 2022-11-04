@@ -1,5 +1,6 @@
+import 'package:bbt_kirov_app/features/category/presentation/bloc/category_bloc.dart';
 import 'package:bbt_kirov_app/features/category/presentation/pages/category_screen.dart';
-import 'package:bbt_kirov_app/features/home/data/datasources/remote_data_source.dart';
+import 'package:bbt_kirov_app/core/datasources/remote_data_source.dart';
 import 'package:bbt_kirov_app/features/home/presentation/bloc/home_bloc.dart';
 import 'package:bbt_kirov_app/features/home/presentation/pages/home_screen.dart';
 import 'package:bbt_kirov_app/locator_service.dart' as di;
@@ -22,28 +23,24 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider<HomeBooksBloc>(
             create: (context) => di.sl<HomeBooksBloc>()),
+        BlocProvider<CategoryAllBooksBloc>(
+            create: (context) => di.sl<CategoryAllBooksBloc>()),
+        BlocProvider<CategoryBooksBySizeBloc>(
+            create: (context) => di.sl<CategoryBooksBySizeBloc>()),
+        BlocProvider<CategoryBooksByNameBloc>(
+            create: (context) => di.sl<CategoryBooksByNameBloc>()),
+        BlocProvider<CategoryBooksSetBloc>(
+            create: (context) => di.sl<CategoryBooksSetBloc>()),
+        BlocProvider<CategoryCulinaryBooksBloc>(
+            create: (context) => di.sl<CategoryCulinaryBooksBloc>()),
       ],
       child: MaterialApp(
-        title: 'Flutter Demo',
+        title: 'BBT Kirov App',
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: const MyHomePage(),
+        home: const HomePage(),
       ),
     );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return const CategoryPage();
   }
 }

@@ -1,5 +1,5 @@
 import 'package:bbt_kirov_app/common/app_colors.dart';
-import 'package:bbt_kirov_app/features/home/presentation/widgets/book_list_widget.dart';
+import 'package:bbt_kirov_app/features/home/presentation/widgets/book_list_home_widget.dart';
 import 'package:bbt_kirov_app/features/home/presentation/widgets/top_home_widget.dart';
 
 import 'package:flutter/material.dart';
@@ -29,12 +29,7 @@ class _HomePageState extends State<HomePage> {
           )
         ],
       ),
-      body: const CustomScrollView(
-        slivers: <Widget>[
-          TopHomeWidget(),
-          BooksListHome(),
-        ],
-      ),
+      body: const TopHomeWidget(),
     );
   }
 }

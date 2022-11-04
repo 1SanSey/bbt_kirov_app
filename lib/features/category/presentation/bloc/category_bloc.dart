@@ -1,13 +1,60 @@
 import 'dart:async';
 
 import 'package:bbt_kirov_app/common/failure_to_message.dart';
+import 'package:bbt_kirov_app/core/entities/book_entity.dart';
 import 'package:bbt_kirov_app/features/category/domain/usecases/get_books_category.dart';
-import 'package:bbt_kirov_app/features/home/domain/entities/book_entity.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'category_event.dart';
 part 'category_state.dart';
+
+class CategoryAllBooksBloc
+    extends Bloc<CategoryBooksEvent, CategoryBooksState> {
+  final AllBooks allBooks;
+
+  CategoryAllBooksBloc({required this.allBooks}) : super(CategoryBooksEmpty()) {
+    on<CategoryLoadBooksEvent>(_onEventAllBooks);
+  }
+
+  FutureOr<void> _onEventAllBooks(
+      CategoryLoadBooksEvent event, Emitter<CategoryBooksState> emit) async {
+    emit(CategoryBooksLoading());
+
+    final failureOrBooks = await allBooks();
+
+    failureOrBooks.fold(
+        (failure) =>
+            emit(CategoryBooksError(message: mapFailureToMessage(failure))),
+        (books) {
+      emit(CategoryBooksLoaded(books: books));
+    });
+  }
+}
+
+class CategoryCulinaryBooksBloc
+    extends Bloc<CategoryBooksEvent, CategoryBooksState> {
+  final CulinaryBooks culinaryBooks;
+
+  CategoryCulinaryBooksBloc({required this.culinaryBooks})
+      : super(CategoryBooksEmpty()) {
+    on<CategoryLoadBooksEvent>(_onEventCulinaryBooks);
+  }
+
+  FutureOr<void> _onEventCulinaryBooks(
+      CategoryLoadBooksEvent event, Emitter<CategoryBooksState> emit) async {
+    emit(CategoryBooksLoading());
+
+    final failureOrBooks = await culinaryBooks();
+
+    failureOrBooks.fold(
+        (failure) =>
+            emit(CategoryBooksError(message: mapFailureToMessage(failure))),
+        (books) {
+      emit(CategoryBooksLoaded(books: books));
+    });
+  }
+}
 
 class CategoryBooksBySizeBloc
     extends Bloc<CategoryBooksEvent, CategoryBooksState> {

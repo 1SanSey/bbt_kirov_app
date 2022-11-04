@@ -1,5 +1,5 @@
 import 'package:bbt_kirov_app/common/app_colors.dart';
-import 'package:bbt_kirov_app/features/home/domain/entities/book_entity.dart';
+import 'package:bbt_kirov_app/core/entities/book_entity.dart';
 import 'package:flutter/material.dart';
 
 class BookCard extends StatelessWidget {
@@ -27,7 +27,7 @@ class BookCard extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Image.network(
-            book.image ?? 'Icon(icon: Icons.image_rounded)',
+            book.image ?? '',
             height: 180,
           ),
           Expanded(

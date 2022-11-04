@@ -1,4 +1,5 @@
 import 'package:bbt_kirov_app/common/app_colors.dart';
+import 'package:bbt_kirov_app/features/category/presentation/pages/category_screen.dart';
 import 'package:flutter/material.dart';
 
 class TopHomeWidget extends StatelessWidget {
@@ -19,44 +20,48 @@ class TopHomeWidget extends StatelessWidget {
       9: 'КУЛИНАРНЫЕ',
     };
 
-    return SliverSafeArea(
-      sliver: SliverPadding(
-        padding: const EdgeInsets.only(top: 16, bottom: 16, right: 8, left: 8),
-        sliver: SliverGrid(
-          delegate: SliverChildBuilderDelegate(
-            (context, index) {
-              return GestureDetector(
-                onTap: () {},
-                child: Container(
-                  height: 50,
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                        color: AppColors.mainBackground,
-                        width: 2.0,
-                        style: BorderStyle.solid),
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  child: Center(
-                    child: Text(
-                      category[index].toString(),
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                          color: AppColors.mainBackground,
-                          fontSize: 15,
-                          fontWeight: FontWeight.w700),
-                    ),
-                  ),
+    return Padding(
+      padding: const EdgeInsets.only(top: 16, bottom: 16, right: 8, left: 8),
+      child: GridView.builder(
+        shrinkWrap: true,
+        itemBuilder: (context, index) {
+          return GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CategoryPage(idCategory: index),
                 ),
               );
             },
-            childCount: category.length,
-          ),
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            mainAxisSpacing: 8.0,
-            crossAxisSpacing: 8.0,
-            mainAxisExtent: 50,
-          ),
+            child: Container(
+              height: 50,
+              decoration: BoxDecoration(
+                border: Border.all(
+                    color: AppColors.mainBackground,
+                    width: 2.0,
+                    style: BorderStyle.solid),
+                borderRadius: BorderRadius.circular(5),
+              ),
+              child: Center(
+                child: Text(
+                  category[index].toString(),
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                      color: AppColors.mainBackground,
+                      fontSize: 15,
+                      fontWeight: FontWeight.w700),
+                ),
+              ),
+            ),
+          );
+        },
+        itemCount: category.length,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          mainAxisSpacing: 8.0,
+          crossAxisSpacing: 8.0,
+          mainAxisExtent: 50,
         ),
       ),
     );
