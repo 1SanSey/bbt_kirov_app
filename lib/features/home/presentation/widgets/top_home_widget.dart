@@ -1,4 +1,3 @@
-import 'package:bbt_kirov_app/common/app_colors.dart';
 import 'package:bbt_kirov_app/features/category/presentation/pages/category_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -38,7 +37,7 @@ class TopHomeWidget extends StatelessWidget {
                 height: 50,
                 decoration: BoxDecoration(
                   border: Border.all(
-                      color: AppColors.mainBackground,
+                      color: Theme.of(context).primaryColor,
                       width: 2.0,
                       style: BorderStyle.solid),
                   borderRadius: BorderRadius.circular(5),
@@ -47,8 +46,8 @@ class TopHomeWidget extends StatelessWidget {
                   child: Text(
                     category[index].toString(),
                     textAlign: TextAlign.center,
-                    style: const TextStyle(
-                        color: AppColors.mainBackground,
+                    style: TextStyle(
+                        color: Theme.of(context).primaryColor,
                         fontSize: 15,
                         fontWeight: FontWeight.w700),
                   ),

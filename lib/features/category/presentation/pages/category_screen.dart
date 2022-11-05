@@ -1,6 +1,7 @@
-import 'package:bbt_kirov_app/common/app_colors.dart';
+import 'package:bbt_kirov_app/core/themes/theme_model.dart';
 import 'package:bbt_kirov_app/features/category/presentation/widgets/book_list_category_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class CategoryPage extends StatelessWidget {
   const CategoryPage({super.key, required this.idCategory});
@@ -41,25 +42,29 @@ class CategoryPage extends StatelessWidget {
       nameCategory = 'Кулинарные';
       query = 'culinary';
     }
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(nameCategory ?? 'Selected Category'),
-        centerTitle: true,
-        backgroundColor: AppColors.mainBackground,
-        actions: [
-          IconButton(
-            onPressed: () {
-              //showSearch(context: context, delegate: CustomSearchDelegate());
-            },
-            icon: const Icon(Icons.search),
-            color: Colors.white,
-          )
-        ],
-      ),
-      body: BooksCategoryWidget(
-        query: query,
-      ),
-    );
+    return Consumer<ThemeModel>(
+        builder: (context, ThemeModel themeNotifier, child) {
+      return Scaffold(
+        appBar: AppBar(
+          title: Text(nameCategory ?? ''),
+          centerTitle: true,
+          actions: [
+            IconButton(
+                icon: Icon(themeNotifier.isDark
+                    ? Icons.nightlight_round
+                    : Icons.wb_sunny),
+                onPressed: () {
+                  themeNotifier.isDark
+                      ? themeNotifier.isDark = false
+                      : themeNotifier.isDark = true;
+                  print("Theme change clicked");
+                })
+          ],
+        ),
+        body: BooksCategoryWidget(
+          query: query,
+        ),
+      );
+    });
   }
 }

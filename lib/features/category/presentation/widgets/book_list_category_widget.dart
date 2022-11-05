@@ -1,4 +1,4 @@
-import 'package:bbt_kirov_app/common/app_colors.dart';
+import 'package:bbt_kirov_app/core/themes/app_colors.dart';
 import 'package:bbt_kirov_app/common/loading_indicator.dart';
 import 'package:bbt_kirov_app/common/error_text.dart';
 import 'package:bbt_kirov_app/core/entities/book_entity.dart';
@@ -51,7 +51,7 @@ class _BooksCategoryWidgetState extends State<BooksCategoryWidget> {
       return BlocBuilder<CategoryAllBooksBloc, CategoryBooksState>(
           builder: (context, state) {
         if (state is CategoryBooksLoading) {
-          return loadingIndicator();
+          return loadingIndicator(context);
         }
         if (state is CategoryBooksLoaded) {
           _categoryBooks = state.books;
@@ -62,7 +62,7 @@ class _BooksCategoryWidgetState extends State<BooksCategoryWidget> {
         } else if (state is CategoryBooksError) {
           return showErrorText(state.message);
         } else {
-          return loadingIndicator();
+          return loadingIndicator(context);
         }
 
         return CustomScrollView(slivers: [
@@ -118,7 +118,7 @@ class _BooksCategoryWidgetState extends State<BooksCategoryWidget> {
         List<BookEntity> categoryBooks = [];
 
         if (state is CategoryBooksLoading) {
-          return loadingIndicator();
+          return loadingIndicator(context);
         }
         if (state is CategoryBooksLoaded) {
           categoryBooks = state.books;
@@ -128,7 +128,7 @@ class _BooksCategoryWidgetState extends State<BooksCategoryWidget> {
         } else if (state is CategoryBooksError) {
           return showErrorText(state.message);
         } else {
-          return loadingIndicator();
+          return loadingIndicator(context);
         }
 
         return CustomScrollView(slivers: [
@@ -167,7 +167,7 @@ class _BooksCategoryWidgetState extends State<BooksCategoryWidget> {
         List<BookEntity> categoryBooks = [];
 
         if (state is CategoryBooksLoading) {
-          return loadingIndicator();
+          return loadingIndicator(context);
         }
         if (state is CategoryBooksLoaded) {
           categoryBooks = state.books;
@@ -177,7 +177,7 @@ class _BooksCategoryWidgetState extends State<BooksCategoryWidget> {
         } else if (state is CategoryBooksError) {
           return showErrorText(state.message);
         } else {
-          return loadingIndicator();
+          return loadingIndicator(context);
         }
 
         return CustomScrollView(slivers: [
@@ -213,7 +213,7 @@ class _BooksCategoryWidgetState extends State<BooksCategoryWidget> {
         List<BookEntity> categoryBooks = [];
 
         if (state is CategoryBooksLoading) {
-          return loadingIndicator();
+          return loadingIndicator(context);
         }
         if (state is CategoryBooksLoaded) {
           categoryBooks = state.books;
@@ -223,7 +223,7 @@ class _BooksCategoryWidgetState extends State<BooksCategoryWidget> {
         } else if (state is CategoryBooksError) {
           return showErrorText(state.message);
         } else {
-          return loadingIndicator();
+          return loadingIndicator(context);
         }
 
         return CustomScrollView(slivers: [
@@ -259,7 +259,7 @@ class _BooksCategoryWidgetState extends State<BooksCategoryWidget> {
         List<BookEntity> categoryBooks = [];
 
         if (state is CategoryBooksLoading) {
-          return loadingIndicator();
+          return loadingIndicator(context);
         }
         if (state is CategoryBooksLoaded) {
           categoryBooks = state.books;
@@ -269,7 +269,7 @@ class _BooksCategoryWidgetState extends State<BooksCategoryWidget> {
         } else if (state is CategoryBooksError) {
           return showErrorText(state.message);
         } else {
-          return loadingIndicator();
+          return loadingIndicator(context);
         }
 
         return CustomScrollView(slivers: [

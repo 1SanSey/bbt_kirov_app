@@ -1,4 +1,4 @@
-import 'package:bbt_kirov_app/common/app_colors.dart';
+import 'package:bbt_kirov_app/core/themes/app_colors.dart';
 import 'package:bbt_kirov_app/core/entities/book_entity.dart';
 import 'package:flutter/material.dart';
 
@@ -18,10 +18,6 @@ class BookCard extends StatelessWidget {
           color: AppColors.greyColor,
           width: 2,
         ),
-        /*gradient: const LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [AppColors.greyColor, AppColors.greyColor2]),*/
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -36,11 +32,7 @@ class BookCard extends StatelessWidget {
               child: Text(
                 book.name,
                 textAlign: TextAlign.center,
-                style: const TextStyle(
-                  color: AppColors.greyColor2,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w400,
-                ),
+                style: Theme.of(context).textTheme.bodyText1,
               ),
             ),
           ),
@@ -49,15 +41,15 @@ class BookCard extends StatelessWidget {
               children: <Widget>[
                 IconButton(
                     onPressed: () {},
-                    icon: const Icon(
+                    icon: Icon(
                       Icons.shopping_cart,
-                      color: AppColors.mainBackground,
+                      color: Theme.of(context).primaryColor,
                       size: 30,
                     )),
                 Text(
                   '${book.price} ₽',
-                  style: const TextStyle(
-                    color: AppColors.mainBackground,
+                  style: TextStyle(
+                    color: Theme.of(context).primaryColor,
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),

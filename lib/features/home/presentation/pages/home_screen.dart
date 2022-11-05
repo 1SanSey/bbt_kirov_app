@@ -1,8 +1,10 @@
-import 'package:bbt_kirov_app/common/app_colors.dart';
+import 'package:bbt_kirov_app/core/themes/app_colors.dart';
+import 'package:bbt_kirov_app/core/themes/theme_model.dart';
 import 'package:bbt_kirov_app/features/home/presentation/widgets/book_list_home_widget.dart';
 import 'package:bbt_kirov_app/features/home/presentation/widgets/top_home_widget.dart';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -14,25 +16,31 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('BBT Kirov'),
-        centerTitle: true,
-        backgroundColor: AppColors.mainBackground,
-        actions: [
-          IconButton(
-            onPressed: () {
-              //showSearch(context: context, delegate: CustomSearchDelegate());
-            },
-            icon: const Icon(Icons.search),
-            color: Colors.white,
-          )
-        ],
-      ),
-      body: CustomScrollView(slivers: [
-        TopHomeWidget(),
-        BooksListHome(),
-      ]),
-    );
+    return Consumer<ThemeModel>(
+        builder: (context, ThemeModel themeNotifier, child) {
+      return Scaffold(
+        appBar: AppBar(
+          title: const Text(
+              /* themeNotifier.isDark ? "Dark Mode" : "Light Mode" */ 'BBT Kirov'),
+          centerTitle: true,
+          actions: [
+            IconButton(
+                icon: Icon(themeNotifier.isDark
+                    ? Icons.nightlight_round
+                    : Icons.wb_sunny),
+                onPressed: () {
+                  themeNotifier.isDark
+                      ? themeNotifier.isDark = false
+                      : themeNotifier.isDark = true;
+                  print("Theme change clicked");
+                })
+          ],
+        ),
+        body: const CustomScrollView(slivers: [
+          TopHomeWidget(),
+          BooksListHome(),
+        ]),
+      );
+    });
   }
 }

@@ -18,7 +18,7 @@ class BooksListHome extends StatelessWidget {
       List<BookEntity> homeBooks = [];
 
       if (state is HomeBooksLoading) {
-        return SliverToBoxAdapter(child: loadingIndicator());
+        return SliverToBoxAdapter(child: loadingIndicator(context));
       }
       if (state is HomeBooksLoaded) {
         homeBooks = state.books;
@@ -29,7 +29,7 @@ class BooksListHome extends StatelessWidget {
       } else if (state is HomeBooksError) {
         return SliverToBoxAdapter(child: showErrorText(state.message));
       } else {
-        return SliverToBoxAdapter(child: loadingIndicator());
+        return SliverToBoxAdapter(child: loadingIndicator(context));
       }
 
       return SliverPadding(
