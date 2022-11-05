@@ -29,7 +29,10 @@ class _HomePageState extends State<HomePage> {
           )
         ],
       ),
-      body: const TopHomeWidget(),
+      body: CustomScrollView(slivers: [
+        TopHomeWidget(),
+        BooksListHome(),
+      ]),
     );
   }
 }

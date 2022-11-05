@@ -18,38 +18,37 @@ class BooksListHome extends StatelessWidget {
       List<BookEntity> homeBooks = [];
 
       if (state is HomeBooksLoading) {
-        return loadingIndicator();
+        return SliverToBoxAdapter(child: loadingIndicator());
       }
       if (state is HomeBooksLoaded) {
         homeBooks = state.books;
         if (homeBooks.isEmpty) {
-          return showErrorText('Books are not loaded');
+          return SliverToBoxAdapter(
+              child: showErrorText('Books are not loaded'));
         }
       } else if (state is HomeBooksError) {
-        return showErrorText(state.message);
+        return SliverToBoxAdapter(child: showErrorText(state.message));
       } else {
-        return loadingIndicator();
+        return SliverToBoxAdapter(child: loadingIndicator());
       }
 
-      return CustomScrollView(slivers: [
-        SliverPadding(
-          padding: const EdgeInsets.only(bottom: 8, right: 8, left: 8),
-          sliver: SliverGrid(
-            delegate: SliverChildBuilderDelegate(
-              (context, index) {
-                return BookCard(book: homeBooks[index]);
-              },
-              childCount: homeBooks.length,
-            ),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              mainAxisSpacing: 8.0,
-              crossAxisSpacing: 8.0,
-              mainAxisExtent: 270,
-            ),
+      return SliverPadding(
+        padding: const EdgeInsets.only(bottom: 16, right: 8, left: 8),
+        sliver: SliverGrid(
+          delegate: SliverChildBuilderDelegate(
+            (context, index) {
+              return BookCard(book: homeBooks[index]);
+            },
+            childCount: homeBooks.length,
+          ),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            mainAxisSpacing: 8.0,
+            crossAxisSpacing: 8.0,
+            mainAxisExtent: 270,
           ),
         ),
-      ]);
+      );
     });
   }
 }

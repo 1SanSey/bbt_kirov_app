@@ -20,43 +20,44 @@ class TopHomeWidget extends StatelessWidget {
       9: 'КУЛИНАРНЫЕ',
     };
 
-    return Padding(
+    return SliverPadding(
       padding: const EdgeInsets.only(top: 16, bottom: 16, right: 8, left: 8),
-      child: GridView.builder(
-        shrinkWrap: true,
-        itemBuilder: (context, index) {
-          return GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => CategoryPage(idCategory: index),
-                ),
-              );
-            },
-            child: Container(
-              height: 50,
-              decoration: BoxDecoration(
-                border: Border.all(
-                    color: AppColors.mainBackground,
-                    width: 2.0,
-                    style: BorderStyle.solid),
-                borderRadius: BorderRadius.circular(5),
-              ),
-              child: Center(
-                child: Text(
-                  category[index].toString(),
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
+      sliver: SliverGrid(
+        delegate: SliverChildBuilderDelegate(
+          (context, index) {
+            return GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => CategoryPage(idCategory: index),
+                  ),
+                );
+              },
+              child: Container(
+                height: 50,
+                decoration: BoxDecoration(
+                  border: Border.all(
                       color: AppColors.mainBackground,
-                      fontSize: 15,
-                      fontWeight: FontWeight.w700),
+                      width: 2.0,
+                      style: BorderStyle.solid),
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                child: Center(
+                  child: Text(
+                    category[index].toString(),
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                        color: AppColors.mainBackground,
+                        fontSize: 15,
+                        fontWeight: FontWeight.w700),
+                  ),
                 ),
               ),
-            ),
-          );
-        },
-        itemCount: category.length,
+            );
+          },
+          childCount: category.length,
+        ),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           mainAxisSpacing: 8.0,
