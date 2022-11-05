@@ -43,7 +43,7 @@ class _BooksCategoryWidgetState extends State<BooksCategoryWidget> {
 
   @override
   Widget build(BuildContext context) {
-// Загрузка всех книг
+// Загрузка всех книг, нужно сделать, чтобы при обращении данные блока обновлялись initState? или instance
     if (widget.query == 'all') {
       BlocProvider.of<CategoryAllBooksBloc>(context)
           .add(CategoryLoadBooksEvent(param: widget.query));

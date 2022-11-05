@@ -1,5 +1,4 @@
 import 'package:bbt_kirov_app/features/category/presentation/bloc/category_bloc.dart';
-import 'package:bbt_kirov_app/features/category/presentation/pages/category_screen.dart';
 import 'package:bbt_kirov_app/core/datasources/remote_data_source.dart';
 import 'package:bbt_kirov_app/features/home/presentation/bloc/home_bloc.dart';
 import 'package:bbt_kirov_app/features/home/presentation/pages/home_screen.dart';
@@ -36,9 +35,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'BBT Kirov App',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
+        theme: ThemeData.dark(),
         home: const HomePage(),
       ),
     );
