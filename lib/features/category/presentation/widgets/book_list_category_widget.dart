@@ -1,3 +1,4 @@
+import 'package:bbt_kirov_app/common/app_colors.dart';
 import 'package:bbt_kirov_app/common/loading_indicator.dart';
 import 'package:bbt_kirov_app/common/error_text.dart';
 import 'package:bbt_kirov_app/core/entities/book_entity.dart';
@@ -36,9 +37,26 @@ class BooksCategoryWidget extends StatelessWidget {
         }
 
         return CustomScrollView(slivers: [
+          const SliverPadding(
+            padding: EdgeInsets.only(top: 16, right: 8, left: 8),
+            sliver: SliverToBoxAdapter(
+              child: TextField(
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: AppColors.greyColor,
+                  hintText: 'Поиск',
+                  suffixIcon: Icon(Icons.search),
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide.none,
+                    borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                  ),
+                ),
+              ),
+            ),
+          ),
           SliverPadding(
             padding:
-                const EdgeInsets.only(top: 16, bottom: 8, right: 8, left: 8),
+                const EdgeInsets.only(top: 16, bottom: 16, right: 8, left: 8),
             sliver: SliverGrid(
               delegate: SliverChildBuilderDelegate(
                 (context, index) {
