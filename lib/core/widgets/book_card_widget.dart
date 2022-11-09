@@ -1,5 +1,6 @@
 import 'package:bbt_kirov_app/core/themes/app_colors.dart';
 import 'package:bbt_kirov_app/core/entities/book_entity.dart';
+import 'package:bbt_kirov_app/core/widgets/book_detail_widget.dart';
 import 'package:flutter/material.dart';
 
 class BookCard extends StatelessWidget {
@@ -22,9 +23,19 @@ class BookCard extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.network(
-            book.image ?? '',
-            height: 180,
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => BookDetailPage(book: book),
+                ),
+              );
+            },
+            child: Image.network(
+              book.image ?? 'https://master-kraski.ru/images/no-image.jpg',
+              height: 180,
+            ),
           ),
           Expanded(
             child: Padding(

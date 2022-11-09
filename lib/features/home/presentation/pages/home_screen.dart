@@ -1,4 +1,3 @@
-import 'package:bbt_kirov_app/core/themes/app_colors.dart';
 import 'package:bbt_kirov_app/core/themes/theme_model.dart';
 import 'package:bbt_kirov_app/features/home/presentation/widgets/book_list_home_widget.dart';
 import 'package:bbt_kirov_app/features/home/presentation/widgets/top_home_widget.dart';
@@ -32,7 +31,6 @@ class _HomePageState extends State<HomePage> {
                   themeNotifier.isDark
                       ? themeNotifier.isDark = false
                       : themeNotifier.isDark = true;
-                  print("Theme change clicked");
                 })
           ],
         ),

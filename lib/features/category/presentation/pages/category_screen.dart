@@ -57,7 +57,6 @@ class CategoryPage extends StatelessWidget {
                   themeNotifier.isDark
                       ? themeNotifier.isDark = false
                       : themeNotifier.isDark = true;
-                  print("Theme change clicked");
                 })
           ],
         ),
