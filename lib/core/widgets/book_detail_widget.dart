@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:bbt_kirov_app/core/entities/book_entity.dart';
 
+bool isTapped = false;
+
 class BookDetailPage extends StatefulWidget {
   const BookDetailPage({super.key, required this.book});
   final BookEntity book;
@@ -29,7 +31,11 @@ class _BookDetailPageState extends State<BookDetailPage> {
 
   void _decrement() {
     setState(() {
-      --_count;
+      if (_count > 0) {
+        --_count;
+      } else {
+        _count;
+      }
     });
   }
 
@@ -56,10 +62,21 @@ class _BookDetailPageState extends State<BookDetailPage> {
         body: SafeArea(
             child: Column(
           children: [
-            Image.network(
-              widget.book.image ??
-                  'https://master-kraski.ru/images/no-image.jpg',
-              height: 270,
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  isTapped = !isTapped;
+                });
+              },
+              child: AnimatedSize(
+                duration: const Duration(seconds: 2),
+                curve: Curves.easeIn,
+                child: Image.network(
+                  widget.book.image ??
+                      'https://master-kraski.ru/images/no-image.jpg',
+                  height: isTapped ? 370 : 270,
+                ),
+              ),
             ),
             const SizedBox(height: 20),
             Row(
@@ -67,10 +84,10 @@ class _BookDetailPageState extends State<BookDetailPage> {
               children: [
                 Container(
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(24),
                     border: Border.all(
-                      color: AppColors.greyColor2,
-                      width: 2,
+                      color: AppColors.greyColor,
+                      width: 1,
                     ),
                     //color: AppColors.greyColor2,
                   ),
@@ -82,17 +99,23 @@ class _BookDetailPageState extends State<BookDetailPage> {
                             icon: const Icon(Icons.remove),
                             iconSize: 25,
                             color: AppColors.greyColor2),
-                        const VerticalDivider(
-                            width: 2, color: AppColors.greyColor2),
-                        Text(
-                          '$_count',
-                          style: const TextStyle(
-                              color: AppColors.greyColor2,
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold),
+                        const SizedBox(width: 20),
+                        /* const VerticalDivider(
+                            width: 2, color: AppColors.greyColor2), */
+                        Container(
+                          color: AppColors.greyColor,
+                          padding: const EdgeInsets.symmetric(horizontal: 8),
+                          child: Text(
+                            '$_count',
+                            style: const TextStyle(
+                                color: AppColors.greyColor2,
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold),
+                          ),
                         ),
-                        const VerticalDivider(
-                            width: 2, color: AppColors.greyColor2),
+                        /*  const VerticalDivider(
+                            width: 2, color: AppColors.greyColor2), */
+                        const SizedBox(width: 20),
                         IconButton(
                             onPressed: _increment,
                             icon: const Icon(Icons.add),
