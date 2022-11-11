@@ -1,5 +1,6 @@
 import 'package:bbt_kirov_app/core/themes/theme_model.dart';
 import 'package:bbt_kirov_app/features/home/presentation/widgets/book_list_home_widget.dart';
+import 'package:bbt_kirov_app/features/home/presentation/widgets/carousel_slider_home.dart';
 import 'package:bbt_kirov_app/features/home/presentation/widgets/top_home_widget.dart';
 
 import 'package:flutter/material.dart';
@@ -34,9 +35,10 @@ class _HomePageState extends State<HomePage> {
                 })
           ],
         ),
-        body: const CustomScrollView(slivers: [
-          TopHomeWidget(),
-          BooksListHome(),
+        body: CustomScrollView(slivers: [
+          CarouselSliderHome(),
+          const TopHomeWidget(),
+          const BooksListHome(),
         ]),
       );
     });
