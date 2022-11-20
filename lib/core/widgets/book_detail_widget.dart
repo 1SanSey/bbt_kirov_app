@@ -31,7 +31,7 @@ class _BookDetailPageState extends State<BookDetailPage> {
 
   void _decrement() {
     setState(() {
-      if (_count > 0) {
+      if (_count > 1) {
         --_count;
       } else {
         _count;
@@ -78,6 +78,16 @@ class _BookDetailPageState extends State<BookDetailPage> {
                 ),
               ),
             ),
+            const SizedBox(height: 10),
+            ConstrainedBox(
+              constraints: BoxConstraints(maxWidth: 250),
+              child: Text(
+                widget.book.name,
+                textAlign: TextAlign.center,
+                style:
+                    const TextStyle(color: AppColors.greyColor2, fontSize: 18),
+              ),
+            ),
             const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -97,13 +107,12 @@ class _BookDetailPageState extends State<BookDetailPage> {
                         IconButton(
                             onPressed: _decrement,
                             icon: const Icon(Icons.remove),
-                            iconSize: 25,
-                            color: AppColors.greyColor2),
+                            iconSize: 30,
+                            color: Theme.of(context).primaryColor),
                         const SizedBox(width: 20),
                         /* const VerticalDivider(
                             width: 2, color: AppColors.greyColor2), */
                         Container(
-                          color: AppColors.greyColor,
                           padding: const EdgeInsets.symmetric(horizontal: 8),
                           child: Text(
                             '$_count',
@@ -119,8 +128,8 @@ class _BookDetailPageState extends State<BookDetailPage> {
                         IconButton(
                             onPressed: _increment,
                             icon: const Icon(Icons.add),
-                            iconSize: 25,
-                            color: AppColors.greyColor2),
+                            iconSize: 30,
+                            color: Theme.of(context).primaryColor),
                       ]),
                 ),
                 Text(

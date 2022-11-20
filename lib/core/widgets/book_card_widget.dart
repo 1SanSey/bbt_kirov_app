@@ -17,7 +17,7 @@ class BookCard extends StatelessWidget {
           color: AppColors.greyColor,
           width: 2,
         ),
-        borderRadius: BorderRadius.circular(20.0),
+        borderRadius: BorderRadius.circular(8.0),
       ),
       child: SizedBox(
         height: 280,
