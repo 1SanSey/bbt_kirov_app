@@ -1,7 +1,5 @@
 import 'package:bbt_kirov_app/features/category/presentation/pages/category_screen.dart';
-import 'package:bbt_kirov_app/features/home/presentation/bloc/home_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TopHomeWidget extends StatelessWidget {
   const TopHomeWidget({super.key});
@@ -26,8 +24,16 @@ class TopHomeWidget extends StatelessWidget {
       sliver: SliverGrid(
         delegate: SliverChildBuilderDelegate(
           (context, index) {
-            return GestureDetector(
-              onTap: () {
+            return OutlinedButton(
+              style: ButtonStyle(
+                side: MaterialStateProperty.all(
+                  BorderSide(
+                    color: Theme.of(context).primaryColor,
+                    width: 2,
+                  ),
+                ),
+              ),
+              onPressed: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -35,24 +41,14 @@ class TopHomeWidget extends StatelessWidget {
                   ),
                 );
               },
-              child: Container(
-                height: 50,
-                decoration: BoxDecoration(
-                  border: Border.all(
+              child: Center(
+                child: Text(
+                  category[index].toString(),
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
                       color: Theme.of(context).primaryColor,
-                      width: 2.0,
-                      style: BorderStyle.solid),
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                child: Center(
-                  child: Text(
-                    category[index].toString(),
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        color: Theme.of(context).primaryColor,
-                        fontSize: 15,
-                        fontWeight: FontWeight.w700),
-                  ),
+                      fontSize: 15,
+                      fontWeight: FontWeight.w700),
                 ),
               ),
             );

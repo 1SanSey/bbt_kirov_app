@@ -80,7 +80,7 @@ class _BookDetailPageState extends State<BookDetailPage> {
             ),
             const SizedBox(height: 10),
             ConstrainedBox(
-              constraints: BoxConstraints(maxWidth: 250),
+              constraints: const BoxConstraints(maxWidth: 250),
               child: Text(
                 widget.book.name,
                 textAlign: TextAlign.center,

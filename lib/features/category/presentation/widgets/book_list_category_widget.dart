@@ -4,7 +4,6 @@ import 'package:bbt_kirov_app/common/error_text.dart';
 import 'package:bbt_kirov_app/core/entities/book_entity.dart';
 import 'package:bbt_kirov_app/features/category/presentation/bloc/category_bloc.dart';
 import 'package:bbt_kirov_app/core/widgets/book_card_widget.dart';
-import 'package:bbt_kirov_app/features/home/presentation/bloc/home_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -46,14 +45,13 @@ class _BooksCategoryWidgetState extends State<BooksCategoryWidget> {
 
   @override
   Widget build(BuildContext context) {
-// Загрузка всех книг, нужно сделать, чтобы при обращении данные блока обновлялись initState? или instance?
+// Загрузка всех книг, нужно сделать, чтобы при обращении данные блока обновлялись initState? instance?
     if (widget.query == 'all') {
       BlocProvider.of<CategoryAllBooksBloc>(context)
           .add(CategoryLoadBooksEvent(param: widget.query));
 
       return BlocBuilder<CategoryAllBooksBloc, CategoryBooksState>(
           builder: (context, state) {
-        print(BlocProvider.of<CategoryAllBooksBloc>(context));
         if (state is CategoryBooksLoading) {
           return loadingIndicator(context);
         }
