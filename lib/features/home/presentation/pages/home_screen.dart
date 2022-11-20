@@ -1,9 +1,11 @@
 import 'package:bbt_kirov_app/core/themes/theme_model.dart';
+import 'package:bbt_kirov_app/features/home/presentation/bloc/home_bloc.dart';
 import 'package:bbt_kirov_app/features/home/presentation/widgets/book_list_home_widget.dart';
 import 'package:bbt_kirov_app/features/home/presentation/widgets/carousel_slider_home.dart';
 import 'package:bbt_kirov_app/features/home/presentation/widgets/top_home_widget.dart';
-
+import 'package:bbt_kirov_app/locator_service.dart' as di;
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -38,7 +40,9 @@ class _HomePageState extends State<HomePage> {
         body: CustomScrollView(slivers: [
           CarouselSliderHome(),
           const TopHomeWidget(),
-          const BooksListHome(),
+          BlocProvider<HomeBooksBloc>(
+              create: (context) => di.sl<HomeBooksBloc>(),
+              child: const BooksListHome()),
         ]),
       );
     });

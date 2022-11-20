@@ -1,5 +1,7 @@
 import 'package:bbt_kirov_app/features/category/presentation/pages/category_screen.dart';
+import 'package:bbt_kirov_app/features/home/presentation/bloc/home_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TopHomeWidget extends StatelessWidget {
   const TopHomeWidget({super.key});

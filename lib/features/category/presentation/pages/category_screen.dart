@@ -1,6 +1,9 @@
 import 'package:bbt_kirov_app/core/themes/theme_model.dart';
+import 'package:bbt_kirov_app/features/category/presentation/bloc/category_bloc.dart';
 import 'package:bbt_kirov_app/features/category/presentation/widgets/book_list_category_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:bbt_kirov_app/locator_service.dart' as di;
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
 class CategoryPage extends StatelessWidget {
@@ -60,8 +63,22 @@ class CategoryPage extends StatelessWidget {
                 })
           ],
         ),
-        body: BooksCategoryWidget(
-          query: query,
+        body: MultiBlocProvider(
+          providers: [
+            BlocProvider<CategoryAllBooksBloc>(
+                create: (context) => di.sl<CategoryAllBooksBloc>()),
+            BlocProvider<CategoryBooksBySizeBloc>(
+                create: (context) => di.sl<CategoryBooksBySizeBloc>()),
+            BlocProvider<CategoryBooksByNameBloc>(
+                create: (context) => di.sl<CategoryBooksByNameBloc>()),
+            BlocProvider<CategoryBooksSetBloc>(
+                create: (context) => di.sl<CategoryBooksSetBloc>()),
+            BlocProvider<CategoryCulinaryBooksBloc>(
+                create: (context) => di.sl<CategoryCulinaryBooksBloc>()),
+          ],
+          child: BooksCategoryWidget(
+            query: query,
+          ),
         ),
       );
     });

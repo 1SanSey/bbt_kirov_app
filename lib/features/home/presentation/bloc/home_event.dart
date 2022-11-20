@@ -8,3 +8,5 @@ abstract class HomeBooksEvent extends Equatable {
 }
 
 class HomeLoadBooksEvent extends HomeBooksEvent {}
+
+class HomeBooksEmptyEvent extends HomeBooksEvent {}

@@ -14,6 +14,7 @@ class HomeBooksBloc extends Bloc<HomeBooksEvent, HomeBooksState> {
 
   HomeBooksBloc({required this.popularBooks}) : super(HomeBooksEmpty()) {
     on<HomeLoadBooksEvent>(_onEvent);
+    on<HomeBooksEmptyEvent>(_onEmptyEvent);
   }
 
   FutureOr<void> _onEvent(
@@ -28,5 +29,10 @@ class HomeBooksBloc extends Bloc<HomeBooksEvent, HomeBooksState> {
         (books) {
       emit(HomeBooksLoaded(books: books));
     });
+  }
+
+  FutureOr<void> _onEmptyEvent(
+      HomeBooksEmptyEvent event, Emitter<HomeBooksState> emit) {
+    emit(HomeBooksEmpty());
   }
 }

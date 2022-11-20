@@ -10,63 +10,65 @@ class BookCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 280,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(
+    return Card(
+      elevation: 1,
+      shape: RoundedRectangleBorder(
+        side: const BorderSide(
           color: AppColors.greyColor,
           width: 2,
         ),
+        borderRadius: BorderRadius.circular(20.0),
       ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => BookDetailPage(book: book),
-                ),
-              );
-            },
-            child: Image.network(
-              book.image ?? 'https://master-kraski.ru/images/no-image.jpg',
-              height: 180,
-            ),
-          ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.only(right: 8, left: 8),
-              child: Text(
-                book.name,
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.bodyText1,
+      child: SizedBox(
+        height: 280,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => BookDetailPage(book: book),
+                  ),
+                );
+              },
+              child: Image.network(
+                book.image ?? 'https://master-kraski.ru/images/no-image.jpg',
+                height: 180,
               ),
             ),
-          ),
-          Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[
-                IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.shopping_cart,
-                      color: Theme.of(context).primaryColor,
-                      size: 30,
-                    )),
-                Text(
-                  '${book.price} ₽',
-                  style: TextStyle(
-                    color: Theme.of(context).primaryColor,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.only(right: 8, left: 8),
+                child: Text(
+                  book.name,
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.bodyText1,
                 ),
-              ]),
-        ],
+              ),
+            ),
+            Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  IconButton(
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.shopping_cart,
+                        color: Theme.of(context).primaryColor,
+                        size: 30,
+                      )),
+                  Text(
+                    '${book.price} ₽',
+                    style: TextStyle(
+                      color: Theme.of(context).primaryColor,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ]),
+          ],
+        ),
       ),
     );
   }

@@ -12,7 +12,6 @@ class BooksListHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     BlocProvider.of<HomeBooksBloc>(context).add(HomeLoadBooksEvent());
-
     return BlocBuilder<HomeBooksBloc, HomeBooksState>(
         builder: (context, state) {
       List<BookEntity> homeBooks = [];
