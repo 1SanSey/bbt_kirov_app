@@ -1,5 +1,6 @@
 import 'package:bbt_kirov_app/core/themes/app_colors.dart';
 import 'package:bbt_kirov_app/core/themes/theme_model.dart';
+import 'package:bbt_kirov_app/core/widgets/icon_switch_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:bbt_kirov_app/core/entities/book_entity.dart';
@@ -47,17 +48,7 @@ class _BookDetailPageState extends State<BookDetailPage> {
         appBar: AppBar(
           title: Text(widget.book.name),
           centerTitle: true,
-          actions: [
-            IconButton(
-                icon: Icon(themeNotifier.isDark
-                    ? Icons.nightlight_round
-                    : Icons.wb_sunny),
-                onPressed: () {
-                  themeNotifier.isDark
-                      ? themeNotifier.isDark = false
-                      : themeNotifier.isDark = true;
-                })
-          ],
+          actions: [iconSwitchTheme(context, themeNotifier)],
         ),
         body: SafeArea(
             child: Column(

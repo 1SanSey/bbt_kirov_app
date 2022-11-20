@@ -1,4 +1,5 @@
 import 'package:bbt_kirov_app/core/themes/theme_model.dart';
+import 'package:bbt_kirov_app/core/widgets/icon_switch_theme.dart';
 import 'package:bbt_kirov_app/features/category/presentation/bloc/category_bloc.dart';
 import 'package:bbt_kirov_app/features/category/presentation/widgets/book_list_category_widget.dart';
 import 'package:flutter/material.dart';
@@ -51,17 +52,7 @@ class CategoryPage extends StatelessWidget {
         appBar: AppBar(
           title: Text(nameCategory ?? ''),
           centerTitle: true,
-          actions: [
-            IconButton(
-                icon: Icon(themeNotifier.isDark
-                    ? Icons.nightlight_round
-                    : Icons.wb_sunny),
-                onPressed: () {
-                  themeNotifier.isDark
-                      ? themeNotifier.isDark = false
-                      : themeNotifier.isDark = true;
-                })
-          ],
+          actions: [iconSwitchTheme(context, themeNotifier)],
         ),
         body: MultiBlocProvider(
           providers: [
