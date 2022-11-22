@@ -1,15 +1,10 @@
+import 'package:bbt_kirov_app/core/assets/app_const.dart';
 import 'package:bbt_kirov_app/core/themes/app_colors.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
 class CarouselSliderHome extends StatelessWidget {
-  CarouselSliderHome({super.key});
-
-  final List<String> imagesList = [
-    'lib/core/assets/images/1_quote.jpg',
-    'lib/core/assets/images/2_quote.jpg',
-    'lib/core/assets/images/3_quote.jpg'
-  ];
+  const CarouselSliderHome({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +19,7 @@ class CarouselSliderHome extends StatelessWidget {
             autoPlay: true,
             enlargeCenterPage: true,
           ),
-          items: imagesList
+          items: AppConstants.imagesList
               .map(
                 (item) => Card(
                   margin: const EdgeInsets.only(
