@@ -28,7 +28,7 @@ class CategoryAllBooksBloc
         (failure) =>
             emit(CategoryBooksError(message: mapFailureToMessage(failure))),
         (books) {
-      log(books.toString());
+      // log(books.toString());
       emit(CategoryBooksLoaded(books: books));
     });
   }

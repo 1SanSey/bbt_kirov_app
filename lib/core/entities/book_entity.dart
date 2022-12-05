@@ -20,8 +20,4 @@ class BookEntity extends Equatable {
 
   @override
   List<Object?> get props => [name, price];
-  @override
-  String toString() {
-    return '$name $price $isPopular';
-  }
 }
