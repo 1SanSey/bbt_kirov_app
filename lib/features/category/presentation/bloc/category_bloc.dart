@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:bbt_kirov_app/common/failure_to_message.dart';
 import 'package:bbt_kirov_app/core/entities/book_entity.dart';
@@ -27,6 +28,7 @@ class CategoryAllBooksBloc
         (failure) =>
             emit(CategoryBooksError(message: mapFailureToMessage(failure))),
         (books) {
+      log(books.toString());
       emit(CategoryBooksLoaded(books: books));
     });
   }
