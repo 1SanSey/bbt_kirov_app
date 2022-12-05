@@ -7,14 +7,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
 class CategoryPage extends StatelessWidget {
-  CategoryPage({super.key, required this.idCategory});
   final int idCategory;
   late var _state;
-
-  @override
-  Widget build(BuildContext context) {
-    String? nameCategory;
-    late String query;
+  late String query;
+  String? nameCategory;
+  CategoryPage({super.key, required this.idCategory}) {
     switch (idCategory) {
       case 0:
         {
@@ -92,6 +89,10 @@ class CategoryPage extends StatelessWidget {
           break;
         }
     }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Consumer<ThemeModel>(
         builder: (context, ThemeModel themeNotifier, child) {
       return Scaffold(
@@ -137,8 +138,6 @@ class CategoryPage extends StatelessWidget {
                     }
                   case 5:
                     {
-                      nameCategory = 'Бхагавад-гита';
-                      query = 'Бхагавад-гита';
                       _state = BlocProvider.of<CategoryBooksByNameBloc>(context)
                           .state as CategoryBooksLoaded;
                       _state.books.clear();

@@ -39,24 +39,6 @@ class BookRemoteDataSourceImpl extends BookRemoteDataSource {
     return books;
   }
 
-/*   @override
-  Future<List<BookModel>> getPopularBooks() async {
-    final QueryBuilder<ParseObject> parseQuery =
-        QueryBuilder<ParseObject>(ParseObject('Books'));
-    parseQuery.whereEqualTo('isPopular', true);
-    final apiResponse = await parseQuery.query();
-
-    if (apiResponse.success && apiResponse.results != null) {
-      for (var object in apiResponse.results as List<ParseObject>) {
-        books.add(BookModel.fromDb(object));
-      }
-    } else {
-      throw ServerException();
-    }
-
-    return books;
-  } */
-
   @override
   Future<List<BookModel>> getBooksByName(String name) async {
     final QueryBuilder<ParseObject> parseQuery =
