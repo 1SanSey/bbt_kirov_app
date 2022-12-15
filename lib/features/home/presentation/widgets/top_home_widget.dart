@@ -1,8 +1,6 @@
 import 'package:bbt_kirov_app/core/assets/app_const.dart';
 import 'package:bbt_kirov_app/features/category/presentation/pages/category_screen.dart';
-import 'package:bbt_kirov_app/features/home/presentation/bloc/home_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TopHomeWidget extends StatelessWidget {
   const TopHomeWidget({super.key});
@@ -24,10 +22,10 @@ class TopHomeWidget extends StatelessWidget {
                 ),
               ),
               onPressed: () {
-                var state = BlocProvider.of<HomeBooksBloc>(context).state
+                /* var state = BlocProvider.of<HomeBooksBloc>(context).state
                     as HomeBooksLoaded;
 
-                state.books.clear();
+                state.books.clear(); */
                 Navigator.push(
                   context,
                   MaterialPageRoute(

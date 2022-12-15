@@ -18,11 +18,12 @@ init() async {
 //BLoC & Cubit
 
   sl.registerFactory(() => HomeBooksBloc(popularBooks: sl()));
-  sl.registerFactory(() => CategoryAllBooksBloc(allBooks: sl()));
-  sl.registerFactory(() => CategoryBooksBySizeBloc(booksBySize: sl()));
-  sl.registerFactory(() => CategoryBooksByNameBloc(booksByName: sl()));
-  sl.registerFactory(() => CategoryBooksSetBloc(setBooks: sl()));
-  sl.registerFactory(() => CategoryCulinaryBooksBloc(culinaryBooks: sl()));
+  sl.registerFactory(() => CategoryBooksBloc(
+      allBooks: sl(),
+      booksBySize: sl(),
+      booksByName: sl(),
+      setBooks: sl(),
+      culinaryBooks: sl()));
 
 //UseCases
   sl.registerLazySingleton(() => PopularBooks(sl()));

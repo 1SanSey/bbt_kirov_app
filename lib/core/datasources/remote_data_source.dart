@@ -23,10 +23,9 @@ class BookRemoteDataSourceImpl extends BookRemoteDataSource {
         clientKey: keyClientKey, autoSendSessionId: true);
   }
 
-  List<BookModel> books = [];
-
   @override
   Future<List<BookModel>> getAllBooks() async {
+    List<BookModel> books = [];
     final apiResponse = await ParseObject('Books').getAll();
     if (apiResponse.success && apiResponse.results != null) {
       for (var object in apiResponse.results as List<ParseObject>) {
@@ -41,6 +40,7 @@ class BookRemoteDataSourceImpl extends BookRemoteDataSource {
 
   @override
   Future<List<BookModel>> getBooksByName(String name) async {
+    List<BookModel> books = [];
     final QueryBuilder<ParseObject> parseQuery =
         QueryBuilder<ParseObject>(ParseObject('Books'));
     parseQuery.whereContains('name', name);
@@ -78,6 +78,7 @@ class BookRemoteDataSourceImpl extends BookRemoteDataSource {
   }
 
   Future<List<BookModel>> _getBooksByQuery(String field, var query) async {
+    List<BookModel> books = [];
     final QueryBuilder<ParseObject> parseQuery =
         QueryBuilder<ParseObject>(ParseObject('Books'));
     parseQuery.whereEqualTo(field, query);

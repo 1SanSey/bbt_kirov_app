@@ -25,16 +25,8 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider<HomeBooksBloc>(
             create: (context) => di.sl<HomeBooksBloc>()),
-        BlocProvider<CategoryAllBooksBloc>(
-            create: (context) => di.sl<CategoryAllBooksBloc>()),
-        BlocProvider<CategoryBooksBySizeBloc>(
-            create: (context) => di.sl<CategoryBooksBySizeBloc>()),
-        BlocProvider<CategoryBooksByNameBloc>(
-            create: (context) => di.sl<CategoryBooksByNameBloc>()),
-        BlocProvider<CategoryBooksSetBloc>(
-            create: (context) => di.sl<CategoryBooksSetBloc>()),
-        BlocProvider<CategoryCulinaryBooksBloc>(
-            create: (context) => di.sl<CategoryCulinaryBooksBloc>()),
+        BlocProvider<CategoryBooksBloc>(
+            create: (context) => di.sl<CategoryBooksBloc>()),
       ],
       child: ChangeNotifierProvider(
         create: (_) => ThemeModel(),

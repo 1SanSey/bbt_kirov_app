@@ -1,3 +1,5 @@
+import 'package:bbt_kirov_app/common/error_text.dart';
+import 'package:bbt_kirov_app/common/loading_indicator.dart';
 import 'package:bbt_kirov_app/core/entities/book_entity.dart';
 import 'package:bbt_kirov_app/features/category/presentation/bloc/category_bloc.dart';
 import 'package:bbt_kirov_app/features/category/presentation/widgets/builder_widget.dart';
@@ -16,33 +18,18 @@ class _BooksCategoryWidgetState extends State<BooksCategoryWidget> {
   @override
   void initState() {
     super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    List<BookEntity> categoryBooks = [];
-// Загрузка всех книг
+    // Загрузка всех книг
     if (widget.query == 'all') {
-      BlocProvider.of<CategoryAllBooksBloc>(context)
-          .add(CategoryLoadBooksEvent(param: widget.query));
-
-      return BlocBuilder<CategoryAllBooksBloc, CategoryBooksState>(
-          builder: (context, state) {
-        return builderWidgetCategory(context, state, categoryBooks);
-      });
+      BlocProvider.of<CategoryBooksBloc>(context)
+          .add(CategoryLoadAllBooksEvent(param: widget.query));
     }
 
     // Загрузка книг по наименованию
     if (widget.query == 'Бхагавад-гита' ||
         widget.query == 'Шримад Бхагаватам' ||
         widget.query == 'Чайтанья Чаритамрита') {
-      BlocProvider.of<CategoryBooksByNameBloc>(context)
-          .add(CategoryLoadBooksEvent(param: widget.query));
-
-      return BlocBuilder<CategoryBooksByNameBloc, CategoryBooksState>(
-          builder: (context, state) {
-        return builderWidgetCategory(context, state, categoryBooks);
-      });
+      BlocProvider.of<CategoryBooksBloc>(context)
+          .add(CategoryLoadBooksByNameEvent(param: widget.query));
     }
 
     // Загрузка книг по размеру
@@ -50,37 +37,61 @@ class _BooksCategoryWidgetState extends State<BooksCategoryWidget> {
         widget.query == 'medium' ||
         widget.query == 'big' ||
         widget.query == 'maha big') {
-      BlocProvider.of<CategoryBooksBySizeBloc>(context)
-          .add(CategoryLoadBooksEvent(param: widget.query));
-
-      return BlocBuilder<CategoryBooksBySizeBloc, CategoryBooksState>(
-          builder: (context, state) {
-        return builderWidgetCategory(context, state, categoryBooks);
-      });
+      BlocProvider.of<CategoryBooksBloc>(context)
+          .add(CategoryLoadBooksBySizeEvent(param: widget.query));
     }
 
     // Загрузка наборов книг
     if (widget.query == 'set') {
-      BlocProvider.of<CategoryBooksSetBloc>(context)
-          .add(CategoryLoadBooksEvent(param: widget.query));
-
-      return BlocBuilder<CategoryBooksSetBloc, CategoryBooksState>(
-          builder: (context, state) {
-        return builderWidgetCategory(context, state, categoryBooks);
-      });
+      BlocProvider.of<CategoryBooksBloc>(context)
+          .add(CategoryLoadBooksSetEvent(param: widget.query));
     }
 
     // Загрузка кулинарных книг
     if (widget.query == 'culinary') {
-      BlocProvider.of<CategoryCulinaryBooksBloc>(context)
-          .add(CategoryLoadBooksEvent(param: widget.query));
-
-      return BlocBuilder<CategoryCulinaryBooksBloc, CategoryBooksState>(
-          builder: (context, state) {
-        return builderWidgetCategory(context, state, categoryBooks);
-      });
+      BlocProvider.of<CategoryBooksBloc>(context)
+          .add(CategoryLoadCulinaryBooksEvent(param: widget.query));
     }
+  }
 
-    return const SizedBox.shrink();
+  @override
+  Widget build(BuildContext context) {
+    List<BookEntity> categoryBooks = [];
+    bool error = false;
+    String errorText = '';
+    return BlocSelector<CategoryBooksBloc, CategoryBooksState, bool>(
+        selector: (state) {
+      if (state is CategoryBooksEmpty) {
+        return false;
+      }
+      if (state is CategoryBooksLoading) {
+        return false;
+      }
+      if (state is CategoryBooksLoaded) {
+        categoryBooks = state.books;
+
+        if (categoryBooks.isEmpty) {
+          error = true;
+          errorText = 'Error! Books are not loaded';
+          return false;
+        }
+        return true;
+      } else if (state is CategoryBooksError) {
+        error = true;
+        errorText = state.message;
+        return false;
+      } else {
+        return false;
+      }
+    }, builder: (context, state) {
+      if (state) {
+        return builderWidgetCategory(context, categoryBooks);
+      } else {
+        if (error) {
+          showErrorText(errorText);
+        }
+      }
+      return loadingIndicator(context);
+    });
   }
 }

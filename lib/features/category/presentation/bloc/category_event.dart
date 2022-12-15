@@ -7,8 +7,32 @@ abstract class CategoryBooksEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class CategoryLoadBooksEvent extends CategoryBooksEvent {
+class CategoryLoadAllBooksEvent extends CategoryBooksEvent {
   final String param;
 
-  const CategoryLoadBooksEvent({required this.param});
+  const CategoryLoadAllBooksEvent({required this.param});
+}
+
+class CategoryLoadBooksBySizeEvent extends CategoryBooksEvent {
+  final String param;
+
+  const CategoryLoadBooksBySizeEvent({required this.param});
+}
+
+class CategoryLoadBooksByNameEvent extends CategoryBooksEvent {
+  final String param;
+
+  const CategoryLoadBooksByNameEvent({required this.param});
+}
+
+class CategoryLoadBooksSetEvent extends CategoryBooksEvent {
+  final String param;
+
+  const CategoryLoadBooksSetEvent({required this.param});
+}
+
+class CategoryLoadCulinaryBooksEvent extends CategoryBooksEvent {
+  final String param;
+
+  const CategoryLoadCulinaryBooksEvent({required this.param});
 }

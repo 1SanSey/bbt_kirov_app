@@ -1,9 +1,7 @@
 import 'package:bbt_kirov_app/core/themes/theme_model.dart';
 import 'package:bbt_kirov_app/core/widgets/icon_switch_theme.dart';
-import 'package:bbt_kirov_app/features/category/presentation/bloc/category_bloc.dart';
 import 'package:bbt_kirov_app/features/category/presentation/widgets/book_list_category_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
 class CategoryPage extends StatelessWidget {
@@ -99,7 +97,7 @@ class CategoryPage extends StatelessWidget {
         appBar: AppBar(
           leading: IconButton(
               onPressed: () {
-                switch (idCategory) {
+                /* switch (idCategory) {
                   case 0:
                     {
                       _state = BlocProvider.of<CategoryAllBooksBloc>(context)
@@ -177,7 +175,7 @@ class CategoryPage extends StatelessWidget {
                     {
                       break;
                     }
-                }
+                } */
 
                 Navigator.maybePop(context);
               },
