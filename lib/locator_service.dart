@@ -1,5 +1,6 @@
 import 'package:bbt_kirov_app/core/platform/network_info.dart';
 import 'package:bbt_kirov_app/features/category/domain/usecases/get_books_category.dart';
+import 'package:bbt_kirov_app/features/category/domain/usecases/search_books_category.dart';
 import 'package:bbt_kirov_app/features/category/presentation/bloc/category_bloc.dart';
 import 'package:bbt_kirov_app/core/datasources/remote_data_source.dart';
 import 'package:bbt_kirov_app/features/home/data/repositories/book_repository_impl.dart';
@@ -19,11 +20,13 @@ init() async {
 
   sl.registerFactory(() => HomeBooksBloc(popularBooks: sl()));
   sl.registerFactory(() => CategoryBooksBloc(
-      allBooks: sl(),
-      booksBySize: sl(),
-      booksByName: sl(),
-      setBooks: sl(),
-      culinaryBooks: sl()));
+        allBooks: sl(),
+        booksBySize: sl(),
+        booksByName: sl(),
+        setBooks: sl(),
+        culinaryBooks: sl(),
+        searchBooks: sl(),
+      ));
 
 //UseCases
   sl.registerLazySingleton(() => PopularBooks(sl()));
@@ -32,6 +35,7 @@ init() async {
   sl.registerLazySingleton(() => BooksByName(sl()));
   sl.registerLazySingleton(() => SetBooks(sl()));
   sl.registerLazySingleton(() => CulinaryBooks(sl()));
+  sl.registerLazySingleton(() => SearchBooksCategory(sl()));
 
 //Repository
   sl.registerLazySingleton<BookHomeRepository>(

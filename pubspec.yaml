@@ -46,6 +46,7 @@ dependencies:
   provider: ^6.0.4
   shared_preferences: ^2.0.15
   carousel_slider: ^4.1.1
+  bloc_concurrency: ^0.2.0
 
 
 dev_dependencies:

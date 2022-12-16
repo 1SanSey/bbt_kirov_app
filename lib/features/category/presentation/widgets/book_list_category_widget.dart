@@ -15,9 +15,14 @@ class BooksCategoryWidget extends StatefulWidget {
 }
 
 class _BooksCategoryWidgetState extends State<BooksCategoryWidget> {
+  late final TextEditingController searchController;
+
   @override
   void initState() {
     super.initState();
+
+    searchController = TextEditingController();
+
     // Загрузка всех книг
     if (widget.query == 'all') {
       BlocProvider.of<CategoryBooksBloc>(context)
@@ -85,7 +90,11 @@ class _BooksCategoryWidgetState extends State<BooksCategoryWidget> {
       }
     }, builder: (context, state) {
       if (state) {
-        return builderWidgetCategory(context, categoryBooks);
+        return BuilderWidgetCategory(
+          context,
+          categoryBooks: categoryBooks,
+          searchController: searchController,
+        );
       } else {
         if (error) {
           showErrorText(errorText);

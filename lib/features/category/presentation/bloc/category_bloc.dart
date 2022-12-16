@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:bbt_kirov_app/common/failure_to_message.dart';
 import 'package:bbt_kirov_app/core/entities/book_entity.dart';
 import 'package:bbt_kirov_app/features/category/domain/usecases/get_books_category.dart';
+import 'package:bbt_kirov_app/features/category/domain/usecases/search_books_category.dart';
+import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -15,19 +17,25 @@ class CategoryBooksBloc extends Bloc<CategoryBooksEvent, CategoryBooksState> {
   final BooksBySize booksBySize;
   final BooksByName booksByName;
   final SetBooks setBooks;
+  final SearchBooksCategory searchBooks;
 
-  CategoryBooksBloc(
-      {required this.booksByName,
-      required this.setBooks,
-      required this.booksBySize,
-      required this.allBooks,
-      required this.culinaryBooks})
-      : super(CategoryBooksEmpty()) {
-    on<CategoryLoadAllBooksEvent>(_onEventAllBooks);
-    on<CategoryLoadBooksBySizeEvent>(_onEventBooksBySize);
-    on<CategoryLoadBooksByNameEvent>(_onEventBooksByName);
-    on<CategoryLoadBooksSetEvent>(_onEventBooksSet);
-    on<CategoryLoadCulinaryBooksEvent>(_onEventCulinaryBooks);
+  CategoryBooksBloc({
+    required this.booksByName,
+    required this.setBooks,
+    required this.booksBySize,
+    required this.allBooks,
+    required this.culinaryBooks,
+    required this.searchBooks,
+  }) : super(CategoryBooksEmpty()) {
+    on<CategoryLoadAllBooksEvent>(_onEventAllBooks, transformer: droppable());
+    on<CategoryLoadBooksBySizeEvent>(_onEventBooksBySize,
+        transformer: droppable());
+    on<CategoryLoadBooksByNameEvent>(_onEventBooksByName,
+        transformer: droppable());
+    on<CategoryLoadBooksSetEvent>(_onEventBooksSet, transformer: droppable());
+    on<CategoryLoadCulinaryBooksEvent>(_onEventCulinaryBooks,
+        transformer: droppable());
+    on<CategorySearchBooksEvent>(_onEventSearchBooks, transformer: droppable());
   }
 
   FutureOr<void> _onEventAllBooks(
@@ -92,6 +100,21 @@ class CategoryBooksBloc extends Bloc<CategoryBooksEvent, CategoryBooksState> {
     emit(CategoryBooksLoading());
 
     final failureOrBooks = await culinaryBooks();
+
+    failureOrBooks.fold(
+        (failure) =>
+            emit(CategoryBooksError(message: mapFailureToMessage(failure))),
+        (books) {
+      emit(CategoryBooksLoaded(books: books));
+    });
+  }
+
+  FutureOr<void> _onEventSearchBooks(
+      CategorySearchBooksEvent event, Emitter<CategoryBooksState> emit) async {
+    emit(CategoryBooksLoading());
+
+    final failureOrBooks =
+        await searchBooks(SearchBooksParams(query: event.query));
 
     failureOrBooks.fold(
         (failure) =>

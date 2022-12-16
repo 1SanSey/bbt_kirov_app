@@ -36,3 +36,12 @@ class CategoryLoadCulinaryBooksEvent extends CategoryBooksEvent {
 
   const CategoryLoadCulinaryBooksEvent({required this.param});
 }
+
+class CategorySearchBooksEvent extends CategoryBooksEvent {
+  final String query;
+
+  const CategorySearchBooksEvent({required this.query});
+
+  @override
+  List<Object> get props => [query];
+}

@@ -6,9 +6,8 @@ import 'package:provider/provider.dart';
 
 class CategoryPage extends StatelessWidget {
   final int idCategory;
-  late var _state;
-  late String query;
-  String? nameCategory;
+  late final String query;
+  late final String nameCategory;
   CategoryPage({super.key, required this.idCategory}) {
     switch (idCategory) {
       case 0:
@@ -180,7 +179,7 @@ class CategoryPage extends StatelessWidget {
                 Navigator.maybePop(context);
               },
               icon: const Icon(Icons.arrow_back)),
-          title: Text(nameCategory ?? ''),
+          title: Text(nameCategory),
           centerTitle: true,
           actions: [iconSwitchTheme(context, themeNotifier)],
         ),
