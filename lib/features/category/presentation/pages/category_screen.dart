@@ -1,5 +1,6 @@
 import 'package:bbt_kirov_app/core/themes/theme_model.dart';
 import 'package:bbt_kirov_app/core/widgets/icon_switch_theme.dart';
+import 'package:bbt_kirov_app/core/widgets/nav_bar_widget.dart';
 import 'package:bbt_kirov_app/features/category/presentation/widgets/book_list_category_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -96,86 +97,6 @@ class CategoryPage extends StatelessWidget {
         appBar: AppBar(
           leading: IconButton(
               onPressed: () {
-                /* switch (idCategory) {
-                  case 0:
-                    {
-                      _state = BlocProvider.of<CategoryAllBooksBloc>(context)
-                          .state as CategoryBooksLoaded;
-                      _state.books.clear();
-
-                      break;
-                    }
-                  case 1:
-                    {
-                      _state = BlocProvider.of<CategoryBooksBySizeBloc>(context)
-                          .state as CategoryBooksLoaded;
-                      _state.books.clear();
-                      break;
-                    }
-                  case 2:
-                    {
-                      _state = BlocProvider.of<CategoryBooksBySizeBloc>(context)
-                          .state as CategoryBooksLoaded;
-                      _state.books.clear();
-                      break;
-                    }
-                  case 3:
-                    {
-                      _state = BlocProvider.of<CategoryBooksBySizeBloc>(context)
-                          .state as CategoryBooksLoaded;
-                      _state.books.clear();
-                      break;
-                    }
-                  case 4:
-                    {
-                      _state = BlocProvider.of<CategoryBooksBySizeBloc>(context)
-                          .state as CategoryBooksLoaded;
-                      _state.books.clear();
-                      break;
-                    }
-                  case 5:
-                    {
-                      _state = BlocProvider.of<CategoryBooksByNameBloc>(context)
-                          .state as CategoryBooksLoaded;
-                      _state.books.clear();
-                      break;
-                    }
-                  case 6:
-                    {
-                      _state = BlocProvider.of<CategoryBooksByNameBloc>(context)
-                          .state as CategoryBooksLoaded;
-                      _state.books.clear();
-                      break;
-                    }
-                  case 7:
-                    {
-                      _state = BlocProvider.of<CategoryBooksByNameBloc>(context)
-                          .state as CategoryBooksLoaded;
-                      _state.books.clear();
-                      break;
-                    }
-                  case 8:
-                    {
-                      _state = BlocProvider.of<CategoryBooksSetBloc>(context)
-                          .state as CategoryBooksLoaded;
-                      _state.books.clear();
-                      break;
-                    }
-
-                  case 9:
-                    {
-                      _state =
-                          BlocProvider.of<CategoryCulinaryBooksBloc>(context)
-                              .state as CategoryBooksLoaded;
-                      _state.books.clear();
-                      break;
-                    }
-                  default:
-                    {
-                      break;
-                    }
-                } */
-
                 Navigator.maybePop(context);
               },
               icon: const Icon(Icons.arrow_back)),
@@ -183,25 +104,11 @@ class CategoryPage extends StatelessWidget {
           centerTitle: true,
           actions: [iconSwitchTheme(context, themeNotifier)],
         ),
-        body: /* MultiBlocProvider(
-          providers: [
-            BlocProvider<CategoryAllBooksBloc>(
-                create: (context) => di.sl<CategoryAllBooksBloc>()),
-            BlocProvider<CategoryBooksBySizeBloc>(
-                create: (context) => di.sl<CategoryBooksBySizeBloc>()),
-            BlocProvider<CategoryBooksByNameBloc>(
-                create: (context) => di.sl<CategoryBooksByNameBloc>()),
-            BlocProvider<CategoryBooksSetBloc>(
-                create: (context) => di.sl<CategoryBooksSetBloc>()),
-            BlocProvider<CategoryCulinaryBooksBloc>(
-                create: (context) => di.sl<CategoryCulinaryBooksBloc>()),
-          ],
-          child: */
-            BooksCategoryWidget(
+        body: BooksCategoryWidget(
           query: query,
         ),
+        bottomNavigationBar: const NavBarWidget(),
       );
-      //);
     });
   }
 }

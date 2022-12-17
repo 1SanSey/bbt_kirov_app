@@ -16,7 +16,7 @@ class BookCard extends StatelessWidget {
       shape: RoundedRectangleBorder(
         side: const BorderSide(
           color: AppColors.greyColor,
-          width: 2,
+          width: 1,
         ),
         borderRadius: BorderRadius.circular(8.0),
       ),
@@ -34,40 +34,45 @@ class BookCard extends StatelessWidget {
                   ),
                 );
               },
-              child: Image.network(
-                book.image ?? 'https://master-kraski.ru/images/no-image.jpg',
-                height: 180,
+              child: Column(
+                children: [
+                  Image.network(
+                    book.image ??
+                        'https://master-kraski.ru/images/no-image.jpg',
+                    height: 180,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 8, left: 8),
+                    child: Text(
+                      book.name,
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.bodyText1,
+                    ),
+                  ),
+                ],
               ),
             ),
             Expanded(
-              child: Padding(
-                padding: const EdgeInsets.only(right: 8, left: 8),
-                child: Text(
-                  book.name,
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.bodyText1,
-                ),
-              ),
-            ),
-            Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  IconButton(
-                      onPressed: () {},
-                      icon: Icon(
-                        Icons.shopping_cart,
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[
+                    IconButton(
+                        onPressed: () {},
+                        icon: Icon(
+                          Icons.shopping_cart,
+                          color: Theme.of(context).primaryColor,
+                          size: 30,
+                        )),
+                    Text(
+                      '${book.price} ₽',
+                      style: TextStyle(
                         color: Theme.of(context).primaryColor,
-                        size: 30,
-                      )),
-                  Text(
-                    '${book.price} ₽',
-                    style: TextStyle(
-                      color: Theme.of(context).primaryColor,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                ]),
+                  ]),
+            ),
           ],
         ),
       ),

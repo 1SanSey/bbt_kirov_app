@@ -1,6 +1,8 @@
 import 'package:bbt_kirov_app/core/themes/app_colors.dart';
 import 'package:bbt_kirov_app/core/themes/theme_model.dart';
+import 'package:bbt_kirov_app/core/widgets/drawer_widget.dart';
 import 'package:bbt_kirov_app/core/widgets/icon_switch_theme.dart';
+import 'package:bbt_kirov_app/core/widgets/nav_bar_widget.dart';
 import 'package:bbt_kirov_app/features/home/presentation/widgets/book_list_home_widget.dart';
 import 'package:bbt_kirov_app/features/home/presentation/widgets/carousel_slider_home.dart';
 import 'package:bbt_kirov_app/features/home/presentation/widgets/top_home_widget.dart';
@@ -44,6 +46,8 @@ class _HomePageState extends State<HomePage> {
           ),
           BooksListHome(),
         ]),
+        bottomNavigationBar: const NavBarWidget(),
+        drawer: const DrawerWidget(),
       );
     });
   }

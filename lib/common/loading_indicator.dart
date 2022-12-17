@@ -8,7 +8,7 @@ Widget loadingIndicator(BuildContext context) {
       child: SpinKitDualRing(
         color: Theme.of(context).primaryColor,
         size: 60.0,
-        duration: const Duration(milliseconds: 500),
+        duration: const Duration(milliseconds: 400),
       ),
     ),
   );

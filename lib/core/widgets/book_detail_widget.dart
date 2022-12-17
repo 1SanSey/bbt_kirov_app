@@ -1,6 +1,7 @@
 import 'package:bbt_kirov_app/core/themes/app_colors.dart';
 import 'package:bbt_kirov_app/core/themes/theme_model.dart';
 import 'package:bbt_kirov_app/core/widgets/icon_switch_theme.dart';
+import 'package:bbt_kirov_app/core/widgets/nav_bar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:bbt_kirov_app/core/entities/book_entity.dart';
@@ -45,6 +46,7 @@ class _BookDetailPageState extends State<BookDetailPage> {
     return Consumer<ThemeModel>(
         builder: (context, ThemeModel themeNotifier, child) {
       return Scaffold(
+        backgroundColor: Colors.white,
         appBar: AppBar(
           title: Text(widget.book.name),
           centerTitle: true,
@@ -90,7 +92,6 @@ class _BookDetailPageState extends State<BookDetailPage> {
                       color: AppColors.greyColor,
                       width: 1,
                     ),
-                    //color: AppColors.greyColor2,
                   ),
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -110,7 +111,7 @@ class _BookDetailPageState extends State<BookDetailPage> {
                             style: const TextStyle(
                                 color: AppColors.greyColor2,
                                 fontSize: 24,
-                                fontWeight: FontWeight.bold),
+                                fontWeight: FontWeight.w400),
                           ),
                         ),
                         /*  const VerticalDivider(
@@ -143,6 +144,7 @@ class _BookDetailPageState extends State<BookDetailPage> {
             ),
           ],
         )),
+        bottomNavigationBar: const NavBarWidget(),
       );
     });
   }
