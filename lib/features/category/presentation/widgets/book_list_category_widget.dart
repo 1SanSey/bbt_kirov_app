@@ -93,7 +93,6 @@ class _BooksCategoryWidgetState extends State<BooksCategoryWidget> {
         return BuilderWidgetCategory(
           context,
           categoryBooks: categoryBooks,
-          searchController: searchController,
         );
       } else {
         if (error) {

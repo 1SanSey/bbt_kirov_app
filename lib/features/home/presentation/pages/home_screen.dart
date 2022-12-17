@@ -27,32 +27,22 @@ class _HomePageState extends State<HomePage> {
         ),
         body: const CustomScrollView(slivers: [
           CarouselSliderHome(),
+          TopHomeWidget(),
           SliverPadding(
             padding: EdgeInsets.only(top: 16, bottom: 8, right: 8, left: 8),
             sliver: SliverToBoxAdapter(
-              child: Text(
-                'Популярные книги',
-                style: TextStyle(
-                    color: AppColors.greyColor2,
-                    fontSize: 23,
-                    fontWeight: FontWeight.w700),
+              child: Center(
+                child: Text(
+                  'Популярные книги',
+                  style: TextStyle(
+                      color: AppColors.greyColor2,
+                      fontSize: 23,
+                      fontWeight: FontWeight.w700),
+                ),
               ),
             ),
           ),
           BooksListHome(),
-          SliverPadding(
-            padding: EdgeInsets.only(top: 8, right: 8, left: 8),
-            sliver: SliverToBoxAdapter(
-              child: Text(
-                'Выберите категорию',
-                style: TextStyle(
-                    color: AppColors.greyColor2,
-                    fontSize: 23,
-                    fontWeight: FontWeight.w700),
-              ),
-            ),
-          ),
-          TopHomeWidget(),
         ]),
       );
     });
