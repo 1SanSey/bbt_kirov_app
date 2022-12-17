@@ -22,10 +22,6 @@ class TopHomeWidget extends StatelessWidget {
                 ),
               ),
               onPressed: () {
-                /* var state = BlocProvider.of<HomeBooksBloc>(context).state
-                    as HomeBooksLoaded;
-
-                state.books.clear(); */
                 Navigator.push(
                   context,
                   MaterialPageRoute(
