@@ -21,7 +21,7 @@ class BookCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(8.0),
       ),
       child: SizedBox(
-        height: 280,
+        height: 300,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -41,12 +41,15 @@ class BookCard extends StatelessWidget {
                         'https://master-kraski.ru/images/no-image.jpg',
                     height: 180,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 8, left: 8),
-                    child: Text(
-                      book.name,
-                      textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.bodyText1,
+                  SizedBox(
+                    height: 35,
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 8, left: 8),
+                      child: Text(
+                        book.name,
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.bodyText1,
+                      ),
                     ),
                   ),
                 ],

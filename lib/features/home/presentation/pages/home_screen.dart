@@ -46,7 +46,9 @@ class _HomePageState extends State<HomePage> {
           ),
           BooksListHome(),
         ]),
-        bottomNavigationBar: const NavBarWidget(),
+        bottomNavigationBar: const NavBarWidget(
+          currentIndex: 0,
+        ),
         drawer: const DrawerWidget(),
       );
     });

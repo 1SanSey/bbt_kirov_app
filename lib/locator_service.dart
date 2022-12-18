@@ -1,4 +1,5 @@
 import 'package:bbt_kirov_app/core/platform/network_info.dart';
+import 'package:bbt_kirov_app/core/widgets/navbar/navbar_bloc/navbar_bloc.dart';
 import 'package:bbt_kirov_app/features/category/domain/usecases/get_books_category.dart';
 import 'package:bbt_kirov_app/features/category/domain/usecases/search_books_category.dart';
 import 'package:bbt_kirov_app/features/category/presentation/bloc/category_bloc.dart';
@@ -27,6 +28,7 @@ init() async {
         culinaryBooks: sl(),
         searchBooks: sl(),
       ));
+  sl.registerFactory<NavbarBloc>(() => NavbarBloc());
 
 //UseCases
   sl.registerLazySingleton(() => PopularBooks(sl()));
