@@ -2,10 +2,9 @@ import 'package:bbt_kirov_app/core/themes/app_colors.dart';
 import 'package:bbt_kirov_app/core/themes/theme_model.dart';
 import 'package:bbt_kirov_app/core/widgets/drawer_widget.dart';
 import 'package:bbt_kirov_app/core/widgets/icon_switch_theme.dart';
-import 'package:bbt_kirov_app/core/widgets/nav_bar_widget.dart';
-import 'package:bbt_kirov_app/features/home/presentation/widgets/book_list_home_widget.dart';
-import 'package:bbt_kirov_app/features/home/presentation/widgets/carousel_slider_home.dart';
-import 'package:bbt_kirov_app/features/home/presentation/widgets/top_home_widget.dart';
+import 'package:bbt_kirov_app/features/cart/presentation/pages/cart_page.dart';
+import 'package:bbt_kirov_app/features/favorites/presentation/pages/favourites_page.dart';
+import 'package:bbt_kirov_app/features/home/presentation/widgets/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -21,35 +20,58 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Consumer<ThemeModel>(
         builder: (context, ThemeModel themeNotifier, child) {
-      return Scaffold(
-        appBar: AppBar(
-          title: const Text('BBT Kirov'),
-          centerTitle: true,
-          actions: [iconSwitchTheme(context, themeNotifier)],
-        ),
-        body: const CustomScrollView(slivers: [
-          CarouselSliderHome(),
-          TopHomeWidget(),
-          SliverPadding(
-            padding: EdgeInsets.only(top: 16, bottom: 8, right: 8, left: 8),
-            sliver: SliverToBoxAdapter(
-              child: Center(
-                child: Text(
-                  'Популярные книги',
-                  style: TextStyle(
-                      color: AppColors.greyColor2,
-                      fontSize: 23,
-                      fontWeight: FontWeight.w700),
-                ),
+      return DefaultTabController(
+        length: 3,
+        child: Scaffold(
+          appBar: AppBar(
+            title: const Text('BBT Kirov'),
+            centerTitle: true,
+            actions: [iconSwitchTheme(context, themeNotifier)],
+          ),
+          body: const TabBarView(
+            children: <Widget>[
+              MainScreen(),
+              FavouritesPage(),
+              CartPage(),
+            ],
+          ),
+          bottomNavigationBar: PreferredSize(
+            preferredSize: Size(MediaQuery.of(context).size.width, 50),
+            child: const Material(
+              color: AppColors.primaryColorLight,
+              child: TabBar(
+                labelColor: Colors.white,
+                unselectedLabelColor: AppColors.secondaryColorLight,
+                automaticIndicatorColorAdjustment: false,
+                indicatorColor: AppColors.primaryColorLight,
+                tabs: <Widget>[
+                  Tab(
+                    icon: Icon(Icons.home),
+                    iconMargin: EdgeInsets.only(top: 3, bottom: 3),
+                    text: 'Главная',
+                    height: 50,
+                  ),
+                  Tab(
+                    icon: Icon(Icons.favorite),
+                    iconMargin: EdgeInsets.only(top: 3, bottom: 3),
+                    text: 'Избранное',
+                    height: 50,
+                  ),
+                  Tab(
+                    icon: Icon(Icons.shopping_basket),
+                    iconMargin: EdgeInsets.only(top: 3, bottom: 3),
+                    text: 'Корзина',
+                    height: 50,
+                  ),
+                ],
               ),
             ),
           ),
-          BooksListHome(),
-        ]),
-        bottomNavigationBar: const NavBarWidget(
-          currentIndex: 0,
+          /* const NavBarWidget(
+            currentIndex: 0,
+          ), */
+          drawer: const DrawerWidget(),
         ),
-        drawer: const DrawerWidget(),
       );
     });
   }

@@ -5,9 +5,9 @@ class DrawerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Drawer(
+    return Drawer(
       backgroundColor: Colors.white,
-      width: 250,
+      width: MediaQuery.of(context).size.width * 0.80,
     );
   }
 }

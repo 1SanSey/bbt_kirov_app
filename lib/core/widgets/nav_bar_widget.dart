@@ -27,29 +27,34 @@ class NavBarWidget extends StatelessWidget {
           ],
           currentIndex: currentIndex ?? 0,
           onTap: (value) {
-            BlocProvider.of<NavbarBloc>(context)
-                .add(NavigateToEvent(destination: value));
-            if (value == 0) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const HomePage(),
-                ),
-              );
-            } else if (value == 1) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const FavouritesPage(),
-                ),
-              );
-            } else if (value == 2) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const CartPage(),
-                ),
-              );
+            switch (value) {
+              case 0:
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const HomePage(),
+                  ),
+                );
+                break;
+              case 1:
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const FavouritesPage(),
+                  ),
+                );
+
+                break;
+              case 2:
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const CartPage(),
+                  ),
+                );
+                break;
+              default:
+                break;
             }
           },
         );

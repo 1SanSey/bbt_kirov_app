@@ -5,7 +5,7 @@ ThemeData lightTheme() => ThemeData(
       brightness: Brightness.light,
       appBarTheme: const AppBarTheme(
         backgroundColor: AppColors.primaryColorLight,
-        foregroundColor: AppColors.secondaryColorLight,
+        foregroundColor: Colors.white,
       ),
       primaryColor: AppColors.primaryColorLight,
       textTheme: const TextTheme(
