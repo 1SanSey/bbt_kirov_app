@@ -1,7 +1,6 @@
 import 'package:bbt_kirov_app/core/themes/app_colors.dart';
 import 'package:bbt_kirov_app/core/themes/theme_model.dart';
 import 'package:bbt_kirov_app/core/widgets/icon_switch_theme.dart';
-import 'package:bbt_kirov_app/core/widgets/nav_bar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:bbt_kirov_app/core/entities/book_entity.dart';
@@ -144,7 +143,6 @@ class _BookDetailPageState extends State<BookDetailPage> {
             ),
           ],
         )),
-        bottomNavigationBar: const NavBarWidget(),
       );
     });
   }

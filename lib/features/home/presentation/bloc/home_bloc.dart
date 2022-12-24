@@ -27,7 +27,6 @@ class HomeBooksBloc extends Bloc<HomeBooksEvent, HomeBooksState> {
         (failure) =>
             emit(HomeBooksError(message: mapFailureToMessage(failure))),
         (books) {
-      //log(books.toString());
       emit(HomeBooksLoaded(books: books));
     });
   }

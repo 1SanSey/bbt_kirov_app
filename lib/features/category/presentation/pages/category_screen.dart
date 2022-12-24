@@ -1,6 +1,5 @@
 import 'package:bbt_kirov_app/core/themes/theme_model.dart';
 import 'package:bbt_kirov_app/core/widgets/icon_switch_theme.dart';
-import 'package:bbt_kirov_app/core/widgets/nav_bar_widget.dart';
 import 'package:bbt_kirov_app/features/category/presentation/widgets/book_list_category_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -107,7 +106,6 @@ class CategoryPage extends StatelessWidget {
         body: BooksCategoryWidget(
           query: query,
         ),
-        bottomNavigationBar: const NavBarWidget(),
       );
     });
   }
