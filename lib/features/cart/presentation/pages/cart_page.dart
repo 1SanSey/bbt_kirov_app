@@ -1,9 +1,8 @@
 import 'package:bbt_kirov_app/common/error_text.dart';
-import 'package:bbt_kirov_app/common/loading_indicator.dart';
 import 'package:bbt_kirov_app/core/entities/book_entity.dart';
 import 'package:bbt_kirov_app/core/themes/app_colors.dart';
+import 'package:bbt_kirov_app/features/cart/presentation/bloc/cart_bloc.dart';
 import 'package:bbt_kirov_app/features/cart/presentation/widgets/cart_book_cart.dart';
-import 'package:bbt_kirov_app/features/home/presentation/bloc/home_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -12,23 +11,16 @@ class CartPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    context.read<HomeBooksBloc>().add(HomeLoadBooksEvent());
-    return BlocBuilder<HomeBooksBloc, HomeBooksState>(
+    context.read<CartBloc>().add(ShowCartEvent());
+    return BlocBuilder<CartBloc, CartState>(
       builder: (context, state) {
-        List<BookEntity> homeBooks = [];
+        List<BookEntity> cartBooks = [];
 
-        if (state is HomeBooksLoading) {
-          return loadingIndicator(context);
-        }
-        if (state is HomeBooksLoaded) {
-          homeBooks = state.books;
-          if (homeBooks.isEmpty) {
-            return showErrorText('Books are not loaded');
+        if (state is ShowCartState) {
+          cartBooks = state.books;
+          if (cartBooks.isEmpty) {
+            return showErrorText('Cart is empty');
           }
-        } else if (state is HomeBooksError) {
-          return showErrorText(state.message);
-        } else {
-          return loadingIndicator(context);
         }
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -49,13 +41,13 @@ class CartPage extends StatelessWidget {
             ),
             SliverPadding(
               padding: const EdgeInsets.symmetric(vertical: 8),
-              sliver: homeBooks.isNotEmpty
+              sliver: cartBooks.isNotEmpty
                   ? SliverList(
                       delegate: SliverChildBuilderDelegate(
                         (context, index) {
-                          return CartBookCard(book: homeBooks[index]);
+                          return CartBookCard(book: cartBooks[index]);
                         },
-                        childCount: homeBooks.length,
+                        childCount: cartBooks.length,
                       ),
                     )
                   : const SliverToBoxAdapter(

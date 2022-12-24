@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bbt_kirov_app/core/error/exception.dart';
 import 'package:bbt_kirov_app/core/models/book_model.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
@@ -9,6 +11,9 @@ abstract class BookRemoteDataSource {
   Future<List<BookModel>> getBooksByName(String name);
   Future<List<BookModel>> getBooksBySize(String size);
   Future<List<BookModel>> getSetBooks(String singleOrSet);
+  void addToCart(BookModel book);
+  void removeFromCart(BookModel book);
+  List<BookModel> showCart();
 }
 
 class BookRemoteDataSourceImpl extends BookRemoteDataSource {
@@ -93,5 +98,22 @@ class BookRemoteDataSourceImpl extends BookRemoteDataSource {
     }
 
     return books;
+  }
+
+  List<BookModel> cartBooks = [];
+  @override
+  void addToCart(BookModel book) {
+    cartBooks.add(book);
+  }
+
+  @override
+  void removeFromCart(BookModel book) {
+    cartBooks.remove(book);
+  }
+
+  @override
+  List<BookModel> showCart() {
+    log(cartBooks.toString());
+    return cartBooks;
   }
 }

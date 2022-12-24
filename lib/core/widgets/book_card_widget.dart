@@ -1,7 +1,9 @@
 import 'package:bbt_kirov_app/core/themes/app_colors.dart';
 import 'package:bbt_kirov_app/core/entities/book_entity.dart';
 import 'package:bbt_kirov_app/core/widgets/book_detail_widget.dart';
+import 'package:bbt_kirov_app/features/cart/presentation/bloc/cart_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BookCard extends StatelessWidget {
   final BookEntity book;
@@ -60,7 +62,10 @@ class BookCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
                     IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          BlocProvider.of<CartBloc>(context)
+                              .add(AddToCartEvent(param: book));
+                        },
                         icon: Icon(
                           Icons.shopping_cart,
                           color: Theme.of(context).primaryColor,
