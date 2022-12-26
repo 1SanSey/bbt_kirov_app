@@ -18,7 +18,7 @@ class CartRepositoryImpl implements CartRepository {
 
   @override
   void removeFromCart(BookEntity book) {
-    remoteDataSource.addToCart(book as BookModel);
+    remoteDataSource.removeFromCart(book as BookModel);
   }
 
   @override

@@ -9,12 +9,14 @@ import 'package:bbt_kirov_app/features/home/presentation/pages/home_screen.dart'
 import 'package:bbt_kirov_app/locator_service.dart' as di;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await BookRemoteDataSourceImpl.initParse();
   await di.init();
+  await Hive.initFlutter();
 
   runApp(const MyApp());
 }

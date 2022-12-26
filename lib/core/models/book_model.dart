@@ -9,7 +9,8 @@ class BookModel extends BookEntity {
       required image,
       required description,
       required size,
-      required singleOrSet})
+      required singleOrSet,
+      quantity})
       : super(
             name: name,
             price: price,
@@ -28,6 +29,7 @@ class BookModel extends BookEntity {
       description: object.get<String>('description') ?? '',
       size: object.get<String>('size') ?? '',
       singleOrSet: object.get<String>('singleOrSet') ?? '',
+      quantity: object.get<int>('quantity'),
     );
   }
 }

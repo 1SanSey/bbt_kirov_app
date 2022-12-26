@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:bbt_kirov_app/core/error/exception.dart';
 import 'package:bbt_kirov_app/core/models/book_model.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
@@ -113,7 +111,6 @@ class BookRemoteDataSourceImpl extends BookRemoteDataSource {
 
   @override
   List<BookModel> showCart() {
-    log(cartBooks.toString());
     return cartBooks;
   }
 }

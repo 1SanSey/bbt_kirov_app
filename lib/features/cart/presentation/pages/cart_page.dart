@@ -2,12 +2,40 @@ import 'package:bbt_kirov_app/common/error_text.dart';
 import 'package:bbt_kirov_app/core/entities/book_entity.dart';
 import 'package:bbt_kirov_app/core/themes/app_colors.dart';
 import 'package:bbt_kirov_app/features/cart/presentation/bloc/cart_bloc.dart';
-import 'package:bbt_kirov_app/features/cart/presentation/widgets/cart_book_cart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CartPage extends StatelessWidget {
+class CartPage extends StatefulWidget {
   const CartPage({super.key});
+
+  @override
+  State<CartPage> createState() => _CartPageState();
+}
+
+class _CartPageState extends State<CartPage> {
+  late int _count;
+
+  @override
+  void initState() {
+    _count = 1;
+    super.initState();
+  }
+
+  void _increment() {
+    setState(() {
+      ++_count;
+    });
+  }
+
+  void _decrement() {
+    setState(() {
+      if (_count > 1) {
+        --_count;
+      } else {
+        _count;
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +47,7 @@ class CartPage extends StatelessWidget {
         if (state is ShowCartState) {
           cartBooks = state.books;
           if (cartBooks.isEmpty) {
-            return showErrorText('Cart is empty');
+            return showErrorText('Ваша корзина пуста');
           }
         }
         return Padding(
@@ -41,26 +69,112 @@ class CartPage extends StatelessWidget {
             ),
             SliverPadding(
               padding: const EdgeInsets.symmetric(vertical: 8),
-              sliver: cartBooks.isNotEmpty
-                  ? SliverList(
-                      delegate: SliverChildBuilderDelegate(
-                        (context, index) {
-                          return CartBookCard(book: cartBooks[index]);
-                        },
-                        childCount: cartBooks.length,
-                      ),
-                    )
-                  : const SliverToBoxAdapter(
-                      child: Center(
-                        child: Text(
-                          'Ваша корзина пуста',
-                          style: TextStyle(
-                              color: AppColors.greyColor2,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w500),
+              sliver: SliverList(
+                delegate: SliverChildBuilderDelegate(
+                  (context, index) {
+                    return Material(
+                      color: Colors.white,
+                      child: Container(
+                        margin: const EdgeInsets.symmetric(vertical: 2),
+                        padding: const EdgeInsets.symmetric(vertical: 4),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(
+                            color: AppColors.greyColor,
+                            width: 1,
+                          ),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 5, right: 10),
+                              child: Image.network(
+                                cartBooks[index].image ??
+                                    'https://master-kraski.ru/images/no-image.jpg',
+                                height: 40,
+                              ),
+                            ),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.70,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    cartBooks[index].name,
+                                    style:
+                                        Theme.of(context).textTheme.bodyText1,
+                                  ),
+                                  Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          'Цена: ${cartBooks[index].price} ₽',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyText1,
+                                        ),
+                                        Row(
+                                          children: [
+                                            IconButton(
+                                                onPressed: _decrement,
+                                                icon: const Icon(Icons.remove),
+                                                iconSize: 20,
+                                                color: Theme.of(context)
+                                                    .primaryColor),
+                                            Text(
+                                              '$_count',
+                                              style: const TextStyle(
+                                                  color: AppColors.greyColor2,
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.w400),
+                                            ),
+                                            IconButton(
+                                                onPressed: _increment,
+                                                icon: const Icon(Icons.add),
+                                                iconSize: 20,
+                                                color: Theme.of(context)
+                                                    .primaryColor),
+                                          ],
+                                        ),
+                                      ]),
+                                ],
+                              ),
+                            ),
+                            /* Container(
+                              decoration: const BoxDecoration(
+                                border: Border(
+                                  right: BorderSide(
+                                    color: AppColors.greyColor,
+                                    width: 1,
+                                  ),
+                                ),
+                              ),
+                            ), */
+                            Expanded(
+                              child: IconButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      context.read<CartBloc>().add(
+                                          RemoveFromCartEvent(
+                                              param: cartBooks[index]));
+                                    });
+                                  },
+                                  icon: const Icon(Icons.delete),
+                                  iconSize: 20,
+                                  color: Theme.of(context).primaryColor),
+                            ),
+                          ],
                         ),
                       ),
-                    ),
+                    );
+                  },
+                  childCount: cartBooks.length,
+                ),
+              ),
             ),
           ]),
         );

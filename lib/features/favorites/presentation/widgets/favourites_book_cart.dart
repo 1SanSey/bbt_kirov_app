@@ -48,7 +48,7 @@ class _FavouritesBookCardState extends State<FavouritesBookCard> {
                     style: Theme.of(context).textTheme.bodyText1,
                   ),
                   Text(
-                    'Цена: ${widget.book.price} руб.',
+                    'Цена: ${widget.book.price} ₽',
                     style: Theme.of(context).textTheme.bodyText1,
                   ),
                 ],
