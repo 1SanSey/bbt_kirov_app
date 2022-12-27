@@ -1,4 +1,4 @@
-import 'package:bbt_kirov_app/core/entities/book_entity.dart';
+import 'package:bbt_kirov_app/features/cart/data/models/cart_book_model.dart';
 import 'package:bbt_kirov_app/features/cart/domain/usecases/cart_usecase.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -16,17 +16,11 @@ class CartBloc extends Bloc<CartEvent, CartState> {
   }
 
   void _addToCart(AddToCartEvent event, Emitter<CartState> emit) {
-    cart.addToCart(event.param);
-    //cart.showCart();
-
-    // emit(ShowCartState(books: cart.showCart()));
+    cart.addToCart(event.book);
   }
 
   void _removeFromCart(RemoveFromCartEvent event, Emitter<CartState> emit) {
-    cart.removeFromCart(event.param);
-    //cart.showCart();
-
-    //emit(ShowCartState(books: cart.showCart()));
+    cart.removeFromCart(event.book, event.index);
   }
 
   void _showCart(ShowCartEvent event, Emitter<CartState> emit) {

@@ -1,5 +1,6 @@
 import 'package:bbt_kirov_app/core/platform/network_info.dart';
 import 'package:bbt_kirov_app/core/widgets/navbar/navbar_bloc/navbar_bloc.dart';
+import 'package:bbt_kirov_app/features/cart/data/datasources/book_hive_datasource.dart';
 import 'package:bbt_kirov_app/features/cart/data/repositories/cart_repository_impl.dart';
 import 'package:bbt_kirov_app/features/cart/domain/usecases/cart_usecase.dart';
 import 'package:bbt_kirov_app/features/cart/presentation/bloc/cart_bloc.dart';
@@ -51,9 +52,10 @@ init() async {
   sl.registerLazySingleton<BookCategoryRepository>(() =>
       BookCategoryRepositoryImpl(remoteDataSource: sl(), networkInfo: sl()));
   sl.registerLazySingleton<CartRepository>(
-      () => CartRepositoryImpl(remoteDataSource: sl(), networkInfo: sl()));
+      () => CartRepositoryImpl(hiveDataSource: sl(), networkInfo: sl()));
   sl.registerLazySingleton<BookRemoteDataSource>(
       () => BookRemoteDataSourceImpl());
+  sl.registerLazySingleton<BookHiveDataSource>(() => BookHiveDataSourceImpl());
 
 //Core
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));

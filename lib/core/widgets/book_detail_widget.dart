@@ -1,6 +1,7 @@
 import 'package:bbt_kirov_app/core/themes/app_colors.dart';
 import 'package:bbt_kirov_app/core/themes/theme_model.dart';
 import 'package:bbt_kirov_app/core/widgets/icon_switch_theme.dart';
+import 'package:bbt_kirov_app/features/cart/data/models/cart_book_model.dart';
 import 'package:bbt_kirov_app/features/cart/presentation/bloc/cart_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -135,8 +136,14 @@ class _BookDetailPageState extends State<BookDetailPage> {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
+                CartBookModel hiveBook = CartBookModel(
+                    name: widget.book.name,
+                    price: widget.book.price,
+                    image: widget.book.image!,
+                    quantity: _count);
+
                 BlocProvider.of<CartBloc>(context)
-                    .add(AddToCartEvent(param: widget.book));
+                    .add(AddToCartEvent(book: hiveBook));
               },
               style: ElevatedButton.styleFrom(
                   backgroundColor: Theme.of(context).primaryColor,

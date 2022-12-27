@@ -1,17 +1,18 @@
 import 'package:hive/hive.dart';
+part 'cart_book_model.g.dart';
 
 @HiveType(typeId: 0)
-class HiveBookModel {
+class CartBookModel extends HiveObject {
   @HiveField(0)
   String name;
   @HiveField(1)
   int price;
   @HiveField(2)
-  String? image;
+  String image;
   @HiveField(3)
-  String quantity;
+  int quantity;
 
-  HiveBookModel(
+  CartBookModel(
       {required this.name,
       required this.price,
       required this.quantity,

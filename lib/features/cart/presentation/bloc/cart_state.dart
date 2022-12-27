@@ -10,7 +10,7 @@ abstract class CartState extends Equatable {
 class EmptyCartState extends CartState {}
 
 class AddToCartState extends CartState {
-  final BookEntity book;
+  final CartBookModel book;
 
   const AddToCartState({required this.book});
 
@@ -19,7 +19,7 @@ class AddToCartState extends CartState {
 }
 
 class RemoveFromCartState extends CartState {
-  final BookEntity book;
+  final CartBookModel book;
 
   const RemoveFromCartState({required this.book});
 
@@ -28,7 +28,7 @@ class RemoveFromCartState extends CartState {
 }
 
 class ShowCartState extends CartState {
-  final List<BookEntity> books;
+  final List<CartBookModel> books;
 
   const ShowCartState({required this.books});
 

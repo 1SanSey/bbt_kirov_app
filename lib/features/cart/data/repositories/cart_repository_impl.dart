@@ -1,29 +1,27 @@
-import 'package:bbt_kirov_app/core/entities/book_entity.dart';
-import 'package:bbt_kirov_app/core/models/book_model.dart';
 import 'package:bbt_kirov_app/core/platform/network_info.dart';
-import 'package:bbt_kirov_app/core/datasources/remote_data_source.dart';
+import 'package:bbt_kirov_app/features/cart/data/datasources/book_hive_datasource.dart';
+import 'package:bbt_kirov_app/features/cart/data/models/cart_book_model.dart';
 import 'package:bbt_kirov_app/features/cart/domain/repositories/cart_repository.dart';
 
 class CartRepositoryImpl implements CartRepository {
-  final BookRemoteDataSource remoteDataSource;
+  final BookHiveDataSource hiveDataSource;
   final NetworkInfo networkInfo;
 
-  CartRepositoryImpl(
-      {required this.networkInfo, required this.remoteDataSource});
+  CartRepositoryImpl({required this.networkInfo, required this.hiveDataSource});
 
   @override
-  void addToCart(BookEntity book) {
-    remoteDataSource.addToCart(book as BookModel);
+  void addToCart(CartBookModel book) {
+    hiveDataSource.addToCart(book);
   }
 
   @override
-  void removeFromCart(BookEntity book) {
-    remoteDataSource.removeFromCart(book as BookModel);
+  void removeFromCart(CartBookModel book, int index) {
+    hiveDataSource.removeFromCart(book, index);
   }
 
   @override
-  List<BookEntity> showCart() {
-    return remoteDataSource.showCart();
+  List<CartBookModel> showCart() {
+    return hiveDataSource.showCart();
   }
 
   /* Future<Either<Failure, List<BookModel>>> _getBooks(

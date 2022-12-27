@@ -1,4 +1,4 @@
-import 'package:bbt_kirov_app/core/entities/book_entity.dart';
+import 'package:bbt_kirov_app/features/cart/data/models/cart_book_model.dart';
 import 'package:bbt_kirov_app/features/cart/domain/repositories/cart_repository.dart';
 
 class CartUseCase {
@@ -6,15 +6,15 @@ class CartUseCase {
 
   CartUseCase(this.cartRepository);
 
-  void addToCart(BookEntity book) {
+  void addToCart(CartBookModel book) {
     cartRepository.addToCart(book);
   }
 
-  void removeFromCart(BookEntity book) {
-    cartRepository.removeFromCart(book);
+  void removeFromCart(CartBookModel book, int index) {
+    cartRepository.removeFromCart(book, index);
   }
 
-  List<BookEntity> showCart() {
+  List<CartBookModel> showCart() {
     return cartRepository.showCart();
   }
 }

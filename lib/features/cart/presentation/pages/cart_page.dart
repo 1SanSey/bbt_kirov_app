@@ -1,6 +1,6 @@
 import 'package:bbt_kirov_app/common/error_text.dart';
-import 'package:bbt_kirov_app/core/entities/book_entity.dart';
 import 'package:bbt_kirov_app/core/themes/app_colors.dart';
+import 'package:bbt_kirov_app/features/cart/data/models/cart_book_model.dart';
 import 'package:bbt_kirov_app/features/cart/presentation/bloc/cart_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -42,7 +42,7 @@ class _CartPageState extends State<CartPage> {
     context.read<CartBloc>().add(ShowCartEvent());
     return BlocBuilder<CartBloc, CartState>(
       builder: (context, state) {
-        List<BookEntity> cartBooks = [];
+        List<CartBookModel> cartBooks = [];
 
         if (state is ShowCartState) {
           cartBooks = state.books;
@@ -91,8 +91,7 @@ class _CartPageState extends State<CartPage> {
                               padding:
                                   const EdgeInsets.only(left: 5, right: 10),
                               child: Image.network(
-                                cartBooks[index].image ??
-                                    'https://master-kraski.ru/images/no-image.jpg',
+                                cartBooks[index].image,
                                 height: 40,
                               ),
                             ),
@@ -126,7 +125,7 @@ class _CartPageState extends State<CartPage> {
                                                 color: Theme.of(context)
                                                     .primaryColor),
                                             Text(
-                                              '$_count',
+                                              '${cartBooks[index].quantity}',
                                               style: const TextStyle(
                                                   color: AppColors.greyColor2,
                                                   fontSize: 15,
@@ -160,7 +159,8 @@ class _CartPageState extends State<CartPage> {
                                     setState(() {
                                       context.read<CartBloc>().add(
                                           RemoveFromCartEvent(
-                                              param: cartBooks[index]));
+                                              book: cartBooks[index],
+                                              index: index));
                                     });
                                   },
                                   icon: const Icon(Icons.delete),

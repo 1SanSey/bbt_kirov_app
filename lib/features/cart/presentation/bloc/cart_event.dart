@@ -12,13 +12,14 @@ class EmptyCartEvent extends CartEvent {}
 class ShowCartEvent extends CartEvent {}
 
 class AddToCartEvent extends CartEvent {
-  final BookEntity param;
+  final CartBookModel book;
 
-  const AddToCartEvent({required this.param});
+  const AddToCartEvent({required this.book});
 }
 
 class RemoveFromCartEvent extends CartEvent {
-  final BookEntity param;
+  final CartBookModel book;
+  final int index;
 
-  const RemoveFromCartEvent({required this.param});
+  const RemoveFromCartEvent({required this.book, required this.index});
 }
