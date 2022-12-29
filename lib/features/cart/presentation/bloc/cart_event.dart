@@ -23,3 +23,10 @@ class RemoveFromCartEvent extends CartEvent {
 
   const RemoveFromCartEvent({required this.book, required this.index});
 }
+
+class ChangeQuantityCartEvent extends CartEvent {
+  final int index;
+  final int value;
+
+  const ChangeQuantityCartEvent({required this.index, required this.value});
+}

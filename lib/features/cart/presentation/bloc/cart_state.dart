@@ -35,3 +35,13 @@ class ShowCartState extends CartState {
   @override
   List<Object?> get props => [books];
 }
+
+class ChangeQuantityCartState extends CartState {
+  final int index;
+  final int value;
+
+  const ChangeQuantityCartState({required this.index, required this.value});
+
+  @override
+  List<Object?> get props => [index, value];
+}

@@ -14,6 +14,10 @@ class CartUseCase {
     cartRepository.removeFromCart(book, index);
   }
 
+  void changeQuantityCart(int index, int value) {
+    cartRepository.changeQuantityCart(index, value);
+  }
+
   List<CartBookModel> showCart() {
     return cartRepository.showCart();
   }

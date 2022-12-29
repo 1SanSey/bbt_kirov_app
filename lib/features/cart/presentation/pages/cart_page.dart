@@ -50,6 +50,28 @@ class _CartPageState extends State<CartPage> {
             return showErrorText('Ваша корзина пуста');
           }
         }
+        void increment(int index, int value) {
+          setState(() {
+            ++value;
+            context
+                .read<CartBloc>()
+                .add(ChangeQuantityCartEvent(index: index, value: value));
+          });
+        }
+
+        void decrement(int index, int value) {
+          setState(() {
+            if (value > 1) {
+              --value;
+            } else {
+              value;
+            }
+            context
+                .read<CartBloc>()
+                .add(ChangeQuantityCartEvent(index: index, value: value));
+          });
+        }
+
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
           child: CustomScrollView(slivers: [
@@ -119,7 +141,9 @@ class _CartPageState extends State<CartPage> {
                                         Row(
                                           children: [
                                             IconButton(
-                                                onPressed: _decrement,
+                                                onPressed: () => decrement(
+                                                    index,
+                                                    cartBooks[index].quantity),
                                                 icon: const Icon(Icons.remove),
                                                 iconSize: 20,
                                                 color: Theme.of(context)
@@ -132,7 +156,9 @@ class _CartPageState extends State<CartPage> {
                                                   fontWeight: FontWeight.w400),
                                             ),
                                             IconButton(
-                                                onPressed: _increment,
+                                                onPressed: () => increment(
+                                                    index,
+                                                    cartBooks[index].quantity),
                                                 icon: const Icon(Icons.add),
                                                 iconSize: 20,
                                                 color: Theme.of(context)
