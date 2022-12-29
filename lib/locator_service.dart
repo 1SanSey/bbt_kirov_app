@@ -8,6 +8,10 @@ import 'package:bbt_kirov_app/features/category/domain/usecases/get_books_catego
 import 'package:bbt_kirov_app/features/category/domain/usecases/search_books_category.dart';
 import 'package:bbt_kirov_app/features/category/presentation/bloc/category_bloc.dart';
 import 'package:bbt_kirov_app/core/datasources/remote_data_source.dart';
+import 'package:bbt_kirov_app/features/favorites/data/repositories/favourites_repository_impl.dart';
+import 'package:bbt_kirov_app/features/favorites/domain/repositories/favourites_repository.dart';
+import 'package:bbt_kirov_app/features/favorites/domain/usecases/favourites_usecase.dart';
+import 'package:bbt_kirov_app/features/favorites/presentation/bloc/favourites_bloc.dart';
 import 'package:bbt_kirov_app/features/home/data/repositories/book_repository_impl.dart';
 import 'package:bbt_kirov_app/features/home/domain/repositories/book_repository.dart';
 import 'package:bbt_kirov_app/features/category/data/repositories/book_repository_impl.dart';
@@ -34,6 +38,7 @@ init() async {
         searchBooks: sl(),
       ));
   sl.registerFactory(() => CartBloc(cart: sl()));
+  sl.registerFactory(() => FavouritesBloc(favourites: sl()));
   sl.registerFactory<NavbarBloc>(() => NavbarBloc());
 
 //UseCases
@@ -45,6 +50,7 @@ init() async {
   sl.registerLazySingleton(() => CulinaryBooks(sl()));
   sl.registerLazySingleton(() => SearchBooksCategory(sl()));
   sl.registerLazySingleton(() => CartUseCase(sl()));
+  sl.registerLazySingleton(() => FavouritesUseCase(sl()));
 
 //Repository
   sl.registerLazySingleton<BookHomeRepository>(
@@ -53,6 +59,8 @@ init() async {
       BookCategoryRepositoryImpl(remoteDataSource: sl(), networkInfo: sl()));
   sl.registerLazySingleton<CartRepository>(
       () => CartRepositoryImpl(hiveDataSource: sl(), networkInfo: sl()));
+  sl.registerLazySingleton<FavouritesRepository>(
+      () => FavouritesRepositoryImpl(hiveDataSource: sl(), networkInfo: sl()));
   sl.registerLazySingleton<BookRemoteDataSource>(
       () => BookRemoteDataSourceImpl());
   sl.registerLazySingleton<BookHiveDataSource>(() => BookHiveDataSourceImpl());

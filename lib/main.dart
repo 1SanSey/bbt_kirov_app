@@ -5,6 +5,7 @@ import 'package:bbt_kirov_app/core/widgets/navbar/navbar_bloc/navbar_bloc.dart';
 import 'package:bbt_kirov_app/core/datasources/book_hive_datasource.dart';
 import 'package:bbt_kirov_app/features/cart/presentation/bloc/cart_bloc.dart';
 import 'package:bbt_kirov_app/features/category/presentation/bloc/category_bloc.dart';
+import 'package:bbt_kirov_app/features/favorites/presentation/bloc/favourites_bloc.dart';
 import 'package:bbt_kirov_app/features/home/presentation/bloc/home_bloc.dart';
 import 'package:bbt_kirov_app/features/home/presentation/pages/home_screen.dart';
 import 'package:bbt_kirov_app/locator_service.dart' as di;
@@ -32,6 +33,8 @@ class MyApp extends StatelessWidget {
         BlocProvider<CategoryBooksBloc>(
             create: (context) => di.sl<CategoryBooksBloc>()),
         BlocProvider<CartBloc>(create: (context) => di.sl<CartBloc>()),
+        BlocProvider<FavouritesBloc>(
+            create: (context) => di.sl<FavouritesBloc>()),
         BlocProvider<NavbarBloc>(create: (context) => di.sl<NavbarBloc>()),
       ],
       child: ChangeNotifierProvider(

@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:bbt_kirov_app/core/assets/hive_names.dart';
 import 'package:bbt_kirov_app/features/cart/data/models/cart_book_model.dart';
+import 'package:bbt_kirov_app/features/favorites/data/models/favourites_book_model.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 abstract class BookHiveDataSource {
@@ -9,16 +10,18 @@ abstract class BookHiveDataSource {
   void removeFromCart(CartBookModel book, int index);
   void changeQuantityCart(int index, int value);
   List<CartBookModel> showCart();
+  void addToFavourites(FavouritesBookModel book);
+  void removeFromFavourites(FavouritesBookModel book, int index);
+  List<FavouritesBookModel> showFavourites();
 }
 
 class BookHiveDataSourceImpl extends BookHiveDataSource {
   static Future<void> initHive() async {
     await Hive.initFlutter();
     Hive.registerAdapter(CartBookModelAdapter());
-    //Hive.registerAdapter(FavouritesBookModelAdapter());
+    Hive.registerAdapter(FavouritesBookModelAdapter());
     await Hive.openBox<CartBookModel>(HiveBoxes.cart);
-
-    //var favouritesBox = await Hive.openBox(HiveBoxes.favourites);
+    await Hive.openBox<FavouritesBookModel>(HiveBoxes.favourites);
   }
 
   Box<CartBookModel> cartBox = Hive.box<CartBookModel>(HiveBoxes.cart);
@@ -48,5 +51,27 @@ class BookHiveDataSourceImpl extends BookHiveDataSource {
     currentItem?.quantity = value;
     await currentItem?.save();
     log(currentItem!.quantity.toString());
+  }
+
+  Box<FavouritesBookModel> favouritesBox =
+      Hive.box<FavouritesBookModel>(HiveBoxes.favourites);
+
+  @override
+  void addToFavourites(FavouritesBookModel book) {
+    favouritesBox.add(FavouritesBookModel(
+      name: book.name,
+      price: book.price,
+      image: book.image,
+    ));
+  }
+
+  @override
+  void removeFromFavourites(FavouritesBookModel book, int index) {
+    favouritesBox.deleteAt(index);
+  }
+
+  @override
+  List<FavouritesBookModel> showFavourites() {
+    return favouritesBox.values.toList();
   }
 }

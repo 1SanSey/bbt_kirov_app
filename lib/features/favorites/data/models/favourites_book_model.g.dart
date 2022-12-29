@@ -8,7 +8,7 @@ part of 'favourites_book_model.dart';
 
 class FavouritesBookModelAdapter extends TypeAdapter<FavouritesBookModel> {
   @override
-  final int typeId = 0;
+  final int typeId = 1;
 
   @override
   FavouritesBookModel read(BinaryReader reader) {
@@ -26,7 +26,7 @@ class FavouritesBookModelAdapter extends TypeAdapter<FavouritesBookModel> {
   @override
   void write(BinaryWriter writer, FavouritesBookModel obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(3)
       ..writeByte(0)
       ..write(obj.name)
       ..writeByte(1)

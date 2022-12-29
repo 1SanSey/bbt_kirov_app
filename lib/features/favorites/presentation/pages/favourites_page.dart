@@ -1,9 +1,8 @@
 import 'package:bbt_kirov_app/common/error_text.dart';
-import 'package:bbt_kirov_app/common/loading_indicator.dart';
-import 'package:bbt_kirov_app/core/entities/book_entity.dart';
 import 'package:bbt_kirov_app/core/themes/app_colors.dart';
-import 'package:bbt_kirov_app/features/favorites/presentation/widgets/favourites_book_cart.dart';
-import 'package:bbt_kirov_app/features/home/presentation/bloc/home_bloc.dart';
+import 'package:bbt_kirov_app/features/favorites/data/models/favourites_book_model.dart';
+import 'package:bbt_kirov_app/features/favorites/presentation/bloc/favourites_bloc.dart';
+import 'package:bbt_kirov_app/features/favorites/presentation/widgets/favourites_book_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -12,23 +11,16 @@ class FavouritesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    context.read<HomeBooksBloc>().add(HomeLoadBooksEvent());
-    return BlocBuilder<HomeBooksBloc, HomeBooksState>(
+    context.read<FavouritesBloc>().add(ShowFavouritesEvent());
+    return BlocBuilder<FavouritesBloc, FavouritesState>(
       builder: (context, state) {
-        List<BookEntity> homeBooks = [];
+        List<FavouritesBookModel> favouritesBooks = [];
 
-        if (state is HomeBooksLoading) {
-          return loadingIndicator(context);
-        }
-        if (state is HomeBooksLoaded) {
-          homeBooks = state.books;
-          if (homeBooks.isEmpty) {
-            return showErrorText('Books are not loaded');
+        if (state is ShowFavouritesState) {
+          favouritesBooks = state.books;
+          if (favouritesBooks.isEmpty) {
+            return showErrorText('Список избранных книг пуст');
           }
-        } else if (state is HomeBooksError) {
-          return showErrorText(state.message);
-        } else {
-          return loadingIndicator(context);
         }
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -49,13 +41,16 @@ class FavouritesPage extends StatelessWidget {
             ),
             SliverPadding(
               padding: const EdgeInsets.symmetric(vertical: 8),
-              sliver: homeBooks.isNotEmpty
+              sliver: favouritesBooks.isNotEmpty
                   ? SliverList(
                       delegate: SliverChildBuilderDelegate(
                         (context, index) {
-                          return FavouritesBookCard(book: homeBooks[index]);
+                          return FavouritesBookCard(
+                            book: favouritesBooks[index],
+                            index: index,
+                          );
                         },
-                        childCount: homeBooks.length,
+                        childCount: favouritesBooks.length,
                       ),
                     )
                   : const SliverToBoxAdapter(
