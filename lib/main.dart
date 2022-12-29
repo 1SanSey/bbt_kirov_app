@@ -2,7 +2,7 @@ import 'package:bbt_kirov_app/core/themes/theme_model.dart';
 import 'package:bbt_kirov_app/core/themes/themes.dart';
 import 'package:bbt_kirov_app/core/datasources/remote_data_source.dart';
 import 'package:bbt_kirov_app/core/widgets/navbar/navbar_bloc/navbar_bloc.dart';
-import 'package:bbt_kirov_app/features/cart/data/datasources/book_hive_datasource.dart';
+import 'package:bbt_kirov_app/core/datasources/book_hive_datasource.dart';
 import 'package:bbt_kirov_app/features/cart/presentation/bloc/cart_bloc.dart';
 import 'package:bbt_kirov_app/features/category/presentation/bloc/category_bloc.dart';
 import 'package:bbt_kirov_app/features/home/presentation/bloc/home_bloc.dart';
