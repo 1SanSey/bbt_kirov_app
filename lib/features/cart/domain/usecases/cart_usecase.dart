@@ -1,4 +1,5 @@
 import 'package:bbt_kirov_app/features/cart/data/models/cart_book_model.dart';
+import 'package:bbt_kirov_app/features/cart/domain/entities/order_entity.dart';
 import 'package:bbt_kirov_app/features/cart/domain/repositories/cart_repository.dart';
 
 class CartUseCase {
@@ -20,5 +21,17 @@ class CartUseCase {
 
   List<CartBookModel> showCart() {
     return cartRepository.showCart();
+  }
+
+  int totalSum() {
+    return cartRepository.totalSum();
+  }
+
+  void sendOrder(OrderEntity order) {
+    cartRepository.sendOrder(order);
+  }
+
+  void removeAllCart() {
+    cartRepository.removeAllCart();
   }
 }

@@ -1,4 +1,3 @@
-import 'package:bbt_kirov_app/core/themes/app_colors.dart';
 import 'package:bbt_kirov_app/core/themes/theme_model.dart';
 import 'package:bbt_kirov_app/core/widgets/drawer_widget.dart';
 import 'package:bbt_kirov_app/core/widgets/icon_switch_theme.dart';
@@ -37,14 +36,14 @@ class _HomePageState extends State<HomePage> {
           ),
           bottomNavigationBar: PreferredSize(
             preferredSize: Size(MediaQuery.of(context).size.width, 50),
-            child: const Material(
-              color: AppColors.primaryColorLight,
+            child: Material(
+              color: Theme.of(context).primaryColor,
               child: TabBar(
                 labelColor: Colors.white,
-                unselectedLabelColor: AppColors.secondaryColorLight,
+                unselectedLabelColor: Theme.of(context).primaryColorLight,
                 automaticIndicatorColorAdjustment: false,
-                indicatorColor: AppColors.primaryColorLight,
-                tabs: <Widget>[
+                indicatorColor: Theme.of(context).primaryColor,
+                tabs: const <Widget>[
                   Tab(
                     icon: Icon(Icons.home),
                     iconMargin: EdgeInsets.only(top: 3, bottom: 3),

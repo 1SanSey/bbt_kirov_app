@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:bbt_kirov_app/core/assets/hive_names.dart';
 import 'package:bbt_kirov_app/features/cart/data/models/cart_book_model.dart';
 import 'package:bbt_kirov_app/features/favorites/data/models/favourites_book_model.dart';
@@ -13,6 +11,8 @@ abstract class BookHiveDataSource {
   void addToFavourites(FavouritesBookModel book);
   void removeFromFavourites(FavouritesBookModel book, int index);
   List<FavouritesBookModel> showFavourites();
+  int totalSum();
+  void removeAllCart();
 }
 
 class BookHiveDataSourceImpl extends BookHiveDataSource {
@@ -46,11 +46,24 @@ class BookHiveDataSourceImpl extends BookHiveDataSource {
   }
 
   @override
+  int totalSum() {
+    int sum = 0;
+    for (var value in cartBox.values) {
+      sum = sum + value.price * value.quantity;
+    }
+    return sum;
+  }
+
+  @override
   void changeQuantityCart(int index, int value) async {
     var currentItem = cartBox.getAt(index);
     currentItem?.quantity = value;
     await currentItem?.save();
-    log(currentItem!.quantity.toString());
+  }
+
+  @override
+  void removeAllCart() {
+    cartBox.clear();
   }
 
   Box<FavouritesBookModel> favouritesBox =

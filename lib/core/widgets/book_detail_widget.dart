@@ -129,7 +129,7 @@ class _BookDetailPageState extends State<BookDetailPage> {
                       ]),
                 ),
                 Text(
-                  'Цена ${widget.book.price} ₽',
+                  'Цена: ${widget.book.price} ₽',
                   style: const TextStyle(
                       fontSize: 25, color: AppColors.greyColor2),
                 ),

@@ -57,8 +57,8 @@ init() async {
       () => BookHomeRepositoryImpl(remoteDataSource: sl(), networkInfo: sl()));
   sl.registerLazySingleton<BookCategoryRepository>(() =>
       BookCategoryRepositoryImpl(remoteDataSource: sl(), networkInfo: sl()));
-  sl.registerLazySingleton<CartRepository>(
-      () => CartRepositoryImpl(hiveDataSource: sl(), networkInfo: sl()));
+  sl.registerLazySingleton<CartRepository>(() => CartRepositoryImpl(
+      hiveDataSource: sl(), bookRemoteDataSource: sl(), networkInfo: sl()));
   sl.registerLazySingleton<FavouritesRepository>(
       () => FavouritesRepositoryImpl(hiveDataSource: sl(), networkInfo: sl()));
   sl.registerLazySingleton<BookRemoteDataSource>(

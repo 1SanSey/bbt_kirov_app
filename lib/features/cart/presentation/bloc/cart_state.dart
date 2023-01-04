@@ -29,11 +29,12 @@ class RemoveFromCartState extends CartState {
 
 class ShowCartState extends CartState {
   final List<CartBookModel> books;
+  final int totalSum;
 
-  const ShowCartState({required this.books});
+  const ShowCartState({required this.totalSum, required this.books});
 
   @override
-  List<Object?> get props => [books];
+  List<Object?> get props => [books, totalSum];
 }
 
 class ChangeQuantityCartState extends CartState {

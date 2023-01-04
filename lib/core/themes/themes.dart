@@ -8,6 +8,7 @@ ThemeData lightTheme() => ThemeData(
         foregroundColor: Colors.white,
       ),
       primaryColor: AppColors.primaryColorLight,
+      primaryColorLight: AppColors.secondaryColorLight,
       textTheme: const TextTheme(
         bodyText1: TextStyle(
           fontFamily: 'Arial',
@@ -22,6 +23,7 @@ ThemeData darkTheme() => ThemeData(
       appBarTheme: const AppBarTheme(backgroundColor: Colors.black),
       brightness: Brightness.dark,
       primaryColor: Colors.black,
+      primaryColorLight: AppColors.greyColor2,
       textTheme: const TextTheme(
         headline6: TextStyle(
           fontFamily: 'Arial',
