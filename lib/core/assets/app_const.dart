@@ -13,8 +13,10 @@ class AppConstants {
   };
 
   static const List<String> imagesList = [
-    'lib/core/assets/images/1_quote.jpg',
-    'lib/core/assets/images/2_quote.jpg',
-    'lib/core/assets/images/3_quote.jpg'
+    'lib/core/assets/images/slides/1_quote.jpg',
+    'lib/core/assets/images/slides/2_quote.jpg',
+    'lib/core/assets/images/slides/3_quote.jpg'
   ];
+
+  static const String bbtLogo = 'lib/core/assets/images/logo/bbt_logo.webp';
 }

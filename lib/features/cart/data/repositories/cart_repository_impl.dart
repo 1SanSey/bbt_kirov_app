@@ -21,8 +21,8 @@ class CartRepositoryImpl implements CartRepository {
   }
 
   @override
-  void removeFromCart(CartBookModel book, int index) {
-    hiveDataSource.removeFromCart(book, index);
+  void removeFromCart(int index) {
+    hiveDataSource.removeFromCart(index);
   }
 
   @override

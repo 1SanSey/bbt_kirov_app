@@ -5,7 +5,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 abstract class BookHiveDataSource {
   void addToCart(CartBookModel book);
-  void removeFromCart(CartBookModel book, int index);
+  void removeFromCart(int index);
   void changeQuantityCart(int index, int value);
   List<CartBookModel> showCart();
   void addToFavourites(FavouritesBookModel book);
@@ -36,7 +36,7 @@ class BookHiveDataSourceImpl extends BookHiveDataSource {
   }
 
   @override
-  void removeFromCart(CartBookModel book, int index) {
+  void removeFromCart(int index) {
     cartBox.deleteAt(index);
   }
 

@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:bbt_kirov_app/core/error/exception.dart';
 import 'package:bbt_kirov_app/core/models/book_model.dart';
+import 'package:bbt_kirov_app/features/authentication/domain/entities/user_entity.dart';
 import 'package:bbt_kirov_app/features/cart/domain/entities/order_entity.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 
@@ -13,6 +14,8 @@ abstract class BookRemoteDataSource {
   Future<List<BookModel>> getBooksBySize(String size);
   Future<List<BookModel>> getSetBooks(String singleOrSet);
   void sendOrder(OrderEntity order);
+  Future<AuthenticatedUser> userLogin(String username, String password);
+  Future<NotAuthenticatedUser> userLogout();
 }
 
 class BookRemoteDataSourceImpl extends BookRemoteDataSource {
@@ -114,5 +117,38 @@ class BookRemoteDataSourceImpl extends BookRemoteDataSource {
     } else {
       log('Object created with failed: ${parseResponse.error.toString()}');
     }
+  }
+
+  @override
+  Future<AuthenticatedUser> userLogin(String username, String password) async {
+    final parseUser = ParseUser(username, password, null);
+    final AuthenticatedUser user;
+
+    var response = await parseUser.login();
+
+    if (response.success) {
+      user = AuthenticatedUser.fromDb(parseUser);
+      log("User was successfully login!");
+      log(user.toString());
+    } else {
+      log(response.error!.message);
+      throw ServerException();
+    }
+
+    return user;
+  }
+
+  @override
+  Future<NotAuthenticatedUser> userLogout() async {
+    final parseUser = await ParseUser.currentUser() as ParseUser;
+    var response = await parseUser.logout();
+    const NotAuthenticatedUser user = NotAuthenticatedUser();
+
+    if (response.success) {
+      log("User was successfully logout!");
+    } else {
+      log(response.error!.message);
+    }
+    return user;
   }
 }

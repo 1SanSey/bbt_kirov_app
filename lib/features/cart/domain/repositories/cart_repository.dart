@@ -3,7 +3,7 @@ import 'package:bbt_kirov_app/features/cart/domain/entities/order_entity.dart';
 
 abstract class CartRepository {
   void addToCart(CartBookModel book);
-  void removeFromCart(CartBookModel book, int index);
+  void removeFromCart(int index);
   void changeQuantityCart(int index, int value);
   List<CartBookModel> showCart();
   int totalSum();

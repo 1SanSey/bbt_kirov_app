@@ -11,8 +11,8 @@ class CartUseCase {
     cartRepository.addToCart(book);
   }
 
-  void removeFromCart(CartBookModel book, int index) {
-    cartRepository.removeFromCart(book, index);
+  void removeFromCart(int index) {
+    cartRepository.removeFromCart(index);
   }
 
   void changeQuantityCart(int index, int value) {

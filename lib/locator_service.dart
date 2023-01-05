@@ -1,6 +1,7 @@
 import 'package:bbt_kirov_app/core/platform/network_info.dart';
-import 'package:bbt_kirov_app/core/widgets/navbar/navbar_bloc/navbar_bloc.dart';
 import 'package:bbt_kirov_app/core/datasources/book_hive_datasource.dart';
+import 'package:bbt_kirov_app/features/authentication/data/repositories/auth_repository_impl.dart';
+import 'package:bbt_kirov_app/features/authentication/domain/repositories/auth_repository.dart';
 import 'package:bbt_kirov_app/features/cart/data/repositories/cart_repository_impl.dart';
 import 'package:bbt_kirov_app/features/cart/domain/usecases/cart_usecase.dart';
 import 'package:bbt_kirov_app/features/cart/presentation/bloc/cart_bloc.dart';
@@ -17,6 +18,7 @@ import 'package:bbt_kirov_app/features/home/domain/repositories/book_repository.
 import 'package:bbt_kirov_app/features/category/data/repositories/book_repository_impl.dart';
 import 'package:bbt_kirov_app/features/category/domain/repositories/book_repository.dart';
 import 'package:bbt_kirov_app/features/home/domain/usecases/get_books_home.dart';
+import 'package:bbt_kirov_app/features/authentication/presentation/auth_bloc/auth_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
@@ -39,7 +41,7 @@ init() async {
       ));
   sl.registerFactory(() => CartBloc(cart: sl()));
   sl.registerFactory(() => FavouritesBloc(favourites: sl()));
-  sl.registerFactory<NavbarBloc>(() => NavbarBloc());
+  sl.registerFactory(() => AuthBLoC(repository: sl()));
 
 //UseCases
   sl.registerLazySingleton(() => PopularBooks(sl()));
@@ -64,6 +66,8 @@ init() async {
   sl.registerLazySingleton<BookRemoteDataSource>(
       () => BookRemoteDataSourceImpl());
   sl.registerLazySingleton<BookHiveDataSource>(() => BookHiveDataSourceImpl());
+  sl.registerLazySingleton<IAuthRepository>(
+      () => AuthRepositoryImpl(remoteDataSource: sl(), networkInfo: sl()));
 
 //Core
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));

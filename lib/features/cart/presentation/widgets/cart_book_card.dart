@@ -90,9 +90,7 @@ class _CartBookCardState extends State<CartBookCard> {
                             onPressed: () {
                               setState(() {
                                 context.read<CartBloc>().add(
-                                    RemoveFromCartEvent(
-                                        book: widget.book,
-                                        index: widget.index));
+                                    RemoveFromCartEvent(index: widget.index));
                               });
                               context.read<CartBloc>().add(ShowCartEvent());
                             },
