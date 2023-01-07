@@ -23,7 +23,7 @@ class _HomePageState extends State<HomePage> {
         length: 3,
         child: Scaffold(
           appBar: AppBar(
-            title: const Text('BBT Kirov'),
+            title: const Text('BBT Kirov App'),
             centerTitle: true,
             actions: [iconSwitchTheme(context, themeNotifier)],
           ),

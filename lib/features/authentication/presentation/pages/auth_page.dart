@@ -1,5 +1,6 @@
 import 'package:bbt_kirov_app/core/assets/app_const.dart';
 import 'package:bbt_kirov_app/core/themes/app_colors.dart';
+import 'package:bbt_kirov_app/features/authentication/data/logged_in_model.dart';
 import 'package:bbt_kirov_app/features/authentication/presentation/auth_bloc/auth_bloc.dart';
 import 'package:bbt_kirov_app/features/home/presentation/pages/home_screen.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,7 @@ class AuthPage extends StatefulWidget {
 class AuthPageState extends State<AuthPage> {
   final controllerUsername = TextEditingController();
   final controllerPassword = TextEditingController();
-  bool isLoggedIn = false;
+  LoggedInModel isLoggedIn = LoggedInModel();
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +24,7 @@ class AuthPageState extends State<AuthPage> {
         appBar: AppBar(
           title: const Text('BBT Kirov App'),
           centerTitle: true,
+          automaticallyImplyLeading: false,
         ),
         body: Center(
           child: SingleChildScrollView(
@@ -45,21 +47,10 @@ class AuthPageState extends State<AuthPage> {
                 const SizedBox(
                   height: 16,
                 ),
-                /* TextField(
-                  controller: controllerUsername,
-                  enabled: !isLoggedIn,
-                  keyboardType: TextInputType.text,
-                  textCapitalization: TextCapitalization.none,
-                  autocorrect: false,
-                  decoration: const InputDecoration(
-                      border: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.black)),
-                      labelText: 'Логин'),
-                ), */
                 TextField(
                   cursorColor: AppColors.primaryColorLight,
                   controller: controllerUsername,
-                  enabled: !isLoggedIn,
+                  //enabled: !isLoggedIn,
                   keyboardType: TextInputType.text,
                   textCapitalization: TextCapitalization.none,
                   autocorrect: false,
@@ -92,7 +83,7 @@ class AuthPageState extends State<AuthPage> {
                 TextField(
                   cursorColor: AppColors.primaryColorLight,
                   controller: controllerPassword,
-                  enabled: !isLoggedIn,
+                  //enabled: !isLoggedIn,
                   obscureText: true,
                   keyboardType: TextInputType.text,
                   textCapitalization: TextCapitalization.none,
@@ -126,9 +117,9 @@ class AuthPageState extends State<AuthPage> {
                 SizedBox(
                   height: 50,
                   child: ElevatedButton(
-                    onPressed: isLoggedIn
+                    onPressed: isLoggedIn.isLoggedIn
                         ? null
-                        : () => doUserLogin(context) /* doUserLogin(context) */,
+                        : () => doUserLogin(context),
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Theme.of(context).primaryColor,
                         fixedSize: const Size(320, 50),
@@ -155,66 +146,15 @@ class AuthPageState extends State<AuthPage> {
         ));
   }
 
-  Widget showSuccess() {
-    final login = controllerUsername.text.trim();
-    final password = controllerPassword.text.trim();
-    context
-        .read<AuthBLoC>()
-        .add(AuthEvent.logIn(login: login, password: password));
-
-    return BlocBuilder<AuthBLoC, AuthState>(
-      builder: (context, state) {
-        /* if (state.user.isAuthenticated) { */
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: const Text("Успешно!"),
-              content: const Text('Вы успешно авторизовались.'),
-              actions: <Widget>[
-                TextButton(
-                  child: const Text("OK"),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
-            );
-          },
-        );
-        /* } */
-
-        return const SizedBox.shrink();
-      },
-    );
-  }
-
-  void showError(String errorMessage) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text("Error!"),
-          content: Text(errorMessage),
-          actions: <Widget>[
-            TextButton(
-              child: const Text("OK"),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
-
   void doUserLogin(BuildContext context) {
     final login = controllerUsername.text.trim();
     final password = controllerPassword.text.trim();
     context
         .read<AuthBLoC>()
         .add(AuthEvent.logIn(login: login, password: password));
+    setState(() {
+      isLoggedIn.isLoggedIn = true;
+    });
 
     showDialog(
       context: context,
@@ -245,7 +185,8 @@ class AuthPageState extends State<AuthPage> {
           log('orElse');
         },
         authenticated: (state) {
-          showDialog(
+          log('authenticated');
+          /* showDialog(
             context: context,
             builder: (BuildContext context) {
               return AlertDialog(
@@ -261,10 +202,11 @@ class AuthPageState extends State<AuthPage> {
                 ],
               );
             },
-          );
+          ); */
         },
         notAuthenticated: (state) {
-          showDialog(
+          log('notauthenticated');
+          /* showDialog(
             context: context,
             builder: (BuildContext context) {
               return AlertDialog(
@@ -280,7 +222,7 @@ class AuthPageState extends State<AuthPage> {
                 ],
               );
             },
-          );
+          ); */
         },
       );
     }); */
@@ -290,7 +232,7 @@ class AuthPageState extends State<AuthPage> {
     context.read<AuthBLoC>().add(const AuthEvent.logOut());
 
     setState(() {
-      isLoggedIn = false;
+      isLoggedIn.isLoggedIn = false;
     });
   }
 }
