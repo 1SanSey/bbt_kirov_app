@@ -12,9 +12,10 @@ class DrawerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    LoggedInModel isLoggedIn = LoggedInModel();
+    LoggedInUserModel isLoggedIn = LoggedInUserModel();
+
     return Drawer(
-      backgroundColor: Colors.white,
+      //backgroundColor: Theme.of(context).primaryColor,
       width: MediaQuery.of(context).size.width * 0.80,
       child: BlocBuilder<AuthBLoC, AuthState>(
         builder: (context, state) {
@@ -61,7 +62,7 @@ class DrawerWidget extends StatelessWidget {
               ),
               ListTile(
                 leading: const Icon(
-                  Icons.home,
+                  Icons.home_outlined,
                 ),
                 title: const Text('Главная'),
                 onTap: () {
@@ -84,14 +85,14 @@ class DrawerWidget extends StatelessWidget {
               ),
               const AboutListTile(
                 icon: Icon(
-                  Icons.info,
+                  Icons.info_outline,
                 ),
                 applicationIcon: Icon(
                   Icons.local_play,
                 ),
                 applicationName: 'BBT Kirov App',
                 applicationVersion: '1.0.0',
-                applicationLegalese: 'Sanatana-Rupa dasa © 2023',
+                applicationLegalese: 'Sergey Ogarkov © 2023',
                 aboutBoxChildren: [],
                 child: Text('О приложении'),
               ),
@@ -102,7 +103,8 @@ class DrawerWidget extends StatelessWidget {
                 title: const Text('Выход'),
                 onTap: () {
                   context.read<AuthBLoC>().add(const AuthEvent.logOut());
-                  isLoggedIn.isLoggedIn = false;
+                  isLoggedIn.setLoggedInUser(
+                      isLogged: false, username: '', email: '', photo: '');
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(

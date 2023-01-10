@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bbt_kirov_app/core/assets/app_const.dart';
 import 'package:bbt_kirov_app/core/themes/app_colors.dart';
 import 'package:bbt_kirov_app/features/authentication/data/logged_in_model.dart';
@@ -16,7 +18,7 @@ class AuthPage extends StatefulWidget {
 class AuthPageState extends State<AuthPage> {
   final controllerUsername = TextEditingController();
   final controllerPassword = TextEditingController();
-  LoggedInModel isLoggedIn = LoggedInModel();
+  LoggedInUserModel isLoggedInUser = LoggedInUserModel();
 
   @override
   Widget build(BuildContext context) {
@@ -117,9 +119,12 @@ class AuthPageState extends State<AuthPage> {
                 SizedBox(
                   height: 50,
                   child: ElevatedButton(
-                    onPressed: isLoggedIn.isLoggedIn
-                        ? null
-                        : () => doUserLogin(context),
+                    onPressed: () {
+                      final login = controllerUsername.text.trim();
+                      final password = controllerPassword.text.trim();
+                      context.read<AuthBLoC>().add(
+                          AuthEvent.logIn(login: login, password: password));
+                    },
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Theme.of(context).primaryColor,
                         fixedSize: const Size(320, 50),
@@ -133,106 +138,84 @@ class AuthPageState extends State<AuthPage> {
                 const SizedBox(
                   height: 16,
                 ),
-                /* SizedBox(
-                  height: 50,
-                  child: TextButton(
-                    onPressed: !isLoggedIn ? null : () => doUserLogout(context),
-                    child: const Text('Logout'),
-                  ),
-                ) */
+                BlocListener<AuthBLoC, AuthState>(
+                  listener: (context, state) {
+                    state.maybeWhen(
+                      orElse: () {
+                        log('orElse');
+                      },
+                      inProcess: (state) => log('inProcess'),
+                      successful: (state) {
+                        log('successful');
+                      },
+                      error: (user, state) {
+                        log('error');
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: const Text("Ошибка!"),
+                              content:
+                                  const Text('Возникла ошибка авторизации.'),
+                              actions: <Widget>[
+                                TextButton(
+                                  child: const Text("OK"),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      },
+                      authenticated: (state) {
+                        log('authenticated');
+                        isLoggedInUser.setLoggedInUser(
+                            isLogged: true,
+                            username: state.displayName!,
+                            email: state.email!,
+                            photo: state.photoURL!);
+
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: const Text("Успешно!"),
+                              content: const Text('Вы успешно авторизовались.'),
+                              actions: <Widget>[
+                                TextButton(
+                                  child: const Text("OK"),
+                                  onPressed: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                const HomePage()));
+                                  },
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      },
+                      notAuthenticated: (state) {
+                        log('notauthenticated');
+                      },
+                    );
+                  },
+                  child: const SizedBox.shrink(),
+                ),
               ],
             ),
           ),
         ));
   }
 
-  void doUserLogin(BuildContext context) {
-    final login = controllerUsername.text.trim();
-    final password = controllerPassword.text.trim();
-    context
-        .read<AuthBLoC>()
-        .add(AuthEvent.logIn(login: login, password: password));
-    setState(() {
-      isLoggedIn.isLoggedIn = true;
-    });
-
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text("Успешно!"),
-          content: const Text('Вы успешно авторизовались.'),
-          actions: <Widget>[
-            TextButton(
-              child: const Text("OK"),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const HomePage(),
-                  ),
-                );
-              },
-            ),
-          ],
-        );
-      },
-    );
-
-    /* return BlocListener<AuthBLoC, AuthState>(listener: (context, state) {
-      state.maybeWhen(
-        orElse: () {
-          log('orElse');
-        },
-        authenticated: (state) {
-          log('authenticated');
-          /* showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return AlertDialog(
-                title: const Text("Успешно!"),
-                content: const Text('Вы успешно авторизовались.'),
-                actions: <Widget>[
-                  TextButton(
-                    child: const Text("OK"),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                ],
-              );
-            },
-          ); */
-        },
-        notAuthenticated: (state) {
-          log('notauthenticated');
-          /* showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return AlertDialog(
-                title: const Text("Error!"),
-                content: const Text('Произошла ошибка'),
-                actions: <Widget>[
-                  TextButton(
-                    child: const Text("OK"),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                ],
-              );
-            },
-          ); */
-        },
-      );
-    }); */
-  }
-
-  void doUserLogout(BuildContext context) async {
-    context.read<AuthBLoC>().add(const AuthEvent.logOut());
-
-    setState(() {
-      isLoggedIn.isLoggedIn = false;
-    });
+  @override
+  void dispose() {
+    controllerUsername.dispose();
+    controllerPassword.dispose();
+    super.dispose();
   }
 }

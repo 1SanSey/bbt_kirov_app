@@ -1,22 +1,38 @@
 import 'package:bbt_kirov_app/features/authentication/data/logged_in_preferences.dart';
 
-class LoggedInModel {
+class LoggedInUserModel {
   late bool _isLoggedIn;
-  late LoggedInPreferences _preferences;
+  late String _username;
+  late String _email;
+  late String _photo;
+  late LoggedInUserPreferences _preferences;
   bool get isLoggedIn => _isLoggedIn;
 
-  LoggedInModel() {
+  LoggedInUserModel() {
     _isLoggedIn = false;
-    _preferences = LoggedInPreferences();
+    _username = '';
+    _email = '';
+    _photo = '';
+    _preferences = LoggedInUserPreferences();
     getPreferences();
   }
 
-  set isLoggedIn(bool value) {
-    _isLoggedIn = value;
-    _preferences.setStateUser(value);
+  void setLoggedInUser(
+      {required bool isLogged,
+      required String username,
+      required String email,
+      required String photo}) {
+    _isLoggedIn = isLogged;
+    _username = username;
+    _email = email;
+    _photo = photo;
+    _preferences.setStateUser(isLogged, username, email, photo);
   }
 
   getPreferences() async {
     _isLoggedIn = await _preferences.getStateUser();
+    _username = await _preferences.getUserName();
+    _email = await _preferences.getUserEmail();
+    _photo = await _preferences.getUserPhoto();
   }
 }

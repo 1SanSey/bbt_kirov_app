@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    LoggedInModel loggedIn = LoggedInModel();
+    LoggedInUserModel loggedIn = LoggedInUserModel();
     return MultiBlocProvider(
       providers: [
         BlocProvider<AuthBLoC>(create: (context) => di.sl<AuthBLoC>()),
