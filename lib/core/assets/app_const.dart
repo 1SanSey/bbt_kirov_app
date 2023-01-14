@@ -19,4 +19,9 @@ class AppConstants {
   ];
 
   static const String bbtLogo = 'lib/core/assets/images/logo/bbt_logo.webp';
+
+  static const loggedInPref = "loggedInPref";
+  static const usernamePref = "usernamePref";
+  static const emailPref = "emailPref";
+  static const photoPref = "photoPref";
 }

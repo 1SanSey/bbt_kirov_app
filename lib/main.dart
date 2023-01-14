@@ -1,8 +1,10 @@
+import 'dart:developer';
+
+import 'package:bbt_kirov_app/core/assets/app_const.dart';
 import 'package:bbt_kirov_app/core/themes/theme_model.dart';
 import 'package:bbt_kirov_app/core/themes/themes.dart';
 import 'package:bbt_kirov_app/core/datasources/remote_data_source.dart';
 import 'package:bbt_kirov_app/core/datasources/book_hive_datasource.dart';
-import 'package:bbt_kirov_app/features/authentication/data/logged_in_model.dart';
 import 'package:bbt_kirov_app/features/authentication/presentation/pages/auth_page.dart';
 import 'package:bbt_kirov_app/features/cart/presentation/bloc/cart_bloc.dart';
 import 'package:bbt_kirov_app/features/category/presentation/bloc/category_bloc.dart';
@@ -13,6 +15,7 @@ import 'package:bbt_kirov_app/locator_service.dart' as di;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'features/authentication/presentation/auth_bloc/auth_bloc.dart';
 
@@ -25,11 +28,29 @@ void main() async {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  late SharedPreferences _userPrefs;
+  bool _userLoggedIn = false;
+
+  @override
+  void initState() {
+    SharedPreferences.getInstance().then((prefs) {
+      setState(() => _userPrefs = prefs);
+      _loadUserPrefs();
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    LoggedInUserModel loggedIn = LoggedInUserModel();
+    log(_userLoggedIn.toString());
     return MultiBlocProvider(
       providers: [
         BlocProvider<AuthBLoC>(create: (context) => di.sl<AuthBLoC>()),
@@ -49,10 +70,16 @@ class MyApp extends StatelessWidget {
             title: 'BBT Kirov App',
             theme: themeNotifier.isDark ? darkTheme() : lightTheme(),
             debugShowCheckedModeBanner: false,
-            home: loggedIn.isLoggedIn ? const HomePage() : const AuthPage(),
+            home: _userLoggedIn ? const HomePage() : const AuthPage(),
           );
         }),
       ),
     );
+  }
+
+  void _loadUserPrefs() {
+    setState(() {
+      _userLoggedIn = _userPrefs.getBool(AppConstants.loggedInPref) ?? false;
+    });
   }
 }

@@ -2,11 +2,11 @@ import 'dart:developer';
 
 import 'package:bbt_kirov_app/core/assets/app_const.dart';
 import 'package:bbt_kirov_app/core/themes/app_colors.dart';
-import 'package:bbt_kirov_app/features/authentication/data/logged_in_model.dart';
 import 'package:bbt_kirov_app/features/authentication/presentation/auth_bloc/auth_bloc.dart';
 import 'package:bbt_kirov_app/features/home/presentation/pages/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthPage extends StatefulWidget {
   const AuthPage({super.key});
@@ -18,7 +18,15 @@ class AuthPage extends StatefulWidget {
 class AuthPageState extends State<AuthPage> {
   final controllerUsername = TextEditingController();
   final controllerPassword = TextEditingController();
-  LoggedInUserModel isLoggedInUser = LoggedInUserModel();
+  late SharedPreferences _userPrefs;
+
+  @override
+  void initState() {
+    SharedPreferences.getInstance().then((prefs) {
+      setState(() => _userPrefs = prefs);
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -171,8 +179,8 @@ class AuthPageState extends State<AuthPage> {
                       },
                       authenticated: (state) {
                         log('authenticated');
-                        isLoggedInUser.setLoggedInUser(
-                            isLogged: true,
+                        _setUserPrefs(
+                            loggedIn: true,
                             username: state.displayName!,
                             email: state.email!,
                             photo: state.photoURL!);
@@ -210,6 +218,17 @@ class AuthPageState extends State<AuthPage> {
             ),
           ),
         ));
+  }
+
+  Future<void> _setUserPrefs(
+      {required bool loggedIn,
+      required String username,
+      required String email,
+      required String photo}) async {
+    await _userPrefs.setBool(AppConstants.loggedInPref, loggedIn);
+    await _userPrefs.setString(AppConstants.usernamePref, username);
+    await _userPrefs.setString(AppConstants.photoPref, photo);
+    await _userPrefs.setString(AppConstants.emailPref, email);
   }
 
   @override
