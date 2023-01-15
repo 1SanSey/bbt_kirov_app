@@ -11,6 +11,7 @@ import 'package:bbt_kirov_app/features/category/presentation/bloc/category_bloc.
 import 'package:bbt_kirov_app/features/favorites/presentation/bloc/favourites_bloc.dart';
 import 'package:bbt_kirov_app/features/home/presentation/bloc/home_bloc.dart';
 import 'package:bbt_kirov_app/features/home/presentation/pages/home_screen.dart';
+import 'package:bbt_kirov_app/features/orders/presentation/bloc/orders_bloc.dart';
 import 'package:bbt_kirov_app/locator_service.dart' as di;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -61,6 +62,7 @@ class _MyAppState extends State<MyApp> {
         BlocProvider<CartBloc>(create: (context) => di.sl<CartBloc>()),
         BlocProvider<FavouritesBloc>(
             create: (context) => di.sl<FavouritesBloc>()),
+        BlocProvider<OrdersBloc>(create: (context) => di.sl<OrdersBloc>()),
       ],
       child: ChangeNotifierProvider(
         create: (_) => ThemeModel(),

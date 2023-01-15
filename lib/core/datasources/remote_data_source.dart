@@ -4,6 +4,7 @@ import 'package:bbt_kirov_app/core/error/exception.dart';
 import 'package:bbt_kirov_app/core/models/book_model.dart';
 import 'package:bbt_kirov_app/features/authentication/domain/entities/user_entity.dart';
 import 'package:bbt_kirov_app/features/cart/domain/entities/order_entity.dart';
+import 'package:bbt_kirov_app/features/orders/data/models/order_model.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 
 abstract class BookRemoteDataSource {
@@ -16,6 +17,7 @@ abstract class BookRemoteDataSource {
   void sendOrder(OrderEntity order);
   Future<AuthenticatedUser> userLogin(String username, String password);
   Future<NotAuthenticatedUser> userLogout();
+  Future<List<OrderModel>> fetchOrders(String username);
 }
 
 class BookRemoteDataSourceImpl extends BookRemoteDataSource {
@@ -107,7 +109,8 @@ class BookRemoteDataSourceImpl extends BookRemoteDataSource {
     var parseObject = ParseObject("Orders")
       ..set("dateOrder", order.dateOrder)
       ..set("sumOrder", order.sumOrder)
-      ..set("books", order.books);
+      ..set("books", order.books)
+      ..set("username", order.username);
 
     final ParseResponse parseResponse = await parseObject.save();
 
@@ -150,5 +153,24 @@ class BookRemoteDataSourceImpl extends BookRemoteDataSource {
       log(response.error!.message);
     }
     return user;
+  }
+
+  @override
+  Future<List<OrderModel>> fetchOrders(String username) async {
+    List<OrderModel> orders = [];
+    final QueryBuilder<ParseObject> parseQuery =
+        QueryBuilder<ParseObject>(ParseObject('Orders'));
+    parseQuery.whereEqualTo('username', username);
+    final apiResponse = await parseQuery.query();
+
+    if (apiResponse.success && apiResponse.results != null) {
+      for (var object in apiResponse.results as List<ParseObject>) {
+        orders.add(OrderModel.fromDb(object));
+      }
+    } else {
+      throw ServerException();
+    }
+
+    return orders;
   }
 }

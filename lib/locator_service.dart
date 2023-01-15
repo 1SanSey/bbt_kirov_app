@@ -19,11 +19,15 @@ import 'package:bbt_kirov_app/features/category/data/repositories/book_repositor
 import 'package:bbt_kirov_app/features/category/domain/repositories/book_repository.dart';
 import 'package:bbt_kirov_app/features/home/domain/usecases/get_books_home.dart';
 import 'package:bbt_kirov_app/features/authentication/presentation/auth_bloc/auth_bloc.dart';
+import 'package:bbt_kirov_app/features/orders/data/repositories/orders_repository_impl.dart';
+import 'package:bbt_kirov_app/features/orders/domain/usecases/orders_usecase.dart';
+import 'package:bbt_kirov_app/features/orders/presentation/bloc/orders_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 import 'features/cart/domain/repositories/cart_repository.dart';
 import 'features/home/presentation/bloc/home_bloc.dart';
+import 'features/orders/domain/repositories/i_orders_repository.dart';
 
 final sl = GetIt.instance;
 
@@ -42,6 +46,7 @@ init() async {
   sl.registerFactory(() => CartBloc(cart: sl()));
   sl.registerFactory(() => FavouritesBloc(favourites: sl()));
   sl.registerFactory(() => AuthBLoC(repository: sl()));
+  sl.registerFactory(() => OrdersBloc(ordersUseCase: sl()));
 
 //UseCases
   sl.registerLazySingleton(() => PopularBooks(sl()));
@@ -53,6 +58,7 @@ init() async {
   sl.registerLazySingleton(() => SearchBooksCategory(sl()));
   sl.registerLazySingleton(() => CartUseCase(sl()));
   sl.registerLazySingleton(() => FavouritesUseCase(sl()));
+  sl.registerLazySingleton(() => OrdersUseCase(sl()));
 
 //Repository
   sl.registerLazySingleton<BookHomeRepository>(
@@ -68,6 +74,8 @@ init() async {
   sl.registerLazySingleton<BookHiveDataSource>(() => BookHiveDataSourceImpl());
   sl.registerLazySingleton<IAuthRepository>(
       () => AuthRepositoryImpl(remoteDataSource: sl(), networkInfo: sl()));
+  sl.registerLazySingleton<IOrdersRepository>(
+      () => OrdersRepositoryImpl(remoteDataSource: sl(), networkInfo: sl()));
 
 //Core
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));

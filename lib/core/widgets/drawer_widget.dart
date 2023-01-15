@@ -2,6 +2,7 @@ import 'package:bbt_kirov_app/core/assets/app_const.dart';
 import 'package:bbt_kirov_app/features/authentication/presentation/auth_bloc/auth_bloc.dart';
 import 'package:bbt_kirov_app/features/authentication/presentation/pages/auth_page.dart';
 import 'package:bbt_kirov_app/features/home/presentation/pages/home_screen.dart';
+import 'package:bbt_kirov_app/features/orders/presentation/pages/orders_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -16,7 +17,7 @@ class DrawerWidget extends StatefulWidget {
 class _DrawerWidgetState extends State<DrawerWidget> {
   late SharedPreferences _userPrefs;
 
-  bool _userLoggedIn = false;
+  late bool _userLoggedIn;
   String _userName = 'userName';
   String _userPhoto = 'https://master-kraski.ru/images/no-image.jpg';
   String _userEmail = 'userEmail';
@@ -79,7 +80,12 @@ class _DrawerWidgetState extends State<DrawerWidget> {
             ),
             title: const Text('Мои заказы'),
             onTap: () {
-              Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const OrdersPage(),
+                ),
+              );
             },
           ),
           const AboutListTile(

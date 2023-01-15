@@ -87,6 +87,7 @@ class _CartPageState extends State<CartPage> {
                 child: ElevatedButton(
                   onPressed: () {
                     OrderEntity order = OrderEntity(
+                      username: 'a',
                       dateOrder: DateTime.now(),
                       sumOrder: totalSum,
                       books: orderBooks,
