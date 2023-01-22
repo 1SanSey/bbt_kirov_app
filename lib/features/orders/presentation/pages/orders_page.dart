@@ -3,6 +3,7 @@ import 'package:bbt_kirov_app/core/themes/theme_model.dart';
 import 'package:bbt_kirov_app/core/widgets/icon_switch_theme.dart';
 import 'package:bbt_kirov_app/features/cart/domain/entities/order_entity.dart';
 import 'package:bbt_kirov_app/features/orders/presentation/bloc/orders_bloc.dart';
+import 'package:bbt_kirov_app/features/orders/presentation/pages/order_detail_page.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -40,21 +41,35 @@ class OrdersPage extends StatelessWidget {
             );
 
             return orders.isNotEmpty
-                ? ListView.separated(
-                    itemBuilder: ((context, i) {
-                      return ListTile(
-                          title: Text(
-                        getDMYDate(orders[i].dateOrder) +
-                            getHmDate(orders[i].dateOrder),
-                      ));
-                    }),
-                    separatorBuilder: ((context, index) {
-                      return const Divider(
-                        color: AppColors.greyColor,
-                        thickness: 2,
-                      );
-                    }),
-                    itemCount: orders.length,
+                ? Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                    child: ListView.separated(
+                      itemBuilder: ((context, i) {
+                        return ListTile(
+                            title: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    OrderDetailPage(order: orders[i]),
+                              ),
+                            );
+                          },
+                          child: Text(
+                            'Заказ от ${getDMYDate(orders[i].dateOrder)}${getHmDate(orders[i].dateOrder)}',
+                          ),
+                        ));
+                      }),
+                      separatorBuilder: ((context, index) {
+                        return const Divider(
+                          color: AppColors.greyColor,
+                          thickness: 2,
+                        );
+                      }),
+                      itemCount: orders.length,
+                    ),
                   )
                 : const SizedBox.shrink();
           }),

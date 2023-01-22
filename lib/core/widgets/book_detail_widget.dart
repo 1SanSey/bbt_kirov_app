@@ -173,6 +173,7 @@ class _BookDetailPageState extends State<BookDetailPage> {
                     color: Theme.of(context).primaryColor,
                     width: 2,
                   ),
+                  foregroundColor: Colors.transparent,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8))),
               child: Text(
