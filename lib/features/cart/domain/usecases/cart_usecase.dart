@@ -7,8 +7,8 @@ class CartUseCase {
 
   CartUseCase(this.cartRepository);
 
-  void addToCart(CartBookModel book) {
-    cartRepository.addToCart(book);
+  String addToCart(CartBookModel book) {
+    return cartRepository.addToCart(book);
   }
 
   void removeFromCart(int index) {

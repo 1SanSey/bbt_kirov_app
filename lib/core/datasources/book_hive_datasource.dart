@@ -4,11 +4,11 @@ import 'package:bbt_kirov_app/features/favorites/data/models/favourites_book_mod
 import 'package:hive_flutter/hive_flutter.dart';
 
 abstract class BookHiveDataSource {
-  void addToCart(CartBookModel book);
+  String addToCart(CartBookModel book);
   void removeFromCart(int index);
   void changeQuantityCart(int index, int value);
   List<CartBookModel> showCart();
-  void addToFavourites(FavouritesBookModel book);
+  String addToFavourites(FavouritesBookModel book);
   void removeFromFavourites(FavouritesBookModel book, int index);
   List<FavouritesBookModel> showFavourites();
   int totalSum();
@@ -27,12 +27,38 @@ class BookHiveDataSourceImpl extends BookHiveDataSource {
   Box<CartBookModel> cartBox = Hive.box<CartBookModel>(HiveBoxes.cart);
 
   @override
-  void addToCart(CartBookModel book) {
-    cartBox.add(CartBookModel(
-        name: book.name,
-        price: book.price,
-        image: book.image,
-        quantity: book.quantity));
+  String addToCart(CartBookModel book) {
+    bool isExist = false;
+    String message = '';
+
+    if (cartBox.values.isNotEmpty) {
+      for (var item in cartBox.values) {
+        if (item.name == book.name) {
+          isExist = true;
+          message = 'Товар уже есть в корзине!';
+          break;
+        }
+      }
+      if (!isExist) {
+        cartBox.add(CartBookModel(
+            name: book.name,
+            price: book.price,
+            image: book.image,
+            quantity: book.quantity));
+
+        message = 'Товар добавлен в корзину!';
+      }
+    } else {
+      cartBox.add(CartBookModel(
+          name: book.name,
+          price: book.price,
+          image: book.image,
+          quantity: book.quantity));
+
+      message = 'Товар добавлен в корзину!';
+    }
+
+    return message;
   }
 
   @override
@@ -70,12 +96,38 @@ class BookHiveDataSourceImpl extends BookHiveDataSource {
       Hive.box<FavouritesBookModel>(HiveBoxes.favourites);
 
   @override
-  void addToFavourites(FavouritesBookModel book) {
-    favouritesBox.add(FavouritesBookModel(
-      name: book.name,
-      price: book.price,
-      image: book.image,
-    ));
+  String addToFavourites(FavouritesBookModel book) {
+    bool isExist = false;
+    String message = '';
+
+    if (favouritesBox.values.isNotEmpty) {
+      for (var item in favouritesBox.values) {
+        if (item.name == book.name) {
+          isExist = true;
+          message = 'Товар уже есть в Избранном!';
+          break;
+        }
+      }
+      if (!isExist) {
+        favouritesBox.add(FavouritesBookModel(
+          name: book.name,
+          price: book.price,
+          image: book.image,
+        ));
+
+        message = 'Товар добавлен в Избранное!';
+      }
+    } else {
+      favouritesBox.add(FavouritesBookModel(
+        name: book.name,
+        price: book.price,
+        image: book.image,
+      ));
+
+      message = 'Товар добавлен в Избранное!';
+    }
+
+    return message;
   }
 
   @override

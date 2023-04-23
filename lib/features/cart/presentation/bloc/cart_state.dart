@@ -11,11 +11,12 @@ class EmptyCartState extends CartState {}
 
 class AddToCartState extends CartState {
   final CartBookModel book;
+  final String message;
 
-  const AddToCartState({required this.book});
+  const AddToCartState({required this.message, required this.book});
 
   @override
-  List<Object?> get props => [book];
+  List<Object?> get props => [book, message];
 }
 
 class RemoveFromCartState extends CartState {

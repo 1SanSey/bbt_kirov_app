@@ -6,8 +6,8 @@ class FavouritesUseCase {
 
   FavouritesUseCase(this.favouritesRepository);
 
-  void addToFavourites(FavouritesBookModel book) {
-    favouritesRepository.addToFavourites(book);
+  String addToFavourites(FavouritesBookModel book) {
+    return favouritesRepository.addToFavourites(book);
   }
 
   void removeFromFavourites(FavouritesBookModel book, int index) {

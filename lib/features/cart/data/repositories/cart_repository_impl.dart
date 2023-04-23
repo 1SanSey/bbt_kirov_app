@@ -16,8 +16,8 @@ class CartRepositoryImpl implements CartRepository {
       required this.hiveDataSource});
 
   @override
-  void addToCart(CartBookModel book) {
-    hiveDataSource.addToCart(book);
+  String addToCart(CartBookModel book) {
+    return hiveDataSource.addToCart(book);
   }
 
   @override

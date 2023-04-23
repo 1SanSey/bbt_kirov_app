@@ -11,11 +11,12 @@ class EmptyFavouritesState extends FavouritesState {}
 
 class AddToFavouritesState extends FavouritesState {
   final FavouritesBookModel book;
+  final String message;
 
-  const AddToFavouritesState({required this.book});
+  const AddToFavouritesState({required this.message, required this.book});
 
   @override
-  List<Object?> get props => [book];
+  List<Object?> get props => [book, message];
 }
 
 class RemoveFromFavouritesState extends FavouritesState {

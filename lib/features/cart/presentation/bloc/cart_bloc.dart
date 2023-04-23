@@ -19,7 +19,9 @@ class CartBloc extends Bloc<CartEvent, CartState> {
   }
 
   void _addToCart(AddToCartEvent event, Emitter<CartState> emit) {
-    cart.addToCart(event.book);
+    String message = cart.addToCart(event.book);
+    emit(AddToCartState(book: event.book, message: message));
+    emit(EmptyCartState());
   }
 
   void _removeFromCart(RemoveFromCartEvent event, Emitter<CartState> emit) {

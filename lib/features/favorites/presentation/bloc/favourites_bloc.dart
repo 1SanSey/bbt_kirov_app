@@ -17,7 +17,9 @@ class FavouritesBloc extends Bloc<FavouritesEvent, FavouritesState> {
 
   void _addToFavourites(
       AddToFavouritesEvent event, Emitter<FavouritesState> emit) {
-    favourites.addToFavourites(event.book);
+    String message = favourites.addToFavourites(event.book);
+
+    emit(AddToFavouritesState(book: event.book, message: message));
   }
 
   void _removeFromFavourites(

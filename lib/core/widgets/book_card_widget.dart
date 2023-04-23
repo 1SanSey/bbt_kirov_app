@@ -71,6 +71,7 @@ class BookCard extends StatelessWidget {
                               quantity: 1);
                           BlocProvider.of<CartBloc>(context)
                               .add(AddToCartEvent(book: hiveBook));
+                          //showSnackBarAddToCart(context);
                         },
                         icon: Icon(
                           Icons.shopping_cart,
@@ -85,6 +86,16 @@ class BookCard extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
+                    /* BlocListener<CartBloc, CartState>(
+                      listener: ((context, state) {
+                        if (state is AddToCartState) {
+                          String message = state.message;
+
+                          
+                        }
+                      }),
+                      child: const SizedBox.shrink(),
+                    ),  */
                   ]),
             ),
           ],
@@ -92,4 +103,19 @@ class BookCard extends StatelessWidget {
       ),
     );
   }
+
+  /* void showSnackBarAddToCart(BuildContext context) {
+    var scaffoldMessenger = ScaffoldMessenger.of(context);
+    BlocListener<CartBloc, CartState>(
+      listener: ((_, state) {
+        log(state.toString());
+
+        if (state is AddToCartState) {
+          String message = state.message;
+          log(message);
+          scaffoldMessenger.showSnackBar(SnackBar(content: Text(message)));
+        }
+      }),
+    );
+  } */
 }

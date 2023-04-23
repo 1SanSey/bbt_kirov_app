@@ -11,8 +11,8 @@ class FavouritesRepositoryImpl implements FavouritesRepository {
       {required this.networkInfo, required this.hiveDataSource});
 
   @override
-  void addToFavourites(FavouritesBookModel book) {
-    hiveDataSource.addToFavourites(book);
+  String addToFavourites(FavouritesBookModel book) {
+    return hiveDataSource.addToFavourites(book);
   }
 
   @override
