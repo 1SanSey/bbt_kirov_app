@@ -1,7 +1,7 @@
 import 'package:bbt_kirov_app/common/error_text.dart';
 import 'package:bbt_kirov_app/core/themes/app_colors.dart';
-import 'package:bbt_kirov_app/features/cart/data/models/cart_book_model.dart';
-import 'package:bbt_kirov_app/features/cart/domain/entities/order_entity.dart';
+import 'package:bbt_kirov_app/features/cart/domain/entities/cart_book_entity.dart';
+import 'package:bbt_kirov_app/features/orders/domain/entities/order_entity.dart';
 import 'package:bbt_kirov_app/features/cart/presentation/bloc/cart_bloc.dart';
 import 'package:bbt_kirov_app/features/cart/presentation/widgets/cart_book_card.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +23,7 @@ class _CartPageState extends State<CartPage> {
         return previous != current;
       },
       builder: (context, state) {
-        List<CartBookModel> cartBooks = [];
+        List<CartBookEntity> cartBooks = [];
         int totalSum = 0;
         Map<String, int> orderBooks = {};
 

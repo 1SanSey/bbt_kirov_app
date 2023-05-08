@@ -1,7 +1,7 @@
-import 'package:bbt_kirov_app/features/favorites/data/models/favourites_book_model.dart';
+import 'package:bbt_kirov_app/features/favorites/domain/entities/favorites_book_entity.dart';
 
 abstract class FavouritesRepository {
-  String addToFavourites(FavouritesBookModel book);
-  void removeFromFavourites(FavouritesBookModel book, int index);
-  List<FavouritesBookModel> showFavourites();
+  String addToFavourites(FavoritesBookEntity book);
+  void removeFromFavourites(FavoritesBookEntity book, int index);
+  List<FavoritesBookEntity> showFavourites();
 }

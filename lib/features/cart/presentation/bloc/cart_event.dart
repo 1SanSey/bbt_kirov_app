@@ -12,7 +12,7 @@ class EmptyCartEvent extends CartEvent {}
 class ShowCartEvent extends CartEvent {}
 
 class AddToCartEvent extends CartEvent {
-  final CartBookModel book;
+  final CartBookEntity book;
 
   const AddToCartEvent({required this.book});
 }

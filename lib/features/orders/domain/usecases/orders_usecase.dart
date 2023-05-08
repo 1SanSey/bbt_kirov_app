@@ -1,6 +1,6 @@
 import 'package:bbt_kirov_app/core/error/failure.dart';
 import 'package:bbt_kirov_app/core/usecases/usecases.dart';
-import 'package:bbt_kirov_app/features/cart/domain/entities/order_entity.dart';
+import 'package:bbt_kirov_app/features/orders/domain/entities/order_entity.dart';
 import 'package:bbt_kirov_app/features/orders/domain/repositories/i_orders_repository.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';

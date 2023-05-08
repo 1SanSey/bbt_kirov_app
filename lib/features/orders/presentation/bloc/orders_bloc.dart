@@ -1,5 +1,5 @@
 import 'package:bbt_kirov_app/common/failure_to_message.dart';
-import 'package:bbt_kirov_app/features/cart/domain/entities/order_entity.dart';
+import 'package:bbt_kirov_app/features/orders/domain/entities/order_entity.dart';
 import 'package:bbt_kirov_app/features/orders/domain/usecases/orders_usecase.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';

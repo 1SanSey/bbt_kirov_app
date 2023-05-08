@@ -1,6 +1,6 @@
 import 'package:bbt_kirov_app/common/error_text.dart';
 import 'package:bbt_kirov_app/core/themes/app_colors.dart';
-import 'package:bbt_kirov_app/features/favorites/data/models/favourites_book_model.dart';
+import 'package:bbt_kirov_app/features/favorites/domain/entities/favorites_book_entity.dart';
 import 'package:bbt_kirov_app/features/favorites/presentation/bloc/favourites_bloc.dart';
 import 'package:bbt_kirov_app/features/favorites/presentation/widgets/favourites_book_card.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +14,7 @@ class FavouritesPage extends StatefulWidget {
 }
 
 class _FavouritesPageState extends State<FavouritesPage> {
-  List<FavouritesBookModel> favouritesBooks = [];
+  List<FavoritesBookEntity> favouritesBooks = [];
   @override
   Widget build(BuildContext context) {
     context.read<FavouritesBloc>().add(ShowFavouritesEvent());

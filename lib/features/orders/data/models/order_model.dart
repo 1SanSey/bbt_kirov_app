@@ -1,4 +1,4 @@
-import 'package:bbt_kirov_app/features/cart/domain/entities/order_entity.dart';
+import 'package:bbt_kirov_app/features/orders/domain/entities/order_entity.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 
 class OrderModel extends OrderEntity {

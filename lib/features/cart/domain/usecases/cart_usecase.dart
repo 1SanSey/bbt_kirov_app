@@ -1,5 +1,5 @@
-import 'package:bbt_kirov_app/features/cart/data/models/cart_book_model.dart';
-import 'package:bbt_kirov_app/features/cart/domain/entities/order_entity.dart';
+import 'package:bbt_kirov_app/features/cart/domain/entities/cart_book_entity.dart';
+import 'package:bbt_kirov_app/features/orders/domain/entities/order_entity.dart';
 import 'package:bbt_kirov_app/features/cart/domain/repositories/cart_repository.dart';
 
 class CartUseCase {
@@ -7,7 +7,7 @@ class CartUseCase {
 
   CartUseCase(this.cartRepository);
 
-  String addToCart(CartBookModel book) {
+  String addToCart(CartBookEntity book) {
     return cartRepository.addToCart(book);
   }
 
@@ -19,7 +19,7 @@ class CartUseCase {
     cartRepository.changeQuantityCart(index, value);
   }
 
-  List<CartBookModel> showCart() {
+  List<CartBookEntity> showCart() {
     return cartRepository.showCart();
   }
 

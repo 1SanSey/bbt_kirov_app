@@ -84,7 +84,7 @@ class BookHiveDataSourceImpl extends BookHiveDataSource {
   void changeQuantityCart(int index, int value) async {
     var currentItem = cartBox.getAt(index);
     currentItem?.quantity = value;
-    await currentItem?.save();
+    await cartBox.putAt(index, currentItem!);
   }
 
   @override

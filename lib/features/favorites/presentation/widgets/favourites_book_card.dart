@@ -1,12 +1,12 @@
 import 'package:bbt_kirov_app/core/themes/app_colors.dart';
 import 'package:bbt_kirov_app/features/cart/data/models/cart_book_model.dart';
 import 'package:bbt_kirov_app/features/cart/presentation/bloc/cart_bloc.dart';
-import 'package:bbt_kirov_app/features/favorites/data/models/favourites_book_model.dart';
+import 'package:bbt_kirov_app/features/favorites/domain/entities/favorites_book_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FavouritesBookCard extends StatefulWidget {
-  final FavouritesBookModel book;
+  final FavoritesBookEntity book;
   final int index;
 
   const FavouritesBookCard({
@@ -20,8 +20,6 @@ class FavouritesBookCard extends StatefulWidget {
 }
 
 class _FavouritesBookCardState extends State<FavouritesBookCard> {
-  final bool _checked = false;
-
   @override
   Widget build(BuildContext context) {
     return Card(

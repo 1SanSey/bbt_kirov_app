@@ -10,13 +10,13 @@ abstract class FavouritesEvent extends Equatable {
 class ShowFavouritesEvent extends FavouritesEvent {}
 
 class AddToFavouritesEvent extends FavouritesEvent {
-  final FavouritesBookModel book;
+  final FavoritesBookEntity book;
 
   const AddToFavouritesEvent({required this.book});
 }
 
 class RemoveFromFavouritesEvent extends FavouritesEvent {
-  final FavouritesBookModel book;
+  final FavoritesBookEntity book;
   final int index;
 
   const RemoveFromFavouritesEvent({required this.book, required this.index});

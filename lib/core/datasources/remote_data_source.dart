@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:bbt_kirov_app/core/error/exception.dart';
 import 'package:bbt_kirov_app/core/models/book_model.dart';
 import 'package:bbt_kirov_app/features/authentication/domain/entities/user_entity.dart';
-import 'package:bbt_kirov_app/features/cart/domain/entities/order_entity.dart';
+import 'package:bbt_kirov_app/features/orders/domain/entities/order_entity.dart';
 import 'package:bbt_kirov_app/features/orders/data/models/order_model.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 

@@ -1,4 +1,4 @@
-import 'package:bbt_kirov_app/features/favorites/data/models/favourites_book_model.dart';
+import 'package:bbt_kirov_app/features/favorites/domain/entities/favorites_book_entity.dart';
 import 'package:bbt_kirov_app/features/favorites/domain/usecases/favourites_usecase.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';

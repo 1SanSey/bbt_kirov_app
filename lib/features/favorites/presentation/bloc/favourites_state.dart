@@ -10,7 +10,7 @@ abstract class FavouritesState extends Equatable {
 class EmptyFavouritesState extends FavouritesState {}
 
 class AddToFavouritesState extends FavouritesState {
-  final FavouritesBookModel book;
+  final FavoritesBookEntity book;
   final String message;
 
   const AddToFavouritesState({required this.message, required this.book});
@@ -20,7 +20,7 @@ class AddToFavouritesState extends FavouritesState {
 }
 
 class RemoveFromFavouritesState extends FavouritesState {
-  final FavouritesBookModel book;
+  final FavoritesBookEntity book;
 
   const RemoveFromFavouritesState({required this.book});
 
@@ -29,7 +29,7 @@ class RemoveFromFavouritesState extends FavouritesState {
 }
 
 class ShowFavouritesState extends FavouritesState {
-  final List<FavouritesBookModel> books;
+  final List<FavoritesBookEntity> books;
 
   const ShowFavouritesState({required this.books});
 

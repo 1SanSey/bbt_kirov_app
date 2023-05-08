@@ -1,5 +1,5 @@
 import 'package:bbt_kirov_app/core/error/failure.dart';
-import 'package:bbt_kirov_app/features/cart/domain/entities/order_entity.dart';
+import 'package:bbt_kirov_app/features/orders/domain/entities/order_entity.dart';
 import 'package:dartz/dartz.dart';
 
 abstract class IOrdersRepository {

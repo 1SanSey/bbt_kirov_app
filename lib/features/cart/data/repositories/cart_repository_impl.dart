@@ -2,7 +2,8 @@ import 'package:bbt_kirov_app/core/datasources/remote_data_source.dart';
 import 'package:bbt_kirov_app/core/platform/network_info.dart';
 import 'package:bbt_kirov_app/core/datasources/book_hive_datasource.dart';
 import 'package:bbt_kirov_app/features/cart/data/models/cart_book_model.dart';
-import 'package:bbt_kirov_app/features/cart/domain/entities/order_entity.dart';
+import 'package:bbt_kirov_app/features/cart/domain/entities/cart_book_entity.dart';
+import 'package:bbt_kirov_app/features/orders/domain/entities/order_entity.dart';
 import 'package:bbt_kirov_app/features/cart/domain/repositories/cart_repository.dart';
 
 class CartRepositoryImpl implements CartRepository {
@@ -16,8 +17,13 @@ class CartRepositoryImpl implements CartRepository {
       required this.hiveDataSource});
 
   @override
-  String addToCart(CartBookModel book) {
-    return hiveDataSource.addToCart(book);
+  String addToCart(CartBookEntity book) {
+    final hiveBook = CartBookModel(
+        name: book.name,
+        price: book.price,
+        quantity: book.quantity,
+        image: book.image);
+    return hiveDataSource.addToCart(hiveBook);
   }
 
   @override
@@ -26,7 +32,7 @@ class CartRepositoryImpl implements CartRepository {
   }
 
   @override
-  List<CartBookModel> showCart() {
+  List<CartBookEntity> showCart() {
     return hiveDataSource.showCart();
   }
 
