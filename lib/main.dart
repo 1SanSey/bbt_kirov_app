@@ -6,6 +6,7 @@ import 'package:bbt_kirov_app/core/themes/themes.dart';
 import 'package:bbt_kirov_app/core/datasources/remote_data_source.dart';
 import 'package:bbt_kirov_app/core/datasources/book_hive_datasource.dart';
 import 'package:bbt_kirov_app/features/authentication/presentation/pages/auth_page.dart';
+import 'package:bbt_kirov_app/features/authentication/presentation/reg_bloc/registration_bloc.dart';
 import 'package:bbt_kirov_app/features/cart/presentation/bloc/cart_bloc.dart';
 import 'package:bbt_kirov_app/features/category/presentation/bloc/category_bloc.dart';
 import 'package:bbt_kirov_app/features/favorites/presentation/bloc/favourites_bloc.dart';
@@ -55,19 +56,16 @@ class _MyAppState extends State<MyApp> {
     return MultiBlocProvider(
       providers: [
         BlocProvider<AuthBLoC>(create: (context) => di.sl<AuthBLoC>()),
-        BlocProvider<HomeBooksBloc>(
-            create: (context) => di.sl<HomeBooksBloc>()),
-        BlocProvider<CategoryBooksBloc>(
-            create: (context) => di.sl<CategoryBooksBloc>()),
+        BlocProvider<RegistrationBloc>(create: (context) => di.sl<RegistrationBloc>()),
+        BlocProvider<HomeBooksBloc>(create: (context) => di.sl<HomeBooksBloc>()),
+        BlocProvider<CategoryBooksBloc>(create: (context) => di.sl<CategoryBooksBloc>()),
         BlocProvider<CartBloc>(create: (context) => di.sl<CartBloc>()),
-        BlocProvider<FavouritesBloc>(
-            create: (context) => di.sl<FavouritesBloc>()),
+        BlocProvider<FavouritesBloc>(create: (context) => di.sl<FavouritesBloc>()),
         BlocProvider<OrdersBloc>(create: (context) => di.sl<OrdersBloc>()),
       ],
       child: ChangeNotifierProvider(
         create: (_) => ThemeModel(),
-        child: Consumer<ThemeModel>(
-            builder: (context, ThemeModel themeNotifier, child) {
+        child: Consumer<ThemeModel>(builder: (context, ThemeModel themeNotifier, child) {
           return MaterialApp(
             title: 'BBT Kirov App',
             theme: themeNotifier.isDark ? darkTheme() : lightTheme(),

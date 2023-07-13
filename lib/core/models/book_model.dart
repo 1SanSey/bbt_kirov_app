@@ -1,5 +1,5 @@
 import 'package:bbt_kirov_app/core/entities/book_entity.dart';
-import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
+import 'package:parse_server_sdk_flutter/parse_server_sdk_flutter.dart';
 
 class BookModel extends BookEntity {
   const BookModel(

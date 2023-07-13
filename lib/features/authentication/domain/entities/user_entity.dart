@@ -1,5 +1,5 @@
 import 'package:meta/meta.dart';
-import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
+import 'package:parse_server_sdk_flutter/parse_server_sdk_flutter.dart';
 
 @immutable
 abstract class UserEntity {
@@ -70,8 +70,7 @@ class AuthenticatedUser implements UserEntity {
   bool get isNotAuthenticated => uid.isEmpty;
 
   @override
-  AuthenticatedUser? get authenticatedOrNull =>
-      isNotAuthenticated ? null : this;
+  AuthenticatedUser? get authenticatedOrNull => isNotAuthenticated ? null : this;
 
   final String uid;
   final String? displayName;
@@ -93,8 +92,7 @@ class AuthenticatedUser implements UserEntity {
       'photoURL: $photoURL)';
 
   @override
-  bool operator ==(final Object other) =>
-      other is AuthenticatedUser && uid == other.uid;
+  bool operator ==(final Object other) => other is AuthenticatedUser && uid == other.uid;
 
   @override
   int get hashCode => uid.hashCode;

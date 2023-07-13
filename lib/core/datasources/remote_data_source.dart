@@ -5,7 +5,7 @@ import 'package:bbt_kirov_app/core/models/book_model.dart';
 import 'package:bbt_kirov_app/features/authentication/domain/entities/user_entity.dart';
 import 'package:bbt_kirov_app/features/orders/domain/entities/order_entity.dart';
 import 'package:bbt_kirov_app/features/orders/data/models/order_model.dart';
-import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
+import 'package:parse_server_sdk_flutter/parse_server_sdk_flutter.dart';
 
 abstract class BookRemoteDataSource {
   Future<List<BookModel>> getAllBooks();
@@ -16,6 +16,7 @@ abstract class BookRemoteDataSource {
   Future<List<BookModel>> getSetBooks(String singleOrSet);
   void sendOrder(OrderEntity order);
   Future<AuthenticatedUser> userLogin(String username, String password);
+  Future<String> userRegister(String username, String password, String email);
   Future<NotAuthenticatedUser> userLogout();
   Future<List<OrderModel>> fetchOrders(String username);
 }
@@ -50,8 +51,7 @@ class BookRemoteDataSourceImpl extends BookRemoteDataSource {
   @override
   Future<List<BookModel>> getBooksByName(String name) async {
     List<BookModel> books = [];
-    final QueryBuilder<ParseObject> parseQuery =
-        QueryBuilder<ParseObject>(ParseObject('Books'));
+    final QueryBuilder<ParseObject> parseQuery = QueryBuilder<ParseObject>(ParseObject('Books'));
     parseQuery.whereContains('name', name);
     final apiResponse = await parseQuery.query();
 
@@ -88,8 +88,7 @@ class BookRemoteDataSourceImpl extends BookRemoteDataSource {
 
   Future<List<BookModel>> _getBooksByQuery(String field, var query) async {
     List<BookModel> books = [];
-    final QueryBuilder<ParseObject> parseQuery =
-        QueryBuilder<ParseObject>(ParseObject('Books'));
+    final QueryBuilder<ParseObject> parseQuery = QueryBuilder<ParseObject>(ParseObject('Books'));
     parseQuery.whereEqualTo(field, query);
     final apiResponse = await parseQuery.query();
 
@@ -119,6 +118,20 @@ class BookRemoteDataSourceImpl extends BookRemoteDataSource {
       log('Object created: $objectId');
     } else {
       log('Object created with failed: ${parseResponse.error.toString()}');
+    }
+  }
+
+  @override
+  Future<String> userRegister(String username, String password, String email) async {
+    final parseUser = ParseUser.createUser(username, password, email);
+    var response = await parseUser.signUp();
+
+    if (response.success) {
+      log("User was successfully register!");
+      return 'Success';
+    } else {
+      log(response.error!.message);
+      throw ServerException();
     }
   }
 
@@ -158,8 +171,7 @@ class BookRemoteDataSourceImpl extends BookRemoteDataSource {
   @override
   Future<List<OrderModel>> fetchOrders(String username) async {
     List<OrderModel> orders = [];
-    final QueryBuilder<ParseObject> parseQuery =
-        QueryBuilder<ParseObject>(ParseObject('Orders'));
+    final QueryBuilder<ParseObject> parseQuery = QueryBuilder<ParseObject>(ParseObject('Orders'));
     parseQuery.whereEqualTo('username', username);
     final apiResponse = await parseQuery.query();
 

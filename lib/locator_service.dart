@@ -2,6 +2,7 @@ import 'package:bbt_kirov_app/core/platform/network_info.dart';
 import 'package:bbt_kirov_app/core/datasources/book_hive_datasource.dart';
 import 'package:bbt_kirov_app/features/authentication/data/repositories/auth_repository_impl.dart';
 import 'package:bbt_kirov_app/features/authentication/domain/repositories/auth_repository.dart';
+import 'package:bbt_kirov_app/features/authentication/presentation/reg_bloc/registration_bloc.dart';
 import 'package:bbt_kirov_app/features/cart/data/repositories/cart_repository_impl.dart';
 import 'package:bbt_kirov_app/features/cart/domain/usecases/cart_usecase.dart';
 import 'package:bbt_kirov_app/features/cart/presentation/bloc/cart_bloc.dart';
@@ -46,6 +47,7 @@ init() async {
   sl.registerFactory(() => CartBloc(cart: sl()));
   sl.registerFactory(() => FavouritesBloc(favourites: sl()));
   sl.registerFactory(() => AuthBLoC(repository: sl()));
+  sl.registerFactory(() => RegistrationBloc(sl()));
   sl.registerFactory(() => OrdersBloc(ordersUseCase: sl()));
 
 //UseCases
@@ -63,14 +65,13 @@ init() async {
 //Repository
   sl.registerLazySingleton<BookHomeRepository>(
       () => BookHomeRepositoryImpl(remoteDataSource: sl(), networkInfo: sl()));
-  sl.registerLazySingleton<BookCategoryRepository>(() =>
-      BookCategoryRepositoryImpl(remoteDataSource: sl(), networkInfo: sl()));
-  sl.registerLazySingleton<CartRepository>(() => CartRepositoryImpl(
-      hiveDataSource: sl(), bookRemoteDataSource: sl(), networkInfo: sl()));
+  sl.registerLazySingleton<BookCategoryRepository>(
+      () => BookCategoryRepositoryImpl(remoteDataSource: sl(), networkInfo: sl()));
+  sl.registerLazySingleton<CartRepository>(() =>
+      CartRepositoryImpl(hiveDataSource: sl(), bookRemoteDataSource: sl(), networkInfo: sl()));
   sl.registerLazySingleton<FavouritesRepository>(
       () => FavouritesRepositoryImpl(hiveDataSource: sl(), networkInfo: sl()));
-  sl.registerLazySingleton<BookRemoteDataSource>(
-      () => BookRemoteDataSourceImpl());
+  sl.registerLazySingleton<BookRemoteDataSource>(() => BookRemoteDataSourceImpl());
   sl.registerLazySingleton<BookHiveDataSource>(() => BookHiveDataSourceImpl());
   sl.registerLazySingleton<IAuthRepository>(
       () => AuthRepositoryImpl(remoteDataSource: sl(), networkInfo: sl()));
