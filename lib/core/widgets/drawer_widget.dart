@@ -16,7 +16,6 @@ class DrawerWidget extends StatefulWidget {
 
 class _DrawerWidgetState extends State<DrawerWidget> {
   late SharedPreferences _userPrefs;
-
   late bool _userLoggedIn;
   String _userName = 'userName';
   String _userPhoto = 'https://master-kraski.ru/images/no-image.jpg';
@@ -131,8 +130,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
     });
   }
 
-  Future<void> _setUserPrefs(
-      bool loggedIn, String username, String email, String photo) async {
+  Future<void> _setUserPrefs(bool loggedIn, String username, String email, String photo) async {
     await _userPrefs.setBool(AppConstants.loggedInPref, loggedIn);
     await _userPrefs.setString(AppConstants.usernamePref, username);
     await _userPrefs.setString(AppConstants.photoPref, photo);

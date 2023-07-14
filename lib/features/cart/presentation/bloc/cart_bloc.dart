@@ -1,4 +1,3 @@
-import 'package:bbt_kirov_app/features/cart/data/models/cart_book_model.dart';
 import 'package:bbt_kirov_app/features/cart/domain/entities/cart_book_entity.dart';
 import 'package:bbt_kirov_app/features/orders/domain/entities/order_entity.dart';
 import 'package:bbt_kirov_app/features/cart/domain/usecases/cart_usecase.dart';
@@ -36,8 +35,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     emit(ShowCartState(books: books, totalSum: totalSum));
   }
 
-  void _changeQuantityCart(
-      ChangeQuantityCartEvent event, Emitter<CartState> emit) {
+  void _changeQuantityCart(ChangeQuantityCartEvent event, Emitter<CartState> emit) {
     cart.changeQuantityCart(event.index, event.value);
   }
 

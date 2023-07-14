@@ -10,7 +10,7 @@ ThemeData lightTheme() => ThemeData(
       primaryColor: AppColors.primaryColorLight,
       primaryColorLight: AppColors.secondaryColorLight,
       textTheme: const TextTheme(
-        bodyText1: TextStyle(
+        bodyLarge: TextStyle(
           fontFamily: 'Arial',
           color: AppColors.greyColor2,
           fontSize: 15,
@@ -25,12 +25,12 @@ ThemeData darkTheme() => ThemeData(
       primaryColor: Colors.black,
       primaryColorLight: AppColors.greyColor2,
       textTheme: const TextTheme(
-        headline6: TextStyle(
+        titleLarge: TextStyle(
           fontFamily: 'Arial',
           fontSize: 20,
           color: Colors.white,
         ),
-        bodyText1: TextStyle(
+        bodyLarge: TextStyle(
           fontFamily: 'Arial',
           color: AppColors.greyColor2,
           fontSize: 15,

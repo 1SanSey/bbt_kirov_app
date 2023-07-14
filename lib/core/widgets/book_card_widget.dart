@@ -40,8 +40,7 @@ class BookCard extends StatelessWidget {
               child: Column(
                 children: [
                   Image.network(
-                    book.image ??
-                        'https://master-kraski.ru/images/no-image.jpg',
+                    book.image ?? 'https://master-kraski.ru/images/no-image.jpg',
                     height: 180,
                   ),
                   SizedBox(
@@ -51,7 +50,7 @@ class BookCard extends StatelessWidget {
                       child: Text(
                         book.name,
                         textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.bodyText1,
+                        style: Theme.of(context).textTheme.bodyLarge,
                       ),
                     ),
                   ),
@@ -59,34 +58,28 @@ class BookCard extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: <Widget>[
-                    IconButton(
-                        onPressed: () {
-                          CartBookModel hiveBook = CartBookModel(
-                              name: book.name,
-                              price: book.price,
-                              image: book.image!,
-                              quantity: 1);
-                          BlocProvider.of<CartBloc>(context)
-                              .add(AddToCartEvent(book: hiveBook));
-                          //showSnackBarAddToCart(context);
-                        },
-                        icon: Icon(
-                          Icons.shopping_cart,
-                          color: Theme.of(context).primaryColor,
-                          size: 30,
-                        )),
-                    Text(
-                      '${book.price} ₽',
-                      style: TextStyle(
-                        color: Theme.of(context).primaryColor,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    /* BlocListener<CartBloc, CartState>(
+              child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: <Widget>[
+                IconButton(
+                    onPressed: () {
+                      CartBookModel hiveBook = CartBookModel(
+                          name: book.name, price: book.price, image: book.image!, quantity: 1);
+                      BlocProvider.of<CartBloc>(context).add(AddToCartEvent(book: hiveBook));
+                      //showSnackBarAddToCart(context);
+                    },
+                    icon: Icon(
+                      Icons.shopping_cart,
+                      color: Theme.of(context).primaryColor,
+                      size: 30,
+                    )),
+                Text(
+                  '${book.price} ₽',
+                  style: TextStyle(
+                    color: Theme.of(context).primaryColor,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                /* BlocListener<CartBloc, CartState>(
                       listener: ((context, state) {
                         if (state is AddToCartState) {
                           String message = state.message;
@@ -96,7 +89,7 @@ class BookCard extends StatelessWidget {
                       }),
                       child: const SizedBox.shrink(),
                     ),  */
-                  ]),
+              ]),
             ),
           ],
         ),

@@ -18,8 +18,7 @@ class OrdersPage extends StatelessWidget {
     context.read<OrdersBloc>().add(const OrdersEvent.fetch(username: 'a'));
     List<OrderEntity> orders = [];
 
-    return Consumer<ThemeModel>(
-        builder: (context, ThemeModel themeNotifier, child) {
+    return Consumer<ThemeModel>(builder: (context, ThemeModel themeNotifier, child) {
       return Scaffold(
         appBar: AppBar(
           leading: IconButton(
@@ -42,8 +41,7 @@ class OrdersPage extends StatelessWidget {
 
             return orders.isNotEmpty
                 ? Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                     child: ListView.separated(
                       itemBuilder: ((context, i) {
                         return ListTile(
@@ -52,8 +50,7 @@ class OrdersPage extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) =>
-                                    OrderDetailPage(order: orders[i]),
+                                builder: (context) => OrderDetailPage(order: orders[i]),
                               ),
                             );
                           },
@@ -79,10 +76,10 @@ class OrdersPage extends StatelessWidget {
   }
 
   String getHmDate(DateTime dateTime) {
-    return DateFormat('Hm').format(dateTime);
+    return DateFormat('HH:mm').format(dateTime);
   }
 
   String getDMYDate(DateTime dateTime) {
-    return DateFormat('d/M/y ').format(dateTime);
+    return DateFormat('dd/MM/y ').format(dateTime);
   }
 }

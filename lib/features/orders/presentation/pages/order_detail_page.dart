@@ -12,8 +12,7 @@ class OrderDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<ThemeModel>(
-        builder: (context, ThemeModel themeNotifier, child) {
+    return Consumer<ThemeModel>(builder: (context, ThemeModel themeNotifier, child) {
       return Scaffold(
         appBar: AppBar(
           leading: IconButton(
@@ -33,8 +32,7 @@ class OrderDetailPage extends StatelessWidget {
               ListTile(
                   title: Text(
                 'Дата заказа: ${getDMYDate(order.dateOrder)}${getHmDate(order.dateOrder)}',
-                style:
-                    const TextStyle(fontWeight: FontWeight.w400, fontSize: 22),
+                style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 22),
               )),
               const SizedBox(
                 height: 5,
@@ -42,8 +40,7 @@ class OrderDetailPage extends StatelessWidget {
               ListTile(
                   title: Text(
                 'Сумма заказа: ${order.sumOrder} руб.',
-                style:
-                    const TextStyle(fontWeight: FontWeight.w400, fontSize: 22),
+                style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 22),
               )),
               const SizedBox(
                 height: 5,
@@ -68,17 +65,16 @@ class OrderDetailPage extends StatelessWidget {
         color: AppColors.greyColor,
         thickness: 2,
       ));
-      listBooks.add(ListTile(
-          title: Text(item.key), trailing: Text(item.value.toString())));
+      listBooks.add(ListTile(title: Text(item.key), trailing: Text(item.value.toString())));
     }
     return listBooks;
   }
 
   String getHmDate(DateTime dateTime) {
-    return DateFormat('Hm').format(dateTime);
+    return DateFormat('HH:mm').format(dateTime);
   }
 
   String getDMYDate(DateTime dateTime) {
-    return DateFormat('d/M/y ').format(dateTime);
+    return DateFormat('dd/MM/y ').format(dateTime);
   }
 }
