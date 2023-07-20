@@ -1,6 +1,5 @@
 import 'package:bbt_kirov_app/core/themes/app_colors.dart';
 import 'package:bbt_kirov_app/core/themes/theme_model.dart';
-import 'package:bbt_kirov_app/core/widgets/icon_switch_theme.dart';
 import 'package:bbt_kirov_app/features/cart/data/models/cart_book_model.dart';
 import 'package:bbt_kirov_app/features/cart/presentation/bloc/cart_bloc.dart';
 import 'package:bbt_kirov_app/features/favorites/data/models/favourites_book_model.dart';
@@ -47,14 +46,12 @@ class _BookDetailPageState extends State<BookDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<ThemeModel>(
-        builder: (context, ThemeModel themeNotifier, child) {
+    return Consumer<ThemeModel>(builder: (context, ThemeModel themeNotifier, child) {
       return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
           title: Text(widget.book.name),
           centerTitle: true,
-          actions: [iconSwitchTheme(context, themeNotifier)],
         ),
         body: SafeArea(
             child: Column(
@@ -69,8 +66,7 @@ class _BookDetailPageState extends State<BookDetailPage> {
                 duration: const Duration(seconds: 2),
                 curve: Curves.easeIn,
                 child: Image.network(
-                  widget.book.image ??
-                      'https://master-kraski.ru/images/no-image.jpg',
+                  widget.book.image ?? 'https://master-kraski.ru/images/no-image.jpg',
                   height: isTapped ? 370 : 270,
                 ),
               ),
@@ -81,8 +77,7 @@ class _BookDetailPageState extends State<BookDetailPage> {
               child: Text(
                 widget.book.name,
                 textAlign: TextAlign.center,
-                style:
-                    const TextStyle(color: AppColors.greyColor2, fontSize: 18),
+                style: const TextStyle(color: AppColors.greyColor2, fontSize: 18),
               ),
             ),
             const SizedBox(height: 20),
@@ -97,41 +92,36 @@ class _BookDetailPageState extends State<BookDetailPage> {
                       width: 1,
                     ),
                   ),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        IconButton(
-                            onPressed: _decrement,
-                            icon: const Icon(Icons.remove),
-                            iconSize: 30,
-                            color: Theme.of(context).primaryColor),
-                        const SizedBox(width: 20),
-                        /* const VerticalDivider(
+                  child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
+                    IconButton(
+                        onPressed: _decrement,
+                        icon: const Icon(Icons.remove),
+                        iconSize: 30,
+                        color: Theme.of(context).primaryColor),
+                    const SizedBox(width: 20),
+                    /* const VerticalDivider(
                             width: 2, color: AppColors.greyColor2), */
-                        Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8),
-                          child: Text(
-                            '$_count',
-                            style: const TextStyle(
-                                color: AppColors.greyColor2,
-                                fontSize: 24,
-                                fontWeight: FontWeight.w400),
-                          ),
-                        ),
-                        /*  const VerticalDivider(
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      child: Text(
+                        '$_count',
+                        style: const TextStyle(
+                            color: AppColors.greyColor2, fontSize: 24, fontWeight: FontWeight.w400),
+                      ),
+                    ),
+                    /*  const VerticalDivider(
                             width: 2, color: AppColors.greyColor2), */
-                        const SizedBox(width: 20),
-                        IconButton(
-                            onPressed: _increment,
-                            icon: const Icon(Icons.add),
-                            iconSize: 30,
-                            color: Theme.of(context).primaryColor),
-                      ]),
+                    const SizedBox(width: 20),
+                    IconButton(
+                        onPressed: _increment,
+                        icon: const Icon(Icons.add),
+                        iconSize: 30,
+                        color: Theme.of(context).primaryColor),
+                  ]),
                 ),
                 Text(
                   'Цена: ${widget.book.price} ₽',
-                  style: const TextStyle(
-                      fontSize: 25, color: AppColors.greyColor2),
+                  style: const TextStyle(fontSize: 25, color: AppColors.greyColor2),
                 ),
               ],
             ),
@@ -144,15 +134,13 @@ class _BookDetailPageState extends State<BookDetailPage> {
                     image: widget.book.image!,
                     quantity: _count);
 
-                BlocProvider.of<CartBloc>(context)
-                    .add(AddToCartEvent(book: hiveBook));
+                BlocProvider.of<CartBloc>(context).add(AddToCartEvent(book: hiveBook));
               },
               style: ElevatedButton.styleFrom(
                   backgroundColor: Theme.of(context).primaryColor,
                   fixedSize: const Size(320, 50),
                   textStyle: const TextStyle(color: Colors.white, fontSize: 18),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8))),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
               child: const Text('ДОБАВИТЬ В КОРЗИНУ'),
             ),
             const SizedBox(height: 20),
@@ -164,8 +152,7 @@ class _BookDetailPageState extends State<BookDetailPage> {
                   image: widget.book.image!,
                 );
 
-                BlocProvider.of<FavouritesBloc>(context)
-                    .add(AddToFavouritesEvent(book: hiveBook));
+                BlocProvider.of<FavouritesBloc>(context).add(AddToFavouritesEvent(book: hiveBook));
               },
               style: OutlinedButton.styleFrom(
                   fixedSize: const Size(320, 50),
@@ -174,12 +161,10 @@ class _BookDetailPageState extends State<BookDetailPage> {
                     width: 2,
                   ),
                   foregroundColor: Colors.transparent,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8))),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
               child: Text(
                 'ДОБАВИТЬ В ИЗБРАННОЕ',
-                style: TextStyle(
-                    color: Theme.of(context).primaryColor, fontSize: 18),
+                style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 18),
               ),
             ),
           ],

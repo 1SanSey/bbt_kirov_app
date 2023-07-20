@@ -1,5 +1,4 @@
 import 'package:bbt_kirov_app/core/themes/theme_model.dart';
-import 'package:bbt_kirov_app/core/widgets/icon_switch_theme.dart';
 import 'package:bbt_kirov_app/features/category/presentation/widgets/book_list_category_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -90,8 +89,7 @@ class CategoryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<ThemeModel>(
-        builder: (context, ThemeModel themeNotifier, child) {
+    return Consumer<ThemeModel>(builder: (context, ThemeModel themeNotifier, child) {
       return Scaffold(
         appBar: AppBar(
           leading: IconButton(
@@ -101,7 +99,6 @@ class CategoryPage extends StatelessWidget {
               icon: const Icon(Icons.arrow_back)),
           title: Text(nameCategory),
           centerTitle: true,
-          actions: [iconSwitchTheme(context, themeNotifier)],
         ),
         body: BooksCategoryWidget(
           query: query,

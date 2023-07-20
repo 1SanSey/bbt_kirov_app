@@ -1,6 +1,5 @@
 import 'package:bbt_kirov_app/core/themes/app_colors.dart';
 import 'package:bbt_kirov_app/core/themes/theme_model.dart';
-import 'package:bbt_kirov_app/core/widgets/icon_switch_theme.dart';
 import 'package:bbt_kirov_app/features/orders/domain/entities/order_entity.dart';
 import 'package:bbt_kirov_app/features/orders/presentation/bloc/orders_bloc.dart';
 import 'package:bbt_kirov_app/features/orders/presentation/pages/order_detail_page.dart';
@@ -28,7 +27,6 @@ class OrdersPage extends StatelessWidget {
               icon: const Icon(Icons.arrow_back)),
           title: const Text('Мои заказы'),
           centerTitle: true,
-          actions: [iconSwitchTheme(context, themeNotifier)],
         ),
         body: BlocBuilder<OrdersBloc, OrdersState>(
           builder: ((context, state) {

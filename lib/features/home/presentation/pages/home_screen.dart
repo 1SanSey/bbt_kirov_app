@@ -1,6 +1,5 @@
 import 'package:bbt_kirov_app/core/themes/theme_model.dart';
 import 'package:bbt_kirov_app/core/widgets/drawer_widget.dart';
-import 'package:bbt_kirov_app/core/widgets/icon_switch_theme.dart';
 import 'package:bbt_kirov_app/features/cart/presentation/pages/cart_page.dart';
 import 'package:bbt_kirov_app/features/favorites/presentation/pages/favourites_page.dart';
 import 'package:bbt_kirov_app/features/home/presentation/widgets/main_screen.dart';
@@ -26,7 +25,6 @@ class _HomePageState extends State<HomePage> {
             appBar: AppBar(
               title: const Text('BBT Kirov App'),
               centerTitle: true,
-              actions: [iconSwitchTheme(context, themeNotifier)],
             ),
             body: const TabBarView(
               children: <Widget>[

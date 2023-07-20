@@ -1,5 +1,4 @@
 import 'package:bbt_kirov_app/core/themes/app_colors.dart';
-import 'package:bbt_kirov_app/core/widgets/icon_switch_theme.dart';
 import 'package:bbt_kirov_app/features/orders/domain/entities/order_entity.dart';
 import 'package:bbt_kirov_app/core/themes/theme_model.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +21,6 @@ class OrderDetailPage extends StatelessWidget {
               icon: const Icon(Icons.arrow_back)),
           title: const Text('Состав заказа'),
           centerTitle: true,
-          actions: [iconSwitchTheme(context, themeNotifier)],
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),

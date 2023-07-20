@@ -1,10 +1,12 @@
 import 'package:bbt_kirov_app/core/assets/app_const.dart';
+import 'package:bbt_kirov_app/core/themes/app_colors.dart';
+import 'package:bbt_kirov_app/core/themes/theme_model.dart';
 import 'package:bbt_kirov_app/features/authentication/presentation/auth_bloc/auth_bloc.dart';
 import 'package:bbt_kirov_app/features/authentication/presentation/pages/auth_page.dart';
 import 'package:bbt_kirov_app/features/home/presentation/pages/home_screen.dart';
 import 'package:bbt_kirov_app/features/orders/presentation/pages/orders_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DrawerWidget extends StatefulWidget {
@@ -32,92 +34,139 @@ class _DrawerWidgetState extends State<DrawerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Drawer(
-      //backgroundColor: Theme.of(context).primaryColor,
-      width: MediaQuery.of(context).size.width * 0.80,
-      child: ListView(
-        children: [
-          UserAccountsDrawerHeader(
-            decoration: BoxDecoration(
-              color: Theme.of(context).primaryColor,
-            ),
-            accountName: Text(
-              _userName,
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
-            ),
-            accountEmail: Text(
-              _userEmail,
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
+    return Consumer<ThemeModel>(
+      builder: (context, ThemeModel themeNotifier, child) {
+        return Drawer(
+          backgroundColor: Theme.of(context).primaryColor,
+          width: MediaQuery.of(context).size.width * 0.80,
+          child: Column(
+            children: [
+              UserAccountsDrawerHeader(
+                decoration: BoxDecoration(
+                  color: Theme.of(context).primaryColor,
+                ),
+                accountName: Text(
+                  _userName,
+                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+                ),
+                accountEmail: Text(
+                  _userEmail,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                currentAccountPicture: ClipRRect(
+                  borderRadius: BorderRadius.circular(50.0),
+                  child: Image.network(
+                    _userPhoto,
+                    fit: BoxFit.fill,
+                  ),
+                ),
               ),
-            ),
-            currentAccountPicture: ClipRRect(
-              borderRadius: BorderRadius.circular(50.0),
-              child: Image.network(
-                _userPhoto,
-                fit: BoxFit.fill,
+              Expanded(
+                child: Container(
+                  color: Colors.white,
+                  width: double.infinity,
+                  child: Column(
+                    children: [
+                      ListTile(
+                        leading: Icon(
+                          Icons.home_outlined,
+                          color: Theme.of(context).primaryColor,
+                        ),
+                        title: const Text(
+                          'Главная',
+                          style: TextStyle(fontSize: 18),
+                        ),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const HomePage(),
+                            ),
+                          );
+                        },
+                      ),
+                      ListTile(
+                        leading: Icon(
+                          Icons.list_alt,
+                          color: Theme.of(context).primaryColor,
+                        ),
+                        title: const Text(
+                          'Мои заказы',
+                          style: TextStyle(fontSize: 18),
+                        ),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const OrdersPage(),
+                            ),
+                          );
+                        },
+                      ),
+                      ListTile(
+                        leading: Icon(
+                          Icons.exit_to_app,
+                          color: Theme.of(context).primaryColor,
+                        ),
+                        title: const Text(
+                          'Выход',
+                          style: TextStyle(fontSize: 18),
+                        ),
+                        onTap: () {
+                          context.read<AuthBLoC>().add(const AuthEvent.logOut());
+                          _setUserPrefs(false, '', '', '');
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const AuthPage(),
+                            ),
+                          );
+                        },
+                      ),
+                      const Divider(
+                        color: AppColors.greyColor,
+                        thickness: 1,
+                      ),
+                      AboutListTile(
+                        icon: Icon(
+                          Icons.info_outline,
+                          color: Theme.of(context).primaryColor,
+                        ),
+                        applicationIcon: const Icon(
+                          Icons.local_play,
+                        ),
+                        applicationName: 'BBT Kirov App',
+                        applicationVersion: '1.0.0',
+                        applicationLegalese: 'Sergey Ogarkov © 2023',
+                        aboutBoxChildren: const [],
+                        child: const Text(
+                          'О приложении',
+                          style: TextStyle(fontSize: 18),
+                        ),
+                      ),
+                      ListTile(
+                        leading: Icon(
+                          themeNotifier.isDark ? Icons.nightlight_round : Icons.wb_sunny,
+                          color: Theme.of(context).primaryColor,
+                        ),
+                        title: Text(
+                          themeNotifier.isDark ? 'Тёмная тема' : 'Светлая тема',
+                          style: const TextStyle(fontSize: 18),
+                        ),
+                        onTap: () => themeNotifier.isDark
+                            ? themeNotifier.isDark = false
+                            : themeNotifier.isDark = true,
+                      ),
+                    ],
+                  ),
+                ),
               ),
-            ),
+            ],
           ),
-          ListTile(
-            leading: const Icon(
-              Icons.home_outlined,
-            ),
-            title: const Text('Главная'),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const HomePage(),
-                ),
-              );
-            },
-          ),
-          ListTile(
-            leading: const Icon(
-              Icons.list_alt,
-            ),
-            title: const Text('Мои заказы'),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const OrdersPage(),
-                ),
-              );
-            },
-          ),
-          const AboutListTile(
-            icon: Icon(
-              Icons.info_outline,
-            ),
-            applicationIcon: Icon(
-              Icons.local_play,
-            ),
-            applicationName: 'BBT Kirov App',
-            applicationVersion: '1.0.0',
-            applicationLegalese: 'Sergey Ogarkov © 2023',
-            aboutBoxChildren: [],
-            child: Text('О приложении'),
-          ),
-          ListTile(
-            leading: const Icon(
-              Icons.exit_to_app,
-            ),
-            title: const Text('Выход'),
-            onTap: () {
-              context.read<AuthBLoC>().add(const AuthEvent.logOut());
-              _setUserPrefs(false, '', '', '');
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const AuthPage(),
-                ),
-              );
-            },
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 
