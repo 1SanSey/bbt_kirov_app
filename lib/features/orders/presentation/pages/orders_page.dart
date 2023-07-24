@@ -54,13 +54,14 @@ class OrdersPage extends StatelessWidget {
                           },
                           child: Text(
                             'Заказ от ${getDMYDate(orders[i].dateOrder)}${getHmDate(orders[i].dateOrder)}',
+                            style: const TextStyle(color: AppColors.greyColor2),
                           ),
                         ));
                       }),
                       separatorBuilder: ((context, index) {
-                        return const Divider(
-                          color: AppColors.greyColor,
-                          thickness: 2,
+                        return Divider(
+                          color: Theme.of(context).primaryColorDark,
+                          thickness: 1,
                         );
                       }),
                       itemCount: orders.length,

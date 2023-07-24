@@ -125,6 +125,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                           );
                         },
                       ),
+                      const SizedBox(height: 60),
                       const Divider(
                         color: AppColors.greyColor,
                         thickness: 1,
@@ -143,7 +144,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                         aboutBoxChildren: const [],
                         child: const Text(
                           'О приложении',
-                          style: TextStyle(fontSize: 18),
+                          style: TextStyle(fontSize: 15),
                         ),
                       ),
                       ListTile(
@@ -153,7 +154,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                         ),
                         title: Text(
                           themeNotifier.isDark ? 'Тёмная тема' : 'Светлая тема',
-                          style: const TextStyle(fontSize: 18),
+                          style: const TextStyle(fontSize: 15),
                         ),
                         onTap: () => themeNotifier.isDark
                             ? themeNotifier.isDark = false

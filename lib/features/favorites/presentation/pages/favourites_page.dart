@@ -14,78 +14,85 @@ class FavouritesPage extends StatefulWidget {
 }
 
 class _FavouritesPageState extends State<FavouritesPage> {
-  List<FavoritesBookEntity> favouritesBooks = [];
+  late List<FavoritesBookEntity> favouritesBooks;
+
+  @override
+  void initState() {
+    super.initState();
+    context.read<FavouritesBloc>().add(ShowFavouritesEvent());
+    favouritesBooks = [];
+  }
+
   @override
   Widget build(BuildContext context) {
-    context.read<FavouritesBloc>().add(ShowFavouritesEvent());
-    return BlocBuilder<FavouritesBloc, FavouritesState>(
-      builder: (context, state) {
-        if (state is ShowFavouritesState) {
-          favouritesBooks = state.books;
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus!.unfocus(),
+      child: BlocBuilder<FavouritesBloc, FavouritesState>(
+        builder: (context, state) {
+          if (state is ShowFavouritesState) {
+            favouritesBooks = state.books;
 
-          if (favouritesBooks.isEmpty) {
-            return showErrorText('Список избранных книг пуст');
+            if (favouritesBooks.isEmpty) {
+              return showErrorText('Список избранных книг пуст');
+            }
           }
-        }
-        return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          child: CustomScrollView(slivers: [
-            const SliverToBoxAdapter(
-              child: Center(
-                child: Padding(
-                  padding: EdgeInsets.only(top: 8.0),
-                  child: Text(
-                    'Избранное',
-                    style: TextStyle(
-                        color: AppColors.greyColor2,
-                        fontSize: 23,
-                        fontWeight: FontWeight.w700),
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: CustomScrollView(slivers: [
+              const SliverToBoxAdapter(
+                child: Center(
+                  child: Padding(
+                    padding: EdgeInsets.only(top: 8.0),
+                    child: Text(
+                      'Избранное',
+                      style: TextStyle(
+                          color: AppColors.greyColor2, fontSize: 23, fontWeight: FontWeight.w700),
+                    ),
                   ),
                 ),
               ),
-            ),
-            SliverPadding(
-              padding: const EdgeInsets.symmetric(vertical: 8),
-              sliver: SliverList(
-                delegate: SliverChildBuilderDelegate(
-                  (context, index) {
-                    return Dismissible(
-                      background: Container(
-                        margin: const EdgeInsets.symmetric(vertical: 2),
-                        padding: const EdgeInsets.symmetric(vertical: 4),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          color: AppColors.primaryColorLight,
+              SliverPadding(
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                sliver: SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                    (context, index) {
+                      return Dismissible(
+                        background: Container(
+                          margin: const EdgeInsets.symmetric(vertical: 2),
+                          padding: const EdgeInsets.symmetric(vertical: 4),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            color: Theme.of(context).primaryColor,
+                          ),
+                          child: const Icon(
+                            Icons.delete,
+                            color: Colors.white,
+                          ),
                         ),
-                        child: const Icon(
-                          Icons.delete,
-                          color: Colors.white,
+                        key:
+                            UniqueKey() /* ValueKey<FavouritesBookModel>(
+                            favouritesBooks[index]) */
+                        ,
+                        onDismissed: (DismissDirection direction) {
+                          setState(() {
+                            context.read<FavouritesBloc>().add(RemoveFromFavouritesEvent(
+                                book: favouritesBooks[index], index: index));
+                          });
+                        },
+                        child: FavouritesBookCard(
+                          book: favouritesBooks[index],
+                          index: index,
                         ),
-                      ),
-                      key:
-                          UniqueKey() /* ValueKey<FavouritesBookModel>(
-                          favouritesBooks[index]) */
-                      ,
-                      onDismissed: (DismissDirection direction) {
-                        setState(() {
-                          context.read<FavouritesBloc>().add(
-                              RemoveFromFavouritesEvent(
-                                  book: favouritesBooks[index], index: index));
-                        });
-                      },
-                      child: FavouritesBookCard(
-                        book: favouritesBooks[index],
-                        index: index,
-                      ),
-                    );
-                  },
-                  childCount: favouritesBooks.length,
+                      );
+                    },
+                    childCount: favouritesBooks.length,
+                  ),
                 ),
               ),
-            ),
-          ]),
-        );
-      },
+            ]),
+          );
+        },
+      ),
     );
   }
 }

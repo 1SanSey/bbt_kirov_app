@@ -30,7 +30,8 @@ class OrderDetailPage extends StatelessWidget {
               ListTile(
                   title: Text(
                 'Дата заказа: ${getDMYDate(order.dateOrder)}${getHmDate(order.dateOrder)}',
-                style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 22),
+                style: const TextStyle(
+                    fontWeight: FontWeight.w400, fontSize: 22, color: AppColors.greyColor2),
               )),
               const SizedBox(
                 height: 5,
@@ -38,7 +39,8 @@ class OrderDetailPage extends StatelessWidget {
               ListTile(
                   title: Text(
                 'Сумма заказа: ${order.sumOrder} руб.',
-                style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 22),
+                style: const TextStyle(
+                    fontWeight: FontWeight.w400, fontSize: 22, color: AppColors.greyColor2),
               )),
               const SizedBox(
                 height: 5,
@@ -46,9 +48,10 @@ class OrderDetailPage extends StatelessWidget {
               const ListTile(
                   title: Text(
                 'Состав заказа:',
-                style: TextStyle(fontWeight: FontWeight.w400, fontSize: 22),
+                style: TextStyle(
+                    fontWeight: FontWeight.w400, fontSize: 22, color: AppColors.greyColor2),
               )),
-              ...getBooksOrder(),
+              ...getBooksOrder(context),
             ],
           ),
         ),
@@ -56,14 +59,19 @@ class OrderDetailPage extends StatelessWidget {
     });
   }
 
-  List<Widget> getBooksOrder() {
+  List<Widget> getBooksOrder(BuildContext context) {
     List<Widget> listBooks = [];
     for (var item in order.books.entries) {
-      listBooks.add(const Divider(
-        color: AppColors.greyColor,
-        thickness: 2,
+      listBooks.add(Divider(
+        color: Theme.of(context).primaryColorDark,
+        thickness: 1,
       ));
-      listBooks.add(ListTile(title: Text(item.key), trailing: Text(item.value.toString())));
+      listBooks.add(ListTile(
+          title: Text(
+            item.key,
+            style: const TextStyle(color: AppColors.greyColor2),
+          ),
+          trailing: Text(item.value.toString())));
     }
     return listBooks;
   }

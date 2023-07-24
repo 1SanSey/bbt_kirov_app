@@ -50,7 +50,7 @@ class BookCard extends StatelessWidget {
                       child: Text(
                         book.name,
                         textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.bodyLarge,
+                        style: Theme.of(context).textTheme.bodyMedium,
                       ),
                     ),
                   ),
@@ -59,6 +59,14 @@ class BookCard extends StatelessWidget {
             ),
             Expanded(
               child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: <Widget>[
+                Text(
+                  '${book.price} ₽',
+                  style: TextStyle(
+                    color: Theme.of(context).primaryColor,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
                 IconButton(
                     onPressed: () {
                       CartBookModel hiveBook = CartBookModel(
@@ -71,14 +79,7 @@ class BookCard extends StatelessWidget {
                       color: Theme.of(context).primaryColor,
                       size: 30,
                     )),
-                Text(
-                  '${book.price} ₽',
-                  style: TextStyle(
-                    color: Theme.of(context).primaryColor,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+
                 /* BlocListener<CartBloc, CartState>(
                       listener: ((context, state) {
                         if (state is AddToCartState) {

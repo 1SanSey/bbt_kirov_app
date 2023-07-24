@@ -9,24 +9,25 @@ class MainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const CustomScrollView(slivers: [
-      CarouselSliderHome(),
-      TopHomeWidget(),
-      SliverPadding(
-        padding: EdgeInsets.only(top: 16, bottom: 8, right: 8, left: 8),
-        sliver: SliverToBoxAdapter(
-          child: Center(
-            child: Text(
-              'Популярные книги',
-              style: TextStyle(
-                  color: AppColors.greyColor2,
-                  fontSize: 23,
-                  fontWeight: FontWeight.w700),
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus!.unfocus(),
+      child: const CustomScrollView(slivers: [
+        CarouselSliderHome(),
+        TopHomeWidget(),
+        SliverPadding(
+          padding: EdgeInsets.only(top: 16, bottom: 8, right: 8, left: 8),
+          sliver: SliverToBoxAdapter(
+            child: Center(
+              child: Text(
+                'Популярные книги',
+                style: TextStyle(
+                    color: AppColors.greyColor2, fontSize: 23, fontWeight: FontWeight.w700),
+              ),
             ),
           ),
         ),
-      ),
-      BooksListHome(),
-    ]);
+        BooksListHome(),
+      ]),
+    );
   }
 }
