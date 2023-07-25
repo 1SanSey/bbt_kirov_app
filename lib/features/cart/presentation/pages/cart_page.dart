@@ -48,18 +48,6 @@ class _CartPageState extends State<CartPage> {
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: CustomScrollView(slivers: [
-              const SliverToBoxAdapter(
-                child: Center(
-                  child: Padding(
-                    padding: EdgeInsets.only(top: 16.0),
-                    child: Text(
-                      'Корзина',
-                      style: TextStyle(
-                          color: AppColors.greyColor2, fontSize: 23, fontWeight: FontWeight.w700),
-                    ),
-                  ),
-                ),
-              ),
               SliverPadding(
                 padding: const EdgeInsets.symmetric(vertical: 8),
                 sliver: SliverList(

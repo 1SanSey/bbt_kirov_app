@@ -13,7 +13,25 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
+  late final TabController tabController;
+  late final List<String> titles;
+  late String titleHandler;
+  @override
+  void initState() {
+    super.initState();
+    tabController = TabController(length: 3, vsync: this);
+    titles = ['BBT Kirov App', 'Избранное', 'Корзина'];
+    titleHandler = titles[0];
+    tabController.addListener(changeTitle);
+  }
+
+  void changeTitle() {
+    setState(() {
+      titleHandler = titles[tabController.index];
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Consumer<ThemeModel>(builder: (context, ThemeModel themeNotifier, child) {
@@ -23,11 +41,12 @@ class _HomePageState extends State<HomePage> {
           onTap: () => FocusManager.instance.primaryFocus!.unfocus(),
           child: Scaffold(
             appBar: AppBar(
-              title: const Text('BBT Kirov App'),
+              title: Text(titleHandler),
               centerTitle: true,
             ),
-            body: const TabBarView(
-              children: <Widget>[
+            body: TabBarView(
+              controller: tabController,
+              children: const <Widget>[
                 MainScreen(),
                 FavouritesPage(),
                 CartPage(),
@@ -38,6 +57,7 @@ class _HomePageState extends State<HomePage> {
               child: Material(
                 color: Theme.of(context).primaryColor,
                 child: TabBar(
+                  controller: tabController,
                   labelColor: Colors.white,
                   unselectedLabelColor: Theme.of(context).primaryColorLight,
                   automaticIndicatorColorAdjustment: false,

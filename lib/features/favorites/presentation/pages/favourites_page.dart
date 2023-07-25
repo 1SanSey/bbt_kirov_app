@@ -1,5 +1,4 @@
 import 'package:bbt_kirov_app/common/error_text.dart';
-import 'package:bbt_kirov_app/core/themes/app_colors.dart';
 import 'package:bbt_kirov_app/features/favorites/domain/entities/favorites_book_entity.dart';
 import 'package:bbt_kirov_app/features/favorites/presentation/bloc/favourites_bloc.dart';
 import 'package:bbt_kirov_app/features/favorites/presentation/widgets/favourites_book_card.dart';
@@ -39,18 +38,6 @@ class _FavouritesPageState extends State<FavouritesPage> {
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: CustomScrollView(slivers: [
-              const SliverToBoxAdapter(
-                child: Center(
-                  child: Padding(
-                    padding: EdgeInsets.only(top: 8.0),
-                    child: Text(
-                      'Избранное',
-                      style: TextStyle(
-                          color: AppColors.greyColor2, fontSize: 23, fontWeight: FontWeight.w700),
-                    ),
-                  ),
-                ),
-              ),
               SliverPadding(
                 padding: const EdgeInsets.symmetric(vertical: 8),
                 sliver: SliverList(
