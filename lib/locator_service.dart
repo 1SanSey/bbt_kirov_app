@@ -1,5 +1,6 @@
 import 'package:bbt_kirov_app/core/platform/network_info.dart';
 import 'package:bbt_kirov_app/core/datasources/book_hive_datasource.dart';
+import 'package:bbt_kirov_app/core/themes/change_theme_bloc.dart';
 import 'package:bbt_kirov_app/features/authentication/data/repositories/auth_repository_impl.dart';
 import 'package:bbt_kirov_app/features/authentication/domain/repositories/auth_repository.dart';
 import 'package:bbt_kirov_app/features/authentication/presentation/reg_bloc/registration_bloc.dart';
@@ -48,6 +49,7 @@ init() async {
   sl.registerFactory(() => FavouritesBloc(favourites: sl()));
   sl.registerFactory(() => AuthBLoC(repository: sl()));
   sl.registerFactory(() => RegistrationBloc(sl()));
+  sl.registerFactory(() => ChangeThemeBloc());
   sl.registerFactory(() => OrdersBloc(ordersUseCase: sl()));
 
 //UseCases

@@ -1,12 +1,12 @@
 import 'package:bbt_kirov_app/core/assets/app_const.dart';
 import 'package:bbt_kirov_app/core/themes/app_colors.dart';
-import 'package:bbt_kirov_app/core/themes/theme_model.dart';
+import 'package:bbt_kirov_app/core/themes/change_theme_bloc.dart';
 import 'package:bbt_kirov_app/features/authentication/presentation/auth_bloc/auth_bloc.dart';
 import 'package:bbt_kirov_app/features/authentication/presentation/pages/auth_page.dart';
 import 'package:bbt_kirov_app/features/home/presentation/pages/home_screen.dart';
 import 'package:bbt_kirov_app/features/orders/presentation/pages/orders_page.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DrawerWidget extends StatefulWidget {
@@ -34,8 +34,8 @@ class _DrawerWidgetState extends State<DrawerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<ThemeModel>(
-      builder: (context, ThemeModel themeNotifier, child) {
+    return BlocBuilder<ChangeThemeBloc, ThemeState>(
+      builder: (context, state) {
         return Drawer(
           backgroundColor: Theme.of(context).primaryColor,
           width: MediaQuery.of(context).size.width * 0.80,
@@ -148,18 +148,16 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                         ),
                       ),
                       ListTile(
-                        leading: Icon(
-                          themeNotifier.isDark ? Icons.nightlight_round : Icons.wb_sunny,
-                          color: Theme.of(context).primaryColor,
-                        ),
-                        title: Text(
-                          themeNotifier.isDark ? 'Тёмная тема' : 'Светлая тема',
-                          style: const TextStyle(fontSize: 15),
-                        ),
-                        onTap: () => themeNotifier.isDark
-                            ? themeNotifier.isDark = false
-                            : themeNotifier.isDark = true,
-                      ),
+                          leading: Icon(
+                            state.isDark ? Icons.nightlight_round : Icons.wb_sunny,
+                            color: Theme.of(context).primaryColor,
+                          ),
+                          title: Text(
+                            state.isDark ? 'Тёмная тема' : 'Светлая тема',
+                            style: const TextStyle(fontSize: 15),
+                          ),
+                          onTap: () =>
+                              context.read<ChangeThemeBloc>().add(const ThemeEvent.change())),
                     ],
                   ),
                 ),

@@ -1,7 +1,5 @@
-import 'package:bbt_kirov_app/core/themes/theme_model.dart';
 import 'package:bbt_kirov_app/features/category/presentation/widgets/book_list_category_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class CategoryPage extends StatelessWidget {
   final int idCategory;
@@ -89,21 +87,19 @@ class CategoryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<ThemeModel>(builder: (context, ThemeModel themeNotifier, child) {
-      return Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-              onPressed: () {
-                Navigator.maybePop(context);
-              },
-              icon: const Icon(Icons.arrow_back)),
-          title: Text(nameCategory),
-          centerTitle: true,
-        ),
-        body: BooksCategoryWidget(
-          query: query,
-        ),
-      );
-    });
+    return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+            onPressed: () {
+              Navigator.maybePop(context);
+            },
+            icon: const Icon(Icons.arrow_back)),
+        title: Text(nameCategory),
+        centerTitle: true,
+      ),
+      body: BooksCategoryWidget(
+        query: query,
+      ),
+    );
   }
 }
