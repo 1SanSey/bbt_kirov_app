@@ -1,5 +1,6 @@
 import 'package:bbt_kirov_app/core/themes/app_colors.dart';
 import 'package:bbt_kirov_app/features/orders/domain/entities/order_entity.dart';
+import 'package:bbt_kirov_app/navigation/navigation_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -12,10 +13,7 @@ class OrderDetailPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-            onPressed: () {
-              Navigator.maybePop(context);
-            },
-            icon: const Icon(Icons.arrow_back)),
+            onPressed: () => NavigationManager.instance.pop(), icon: const Icon(Icons.arrow_back)),
         title: const Text('Состав заказа'),
         centerTitle: true,
       ),

@@ -1,8 +1,8 @@
 import 'package:bbt_kirov_app/core/themes/app_colors.dart';
 import 'package:bbt_kirov_app/core/entities/book_entity.dart';
-import 'package:bbt_kirov_app/core/widgets/book_detail_widget.dart';
 import 'package:bbt_kirov_app/features/cart/data/models/cart_book_model.dart';
 import 'package:bbt_kirov_app/features/cart/presentation/bloc/cart_bloc.dart';
+import 'package:bbt_kirov_app/navigation/navigation_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -29,14 +29,7 @@ class BookCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => BookDetailPage(book: book),
-                  ),
-                );
-              },
+              onTap: () => NavigationManager.instance.goBookDetailPage(book),
               child: Column(
                 children: [
                   Image.network(

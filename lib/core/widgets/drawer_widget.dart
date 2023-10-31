@@ -2,9 +2,7 @@ import 'package:bbt_kirov_app/core/assets/app_const.dart';
 import 'package:bbt_kirov_app/core/themes/app_colors.dart';
 import 'package:bbt_kirov_app/core/themes/change_theme_bloc.dart';
 import 'package:bbt_kirov_app/features/authentication/presentation/auth_bloc/auth_bloc.dart';
-import 'package:bbt_kirov_app/features/authentication/presentation/pages/auth_page.dart';
-import 'package:bbt_kirov_app/features/home/presentation/pages/home_screen.dart';
-import 'package:bbt_kirov_app/features/orders/presentation/pages/orders_page.dart';
+import 'package:bbt_kirov_app/navigation/navigation_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -78,14 +76,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                           'Главная',
                           style: TextStyle(fontSize: 18),
                         ),
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const HomePage(),
-                            ),
-                          );
-                        },
+                        onTap: () => NavigationManager.instance.goHomePage(),
                       ),
                       ListTile(
                         leading: Icon(
@@ -96,14 +87,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                           'Мои заказы',
                           style: TextStyle(fontSize: 18),
                         ),
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const OrdersPage(),
-                            ),
-                          );
-                        },
+                        onTap: () => NavigationManager.instance.goOrdersPage(),
                       ),
                       ListTile(
                         leading: Icon(
@@ -117,12 +101,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                         onTap: () {
                           context.read<AuthBLoC>().add(const AuthEvent.logOut());
                           _setUserPrefs(false, '', '', '');
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const AuthPage(),
-                            ),
-                          );
+                          NavigationManager.instance.popToAuthPage();
                         },
                       ),
                       const SizedBox(height: 60),

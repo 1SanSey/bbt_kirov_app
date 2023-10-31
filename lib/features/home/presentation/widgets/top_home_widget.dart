@@ -1,5 +1,5 @@
 import 'package:bbt_kirov_app/core/assets/app_const.dart';
-import 'package:bbt_kirov_app/features/category/presentation/pages/category_screen.dart';
+import 'package:bbt_kirov_app/navigation/navigation_manager.dart';
 import 'package:flutter/material.dart';
 
 class TopHomeWidget extends StatelessWidget {
@@ -21,14 +21,7 @@ class TopHomeWidget extends StatelessWidget {
                   ),
                 ),
               ),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => CategoryPage(idCategory: index),
-                  ),
-                );
-              },
+              onPressed: () => NavigationManager.instance.goCategoryPage(index),
               child: Center(
                 child: Text(
                   AppConstants.category[index].toString(),

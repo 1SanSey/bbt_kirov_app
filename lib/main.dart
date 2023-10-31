@@ -5,15 +5,15 @@ import 'package:bbt_kirov_app/core/themes/change_theme_bloc.dart';
 import 'package:bbt_kirov_app/core/themes/themes.dart';
 import 'package:bbt_kirov_app/core/datasources/remote_data_source.dart';
 import 'package:bbt_kirov_app/core/datasources/book_hive_datasource.dart';
-import 'package:bbt_kirov_app/features/authentication/presentation/pages/auth_page.dart';
 import 'package:bbt_kirov_app/features/authentication/presentation/reg_bloc/registration_bloc.dart';
 import 'package:bbt_kirov_app/features/cart/presentation/bloc/cart_bloc.dart';
 import 'package:bbt_kirov_app/features/category/presentation/bloc/category_bloc.dart';
 import 'package:bbt_kirov_app/features/favorites/presentation/bloc/favourites_bloc.dart';
 import 'package:bbt_kirov_app/features/home/presentation/bloc/home_bloc.dart';
-import 'package:bbt_kirov_app/features/home/presentation/pages/home_screen.dart';
 import 'package:bbt_kirov_app/features/orders/presentation/bloc/orders_bloc.dart';
 import 'package:bbt_kirov_app/locator_service.dart' as di;
+import 'package:bbt_kirov_app/navigation/navigation_manager.dart';
+import 'package:bbt_kirov_app/navigation/route_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
@@ -74,7 +74,11 @@ class _MyAppState extends State<MyApp> {
             title: 'BBT Kirov App',
             theme: state.isDark ? darkTheme() : lightTheme(),
             debugShowCheckedModeBanner: false,
-            home: _userLoggedIn ? const HomePage() : const AuthPage(),
+            navigatorKey: NavigationManager.instance.key,
+            routes: RouteBuilder.routes,
+            initialRoute: RouteBuilder.initialRoute,
+            onGenerateRoute: RouteBuilder.onGenerateRoute,
+           // home: _userLoggedIn ? const HomePage() : const AuthPage(),
           );
         },
       ),

@@ -1,6 +1,7 @@
 import 'package:bbt_kirov_app/core/assets/app_const.dart';
 import 'package:bbt_kirov_app/core/themes/app_colors.dart';
 import 'package:bbt_kirov_app/features/authentication/presentation/reg_bloc/registration_bloc.dart';
+import 'package:bbt_kirov_app/navigation/navigation_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -41,9 +42,7 @@ class RegistrationPageState extends State<RegistrationPage> {
                               "OK",
                               style: TextStyle(color: AppColors.primaryColorLight),
                             ),
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
+                            onPressed: () => NavigationManager.instance.pop(),
                           ),
                         ],
                       );
@@ -64,7 +63,7 @@ class RegistrationPageState extends State<RegistrationPage> {
                               style: TextStyle(color: AppColors.primaryColorLight),
                             ),
                             onPressed: () {
-                              Navigator.of(context)
+                              NavigationManager.instance
                                 ..pop()
                                 ..pop();
                             },

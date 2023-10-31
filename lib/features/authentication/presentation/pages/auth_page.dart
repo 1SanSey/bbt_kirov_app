@@ -1,8 +1,7 @@
 import 'package:bbt_kirov_app/core/assets/app_const.dart';
 import 'package:bbt_kirov_app/core/themes/app_colors.dart';
 import 'package:bbt_kirov_app/features/authentication/presentation/auth_bloc/auth_bloc.dart';
-import 'package:bbt_kirov_app/features/authentication/presentation/pages/registration_page.dart';
-import 'package:bbt_kirov_app/features/home/presentation/pages/home_screen.dart';
+import 'package:bbt_kirov_app/navigation/navigation_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -59,9 +58,7 @@ class AuthPageState extends State<AuthPage> {
                               "OK",
                               style: TextStyle(color: AppColors.primaryColorLight),
                             ),
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
+                            onPressed: () => NavigationManager.instance.pop(),
                           ),
                         ],
                       );
@@ -74,8 +71,7 @@ class AuthPageState extends State<AuthPage> {
                       username: state.user.displayName!,
                       email: state.user.email!,
                       photo: state.user.photoURL!);
-                  Navigator.pushReplacement(
-                      context, MaterialPageRoute(builder: (context) => const HomePage()));
+                  NavigationManager.instance.goHomePage();
                 },
               );
             },
@@ -184,10 +180,7 @@ class AuthPageState extends State<AuthPage> {
                     ),
                     const SizedBox(height: 20),
                     OutlinedButton(
-                      onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => const RegistrationPage()));
-                      },
+                      onPressed: () => NavigationManager.instance.goRegistrationPage(),
                       style: OutlinedButton.styleFrom(
                           fixedSize: const Size(320, 50),
                           side: BorderSide(

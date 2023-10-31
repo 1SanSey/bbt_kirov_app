@@ -1,4 +1,5 @@
 import 'package:bbt_kirov_app/features/category/presentation/widgets/book_list_category_widget.dart';
+import 'package:bbt_kirov_app/navigation/navigation_manager.dart';
 import 'package:flutter/material.dart';
 
 class CategoryPage extends StatelessWidget {
@@ -90,10 +91,7 @@ class CategoryPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-            onPressed: () {
-              Navigator.maybePop(context);
-            },
-            icon: const Icon(Icons.arrow_back)),
+            onPressed: () => NavigationManager.instance.pop(), icon: const Icon(Icons.arrow_back)),
         title: Text(nameCategory),
         centerTitle: true,
       ),
