@@ -6,18 +6,20 @@ part of 'change_theme_bloc.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Light _$$_LightFromJson(Map<String, dynamic> json) => _$_Light(
+_$LightImpl _$$LightImplFromJson(Map<String, dynamic> json) => _$LightImpl(
       $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$$_LightToJson(_$_Light instance) => <String, dynamic>{
+Map<String, dynamic> _$$LightImplToJson(_$LightImpl instance) =>
+    <String, dynamic>{
       'runtimeType': instance.$type,
     };
 
-_$_Dark _$$_DarkFromJson(Map<String, dynamic> json) => _$_Dark(
+_$DarkImpl _$$DarkImplFromJson(Map<String, dynamic> json) => _$DarkImpl(
       $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$$_DarkToJson(_$_Dark instance) => <String, dynamic>{
+Map<String, dynamic> _$$DarkImplToJson(_$DarkImpl instance) =>
+    <String, dynamic>{
       'runtimeType': instance.$type,
     };

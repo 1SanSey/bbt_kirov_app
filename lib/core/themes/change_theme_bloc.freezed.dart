@@ -69,23 +69,25 @@ class _$ThemeEventCopyWithImpl<$Res, $Val extends ThemeEvent>
 }
 
 /// @nodoc
-abstract class _$$_ChangeCopyWith<$Res> {
-  factory _$$_ChangeCopyWith(_$_Change value, $Res Function(_$_Change) then) =
-      __$$_ChangeCopyWithImpl<$Res>;
+abstract class _$$ChangeImplCopyWith<$Res> {
+  factory _$$ChangeImplCopyWith(
+          _$ChangeImpl value, $Res Function(_$ChangeImpl) then) =
+      __$$ChangeImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_ChangeCopyWithImpl<$Res>
-    extends _$ThemeEventCopyWithImpl<$Res, _$_Change>
-    implements _$$_ChangeCopyWith<$Res> {
-  __$$_ChangeCopyWithImpl(_$_Change _value, $Res Function(_$_Change) _then)
+class __$$ChangeImplCopyWithImpl<$Res>
+    extends _$ThemeEventCopyWithImpl<$Res, _$ChangeImpl>
+    implements _$$ChangeImplCopyWith<$Res> {
+  __$$ChangeImplCopyWithImpl(
+      _$ChangeImpl _value, $Res Function(_$ChangeImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Change extends _Change {
-  const _$_Change() : super._();
+class _$ChangeImpl extends _Change {
+  const _$ChangeImpl() : super._();
 
   @override
   String toString() {
@@ -95,7 +97,7 @@ class _$_Change extends _Change {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Change);
+        (other.runtimeType == runtimeType && other is _$ChangeImpl);
   }
 
   @override
@@ -159,7 +161,7 @@ class _$_Change extends _Change {
 }
 
 abstract class _Change extends ThemeEvent {
-  const factory _Change() = _$_Change;
+  const factory _Change() = _$ChangeImpl;
   const _Change._() : super._();
 }
 
@@ -238,28 +240,30 @@ class _$ThemeStateCopyWithImpl<$Res, $Val extends ThemeState>
 }
 
 /// @nodoc
-abstract class _$$_LightCopyWith<$Res> {
-  factory _$$_LightCopyWith(_$_Light value, $Res Function(_$_Light) then) =
-      __$$_LightCopyWithImpl<$Res>;
+abstract class _$$LightImplCopyWith<$Res> {
+  factory _$$LightImplCopyWith(
+          _$LightImpl value, $Res Function(_$LightImpl) then) =
+      __$$LightImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_LightCopyWithImpl<$Res>
-    extends _$ThemeStateCopyWithImpl<$Res, _$_Light>
-    implements _$$_LightCopyWith<$Res> {
-  __$$_LightCopyWithImpl(_$_Light _value, $Res Function(_$_Light) _then)
+class __$$LightImplCopyWithImpl<$Res>
+    extends _$ThemeStateCopyWithImpl<$Res, _$LightImpl>
+    implements _$$LightImplCopyWith<$Res> {
+  __$$LightImplCopyWithImpl(
+      _$LightImpl _value, $Res Function(_$LightImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_Light extends _Light {
-  const _$_Light({final String? $type})
+class _$LightImpl extends _Light {
+  const _$LightImpl({final String? $type})
       : $type = $type ?? 'light',
         super._();
 
-  factory _$_Light.fromJson(Map<String, dynamic> json) =>
-      _$$_LightFromJson(json);
+  factory _$LightImpl.fromJson(Map<String, dynamic> json) =>
+      _$$LightImplFromJson(json);
 
   @JsonKey(name: 'runtimeType')
   final String $type;
@@ -272,7 +276,7 @@ class _$_Light extends _Light {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Light);
+        (other.runtimeType == runtimeType && other is _$LightImpl);
   }
 
   @JsonKey(ignore: true)
@@ -343,41 +347,43 @@ class _$_Light extends _Light {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_LightToJson(
+    return _$$LightImplToJson(
       this,
     );
   }
 }
 
 abstract class _Light extends ThemeState {
-  const factory _Light() = _$_Light;
+  const factory _Light() = _$LightImpl;
   const _Light._() : super._();
 
-  factory _Light.fromJson(Map<String, dynamic> json) = _$_Light.fromJson;
+  factory _Light.fromJson(Map<String, dynamic> json) = _$LightImpl.fromJson;
 }
 
 /// @nodoc
-abstract class _$$_DarkCopyWith<$Res> {
-  factory _$$_DarkCopyWith(_$_Dark value, $Res Function(_$_Dark) then) =
-      __$$_DarkCopyWithImpl<$Res>;
+abstract class _$$DarkImplCopyWith<$Res> {
+  factory _$$DarkImplCopyWith(
+          _$DarkImpl value, $Res Function(_$DarkImpl) then) =
+      __$$DarkImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_DarkCopyWithImpl<$Res>
-    extends _$ThemeStateCopyWithImpl<$Res, _$_Dark>
-    implements _$$_DarkCopyWith<$Res> {
-  __$$_DarkCopyWithImpl(_$_Dark _value, $Res Function(_$_Dark) _then)
+class __$$DarkImplCopyWithImpl<$Res>
+    extends _$ThemeStateCopyWithImpl<$Res, _$DarkImpl>
+    implements _$$DarkImplCopyWith<$Res> {
+  __$$DarkImplCopyWithImpl(_$DarkImpl _value, $Res Function(_$DarkImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_Dark extends _Dark {
-  const _$_Dark({final String? $type})
+class _$DarkImpl extends _Dark {
+  const _$DarkImpl({final String? $type})
       : $type = $type ?? 'dark',
         super._();
 
-  factory _$_Dark.fromJson(Map<String, dynamic> json) => _$$_DarkFromJson(json);
+  factory _$DarkImpl.fromJson(Map<String, dynamic> json) =>
+      _$$DarkImplFromJson(json);
 
   @JsonKey(name: 'runtimeType')
   final String $type;
@@ -390,7 +396,7 @@ class _$_Dark extends _Dark {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Dark);
+        (other.runtimeType == runtimeType && other is _$DarkImpl);
   }
 
   @JsonKey(ignore: true)
@@ -461,15 +467,15 @@ class _$_Dark extends _Dark {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_DarkToJson(
+    return _$$DarkImplToJson(
       this,
     );
   }
 }
 
 abstract class _Dark extends ThemeState {
-  const factory _Dark() = _$_Dark;
+  const factory _Dark() = _$DarkImpl;
   const _Dark._() : super._();
 
-  factory _Dark.fromJson(Map<String, dynamic> json) = _$_Dark.fromJson;
+  factory _Dark.fromJson(Map<String, dynamic> json) = _$DarkImpl.fromJson;
 }

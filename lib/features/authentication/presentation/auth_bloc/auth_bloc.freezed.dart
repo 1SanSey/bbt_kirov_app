@@ -74,20 +74,20 @@ class _$AuthEventCopyWithImpl<$Res, $Val extends AuthEvent>
 }
 
 /// @nodoc
-abstract class _$$_LogInAuthEventCopyWith<$Res> {
-  factory _$$_LogInAuthEventCopyWith(
-          _$_LogInAuthEvent value, $Res Function(_$_LogInAuthEvent) then) =
-      __$$_LogInAuthEventCopyWithImpl<$Res>;
+abstract class _$$LogInAuthEventImplCopyWith<$Res> {
+  factory _$$LogInAuthEventImplCopyWith(_$LogInAuthEventImpl value,
+          $Res Function(_$LogInAuthEventImpl) then) =
+      __$$LogInAuthEventImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String login, String password});
 }
 
 /// @nodoc
-class __$$_LogInAuthEventCopyWithImpl<$Res>
-    extends _$AuthEventCopyWithImpl<$Res, _$_LogInAuthEvent>
-    implements _$$_LogInAuthEventCopyWith<$Res> {
-  __$$_LogInAuthEventCopyWithImpl(
-      _$_LogInAuthEvent _value, $Res Function(_$_LogInAuthEvent) _then)
+class __$$LogInAuthEventImplCopyWithImpl<$Res>
+    extends _$AuthEventCopyWithImpl<$Res, _$LogInAuthEventImpl>
+    implements _$$LogInAuthEventImplCopyWith<$Res> {
+  __$$LogInAuthEventImplCopyWithImpl(
+      _$LogInAuthEventImpl _value, $Res Function(_$LogInAuthEventImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -96,7 +96,7 @@ class __$$_LogInAuthEventCopyWithImpl<$Res>
     Object? login = null,
     Object? password = null,
   }) {
-    return _then(_$_LogInAuthEvent(
+    return _then(_$LogInAuthEventImpl(
       login: null == login
           ? _value.login
           : login // ignore: cast_nullable_to_non_nullable
@@ -111,8 +111,8 @@ class __$$_LogInAuthEventCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_LogInAuthEvent extends _LogInAuthEvent {
-  const _$_LogInAuthEvent({required this.login, required this.password})
+class _$LogInAuthEventImpl extends _LogInAuthEvent {
+  const _$LogInAuthEventImpl({required this.login, required this.password})
       : super._();
 
   @override
@@ -129,7 +129,7 @@ class _$_LogInAuthEvent extends _LogInAuthEvent {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_LogInAuthEvent &&
+            other is _$LogInAuthEventImpl &&
             (identical(other.login, login) || other.login == login) &&
             (identical(other.password, password) ||
                 other.password == password));
@@ -141,8 +141,9 @@ class _$_LogInAuthEvent extends _LogInAuthEvent {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_LogInAuthEventCopyWith<_$_LogInAuthEvent> get copyWith =>
-      __$$_LogInAuthEventCopyWithImpl<_$_LogInAuthEvent>(this, _$identity);
+  _$$LogInAuthEventImplCopyWith<_$LogInAuthEventImpl> get copyWith =>
+      __$$LogInAuthEventImplCopyWithImpl<_$LogInAuthEventImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -210,36 +211,36 @@ class _$_LogInAuthEvent extends _LogInAuthEvent {
 abstract class _LogInAuthEvent extends AuthEvent {
   const factory _LogInAuthEvent(
       {required final String login,
-      required final String password}) = _$_LogInAuthEvent;
+      required final String password}) = _$LogInAuthEventImpl;
   const _LogInAuthEvent._() : super._();
 
   String get login;
   String get password;
   @JsonKey(ignore: true)
-  _$$_LogInAuthEventCopyWith<_$_LogInAuthEvent> get copyWith =>
+  _$$LogInAuthEventImplCopyWith<_$LogInAuthEventImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_LogOutAuthEventCopyWith<$Res> {
-  factory _$$_LogOutAuthEventCopyWith(
-          _$_LogOutAuthEvent value, $Res Function(_$_LogOutAuthEvent) then) =
-      __$$_LogOutAuthEventCopyWithImpl<$Res>;
+abstract class _$$LogOutAuthEventImplCopyWith<$Res> {
+  factory _$$LogOutAuthEventImplCopyWith(_$LogOutAuthEventImpl value,
+          $Res Function(_$LogOutAuthEventImpl) then) =
+      __$$LogOutAuthEventImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_LogOutAuthEventCopyWithImpl<$Res>
-    extends _$AuthEventCopyWithImpl<$Res, _$_LogOutAuthEvent>
-    implements _$$_LogOutAuthEventCopyWith<$Res> {
-  __$$_LogOutAuthEventCopyWithImpl(
-      _$_LogOutAuthEvent _value, $Res Function(_$_LogOutAuthEvent) _then)
+class __$$LogOutAuthEventImplCopyWithImpl<$Res>
+    extends _$AuthEventCopyWithImpl<$Res, _$LogOutAuthEventImpl>
+    implements _$$LogOutAuthEventImplCopyWith<$Res> {
+  __$$LogOutAuthEventImplCopyWithImpl(
+      _$LogOutAuthEventImpl _value, $Res Function(_$LogOutAuthEventImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_LogOutAuthEvent extends _LogOutAuthEvent {
-  const _$_LogOutAuthEvent() : super._();
+class _$LogOutAuthEventImpl extends _LogOutAuthEvent {
+  const _$LogOutAuthEventImpl() : super._();
 
   @override
   String toString() {
@@ -249,7 +250,7 @@ class _$_LogOutAuthEvent extends _LogOutAuthEvent {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_LogOutAuthEvent);
+        (other.runtimeType == runtimeType && other is _$LogOutAuthEventImpl);
   }
 
   @override
@@ -319,8 +320,27 @@ class _$_LogOutAuthEvent extends _LogOutAuthEvent {
 }
 
 abstract class _LogOutAuthEvent extends AuthEvent {
-  const factory _LogOutAuthEvent() = _$_LogOutAuthEvent;
+  const factory _LogOutAuthEvent() = _$LogOutAuthEventImpl;
   const _LogOutAuthEvent._() : super._();
+}
+
+AuthState _$AuthStateFromJson(Map<String, dynamic> json) {
+  switch (json['runtimeType']) {
+    case 'authenticated':
+      return _AuthenticatedAuthState.fromJson(json);
+    case 'inProcess':
+      return _InProcessAuthState.fromJson(json);
+    case 'notAuthenticated':
+      return _NotAuthenticatedAuthState.fromJson(json);
+    case 'error':
+      return _ErrorAuthState.fromJson(json);
+    case 'successful':
+      return _SuccessfulAuthState.fromJson(json);
+
+    default:
+      throw CheckedFromJsonException(json, 'runtimeType', 'AuthState',
+          'Invalid union type "${json['runtimeType']}"!');
+  }
 }
 
 /// @nodoc
@@ -328,7 +348,7 @@ mixin _$AuthState {
   UserEntity get user => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(AuthenticatedUser user) authenticated,
+    required TResult Function(UserEntity user) authenticated,
     required TResult Function(UserEntity user) inProcess,
     required TResult Function(UserEntity user) notAuthenticated,
     required TResult Function(UserEntity user, String message) error,
@@ -337,7 +357,7 @@ mixin _$AuthState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(AuthenticatedUser user)? authenticated,
+    TResult? Function(UserEntity user)? authenticated,
     TResult? Function(UserEntity user)? inProcess,
     TResult? Function(UserEntity user)? notAuthenticated,
     TResult? Function(UserEntity user, String message)? error,
@@ -346,7 +366,7 @@ mixin _$AuthState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(AuthenticatedUser user)? authenticated,
+    TResult Function(UserEntity user)? authenticated,
     TResult Function(UserEntity user)? inProcess,
     TResult Function(UserEntity user)? notAuthenticated,
     TResult Function(UserEntity user, String message)? error,
@@ -383,12 +403,20 @@ mixin _$AuthState {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $AuthStateCopyWith<AuthState> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $AuthStateCopyWith<$Res> {
   factory $AuthStateCopyWith(AuthState value, $Res Function(AuthState) then) =
       _$AuthStateCopyWithImpl<$Res, AuthState>;
+  @useResult
+  $Res call({UserEntity user});
+
+  $UserEntityCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -400,23 +428,51 @@ class _$AuthStateCopyWithImpl<$Res, $Val extends AuthState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? user = null,
+  }) {
+    return _then(_value.copyWith(
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as UserEntity,
+    ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserEntityCopyWith<$Res> get user {
+    return $UserEntityCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
-abstract class _$$_AuthenticatedAuthStateCopyWith<$Res> {
-  factory _$$_AuthenticatedAuthStateCopyWith(_$_AuthenticatedAuthState value,
-          $Res Function(_$_AuthenticatedAuthState) then) =
-      __$$_AuthenticatedAuthStateCopyWithImpl<$Res>;
+abstract class _$$AuthenticatedAuthStateImplCopyWith<$Res>
+    implements $AuthStateCopyWith<$Res> {
+  factory _$$AuthenticatedAuthStateImplCopyWith(
+          _$AuthenticatedAuthStateImpl value,
+          $Res Function(_$AuthenticatedAuthStateImpl) then) =
+      __$$AuthenticatedAuthStateImplCopyWithImpl<$Res>;
+  @override
   @useResult
-  $Res call({AuthenticatedUser user});
+  $Res call({UserEntity user});
+
+  @override
+  $UserEntityCopyWith<$Res> get user;
 }
 
 /// @nodoc
-class __$$_AuthenticatedAuthStateCopyWithImpl<$Res>
-    extends _$AuthStateCopyWithImpl<$Res, _$_AuthenticatedAuthState>
-    implements _$$_AuthenticatedAuthStateCopyWith<$Res> {
-  __$$_AuthenticatedAuthStateCopyWithImpl(_$_AuthenticatedAuthState _value,
-      $Res Function(_$_AuthenticatedAuthState) _then)
+class __$$AuthenticatedAuthStateImplCopyWithImpl<$Res>
+    extends _$AuthStateCopyWithImpl<$Res, _$AuthenticatedAuthStateImpl>
+    implements _$$AuthenticatedAuthStateImplCopyWith<$Res> {
+  __$$AuthenticatedAuthStateImplCopyWithImpl(
+      _$AuthenticatedAuthStateImpl _value,
+      $Res Function(_$AuthenticatedAuthStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -424,22 +480,30 @@ class __$$_AuthenticatedAuthStateCopyWithImpl<$Res>
   $Res call({
     Object? user = null,
   }) {
-    return _then(_$_AuthenticatedAuthState(
+    return _then(_$AuthenticatedAuthStateImpl(
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as AuthenticatedUser,
+              as UserEntity,
     ));
   }
 }
 
 /// @nodoc
+@JsonSerializable()
+class _$AuthenticatedAuthStateImpl extends _AuthenticatedAuthState {
+  const _$AuthenticatedAuthStateImpl({required this.user, final String? $type})
+      : $type = $type ?? 'authenticated',
+        super._();
 
-class _$_AuthenticatedAuthState extends _AuthenticatedAuthState {
-  const _$_AuthenticatedAuthState({required this.user}) : super._();
+  factory _$AuthenticatedAuthStateImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AuthenticatedAuthStateImplFromJson(json);
 
   @override
-  final AuthenticatedUser user;
+  final UserEntity user;
+
+  @JsonKey(name: 'runtimeType')
+  final String $type;
 
   @override
   String toString() {
@@ -450,24 +514,25 @@ class _$_AuthenticatedAuthState extends _AuthenticatedAuthState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AuthenticatedAuthState &&
+            other is _$AuthenticatedAuthStateImpl &&
             (identical(other.user, user) || other.user == user));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, user);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AuthenticatedAuthStateCopyWith<_$_AuthenticatedAuthState> get copyWith =>
-      __$$_AuthenticatedAuthStateCopyWithImpl<_$_AuthenticatedAuthState>(
-          this, _$identity);
+  _$$AuthenticatedAuthStateImplCopyWith<_$AuthenticatedAuthStateImpl>
+      get copyWith => __$$AuthenticatedAuthStateImplCopyWithImpl<
+          _$AuthenticatedAuthStateImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(AuthenticatedUser user) authenticated,
+    required TResult Function(UserEntity user) authenticated,
     required TResult Function(UserEntity user) inProcess,
     required TResult Function(UserEntity user) notAuthenticated,
     required TResult Function(UserEntity user, String message) error,
@@ -479,7 +544,7 @@ class _$_AuthenticatedAuthState extends _AuthenticatedAuthState {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(AuthenticatedUser user)? authenticated,
+    TResult? Function(UserEntity user)? authenticated,
     TResult? Function(UserEntity user)? inProcess,
     TResult? Function(UserEntity user)? notAuthenticated,
     TResult? Function(UserEntity user, String message)? error,
@@ -491,7 +556,7 @@ class _$_AuthenticatedAuthState extends _AuthenticatedAuthState {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(AuthenticatedUser user)? authenticated,
+    TResult Function(UserEntity user)? authenticated,
     TResult Function(UserEntity user)? inProcess,
     TResult Function(UserEntity user)? notAuthenticated,
     TResult Function(UserEntity user, String message)? error,
@@ -544,35 +609,51 @@ class _$_AuthenticatedAuthState extends _AuthenticatedAuthState {
     }
     return orElse();
   }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$AuthenticatedAuthStateImplToJson(
+      this,
+    );
+  }
 }
 
 abstract class _AuthenticatedAuthState extends AuthState {
-  const factory _AuthenticatedAuthState(
-      {required final AuthenticatedUser user}) = _$_AuthenticatedAuthState;
+  const factory _AuthenticatedAuthState({required final UserEntity user}) =
+      _$AuthenticatedAuthStateImpl;
   const _AuthenticatedAuthState._() : super._();
 
+  factory _AuthenticatedAuthState.fromJson(Map<String, dynamic> json) =
+      _$AuthenticatedAuthStateImpl.fromJson;
+
   @override
-  AuthenticatedUser get user;
+  UserEntity get user;
+  @override
   @JsonKey(ignore: true)
-  _$$_AuthenticatedAuthStateCopyWith<_$_AuthenticatedAuthState> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$AuthenticatedAuthStateImplCopyWith<_$AuthenticatedAuthStateImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_InProcessAuthStateCopyWith<$Res> {
-  factory _$$_InProcessAuthStateCopyWith(_$_InProcessAuthState value,
-          $Res Function(_$_InProcessAuthState) then) =
-      __$$_InProcessAuthStateCopyWithImpl<$Res>;
+abstract class _$$InProcessAuthStateImplCopyWith<$Res>
+    implements $AuthStateCopyWith<$Res> {
+  factory _$$InProcessAuthStateImplCopyWith(_$InProcessAuthStateImpl value,
+          $Res Function(_$InProcessAuthStateImpl) then) =
+      __$$InProcessAuthStateImplCopyWithImpl<$Res>;
+  @override
   @useResult
   $Res call({UserEntity user});
+
+  @override
+  $UserEntityCopyWith<$Res> get user;
 }
 
 /// @nodoc
-class __$$_InProcessAuthStateCopyWithImpl<$Res>
-    extends _$AuthStateCopyWithImpl<$Res, _$_InProcessAuthState>
-    implements _$$_InProcessAuthStateCopyWith<$Res> {
-  __$$_InProcessAuthStateCopyWithImpl(
-      _$_InProcessAuthState _value, $Res Function(_$_InProcessAuthState) _then)
+class __$$InProcessAuthStateImplCopyWithImpl<$Res>
+    extends _$AuthStateCopyWithImpl<$Res, _$InProcessAuthStateImpl>
+    implements _$$InProcessAuthStateImplCopyWith<$Res> {
+  __$$InProcessAuthStateImplCopyWithImpl(_$InProcessAuthStateImpl _value,
+      $Res Function(_$InProcessAuthStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -580,7 +661,7 @@ class __$$_InProcessAuthStateCopyWithImpl<$Res>
   $Res call({
     Object? user = null,
   }) {
-    return _then(_$_InProcessAuthState(
+    return _then(_$InProcessAuthStateImpl(
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -590,14 +671,20 @@ class __$$_InProcessAuthStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
+@JsonSerializable()
+class _$InProcessAuthStateImpl extends _InProcessAuthState {
+  const _$InProcessAuthStateImpl({required this.user, final String? $type})
+      : $type = $type ?? 'inProcess',
+        super._();
 
-class _$_InProcessAuthState extends _InProcessAuthState {
-  const _$_InProcessAuthState({this.user = const UserEntity.notAuthenticated()})
-      : super._();
+  factory _$InProcessAuthStateImpl.fromJson(Map<String, dynamic> json) =>
+      _$$InProcessAuthStateImplFromJson(json);
 
   @override
-  @JsonKey()
   final UserEntity user;
+
+  @JsonKey(name: 'runtimeType')
+  final String $type;
 
   @override
   String toString() {
@@ -608,24 +695,25 @@ class _$_InProcessAuthState extends _InProcessAuthState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_InProcessAuthState &&
+            other is _$InProcessAuthStateImpl &&
             (identical(other.user, user) || other.user == user));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, user);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_InProcessAuthStateCopyWith<_$_InProcessAuthState> get copyWith =>
-      __$$_InProcessAuthStateCopyWithImpl<_$_InProcessAuthState>(
+  _$$InProcessAuthStateImplCopyWith<_$InProcessAuthStateImpl> get copyWith =>
+      __$$InProcessAuthStateImplCopyWithImpl<_$InProcessAuthStateImpl>(
           this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(AuthenticatedUser user) authenticated,
+    required TResult Function(UserEntity user) authenticated,
     required TResult Function(UserEntity user) inProcess,
     required TResult Function(UserEntity user) notAuthenticated,
     required TResult Function(UserEntity user, String message) error,
@@ -637,7 +725,7 @@ class _$_InProcessAuthState extends _InProcessAuthState {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(AuthenticatedUser user)? authenticated,
+    TResult? Function(UserEntity user)? authenticated,
     TResult? Function(UserEntity user)? inProcess,
     TResult? Function(UserEntity user)? notAuthenticated,
     TResult? Function(UserEntity user, String message)? error,
@@ -649,7 +737,7 @@ class _$_InProcessAuthState extends _InProcessAuthState {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(AuthenticatedUser user)? authenticated,
+    TResult Function(UserEntity user)? authenticated,
     TResult Function(UserEntity user)? inProcess,
     TResult Function(UserEntity user)? notAuthenticated,
     TResult Function(UserEntity user, String message)? error,
@@ -702,37 +790,53 @@ class _$_InProcessAuthState extends _InProcessAuthState {
     }
     return orElse();
   }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$InProcessAuthStateImplToJson(
+      this,
+    );
+  }
 }
 
 abstract class _InProcessAuthState extends AuthState {
-  const factory _InProcessAuthState({final UserEntity user}) =
-      _$_InProcessAuthState;
+  const factory _InProcessAuthState({required final UserEntity user}) =
+      _$InProcessAuthStateImpl;
   const _InProcessAuthState._() : super._();
+
+  factory _InProcessAuthState.fromJson(Map<String, dynamic> json) =
+      _$InProcessAuthStateImpl.fromJson;
 
   @override
   UserEntity get user;
+  @override
   @JsonKey(ignore: true)
-  _$$_InProcessAuthStateCopyWith<_$_InProcessAuthState> get copyWith =>
+  _$$InProcessAuthStateImplCopyWith<_$InProcessAuthStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_NotAuthenticatedAuthStateCopyWith<$Res> {
-  factory _$$_NotAuthenticatedAuthStateCopyWith(
-          _$_NotAuthenticatedAuthState value,
-          $Res Function(_$_NotAuthenticatedAuthState) then) =
-      __$$_NotAuthenticatedAuthStateCopyWithImpl<$Res>;
+abstract class _$$NotAuthenticatedAuthStateImplCopyWith<$Res>
+    implements $AuthStateCopyWith<$Res> {
+  factory _$$NotAuthenticatedAuthStateImplCopyWith(
+          _$NotAuthenticatedAuthStateImpl value,
+          $Res Function(_$NotAuthenticatedAuthStateImpl) then) =
+      __$$NotAuthenticatedAuthStateImplCopyWithImpl<$Res>;
+  @override
   @useResult
   $Res call({UserEntity user});
+
+  @override
+  $UserEntityCopyWith<$Res> get user;
 }
 
 /// @nodoc
-class __$$_NotAuthenticatedAuthStateCopyWithImpl<$Res>
-    extends _$AuthStateCopyWithImpl<$Res, _$_NotAuthenticatedAuthState>
-    implements _$$_NotAuthenticatedAuthStateCopyWith<$Res> {
-  __$$_NotAuthenticatedAuthStateCopyWithImpl(
-      _$_NotAuthenticatedAuthState _value,
-      $Res Function(_$_NotAuthenticatedAuthState) _then)
+class __$$NotAuthenticatedAuthStateImplCopyWithImpl<$Res>
+    extends _$AuthStateCopyWithImpl<$Res, _$NotAuthenticatedAuthStateImpl>
+    implements _$$NotAuthenticatedAuthStateImplCopyWith<$Res> {
+  __$$NotAuthenticatedAuthStateImplCopyWithImpl(
+      _$NotAuthenticatedAuthStateImpl _value,
+      $Res Function(_$NotAuthenticatedAuthStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -740,7 +844,7 @@ class __$$_NotAuthenticatedAuthStateCopyWithImpl<$Res>
   $Res call({
     Object? user = null,
   }) {
-    return _then(_$_NotAuthenticatedAuthState(
+    return _then(_$NotAuthenticatedAuthStateImpl(
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -750,15 +854,21 @@ class __$$_NotAuthenticatedAuthStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
+@JsonSerializable()
+class _$NotAuthenticatedAuthStateImpl extends _NotAuthenticatedAuthState {
+  const _$NotAuthenticatedAuthStateImpl(
+      {required this.user, final String? $type})
+      : $type = $type ?? 'notAuthenticated',
+        super._();
 
-class _$_NotAuthenticatedAuthState extends _NotAuthenticatedAuthState {
-  const _$_NotAuthenticatedAuthState(
-      {this.user = const UserEntity.notAuthenticated()})
-      : super._();
+  factory _$NotAuthenticatedAuthStateImpl.fromJson(Map<String, dynamic> json) =>
+      _$$NotAuthenticatedAuthStateImplFromJson(json);
 
   @override
-  @JsonKey()
   final UserEntity user;
+
+  @JsonKey(name: 'runtimeType')
+  final String $type;
 
   @override
   String toString() {
@@ -769,24 +879,25 @@ class _$_NotAuthenticatedAuthState extends _NotAuthenticatedAuthState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_NotAuthenticatedAuthState &&
+            other is _$NotAuthenticatedAuthStateImpl &&
             (identical(other.user, user) || other.user == user));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, user);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_NotAuthenticatedAuthStateCopyWith<_$_NotAuthenticatedAuthState>
-      get copyWith => __$$_NotAuthenticatedAuthStateCopyWithImpl<
-          _$_NotAuthenticatedAuthState>(this, _$identity);
+  _$$NotAuthenticatedAuthStateImplCopyWith<_$NotAuthenticatedAuthStateImpl>
+      get copyWith => __$$NotAuthenticatedAuthStateImplCopyWithImpl<
+          _$NotAuthenticatedAuthStateImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(AuthenticatedUser user) authenticated,
+    required TResult Function(UserEntity user) authenticated,
     required TResult Function(UserEntity user) inProcess,
     required TResult Function(UserEntity user) notAuthenticated,
     required TResult Function(UserEntity user, String message) error,
@@ -798,7 +909,7 @@ class _$_NotAuthenticatedAuthState extends _NotAuthenticatedAuthState {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(AuthenticatedUser user)? authenticated,
+    TResult? Function(UserEntity user)? authenticated,
     TResult? Function(UserEntity user)? inProcess,
     TResult? Function(UserEntity user)? notAuthenticated,
     TResult? Function(UserEntity user, String message)? error,
@@ -810,7 +921,7 @@ class _$_NotAuthenticatedAuthState extends _NotAuthenticatedAuthState {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(AuthenticatedUser user)? authenticated,
+    TResult Function(UserEntity user)? authenticated,
     TResult Function(UserEntity user)? inProcess,
     TResult Function(UserEntity user)? notAuthenticated,
     TResult Function(UserEntity user, String message)? error,
@@ -863,35 +974,51 @@ class _$_NotAuthenticatedAuthState extends _NotAuthenticatedAuthState {
     }
     return orElse();
   }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$NotAuthenticatedAuthStateImplToJson(
+      this,
+    );
+  }
 }
 
 abstract class _NotAuthenticatedAuthState extends AuthState {
-  const factory _NotAuthenticatedAuthState({final UserEntity user}) =
-      _$_NotAuthenticatedAuthState;
+  const factory _NotAuthenticatedAuthState({required final UserEntity user}) =
+      _$NotAuthenticatedAuthStateImpl;
   const _NotAuthenticatedAuthState._() : super._();
+
+  factory _NotAuthenticatedAuthState.fromJson(Map<String, dynamic> json) =
+      _$NotAuthenticatedAuthStateImpl.fromJson;
 
   @override
   UserEntity get user;
+  @override
   @JsonKey(ignore: true)
-  _$$_NotAuthenticatedAuthStateCopyWith<_$_NotAuthenticatedAuthState>
+  _$$NotAuthenticatedAuthStateImplCopyWith<_$NotAuthenticatedAuthStateImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_ErrorAuthStateCopyWith<$Res> {
-  factory _$$_ErrorAuthStateCopyWith(
-          _$_ErrorAuthState value, $Res Function(_$_ErrorAuthState) then) =
-      __$$_ErrorAuthStateCopyWithImpl<$Res>;
+abstract class _$$ErrorAuthStateImplCopyWith<$Res>
+    implements $AuthStateCopyWith<$Res> {
+  factory _$$ErrorAuthStateImplCopyWith(_$ErrorAuthStateImpl value,
+          $Res Function(_$ErrorAuthStateImpl) then) =
+      __$$ErrorAuthStateImplCopyWithImpl<$Res>;
+  @override
   @useResult
   $Res call({UserEntity user, String message});
+
+  @override
+  $UserEntityCopyWith<$Res> get user;
 }
 
 /// @nodoc
-class __$$_ErrorAuthStateCopyWithImpl<$Res>
-    extends _$AuthStateCopyWithImpl<$Res, _$_ErrorAuthState>
-    implements _$$_ErrorAuthStateCopyWith<$Res> {
-  __$$_ErrorAuthStateCopyWithImpl(
-      _$_ErrorAuthState _value, $Res Function(_$_ErrorAuthState) _then)
+class __$$ErrorAuthStateImplCopyWithImpl<$Res>
+    extends _$AuthStateCopyWithImpl<$Res, _$ErrorAuthStateImpl>
+    implements _$$ErrorAuthStateImplCopyWith<$Res> {
+  __$$ErrorAuthStateImplCopyWithImpl(
+      _$ErrorAuthStateImpl _value, $Res Function(_$ErrorAuthStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -900,7 +1027,7 @@ class __$$_ErrorAuthStateCopyWithImpl<$Res>
     Object? user = null,
     Object? message = null,
   }) {
-    return _then(_$_ErrorAuthState(
+    return _then(_$ErrorAuthStateImpl(
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -914,19 +1041,26 @@ class __$$_ErrorAuthStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
+@JsonSerializable()
+class _$ErrorAuthStateImpl extends _ErrorAuthState {
+  const _$ErrorAuthStateImpl(
+      {required this.user,
+      this.message = 'Произошла ошибка',
+      final String? $type})
+      : $type = $type ?? 'error',
+        super._();
 
-class _$_ErrorAuthState extends _ErrorAuthState {
-  const _$_ErrorAuthState(
-      {this.user = const UserEntity.notAuthenticated(),
-      this.message = 'Произошла ошибка'})
-      : super._();
+  factory _$ErrorAuthStateImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ErrorAuthStateImplFromJson(json);
 
   @override
-  @JsonKey()
   final UserEntity user;
   @override
   @JsonKey()
   final String message;
+
+  @JsonKey(name: 'runtimeType')
+  final String $type;
 
   @override
   String toString() {
@@ -937,24 +1071,26 @@ class _$_ErrorAuthState extends _ErrorAuthState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ErrorAuthState &&
+            other is _$ErrorAuthStateImpl &&
             (identical(other.user, user) || other.user == user) &&
             (identical(other.message, message) || other.message == message));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, user, message);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ErrorAuthStateCopyWith<_$_ErrorAuthState> get copyWith =>
-      __$$_ErrorAuthStateCopyWithImpl<_$_ErrorAuthState>(this, _$identity);
+  _$$ErrorAuthStateImplCopyWith<_$ErrorAuthStateImpl> get copyWith =>
+      __$$ErrorAuthStateImplCopyWithImpl<_$ErrorAuthStateImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(AuthenticatedUser user) authenticated,
+    required TResult Function(UserEntity user) authenticated,
     required TResult Function(UserEntity user) inProcess,
     required TResult Function(UserEntity user) notAuthenticated,
     required TResult Function(UserEntity user, String message) error,
@@ -966,7 +1102,7 @@ class _$_ErrorAuthState extends _ErrorAuthState {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(AuthenticatedUser user)? authenticated,
+    TResult? Function(UserEntity user)? authenticated,
     TResult? Function(UserEntity user)? inProcess,
     TResult? Function(UserEntity user)? notAuthenticated,
     TResult? Function(UserEntity user, String message)? error,
@@ -978,7 +1114,7 @@ class _$_ErrorAuthState extends _ErrorAuthState {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(AuthenticatedUser user)? authenticated,
+    TResult Function(UserEntity user)? authenticated,
     TResult Function(UserEntity user)? inProcess,
     TResult Function(UserEntity user)? notAuthenticated,
     TResult Function(UserEntity user, String message)? error,
@@ -1031,36 +1167,53 @@ class _$_ErrorAuthState extends _ErrorAuthState {
     }
     return orElse();
   }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$ErrorAuthStateImplToJson(
+      this,
+    );
+  }
 }
 
 abstract class _ErrorAuthState extends AuthState {
-  const factory _ErrorAuthState({final UserEntity user, final String message}) =
-      _$_ErrorAuthState;
+  const factory _ErrorAuthState(
+      {required final UserEntity user,
+      final String message}) = _$ErrorAuthStateImpl;
   const _ErrorAuthState._() : super._();
+
+  factory _ErrorAuthState.fromJson(Map<String, dynamic> json) =
+      _$ErrorAuthStateImpl.fromJson;
 
   @override
   UserEntity get user;
   String get message;
+  @override
   @JsonKey(ignore: true)
-  _$$_ErrorAuthStateCopyWith<_$_ErrorAuthState> get copyWith =>
+  _$$ErrorAuthStateImplCopyWith<_$ErrorAuthStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_SuccessfulAuthStateCopyWith<$Res> {
-  factory _$$_SuccessfulAuthStateCopyWith(_$_SuccessfulAuthState value,
-          $Res Function(_$_SuccessfulAuthState) then) =
-      __$$_SuccessfulAuthStateCopyWithImpl<$Res>;
+abstract class _$$SuccessfulAuthStateImplCopyWith<$Res>
+    implements $AuthStateCopyWith<$Res> {
+  factory _$$SuccessfulAuthStateImplCopyWith(_$SuccessfulAuthStateImpl value,
+          $Res Function(_$SuccessfulAuthStateImpl) then) =
+      __$$SuccessfulAuthStateImplCopyWithImpl<$Res>;
+  @override
   @useResult
   $Res call({UserEntity user});
+
+  @override
+  $UserEntityCopyWith<$Res> get user;
 }
 
 /// @nodoc
-class __$$_SuccessfulAuthStateCopyWithImpl<$Res>
-    extends _$AuthStateCopyWithImpl<$Res, _$_SuccessfulAuthState>
-    implements _$$_SuccessfulAuthStateCopyWith<$Res> {
-  __$$_SuccessfulAuthStateCopyWithImpl(_$_SuccessfulAuthState _value,
-      $Res Function(_$_SuccessfulAuthState) _then)
+class __$$SuccessfulAuthStateImplCopyWithImpl<$Res>
+    extends _$AuthStateCopyWithImpl<$Res, _$SuccessfulAuthStateImpl>
+    implements _$$SuccessfulAuthStateImplCopyWith<$Res> {
+  __$$SuccessfulAuthStateImplCopyWithImpl(_$SuccessfulAuthStateImpl _value,
+      $Res Function(_$SuccessfulAuthStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1068,7 +1221,7 @@ class __$$_SuccessfulAuthStateCopyWithImpl<$Res>
   $Res call({
     Object? user = null,
   }) {
-    return _then(_$_SuccessfulAuthState(
+    return _then(_$SuccessfulAuthStateImpl(
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -1078,15 +1231,20 @@ class __$$_SuccessfulAuthStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
+@JsonSerializable()
+class _$SuccessfulAuthStateImpl extends _SuccessfulAuthState {
+  const _$SuccessfulAuthStateImpl({required this.user, final String? $type})
+      : $type = $type ?? 'successful',
+        super._();
 
-class _$_SuccessfulAuthState extends _SuccessfulAuthState {
-  const _$_SuccessfulAuthState(
-      {this.user = const UserEntity.notAuthenticated()})
-      : super._();
+  factory _$SuccessfulAuthStateImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SuccessfulAuthStateImplFromJson(json);
 
   @override
-  @JsonKey()
   final UserEntity user;
+
+  @JsonKey(name: 'runtimeType')
+  final String $type;
 
   @override
   String toString() {
@@ -1097,24 +1255,25 @@ class _$_SuccessfulAuthState extends _SuccessfulAuthState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SuccessfulAuthState &&
+            other is _$SuccessfulAuthStateImpl &&
             (identical(other.user, user) || other.user == user));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, user);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SuccessfulAuthStateCopyWith<_$_SuccessfulAuthState> get copyWith =>
-      __$$_SuccessfulAuthStateCopyWithImpl<_$_SuccessfulAuthState>(
+  _$$SuccessfulAuthStateImplCopyWith<_$SuccessfulAuthStateImpl> get copyWith =>
+      __$$SuccessfulAuthStateImplCopyWithImpl<_$SuccessfulAuthStateImpl>(
           this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(AuthenticatedUser user) authenticated,
+    required TResult Function(UserEntity user) authenticated,
     required TResult Function(UserEntity user) inProcess,
     required TResult Function(UserEntity user) notAuthenticated,
     required TResult Function(UserEntity user, String message) error,
@@ -1126,7 +1285,7 @@ class _$_SuccessfulAuthState extends _SuccessfulAuthState {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(AuthenticatedUser user)? authenticated,
+    TResult? Function(UserEntity user)? authenticated,
     TResult? Function(UserEntity user)? inProcess,
     TResult? Function(UserEntity user)? notAuthenticated,
     TResult? Function(UserEntity user, String message)? error,
@@ -1138,7 +1297,7 @@ class _$_SuccessfulAuthState extends _SuccessfulAuthState {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(AuthenticatedUser user)? authenticated,
+    TResult Function(UserEntity user)? authenticated,
     TResult Function(UserEntity user)? inProcess,
     TResult Function(UserEntity user)? notAuthenticated,
     TResult Function(UserEntity user, String message)? error,
@@ -1191,16 +1350,27 @@ class _$_SuccessfulAuthState extends _SuccessfulAuthState {
     }
     return orElse();
   }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$SuccessfulAuthStateImplToJson(
+      this,
+    );
+  }
 }
 
 abstract class _SuccessfulAuthState extends AuthState {
-  const factory _SuccessfulAuthState({final UserEntity user}) =
-      _$_SuccessfulAuthState;
+  const factory _SuccessfulAuthState({required final UserEntity user}) =
+      _$SuccessfulAuthStateImpl;
   const _SuccessfulAuthState._() : super._();
+
+  factory _SuccessfulAuthState.fromJson(Map<String, dynamic> json) =
+      _$SuccessfulAuthStateImpl.fromJson;
 
   @override
   UserEntity get user;
+  @override
   @JsonKey(ignore: true)
-  _$$_SuccessfulAuthStateCopyWith<_$_SuccessfulAuthState> get copyWith =>
+  _$$SuccessfulAuthStateImplCopyWith<_$SuccessfulAuthStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

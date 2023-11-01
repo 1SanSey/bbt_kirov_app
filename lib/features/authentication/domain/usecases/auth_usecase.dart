@@ -5,13 +5,13 @@ import 'package:bbt_kirov_app/features/authentication/domain/repositories/auth_r
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 
-class AuthUseCase extends UseCaseByParams<AuthenticatedUser, UserParams> {
+class AuthUseCase extends UseCaseByParams<UserEntity, UserParams> {
   final IAuthRepository authRepository;
 
   AuthUseCase(this.authRepository);
 
   @override
-  Future<Either<Failure, AuthenticatedUser>> call(UserParams params) async {
+  Future<Either<Failure, UserEntity>> call(UserParams params) async {
     return await authRepository.login(
         login: params.login, password: params.password);
   }

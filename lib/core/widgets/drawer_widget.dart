@@ -99,9 +99,9 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                           style: TextStyle(fontSize: 18),
                         ),
                         onTap: () {
-                          context.read<AuthBLoC>().add(const AuthEvent.logOut());
+                          context.read<AuthBloc>().add(const AuthEvent.logOut());
                           _setUserPrefs(false, '', '', '');
-                          NavigationManager.instance.popToAuthPage();
+                          NavigationManager.instance.goAuthPage();
                         },
                       ),
                       const SizedBox(height: 60),

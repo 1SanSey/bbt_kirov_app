@@ -13,7 +13,7 @@ class AuthRepositoryImpl implements IAuthRepository {
   AuthRepositoryImpl({required this.networkInfo, required this.remoteDataSource});
 
   @override
-  Future<Either<Failure, AuthenticatedUser>> login(
+  Future<Either<Failure, UserEntity>> login(
       {required String login, required String password}) async {
     if (await networkInfo.isConnected) {
       try {
@@ -45,7 +45,7 @@ class AuthRepositoryImpl implements IAuthRepository {
   }
 
   @override
-  Future<Either<Failure, NotAuthenticatedUser>> logout() async {
+  Future<Either<Failure, UserEntity>> logout() async {
     if (await networkInfo.isConnected) {
       try {
         final notAuthenticatedUser = await remoteDataSource.userLogout();

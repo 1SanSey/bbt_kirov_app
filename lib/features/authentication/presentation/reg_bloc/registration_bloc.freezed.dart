@@ -75,20 +75,20 @@ class _$RegistrationEventCopyWithImpl<$Res, $Val extends RegistrationEvent>
 }
 
 /// @nodoc
-abstract class _$$_RegistrationEventCopyWith<$Res> {
-  factory _$$_RegistrationEventCopyWith(_$_RegistrationEvent value,
-          $Res Function(_$_RegistrationEvent) then) =
-      __$$_RegistrationEventCopyWithImpl<$Res>;
+abstract class _$$RegistrationEventImplCopyWith<$Res> {
+  factory _$$RegistrationEventImplCopyWith(_$RegistrationEventImpl value,
+          $Res Function(_$RegistrationEventImpl) then) =
+      __$$RegistrationEventImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String login, String password});
 }
 
 /// @nodoc
-class __$$_RegistrationEventCopyWithImpl<$Res>
-    extends _$RegistrationEventCopyWithImpl<$Res, _$_RegistrationEvent>
-    implements _$$_RegistrationEventCopyWith<$Res> {
-  __$$_RegistrationEventCopyWithImpl(
-      _$_RegistrationEvent _value, $Res Function(_$_RegistrationEvent) _then)
+class __$$RegistrationEventImplCopyWithImpl<$Res>
+    extends _$RegistrationEventCopyWithImpl<$Res, _$RegistrationEventImpl>
+    implements _$$RegistrationEventImplCopyWith<$Res> {
+  __$$RegistrationEventImplCopyWithImpl(_$RegistrationEventImpl _value,
+      $Res Function(_$RegistrationEventImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -97,7 +97,7 @@ class __$$_RegistrationEventCopyWithImpl<$Res>
     Object? login = null,
     Object? password = null,
   }) {
-    return _then(_$_RegistrationEvent(
+    return _then(_$RegistrationEventImpl(
       login: null == login
           ? _value.login
           : login // ignore: cast_nullable_to_non_nullable
@@ -112,8 +112,8 @@ class __$$_RegistrationEventCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_RegistrationEvent extends _RegistrationEvent {
-  const _$_RegistrationEvent({required this.login, required this.password})
+class _$RegistrationEventImpl extends _RegistrationEvent {
+  const _$RegistrationEventImpl({required this.login, required this.password})
       : super._();
 
   @override
@@ -130,7 +130,7 @@ class _$_RegistrationEvent extends _RegistrationEvent {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RegistrationEvent &&
+            other is _$RegistrationEventImpl &&
             (identical(other.login, login) || other.login == login) &&
             (identical(other.password, password) ||
                 other.password == password));
@@ -142,8 +142,8 @@ class _$_RegistrationEvent extends _RegistrationEvent {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RegistrationEventCopyWith<_$_RegistrationEvent> get copyWith =>
-      __$$_RegistrationEventCopyWithImpl<_$_RegistrationEvent>(
+  _$$RegistrationEventImplCopyWith<_$RegistrationEventImpl> get copyWith =>
+      __$$RegistrationEventImplCopyWithImpl<_$RegistrationEventImpl>(
           this, _$identity);
 
   @override
@@ -212,38 +212,39 @@ class _$_RegistrationEvent extends _RegistrationEvent {
 abstract class _RegistrationEvent extends RegistrationEvent {
   const factory _RegistrationEvent(
       {required final String login,
-      required final String password}) = _$_RegistrationEvent;
+      required final String password}) = _$RegistrationEventImpl;
   const _RegistrationEvent._() : super._();
 
   String get login;
   String get password;
   @JsonKey(ignore: true)
-  _$$_RegistrationEventCopyWith<_$_RegistrationEvent> get copyWith =>
+  _$$RegistrationEventImplCopyWith<_$RegistrationEventImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_ToInitialRegistrationEventCopyWith<$Res> {
-  factory _$$_ToInitialRegistrationEventCopyWith(
-          _$_ToInitialRegistrationEvent value,
-          $Res Function(_$_ToInitialRegistrationEvent) then) =
-      __$$_ToInitialRegistrationEventCopyWithImpl<$Res>;
+abstract class _$$ToInitialRegistrationEventImplCopyWith<$Res> {
+  factory _$$ToInitialRegistrationEventImplCopyWith(
+          _$ToInitialRegistrationEventImpl value,
+          $Res Function(_$ToInitialRegistrationEventImpl) then) =
+      __$$ToInitialRegistrationEventImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_ToInitialRegistrationEventCopyWithImpl<$Res>
-    extends _$RegistrationEventCopyWithImpl<$Res, _$_ToInitialRegistrationEvent>
-    implements _$$_ToInitialRegistrationEventCopyWith<$Res> {
-  __$$_ToInitialRegistrationEventCopyWithImpl(
-      _$_ToInitialRegistrationEvent _value,
-      $Res Function(_$_ToInitialRegistrationEvent) _then)
+class __$$ToInitialRegistrationEventImplCopyWithImpl<$Res>
+    extends _$RegistrationEventCopyWithImpl<$Res,
+        _$ToInitialRegistrationEventImpl>
+    implements _$$ToInitialRegistrationEventImplCopyWith<$Res> {
+  __$$ToInitialRegistrationEventImplCopyWithImpl(
+      _$ToInitialRegistrationEventImpl _value,
+      $Res Function(_$ToInitialRegistrationEventImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_ToInitialRegistrationEvent extends _ToInitialRegistrationEvent {
-  const _$_ToInitialRegistrationEvent() : super._();
+class _$ToInitialRegistrationEventImpl extends _ToInitialRegistrationEvent {
+  const _$ToInitialRegistrationEventImpl() : super._();
 
   @override
   String toString() {
@@ -254,7 +255,7 @@ class _$_ToInitialRegistrationEvent extends _ToInitialRegistrationEvent {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ToInitialRegistrationEvent);
+            other is _$ToInitialRegistrationEventImpl);
   }
 
   @override
@@ -324,7 +325,8 @@ class _$_ToInitialRegistrationEvent extends _ToInitialRegistrationEvent {
 }
 
 abstract class _ToInitialRegistrationEvent extends RegistrationEvent {
-  const factory _ToInitialRegistrationEvent() = _$_ToInitialRegistrationEvent;
+  const factory _ToInitialRegistrationEvent() =
+      _$ToInitialRegistrationEventImpl;
   const _ToInitialRegistrationEvent._() : super._();
 }
 
@@ -401,26 +403,28 @@ class _$RegistrationStateCopyWithImpl<$Res, $Val extends RegistrationState>
 }
 
 /// @nodoc
-abstract class _$$_InitialRegistrationStateCopyWith<$Res> {
-  factory _$$_InitialRegistrationStateCopyWith(
-          _$_InitialRegistrationState value,
-          $Res Function(_$_InitialRegistrationState) then) =
-      __$$_InitialRegistrationStateCopyWithImpl<$Res>;
+abstract class _$$InitialRegistrationStateImplCopyWith<$Res> {
+  factory _$$InitialRegistrationStateImplCopyWith(
+          _$InitialRegistrationStateImpl value,
+          $Res Function(_$InitialRegistrationStateImpl) then) =
+      __$$InitialRegistrationStateImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_InitialRegistrationStateCopyWithImpl<$Res>
-    extends _$RegistrationStateCopyWithImpl<$Res, _$_InitialRegistrationState>
-    implements _$$_InitialRegistrationStateCopyWith<$Res> {
-  __$$_InitialRegistrationStateCopyWithImpl(_$_InitialRegistrationState _value,
-      $Res Function(_$_InitialRegistrationState) _then)
+class __$$InitialRegistrationStateImplCopyWithImpl<$Res>
+    extends _$RegistrationStateCopyWithImpl<$Res,
+        _$InitialRegistrationStateImpl>
+    implements _$$InitialRegistrationStateImplCopyWith<$Res> {
+  __$$InitialRegistrationStateImplCopyWithImpl(
+      _$InitialRegistrationStateImpl _value,
+      $Res Function(_$InitialRegistrationStateImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_InitialRegistrationState extends _InitialRegistrationState {
-  const _$_InitialRegistrationState() : super._();
+class _$InitialRegistrationStateImpl extends _InitialRegistrationState {
+  const _$InitialRegistrationStateImpl() : super._();
 
   @override
   String toString() {
@@ -431,7 +435,7 @@ class _$_InitialRegistrationState extends _InitialRegistrationState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_InitialRegistrationState);
+            other is _$InitialRegistrationStateImpl);
   }
 
   @override
@@ -513,32 +517,33 @@ class _$_InitialRegistrationState extends _InitialRegistrationState {
 }
 
 abstract class _InitialRegistrationState extends RegistrationState {
-  const factory _InitialRegistrationState() = _$_InitialRegistrationState;
+  const factory _InitialRegistrationState() = _$InitialRegistrationStateImpl;
   const _InitialRegistrationState._() : super._();
 }
 
 /// @nodoc
-abstract class _$$_InProcessRegistrationStateCopyWith<$Res> {
-  factory _$$_InProcessRegistrationStateCopyWith(
-          _$_InProcessRegistrationState value,
-          $Res Function(_$_InProcessRegistrationState) then) =
-      __$$_InProcessRegistrationStateCopyWithImpl<$Res>;
+abstract class _$$InProcessRegistrationStateImplCopyWith<$Res> {
+  factory _$$InProcessRegistrationStateImplCopyWith(
+          _$InProcessRegistrationStateImpl value,
+          $Res Function(_$InProcessRegistrationStateImpl) then) =
+      __$$InProcessRegistrationStateImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_InProcessRegistrationStateCopyWithImpl<$Res>
-    extends _$RegistrationStateCopyWithImpl<$Res, _$_InProcessRegistrationState>
-    implements _$$_InProcessRegistrationStateCopyWith<$Res> {
-  __$$_InProcessRegistrationStateCopyWithImpl(
-      _$_InProcessRegistrationState _value,
-      $Res Function(_$_InProcessRegistrationState) _then)
+class __$$InProcessRegistrationStateImplCopyWithImpl<$Res>
+    extends _$RegistrationStateCopyWithImpl<$Res,
+        _$InProcessRegistrationStateImpl>
+    implements _$$InProcessRegistrationStateImplCopyWith<$Res> {
+  __$$InProcessRegistrationStateImplCopyWithImpl(
+      _$InProcessRegistrationStateImpl _value,
+      $Res Function(_$InProcessRegistrationStateImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_InProcessRegistrationState extends _InProcessRegistrationState {
-  const _$_InProcessRegistrationState() : super._();
+class _$InProcessRegistrationStateImpl extends _InProcessRegistrationState {
+  const _$InProcessRegistrationStateImpl() : super._();
 
   @override
   String toString() {
@@ -549,7 +554,7 @@ class _$_InProcessRegistrationState extends _InProcessRegistrationState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_InProcessRegistrationState);
+            other is _$InProcessRegistrationStateImpl);
   }
 
   @override
@@ -631,33 +636,34 @@ class _$_InProcessRegistrationState extends _InProcessRegistrationState {
 }
 
 abstract class _InProcessRegistrationState extends RegistrationState {
-  const factory _InProcessRegistrationState() = _$_InProcessRegistrationState;
+  const factory _InProcessRegistrationState() =
+      _$InProcessRegistrationStateImpl;
   const _InProcessRegistrationState._() : super._();
 }
 
 /// @nodoc
-abstract class _$$_SuccessfulRegistrationStateCopyWith<$Res> {
-  factory _$$_SuccessfulRegistrationStateCopyWith(
-          _$_SuccessfulRegistrationState value,
-          $Res Function(_$_SuccessfulRegistrationState) then) =
-      __$$_SuccessfulRegistrationStateCopyWithImpl<$Res>;
+abstract class _$$SuccessfulRegistrationStateImplCopyWith<$Res> {
+  factory _$$SuccessfulRegistrationStateImplCopyWith(
+          _$SuccessfulRegistrationStateImpl value,
+          $Res Function(_$SuccessfulRegistrationStateImpl) then) =
+      __$$SuccessfulRegistrationStateImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_SuccessfulRegistrationStateCopyWithImpl<$Res>
+class __$$SuccessfulRegistrationStateImplCopyWithImpl<$Res>
     extends _$RegistrationStateCopyWithImpl<$Res,
-        _$_SuccessfulRegistrationState>
-    implements _$$_SuccessfulRegistrationStateCopyWith<$Res> {
-  __$$_SuccessfulRegistrationStateCopyWithImpl(
-      _$_SuccessfulRegistrationState _value,
-      $Res Function(_$_SuccessfulRegistrationState) _then)
+        _$SuccessfulRegistrationStateImpl>
+    implements _$$SuccessfulRegistrationStateImplCopyWith<$Res> {
+  __$$SuccessfulRegistrationStateImplCopyWithImpl(
+      _$SuccessfulRegistrationStateImpl _value,
+      $Res Function(_$SuccessfulRegistrationStateImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_SuccessfulRegistrationState extends _SuccessfulRegistrationState {
-  const _$_SuccessfulRegistrationState() : super._();
+class _$SuccessfulRegistrationStateImpl extends _SuccessfulRegistrationState {
+  const _$SuccessfulRegistrationStateImpl() : super._();
 
   @override
   String toString() {
@@ -668,7 +674,7 @@ class _$_SuccessfulRegistrationState extends _SuccessfulRegistrationState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SuccessfulRegistrationState);
+            other is _$SuccessfulRegistrationStateImpl);
   }
 
   @override
@@ -750,25 +756,28 @@ class _$_SuccessfulRegistrationState extends _SuccessfulRegistrationState {
 }
 
 abstract class _SuccessfulRegistrationState extends RegistrationState {
-  const factory _SuccessfulRegistrationState() = _$_SuccessfulRegistrationState;
+  const factory _SuccessfulRegistrationState() =
+      _$SuccessfulRegistrationStateImpl;
   const _SuccessfulRegistrationState._() : super._();
 }
 
 /// @nodoc
-abstract class _$$_ErrorRegistrationStateCopyWith<$Res> {
-  factory _$$_ErrorRegistrationStateCopyWith(_$_ErrorRegistrationState value,
-          $Res Function(_$_ErrorRegistrationState) then) =
-      __$$_ErrorRegistrationStateCopyWithImpl<$Res>;
+abstract class _$$ErrorRegistrationStateImplCopyWith<$Res> {
+  factory _$$ErrorRegistrationStateImplCopyWith(
+          _$ErrorRegistrationStateImpl value,
+          $Res Function(_$ErrorRegistrationStateImpl) then) =
+      __$$ErrorRegistrationStateImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String message});
 }
 
 /// @nodoc
-class __$$_ErrorRegistrationStateCopyWithImpl<$Res>
-    extends _$RegistrationStateCopyWithImpl<$Res, _$_ErrorRegistrationState>
-    implements _$$_ErrorRegistrationStateCopyWith<$Res> {
-  __$$_ErrorRegistrationStateCopyWithImpl(_$_ErrorRegistrationState _value,
-      $Res Function(_$_ErrorRegistrationState) _then)
+class __$$ErrorRegistrationStateImplCopyWithImpl<$Res>
+    extends _$RegistrationStateCopyWithImpl<$Res, _$ErrorRegistrationStateImpl>
+    implements _$$ErrorRegistrationStateImplCopyWith<$Res> {
+  __$$ErrorRegistrationStateImplCopyWithImpl(
+      _$ErrorRegistrationStateImpl _value,
+      $Res Function(_$ErrorRegistrationStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -776,7 +785,7 @@ class __$$_ErrorRegistrationStateCopyWithImpl<$Res>
   $Res call({
     Object? message = null,
   }) {
-    return _then(_$_ErrorRegistrationState(
+    return _then(_$ErrorRegistrationStateImpl(
       message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -787,8 +796,8 @@ class __$$_ErrorRegistrationStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ErrorRegistrationState extends _ErrorRegistrationState {
-  const _$_ErrorRegistrationState({this.message = 'Произошла ошибка'})
+class _$ErrorRegistrationStateImpl extends _ErrorRegistrationState {
+  const _$ErrorRegistrationStateImpl({this.message = 'Произошла ошибка'})
       : super._();
 
   @override
@@ -804,7 +813,7 @@ class _$_ErrorRegistrationState extends _ErrorRegistrationState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ErrorRegistrationState &&
+            other is _$ErrorRegistrationStateImpl &&
             (identical(other.message, message) || other.message == message));
   }
 
@@ -814,9 +823,9 @@ class _$_ErrorRegistrationState extends _ErrorRegistrationState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ErrorRegistrationStateCopyWith<_$_ErrorRegistrationState> get copyWith =>
-      __$$_ErrorRegistrationStateCopyWithImpl<_$_ErrorRegistrationState>(
-          this, _$identity);
+  _$$ErrorRegistrationStateImplCopyWith<_$ErrorRegistrationStateImpl>
+      get copyWith => __$$ErrorRegistrationStateImplCopyWithImpl<
+          _$ErrorRegistrationStateImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -895,11 +904,11 @@ class _$_ErrorRegistrationState extends _ErrorRegistrationState {
 
 abstract class _ErrorRegistrationState extends RegistrationState {
   const factory _ErrorRegistrationState({final String message}) =
-      _$_ErrorRegistrationState;
+      _$ErrorRegistrationStateImpl;
   const _ErrorRegistrationState._() : super._();
 
   String get message;
   @JsonKey(ignore: true)
-  _$$_ErrorRegistrationStateCopyWith<_$_ErrorRegistrationState> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$ErrorRegistrationStateImplCopyWith<_$ErrorRegistrationStateImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

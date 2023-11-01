@@ -59,7 +59,7 @@ class _MyAppState extends State<MyApp> {
     log(_userLoggedIn.toString());
     return MultiBlocProvider(
       providers: [
-        BlocProvider<AuthBLoC>(create: (context) => di.sl<AuthBLoC>()),
+        BlocProvider<AuthBloc>(create: (context) => di.sl<AuthBloc>()),
         BlocProvider<RegistrationBloc>(create: (context) => di.sl<RegistrationBloc>()),
         BlocProvider<ChangeThemeBloc>(create: (context) => di.sl<ChangeThemeBloc>()),
         BlocProvider<HomeBooksBloc>(create: (context) => di.sl<HomeBooksBloc>()),

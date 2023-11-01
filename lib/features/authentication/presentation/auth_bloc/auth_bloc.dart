@@ -1,11 +1,12 @@
 import 'package:bbt_kirov_app/common/failure_to_message.dart';
 import 'package:bbt_kirov_app/features/authentication/domain/repositories/auth_repository.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart' as bloc_concurrency;
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bbt_kirov_app/features/authentication/domain/entities/user_entity.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 
 part 'auth_bloc.freezed.dart';
+part 'auth_bloc.g.dart';
 
 @freezed
 class AuthEvent with _$AuthEvent {
@@ -22,11 +23,9 @@ class AuthEvent with _$AuthEvent {
 class AuthState with _$AuthState {
   const AuthState._();
 
-  bool get isAuthenticated => user.isAuthenticated;
-
-  AuthenticatedUser? get authenticatedOrNull => maybeMap<AuthenticatedUser?>(
-        orElse: () => user.authenticatedOrNull,
-        notAuthenticated: (_) => null,
+bool get isAuthenticated => maybeMap<bool>(
+        orElse: () => false,
+        authenticated: (_) => true,
       );
 
   bool get inProgress => maybeMap<bool>(
@@ -45,39 +44,42 @@ class AuthState with _$AuthState {
       );
 
   const factory AuthState.authenticated({
-    required final AuthenticatedUser user,
+    required final UserEntity user,
   }) = _AuthenticatedAuthState;
 
   const factory AuthState.inProcess({
-    @Default(UserEntity.notAuthenticated()) final UserEntity user,
+    required final UserEntity user,
   }) = _InProcessAuthState;
 
   const factory AuthState.notAuthenticated({
-    @Default(UserEntity.notAuthenticated()) final UserEntity user,
+    required final UserEntity user,
   }) = _NotAuthenticatedAuthState;
 
   const factory AuthState.error({
-    @Default(UserEntity.notAuthenticated()) final UserEntity user,
+    required final UserEntity user,
     @Default('Произошла ошибка') String message,
   }) = _ErrorAuthState;
 
   const factory AuthState.successful({
-    @Default(UserEntity.notAuthenticated()) final UserEntity user,
+    required final UserEntity user,
   }) = _SuccessfulAuthState;
+
+  factory AuthState.fromJson(Map<String, dynamic> json) => _$AuthStateFromJson(json);
 }
 
-class AuthBLoC extends Bloc<AuthEvent, AuthState> {
-  AuthBLoC({
+class AuthBloc extends HydratedBloc<AuthEvent, AuthState> {
+  final IAuthRepository _repository;
+
+  AuthBloc({
     required final IAuthRepository repository,
-    final UserEntity? userEntity,
   })  : _repository = repository,
-        super(
-          userEntity?.when<AuthState>(
-                authenticated: (user) => AuthState.authenticated(user: user),
-                notAuthenticated: () => const AuthState.notAuthenticated(),
-              ) ??
-              const AuthState.notAuthenticated(),
-        ) {
+        super(AuthState.notAuthenticated(user: UserEntity.empty())
+            // userEntity?.when<AuthState>(
+            //       authenticated: (user) => AuthState.authenticated(user: user),
+            //       notAuthenticated: () => const AuthState.notAuthenticated(),
+            //     ) ??
+            //     const AuthState.notAuthenticated(),
+            ) {
     on<AuthEvent>(
       (event, emitter) => event.map<Future<void>>(
         logIn: (event) => _logIn(event, emitter),
@@ -86,63 +88,83 @@ class AuthBLoC extends Bloc<AuthEvent, AuthState> {
       transformer: bloc_concurrency.droppable(),
     );
   }
-  final IAuthRepository _repository;
+
+  // @override
+  // AuthState? fromJson(Map<String, dynamic> json) {
+  //   // TODO: implement fromJson
+  //   throw UnimplementedError();
+  // }
+
+  // @override
+  // Map<String, dynamic>? toJson(AuthState state) {
+  //   // TODO: implement toJson
+  //   throw UnimplementedError();
+  // }
 
   Future<void> _logIn(_LogInAuthEvent event, Emitter<AuthState> emitter) async {
     try {
-      emitter(AuthState.inProcess(user: state.user));
-      final newUser =
-          await _repository.login(login: event.login, password: event.password);
+      emitter(AuthState.inProcess(user: UserEntity.empty()));
+      final newUser = await _repository.login(login: event.login, password: event.password);
 
       newUser.fold(
-          (failure) =>
-              emitter(AuthState.error(message: mapFailureToMessage(failure))),
+          (failure) => emitter(
+              AuthState.error(user: UserEntity.empty(), message: mapFailureToMessage(failure))),
           (user) {
         emitter(AuthState.successful(user: user));
       });
     } on FormatException {
       emitter(AuthState.error(
-          user: state.user, message: 'Нельзя залогиниться - нет интернета'));
+          user: UserEntity.empty(), message: 'Нельзя залогиниться - нет интернета'));
     } on Object {
-      emitter(
-          AuthState.error(user: state.user, message: 'Ошибка аутентификации'));
+      emitter(AuthState.error(user: UserEntity.empty(), message: 'Ошибка аутентификации'));
       // без rethrow будет замалчивание ошибок
       rethrow;
     } finally {
       emitter(
-        state.user.when<AuthState>(
-          authenticated: (user) => AuthState.authenticated(user: user),
-          notAuthenticated: () => const AuthState.notAuthenticated(),
+        state.maybeMap(
+          successful: (state) => AuthState.authenticated(user: state.user),
+          orElse: () => AuthState.notAuthenticated(user: UserEntity.empty()),
         ),
       );
     }
   }
 
-  Future<void> _logOut(
-      _LogOutAuthEvent event, Emitter<AuthState> emitter) async {
+  Future<void> _logOut(_LogOutAuthEvent event, Emitter<AuthState> emitter) async {
     try {
       emitter(AuthState.inProcess(user: state.user));
       final notAuthenticatedUser = await _repository.logout();
       notAuthenticatedUser.fold(
-          (failure) =>
-              emitter(AuthState.error(message: mapFailureToMessage(failure))),
+          (failure) => emitter(
+              AuthState.error(user: UserEntity.empty(), message: mapFailureToMessage(failure))),
           (notAuthenticatedUser) {
         emitter(AuthState.successful(user: notAuthenticatedUser));
       });
     } on FormatException {
-      emitter(AuthState.error(
-          user: state.user, message: 'Нельзя залогиниться - нет интернета'));
+      emitter(AuthState.error(user: state.user, message: 'Нельзя залогиниться - нет интернета'));
     } on Object {
-      emitter(
-          AuthState.error(user: state.user, message: 'Ошибка аутентификации'));
+      emitter(AuthState.error(user: state.user, message: 'Ошибка аутентификации'));
       rethrow;
     } finally {
       emitter(
-        state.user.when<AuthState>(
-          authenticated: (user) => AuthState.authenticated(user: user),
-          notAuthenticated: () => const AuthState.notAuthenticated(),
+        state.maybeMap<AuthState>(
+          successful: (state) =>AuthState.notAuthenticated(user: UserEntity.empty()),
+          orElse: () => AuthState.authenticated(user: state.user),
         ),
       );
     }
+  }
+
+  @override
+  AuthState? fromJson(Map<String, dynamic> json) {
+    final state = AuthState.fromJson(json);
+
+    return state.maybeMap(
+        authenticated: (state) => AuthState.authenticated(user: state.user),
+        orElse: () => AuthState.notAuthenticated(user: UserEntity.empty()));
+  }
+
+  @override
+  Map<String, dynamic>? toJson(AuthState state) {
+    return state.toJson();
   }
 }

@@ -3,9 +3,9 @@ import 'package:bbt_kirov_app/features/authentication/domain/entities/user_entit
 import 'package:dartz/dartz.dart';
 
 abstract class IAuthRepository {
-  Future<Either<Failure, AuthenticatedUser>> login(
+  Future<Either<Failure, UserEntity>> login(
       {required final String login, required final String password});
   Future<Either<Failure, String>> register(
       {required final String login, required final String password, required final String email});
-  Future<Either<Failure, NotAuthenticatedUser>> logout();
+  Future<Either<Failure, UserEntity>> logout();
 }

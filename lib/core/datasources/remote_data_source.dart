@@ -15,9 +15,9 @@ abstract class BookRemoteDataSource {
   Future<List<BookModel>> getBooksBySize(String size);
   Future<List<BookModel>> getSetBooks(String singleOrSet);
   void sendOrder(OrderEntity order);
-  Future<AuthenticatedUser> userLogin(String username, String password);
+  Future<UserEntity> userLogin(String username, String password);
   Future<String> userRegister(String username, String password, String email);
-  Future<NotAuthenticatedUser> userLogout();
+  Future<UserEntity> userLogout();
   Future<List<OrderModel>> fetchOrders(String username);
 }
 
@@ -136,14 +136,14 @@ class BookRemoteDataSourceImpl extends BookRemoteDataSource {
   }
 
   @override
-  Future<AuthenticatedUser> userLogin(String username, String password) async {
+  Future<UserEntity> userLogin(String username, String password) async {
     final parseUser = ParseUser(username, password, null);
-    final AuthenticatedUser user;
+    final UserEntity user;
 
     var response = await parseUser.login();
 
     if (response.success) {
-      user = AuthenticatedUser.fromDb(parseUser);
+      user = UserEntity.fromDb(parseUser);
       log("User was successfully login!");
       log(user.toString());
     } else {
@@ -155,10 +155,10 @@ class BookRemoteDataSourceImpl extends BookRemoteDataSource {
   }
 
   @override
-  Future<NotAuthenticatedUser> userLogout() async {
+  Future<UserEntity> userLogout() async {
     final parseUser = await ParseUser.currentUser() as ParseUser;
     var response = await parseUser.logout();
-    const NotAuthenticatedUser user = NotAuthenticatedUser();
+    final user = UserEntity.empty();
 
     if (response.success) {
       log("User was successfully logout!");

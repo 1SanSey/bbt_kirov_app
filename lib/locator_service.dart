@@ -47,7 +47,7 @@ init() async {
       ));
   sl.registerFactory(() => CartBloc(cart: sl()));
   sl.registerFactory(() => FavouritesBloc(favourites: sl()));
-  sl.registerFactory(() => AuthBLoC(repository: sl()));
+  sl.registerFactory(() => AuthBloc(repository: sl()));
   sl.registerFactory(() => RegistrationBloc(sl()));
   sl.registerFactory(() => ChangeThemeBloc());
   sl.registerFactory(() => OrdersBloc(ordersUseCase: sl()));
