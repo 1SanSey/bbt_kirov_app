@@ -1,6 +1,3 @@
-import 'dart:developer';
-
-import 'package:bbt_kirov_app/core/assets/app_const.dart';
 import 'package:bbt_kirov_app/core/themes/change_theme_bloc.dart';
 import 'package:bbt_kirov_app/core/themes/themes.dart';
 import 'package:bbt_kirov_app/core/datasources/remote_data_source.dart';
@@ -18,7 +15,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import 'features/authentication/presentation/auth_bloc/auth_bloc.dart';
 
@@ -34,29 +30,11 @@ Future<void> main() async {
   runApp(const MyApp());
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  late SharedPreferences _userPrefs;
-  bool _userLoggedIn = false;
-
-  @override
-  void initState() {
-    SharedPreferences.getInstance().then((prefs) {
-      setState(() => _userPrefs = prefs);
-      _loadUserPrefs();
-    });
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    log(_userLoggedIn.toString());
     return MultiBlocProvider(
       providers: [
         BlocProvider<AuthBloc>(create: (context) => di.sl<AuthBloc>()),
@@ -78,16 +56,9 @@ class _MyAppState extends State<MyApp> {
             routes: RouteBuilder.routes,
             initialRoute: RouteBuilder.initialRoute,
             onGenerateRoute: RouteBuilder.onGenerateRoute,
-           // home: _userLoggedIn ? const HomePage() : const AuthPage(),
           );
         },
       ),
     );
-  }
-
-  void _loadUserPrefs() {
-    setState(() {
-      _userLoggedIn = _userPrefs.getBool(AppConstants.loggedInPref) ?? false;
-    });
   }
 }

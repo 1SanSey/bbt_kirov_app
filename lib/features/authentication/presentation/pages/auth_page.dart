@@ -1,10 +1,9 @@
-import 'dart:developer';
-
 import 'package:bbt_kirov_app/core/assets/app_const.dart';
 import 'package:bbt_kirov_app/core/themes/app_colors.dart';
 import 'package:bbt_kirov_app/features/authentication/presentation/auth_bloc/auth_bloc.dart';
 import 'package:bbt_kirov_app/navigation/navigation_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -78,9 +77,11 @@ class AuthPageState extends State<AuthPage> {
               );
             },
             builder: (context, state) {
-              if (state.isAuthenticated) {
-                NavigationManager.instance.goHomePage();
-              }
+              SchedulerBinding.instance.addPostFrameCallback((_) {
+                if (state.isAuthenticated) {
+                  NavigationManager.instance.goHomePage();
+                }
+              });
 
               return Center(
                 child: SingleChildScrollView(

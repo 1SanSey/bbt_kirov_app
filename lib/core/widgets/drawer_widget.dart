@@ -1,11 +1,9 @@
-import 'package:bbt_kirov_app/core/assets/app_const.dart';
 import 'package:bbt_kirov_app/core/themes/app_colors.dart';
 import 'package:bbt_kirov_app/core/themes/change_theme_bloc.dart';
 import 'package:bbt_kirov_app/features/authentication/presentation/auth_bloc/auth_bloc.dart';
 import 'package:bbt_kirov_app/navigation/navigation_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class DrawerWidget extends StatefulWidget {
   const DrawerWidget({super.key});
@@ -15,18 +13,18 @@ class DrawerWidget extends StatefulWidget {
 }
 
 class _DrawerWidgetState extends State<DrawerWidget> {
-  late SharedPreferences _userPrefs;
-  late bool _userLoggedIn;
-  String _userName = 'userName';
-  String _userPhoto = 'https://master-kraski.ru/images/no-image.jpg';
-  String _userEmail = 'userEmail';
+  // late SharedPreferences _userPrefs;
+  // late bool _userLoggedIn;
+  // String _userName = 'userName';
+  // String _userPhoto = 'https://master-kraski.ru/images/no-image.jpg';
+  // String _userEmail = 'userEmail';
 
   @override
   void initState() {
-    SharedPreferences.getInstance().then((prefs) {
-      setState(() => _userPrefs = prefs);
-      _loadUserPrefs();
-    });
+    // SharedPreferences.getInstance().then((prefs) {
+    //   setState(() => _userPrefs = prefs);
+    //   _loadUserPrefs();
+    // });
     super.initState();
   }
 
@@ -39,27 +37,36 @@ class _DrawerWidgetState extends State<DrawerWidget> {
           width: MediaQuery.of(context).size.width * 0.80,
           child: Column(
             children: [
-              UserAccountsDrawerHeader(
-                decoration: BoxDecoration(
-                  color: Theme.of(context).primaryColor,
-                ),
-                accountName: Text(
-                  _userName,
-                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
-                ),
-                accountEmail: Text(
-                  _userEmail,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                currentAccountPicture: ClipRRect(
-                  borderRadius: BorderRadius.circular(50.0),
-                  child: Image.network(
-                    _userPhoto,
-                    fit: BoxFit.fill,
-                  ),
-                ),
+              BlocBuilder<AuthBloc, AuthState>(
+                builder: (context, state) {
+                  return UserAccountsDrawerHeader(
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).primaryColor,
+                    ),
+                    accountName: Text(
+                      state.user.displayName,
+                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+                    ),
+                    accountEmail: Text(
+                      state.user.email,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    currentAccountPicture: state.user.photoURL.isNotEmpty
+                        ? ClipRRect(
+                            borderRadius: BorderRadius.circular(50.0),
+                            child: Image.network(
+                              state.user.photoURL,
+                              fit: BoxFit.fill,
+                            ),
+                          )
+                        : Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(50.0), color: Colors.white),
+                          ),
+                  );
+                },
               ),
               Expanded(
                 child: Container(
@@ -100,7 +107,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                         ),
                         onTap: () {
                           context.read<AuthBloc>().add(const AuthEvent.logOut());
-                          _setUserPrefs(false, '', '', '');
+                          // _setUserPrefs(false, '', '', '');
                           NavigationManager.instance.goAuthPage();
                         },
                       ),
@@ -148,19 +155,19 @@ class _DrawerWidgetState extends State<DrawerWidget> {
     );
   }
 
-  void _loadUserPrefs() {
-    setState(() {
-      _userLoggedIn = _userPrefs.getBool(AppConstants.loggedInPref) ?? false;
-      _userName = _userPrefs.getString(AppConstants.usernamePref) ?? '';
-      _userPhoto = _userPrefs.getString(AppConstants.photoPref) ?? '';
-      _userEmail = _userPrefs.getString(AppConstants.emailPref) ?? '';
-    });
-  }
+  // void _loadUserPrefs() {
+  //   setState(() {
+  //     _userLoggedIn = _userPrefs.getBool(AppConstants.loggedInPref) ?? false;
+  //     _userName = _userPrefs.getString(AppConstants.usernamePref) ?? '';
+  //     _userPhoto = _userPrefs.getString(AppConstants.photoPref) ?? '';
+  //     _userEmail = _userPrefs.getString(AppConstants.emailPref) ?? '';
+  //   });
+  // }
 
-  Future<void> _setUserPrefs(bool loggedIn, String username, String email, String photo) async {
-    await _userPrefs.setBool(AppConstants.loggedInPref, loggedIn);
-    await _userPrefs.setString(AppConstants.usernamePref, username);
-    await _userPrefs.setString(AppConstants.photoPref, photo);
-    await _userPrefs.setString(AppConstants.emailPref, email);
-  }
+  // Future<void> _setUserPrefs(bool loggedIn, String username, String email, String photo) async {
+  //   await _userPrefs.setBool(AppConstants.loggedInPref, loggedIn);
+  //   await _userPrefs.setString(AppConstants.usernamePref, username);
+  //   await _userPrefs.setString(AppConstants.photoPref, photo);
+  //   await _userPrefs.setString(AppConstants.emailPref, email);
+  // }
 }
