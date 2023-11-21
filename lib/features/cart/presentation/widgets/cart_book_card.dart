@@ -1,6 +1,7 @@
 import 'package:bbt_kirov_app/core/themes/app_colors.dart';
 import 'package:bbt_kirov_app/features/cart/domain/entities/cart_book_entity.dart';
 import 'package:bbt_kirov_app/features/cart/presentation/bloc/cart_bloc.dart';
+import 'package:bbt_kirov_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -25,16 +26,6 @@ class _CartBookCardState extends State<CartBookCard> {
         ),
         borderRadius: BorderRadius.circular(8.0),
       ),
-      /* margin: const EdgeInsets.symmetric(vertical: 2),
-      padding: const EdgeInsets.symmetric(vertical: 4),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
-        color: Colors.white,
-        border: Border.all(
-          color: AppColors.greyColor,
-          width: 1,
-        ),
-      ), */
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 2),
         padding: const EdgeInsets.symmetric(vertical: 4),
@@ -63,58 +54,51 @@ class _CartBookCardState extends State<CartBookCard> {
                           .bodyLarge
                           ?.copyWith(fontWeight: FontWeight.w400, fontSize: 17),
                     ),
-                    Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                      Text(
+                        S.current.price(widget.book.price),
+                        style: Theme.of(context).textTheme.bodyLarge,
+                      ),
+                      Row(
                         children: [
+                          IconButton(
+                              onPressed: () {
+                                decrement(widget.index, widget.book.quantity);
+                                context.read<CartBloc>().add(ShowCartEvent());
+                              },
+                              icon: const Icon(Icons.remove),
+                              iconSize: 20,
+                              color: Theme.of(context).primaryColor),
                           Text(
-                            'Цена: ${widget.book.price} ₽',
-                            style: Theme.of(context).textTheme.bodyLarge,
-                          ),
-                          Row(
-                            children: [
-                              IconButton(
-                                  onPressed: () {
-                                    decrement(
-                                        widget.index, widget.book.quantity);
-                                    context
-                                        .read<CartBloc>()
-                                        .add(ShowCartEvent());
-                                  },
-                                  icon: const Icon(Icons.remove),
-                                  iconSize: 20,
-                                  color: Theme.of(context).primaryColor),
-                              Text(
-                                '${widget.book.quantity}',
-                                style: const TextStyle(
-                                    color: AppColors.greyColor2,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w400),
-                              ),
-                              IconButton(
-                                  onPressed: () {
-                                    increment(
-                                        widget.index, widget.book.quantity);
-                                    context
-                                        .read<CartBloc>()
-                                        .add(ShowCartEvent());
-                                  },
-                                  icon: const Icon(Icons.add),
-                                  iconSize: 20,
-                                  color: Theme.of(context).primaryColor),
-                            ],
+                            '${widget.book.quantity}',
+                            style: const TextStyle(
+                                color: AppColors.greyColor2,
+                                fontSize: 15,
+                                fontWeight: FontWeight.w400),
                           ),
                           IconButton(
                               onPressed: () {
-                                setState(() {
-                                  context.read<CartBloc>().add(
-                                      RemoveFromCartEvent(index: widget.index));
-                                });
+                                increment(widget.index, widget.book.quantity);
                                 context.read<CartBloc>().add(ShowCartEvent());
                               },
-                              icon: const Icon(Icons.delete),
+                              icon: const Icon(Icons.add),
                               iconSize: 20,
                               color: Theme.of(context).primaryColor),
-                        ]),
+                        ],
+                      ),
+                      IconButton(
+                          onPressed: () {
+                            setState(() {
+                              context
+                                  .read<CartBloc>()
+                                  .add(RemoveFromCartEvent(index: widget.index));
+                            });
+                            context.read<CartBloc>().add(ShowCartEvent());
+                          },
+                          icon: const Icon(Icons.delete),
+                          iconSize: 20,
+                          color: Theme.of(context).primaryColor),
+                    ]),
                   ],
                 ),
               ),
@@ -128,9 +112,7 @@ class _CartBookCardState extends State<CartBookCard> {
   void increment(int index, int value) {
     setState(() {
       ++value;
-      context
-          .read<CartBloc>()
-          .add(ChangeQuantityCartEvent(index: index, value: value));
+      context.read<CartBloc>().add(ChangeQuantityCartEvent(index: index, value: value));
     });
   }
 
@@ -141,9 +123,7 @@ class _CartBookCardState extends State<CartBookCard> {
       } else {
         value;
       }
-      context
-          .read<CartBloc>()
-          .add(ChangeQuantityCartEvent(index: index, value: value));
+      context.read<CartBloc>().add(ChangeQuantityCartEvent(index: index, value: value));
     });
   }
 }

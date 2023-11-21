@@ -1,10 +1,10 @@
-import 'package:bbt_kirov_app/core/assets/app_const.dart';
+import 'package:bbt_kirov_app/core/assets/app_constants.dart';
 import 'package:bbt_kirov_app/core/themes/app_colors.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
-class CarouselSliderHome extends StatelessWidget {
-  const CarouselSliderHome({super.key});
+class CarouselSliderWidget extends StatelessWidget {
+  const CarouselSliderWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

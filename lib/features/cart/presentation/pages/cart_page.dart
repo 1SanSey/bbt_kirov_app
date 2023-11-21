@@ -4,6 +4,7 @@ import 'package:bbt_kirov_app/features/cart/domain/entities/cart_book_entity.dar
 import 'package:bbt_kirov_app/features/orders/domain/entities/order_entity.dart';
 import 'package:bbt_kirov_app/features/cart/presentation/bloc/cart_bloc.dart';
 import 'package:bbt_kirov_app/features/cart/presentation/widgets/cart_book_card.dart';
+import 'package:bbt_kirov_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -41,7 +42,7 @@ class _CartPageState extends State<CartPage> {
               orderBooks.addAll({value.name: value.quantity});
             }
             if (cartBooks.isEmpty) {
-              return showErrorText('Ваша корзина пуста');
+              return showErrorText(S.current.cartEmpty);
             }
           }
 
@@ -66,7 +67,7 @@ class _CartPageState extends State<CartPage> {
                 child: Padding(
                   padding: const EdgeInsets.only(top: 8.0),
                   child: Text(
-                    'Общая сумма: $totalSum ₽',
+                    S.current.totalSum(totalSum),
                     style: const TextStyle(
                         color: AppColors.greyColor2, fontSize: 20, fontWeight: FontWeight.w400),
                   ),
@@ -77,6 +78,7 @@ class _CartPageState extends State<CartPage> {
                   padding: const EdgeInsets.symmetric(vertical: 48.0),
                   child: ElevatedButton(
                     onPressed: () {
+                      //TODO: исправить
                       OrderEntity order = OrderEntity(
                         username: 'a',
                         dateOrder: DateTime.now(),
@@ -94,7 +96,7 @@ class _CartPageState extends State<CartPage> {
                         fixedSize: const Size(320, 50),
                         textStyle: const TextStyle(color: Colors.white, fontSize: 18),
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
-                    child: const Text('ОТПРАВИТЬ ЗАКАЗ'),
+                    child: Text(S.current.sendOrder),
                   ),
                 ),
               ),

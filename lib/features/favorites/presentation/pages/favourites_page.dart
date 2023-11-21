@@ -2,6 +2,7 @@ import 'package:bbt_kirov_app/common/error_text.dart';
 import 'package:bbt_kirov_app/features/favorites/domain/entities/favorites_book_entity.dart';
 import 'package:bbt_kirov_app/features/favorites/presentation/bloc/favourites_bloc.dart';
 import 'package:bbt_kirov_app/features/favorites/presentation/widgets/favourites_book_card.dart';
+import 'package:bbt_kirov_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -32,7 +33,7 @@ class _FavouritesPageState extends State<FavouritesPage> {
             favouritesBooks = state.books;
 
             if (favouritesBooks.isEmpty) {
-              return showErrorText('Список избранных книг пуст');
+              return showErrorText(S.current.emptyFavourites);
             }
           }
           return Padding(
@@ -56,10 +57,7 @@ class _FavouritesPageState extends State<FavouritesPage> {
                             color: Colors.white,
                           ),
                         ),
-                        key:
-                            UniqueKey() /* ValueKey<FavouritesBookModel>(
-                            favouritesBooks[index]) */
-                        ,
+                        key: UniqueKey(),
                         onDismissed: (DismissDirection direction) {
                           setState(() {
                             context.read<FavouritesBloc>().add(RemoveFromFavouritesEvent(

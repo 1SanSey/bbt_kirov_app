@@ -28,7 +28,7 @@ import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 import 'features/cart/domain/repositories/cart_repository.dart';
-import 'features/home/presentation/bloc/home_bloc.dart';
+import 'features/home/presentation/bloc/home_books_bloc.dart';
 import 'features/orders/domain/repositories/i_orders_repository.dart';
 
 final sl = GetIt.instance;
@@ -37,7 +37,7 @@ init() async {
 //BLoC & Cubit
 
   sl.registerFactory(() => HomeBooksBloc(popularBooks: sl()));
-  sl.registerFactory(() => CategoryBooksBloc(
+  sl.registerFactory(() => CategoryBloc(
         allBooks: sl(),
         booksBySize: sl(),
         booksByName: sl(),

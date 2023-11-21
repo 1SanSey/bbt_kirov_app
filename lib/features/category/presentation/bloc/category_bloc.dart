@@ -11,7 +11,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 part 'category_event.dart';
 part 'category_state.dart';
 
-class CategoryBooksBloc extends Bloc<CategoryBooksEvent, CategoryBooksState> {
+class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
   final AllBooks allBooks;
   final CulinaryBooks culinaryBooks;
   final BooksBySize booksBySize;
@@ -19,7 +19,7 @@ class CategoryBooksBloc extends Bloc<CategoryBooksEvent, CategoryBooksState> {
   final SetBooks setBooks;
   final SearchBooksCategory searchBooks;
 
-  CategoryBooksBloc({
+  CategoryBloc({
     required this.booksByName,
     required this.setBooks,
     required this.booksBySize,
@@ -39,7 +39,7 @@ class CategoryBooksBloc extends Bloc<CategoryBooksEvent, CategoryBooksState> {
   }
 
   FutureOr<void> _onEventAllBooks(
-      CategoryLoadAllBooksEvent event, Emitter<CategoryBooksState> emit) async {
+      CategoryLoadAllBooksEvent event, Emitter<CategoryState> emit) async {
     emit(CategoryBooksLoading());
 
     final failureOrBooks = await allBooks();
@@ -53,7 +53,7 @@ class CategoryBooksBloc extends Bloc<CategoryBooksEvent, CategoryBooksState> {
   }
 
   FutureOr<void> _onEventBooksBySize(CategoryLoadBooksBySizeEvent event,
-      Emitter<CategoryBooksState> emit) async {
+      Emitter<CategoryState> emit) async {
     emit(CategoryBooksLoading());
 
     final failureOrBooks = await booksBySize(BookSizeParams(size: event.param));
@@ -67,7 +67,7 @@ class CategoryBooksBloc extends Bloc<CategoryBooksEvent, CategoryBooksState> {
   }
 
   FutureOr<void> _onEventBooksByName(CategoryLoadBooksByNameEvent event,
-      Emitter<CategoryBooksState> emit) async {
+      Emitter<CategoryState> emit) async {
     emit(CategoryBooksLoading());
 
     final failureOrBooks = await booksByName(BookNameParams(name: event.param));
@@ -81,7 +81,7 @@ class CategoryBooksBloc extends Bloc<CategoryBooksEvent, CategoryBooksState> {
   }
 
   FutureOr<void> _onEventBooksSet(
-      CategoryLoadBooksSetEvent event, Emitter<CategoryBooksState> emit) async {
+      CategoryLoadBooksSetEvent event, Emitter<CategoryState> emit) async {
     emit(CategoryBooksLoading());
 
     final failureOrBooks =
@@ -96,7 +96,7 @@ class CategoryBooksBloc extends Bloc<CategoryBooksEvent, CategoryBooksState> {
   }
 
   FutureOr<void> _onEventCulinaryBooks(CategoryLoadCulinaryBooksEvent event,
-      Emitter<CategoryBooksState> emit) async {
+      Emitter<CategoryState> emit) async {
     emit(CategoryBooksLoading());
 
     final failureOrBooks = await culinaryBooks();
@@ -110,7 +110,7 @@ class CategoryBooksBloc extends Bloc<CategoryBooksEvent, CategoryBooksState> {
   }
 
   FutureOr<void> _onEventSearchBooks(
-      CategorySearchBooksEvent event, Emitter<CategoryBooksState> emit) async {
+      CategorySearchBooksEvent event, Emitter<CategoryState> emit) async {
     emit(CategoryBooksLoading());
 
     final failureOrBooks =

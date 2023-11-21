@@ -1,0 +1,64 @@
+{
+    "BBTKirovApp": "BBT Kirov App",
+    "ok": "OK",
+    "authError": "Возникла ошибка при авторизации.",
+    "regError": "Возникла ошибка при регистрации.",
+    "authExecute": "Выполните авторизацию для входа в приложение!",
+    "login": "Логин",
+    "password": "Пароль",
+    "enter": "ВОЙТИ",
+    "signUp": "ЗАРЕГИСТРИРОВАТЬСЯ",
+    "registerForEnter": "Зарегистрируйтесь для входа",
+    "successfully": "Успешно!",
+    "successfullyRegister": "Вы успешно зарегистрировались.",
+    "inputEmail": "Введите email (логин)",
+    "inputPassword": "Введите пароль",
+    "main": "Главная",
+    "favourites": "Избранное",
+    "cart": "Корзина",
+    "popularBooks": "Популярные книги",
+    "error": "Ошибка!",
+    "booksNotLoaded": "Ошибка! Товары не загружены",
+    "emptyFavourites": "Список избранных книг пуст",
+    "price": "Цена: {price}",
+    "@price": {
+        "placeholders": {
+            "price": {
+                "type": "int",
+                "optionalParameters": {
+                    "symbol": "₽"
+                }
+            }
+        }
+    },
+    "searchFromName": "Поиск по названию",
+    "resultsNotFound": "Результаты не найдены",
+    "myOrders": "Мои заказы",
+    "orderFrom": "Заказ от ",
+    "orderStructure": "Состав заказа",
+    "orderDate": "Дата заказа: ",
+    "orderSum": "Сумма заказа: {sum}",
+    "@orderSum": {
+        "placeholders": {
+            "sum": {
+                "type": "int",
+                "optionalParameters": {
+                    "symbol": "₽"
+                }
+            }
+        }
+    },
+    "cartEmpty": "Ваша корзина пуста",
+    "totalSum": "Общая сумма: {sum}",
+    "@totalSum": {
+        "placeholders": {
+            "sum": {
+                "type": "int",
+                "optionalParameters": {
+                    "symbol": "₽"
+                }
+            }
+        }
+    },
+    "sendOrder": "ОТПРАВИТЬ ЗАКАЗ"
+}

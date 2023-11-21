@@ -1,5 +1,6 @@
 import 'package:bbt_kirov_app/core/themes/app_colors.dart';
 import 'package:bbt_kirov_app/features/orders/domain/entities/order_entity.dart';
+import 'package:bbt_kirov_app/generated/l10n.dart';
 import 'package:bbt_kirov_app/navigation/navigation_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -14,7 +15,7 @@ class OrderDetailPage extends StatelessWidget {
       appBar: AppBar(
         leading: IconButton(
             onPressed: () => NavigationManager.instance.pop(), icon: const Icon(Icons.arrow_back)),
-        title: const Text('Состав заказа'),
+        title: Text(S.current.orderStructure),
         centerTitle: true,
       ),
       body: Padding(
@@ -24,7 +25,7 @@ class OrderDetailPage extends StatelessWidget {
           children: [
             ListTile(
                 title: Text(
-              'Дата заказа: ${getDMYDate(order.dateOrder)}${getHmDate(order.dateOrder)}',
+              '${S.current.orderDate}${getDMYDate(order.dateOrder)}${getHmDate(order.dateOrder)}',
               style: const TextStyle(
                   fontWeight: FontWeight.w400, fontSize: 22, color: AppColors.greyColor2),
             )),
@@ -33,18 +34,18 @@ class OrderDetailPage extends StatelessWidget {
             ),
             ListTile(
                 title: Text(
-              'Сумма заказа: ${order.sumOrder} руб.',
+              S.current.orderSum(order.sumOrder),
               style: const TextStyle(
                   fontWeight: FontWeight.w400, fontSize: 22, color: AppColors.greyColor2),
             )),
             const SizedBox(
               height: 5,
             ),
-            const ListTile(
+            ListTile(
                 title: Text(
-              'Состав заказа:',
-              style:
-                  TextStyle(fontWeight: FontWeight.w400, fontSize: 22, color: AppColors.greyColor2),
+              '${S.current.orderStructure}:',
+              style: const TextStyle(
+                  fontWeight: FontWeight.w400, fontSize: 22, color: AppColors.greyColor2),
             )),
             ...getBooksOrder(context),
           ],

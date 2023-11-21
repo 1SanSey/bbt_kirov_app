@@ -1,4 +1,4 @@
-import 'package:bbt_kirov_app/core/assets/app_const.dart';
+import 'package:bbt_kirov_app/core/assets/app_constants.dart';
 import 'package:bbt_kirov_app/navigation/navigation_manager.dart';
 import 'package:flutter/material.dart';
 
@@ -24,7 +24,7 @@ class TopHomeWidget extends StatelessWidget {
               onPressed: () => NavigationManager.instance.goCategoryPage(index),
               child: Center(
                 child: Text(
-                  AppConstants.category[index].toString(),
+                  AppConstants.category[index]!.$1,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       color: Theme.of(context).primaryColor,

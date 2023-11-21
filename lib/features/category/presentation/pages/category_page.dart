@@ -1,88 +1,62 @@
-import 'package:bbt_kirov_app/features/category/presentation/widgets/book_list_category_widget.dart';
+import 'package:bbt_kirov_app/common/error_text.dart';
+import 'package:bbt_kirov_app/common/loading_indicator.dart';
+import 'package:bbt_kirov_app/core/assets/app_constants.dart';
+import 'package:bbt_kirov_app/core/entities/book_entity.dart';
+import 'package:bbt_kirov_app/features/category/presentation/bloc/category_bloc.dart';
+import 'package:bbt_kirov_app/features/category/presentation/widgets/builder_widget_category.dart';
+import 'package:bbt_kirov_app/generated/l10n.dart';
 import 'package:bbt_kirov_app/navigation/navigation_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CategoryPage extends StatelessWidget {
+class CategoryPage extends StatefulWidget {
   final int idCategory;
-  late final String query;
-  late final String nameCategory;
-  CategoryPage({super.key, required this.idCategory}) {
-    switch (idCategory) {
-      case 0:
-        {
-          nameCategory = 'Все книги';
-          query = 'all';
-          break;
-        }
-      case 1:
-        {
-          nameCategory = 'Маленькие книги';
-          query = 'small';
-          break;
-        }
-      case 2:
-        {
-          nameCategory = 'Средние книги';
-          query = 'medium';
 
-          break;
-        }
-      case 3:
-        {
-          nameCategory = 'Большие книги';
-          query = 'big';
+  const CategoryPage({super.key, required this.idCategory});
 
-          break;
-        }
-      case 4:
-        {
-          nameCategory = 'Махабольшие книги';
-          query = 'maha big';
+  @override
+  State<CategoryPage> createState() => _CategoryPageState();
+}
 
-          break;
-        }
-      case 5:
-        {
-          nameCategory = 'Бхагавад-гита';
-          query = 'Бхагавад-гита';
+late String query;
+List<BookEntity> categoryBooks = [];
+bool error = false;
+String errorText = '';
 
-          break;
-        }
-      case 6:
-        {
-          nameCategory = 'Шримад Бхагаватам';
-          query = 'Шримад Бхагаватам';
+class _CategoryPageState extends State<CategoryPage> {
+  @override
+  void initState() {
+    super.initState();
+    query = AppConstants.category[widget.idCategory]!.$3;
 
-          break;
-        }
-      case 7:
-        {
-          nameCategory = 'Шри Чайтанья Чаритамрита';
-          query = 'Чайтанья Чаритамрита';
+    // Загрузка всех книг
+    if (query == AppCategories.all.$3) {
+      context.read<CategoryBloc>().add(CategoryLoadAllBooksEvent(param: query));
+    }
 
-          break;
-        }
-      case 8:
-        {
-          nameCategory = 'Комплекты';
-          query = 'set';
+    // Загрузка книг по наименованию
+    if (query == AppCategories.bg.$3 ||
+        query == AppCategories.sb.$3 ||
+        query == AppCategories.cc.$3) {
+      context.read<CategoryBloc>().add(CategoryLoadBooksByNameEvent(param: query));
+    }
 
-          break;
-        }
+    // Загрузка книг по размеру
+    if (query == AppCategories.small.$3 ||
+        query == AppCategories.medium.$3 ||
+        query == AppCategories.big.$3 ||
+        query == AppCategories.mahabig.$3) {
+      context.read<CategoryBloc>().add(CategoryLoadBooksBySizeEvent(param: query));
+    }
 
-      case 9:
-        {
-          nameCategory = 'Кулинарные';
-          query = 'culinary';
+    // Загрузка наборов книг
+    if (query == AppCategories.set.$3) {
+      context.read<CategoryBloc>().add(CategoryLoadBooksSetEvent(param: query));
+    }
 
-          break;
-        }
-      default:
-        {
-          nameCategory = 'Выбранная категория';
-          query = '';
-          break;
-        }
+    // Загрузка кулинарных книг
+    if (query == AppCategories.culinary.$3) {
+      context.read<CategoryBloc>().add(CategoryLoadCulinaryBooksEvent(param: query));
     }
   }
 
@@ -92,12 +66,45 @@ class CategoryPage extends StatelessWidget {
       appBar: AppBar(
         leading: IconButton(
             onPressed: () => NavigationManager.instance.pop(), icon: const Icon(Icons.arrow_back)),
-        title: Text(nameCategory),
+        title: Text(AppConstants.category[widget.idCategory]!.$2),
         centerTitle: true,
       ),
-      body: BooksCategoryWidget(
-        query: query,
-      ),
+      body: BlocSelector<CategoryBloc, CategoryState, bool>(selector: (state) {
+        if (state is CategoryBooksEmpty) {
+          return false;
+        }
+        if (state is CategoryBooksLoading) {
+          return false;
+        }
+        if (state is CategoryBooksLoaded) {
+          categoryBooks = state.books;
+
+          if (categoryBooks.isEmpty) {
+            error = true;
+            errorText = S.current.booksNotLoaded;
+            return false;
+          }
+          return true;
+        } else if (state is CategoryBooksError) {
+          error = true;
+          errorText = state.message;
+          return false;
+        } else {
+          return false;
+        }
+      }, builder: (context, state) {
+        if (state) {
+          return BuilderCategoryWidget(
+            context,
+            categoryBooks: categoryBooks,
+          );
+        } else {
+          if (error) {
+            showErrorText(errorText);
+          }
+        }
+        return loadingIndicator(context);
+      }),
     );
   }
 }

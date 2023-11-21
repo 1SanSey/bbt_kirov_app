@@ -1,18 +1,19 @@
 import 'package:bbt_kirov_app/core/entities/book_entity.dart';
 import 'package:bbt_kirov_app/core/themes/app_colors.dart';
 import 'package:bbt_kirov_app/core/widgets/book_card_widget.dart';
+import 'package:bbt_kirov_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
-class BuilderWidgetCategory extends StatefulWidget {
+class BuilderCategoryWidget extends StatefulWidget {
   final List<BookEntity> categoryBooks;
 
-  const BuilderWidgetCategory(BuildContext context, {super.key, required this.categoryBooks});
+  const BuilderCategoryWidget(BuildContext context, {super.key, required this.categoryBooks});
 
   @override
-  State<BuilderWidgetCategory> createState() => _BuilderWidgetCategoryState();
+  State<BuilderCategoryWidget> createState() => _BuilderWidgetCategoryState();
 }
 
-class _BuilderWidgetCategoryState extends State<BuilderWidgetCategory> {
+class _BuilderWidgetCategoryState extends State<BuilderCategoryWidget> {
   final FocusNode? focusNode = FocusNode();
 
   List<BookEntity> _foundBooks = [];
@@ -63,7 +64,7 @@ class _BuilderWidgetCategoryState extends State<BuilderWidgetCategory> {
                       : Theme.of(context).primaryColorDark,
                 ),
                 filled: true,
-                hintText: 'Поиск по названию',
+                hintText: S.current.searchFromName,
                 hintStyle: TextStyle(
                   color: focusNode!.hasFocus
                       ? Theme.of(context).primaryColor
@@ -108,13 +109,13 @@ class _BuilderWidgetCategoryState extends State<BuilderWidgetCategory> {
                     mainAxisExtent: 270,
                   ),
                 )
-              : const SliverToBoxAdapter(
+              : SliverToBoxAdapter(
                   child: Padding(
-                    padding: EdgeInsets.only(top: 200),
+                    padding: const EdgeInsets.only(top: 200),
                     child: Center(
                       child: Text(
-                        'Результаты не найдены',
-                        style: TextStyle(fontSize: 24),
+                        S.current.resultsNotFound,
+                        style: const TextStyle(fontSize: 24),
                       ),
                     ),
                   ),

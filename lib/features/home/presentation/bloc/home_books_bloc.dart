@@ -6,8 +6,8 @@ import 'package:bbt_kirov_app/features/home/domain/usecases/get_books_home.dart'
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 
-part 'home_event.dart';
-part 'home_state.dart';
+part 'home_books_event.dart';
+part 'home_books_state.dart';
 
 class HomeBooksBloc extends Bloc<HomeBooksEvent, HomeBooksState> {
   final PopularBooks popularBooks;

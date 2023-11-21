@@ -23,7 +23,7 @@ class AuthEvent with _$AuthEvent {
 class AuthState with _$AuthState {
   const AuthState._();
 
-bool get isAuthenticated => maybeMap<bool>(
+  bool get isAuthenticated => maybeMap<bool>(
         orElse: () => false,
         authenticated: (_) => true,
       );
@@ -147,7 +147,7 @@ class AuthBloc extends HydratedBloc<AuthEvent, AuthState> {
     } finally {
       emitter(
         state.maybeMap<AuthState>(
-          successful: (state) =>AuthState.notAuthenticated(user: UserEntity.empty()),
+          successful: (state) => AuthState.notAuthenticated(user: UserEntity.empty()),
           orElse: () => AuthState.authenticated(user: state.user),
         ),
       );

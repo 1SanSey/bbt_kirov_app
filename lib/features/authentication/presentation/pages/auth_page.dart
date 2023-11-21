@@ -1,6 +1,8 @@
-import 'package:bbt_kirov_app/core/assets/app_const.dart';
+import 'package:bbt_kirov_app/core/assets/app_constants.dart';
 import 'package:bbt_kirov_app/core/themes/app_colors.dart';
 import 'package:bbt_kirov_app/features/authentication/presentation/auth_bloc/auth_bloc.dart';
+import 'package:bbt_kirov_app/features/authentication/presentation/widgets/auth_text_field.dart';
+import 'package:bbt_kirov_app/generated/l10n.dart';
 import 'package:bbt_kirov_app/navigation/navigation_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -39,7 +41,7 @@ class AuthPageState extends State<AuthPage> {
       onTap: () => FocusManager.instance.primaryFocus!.unfocus(),
       child: Scaffold(
           appBar: AppBar(
-            title: const Text('BBT Kirov App'),
+            title: Text(S.current.BBTKirovApp),
             centerTitle: true,
             automaticallyImplyLeading: false,
           ),
@@ -51,13 +53,13 @@ class AuthPageState extends State<AuthPage> {
                     context: context,
                     builder: (BuildContext context) {
                       return AlertDialog(
-                        title: const Text("Ошибка!"),
-                        content: const Text('Возникла ошибка авторизации.'),
+                        title: Text(S.current.error),
+                        content: Text(S.current.authError),
                         actions: <Widget>[
                           TextButton(
-                            child: const Text(
-                              "OK",
-                              style: TextStyle(color: AppColors.primaryColorLight),
+                            child: Text(
+                              S.current.ok,
+                              style: const TextStyle(color: AppColors.primaryColorLight),
                             ),
                             onPressed: () => NavigationManager.instance.pop(),
                           ),
@@ -96,74 +98,25 @@ class AuthPageState extends State<AuthPage> {
                       const SizedBox(
                         height: 16,
                       ),
-                      const Center(
-                        child: Text('Выполните авторизацию для входа',
-                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400)),
+                      Center(
+                        child: Text(S.current.authExecute,
+                            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400)),
                       ),
                       const SizedBox(
                         height: 16,
                       ),
-                      TextField(
-                        cursorColor: AppColors.primaryColorLight,
+                      AuthTextField(
+                        labelText: S.current.login,
                         controller: controllerUsername,
                         focusNode: focusNodeUsername,
-                        keyboardType: TextInputType.text,
-                        textCapitalization: TextCapitalization.none,
-                        autocorrect: false,
-                        textInputAction: TextInputAction.search,
-                        decoration: InputDecoration(
-                          filled: true,
-                          labelText: 'Логин',
-                          labelStyle: const TextStyle(color: AppColors.primaryColorLight),
-                          fillColor: AppColors.greyColor,
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
-                            borderSide: const BorderSide(
-                              color: AppColors.greyColor,
-                              width: 1.0,
-                            ),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
-                            borderSide: const BorderSide(
-                              color: AppColors.primaryColorLight,
-                              width: 1.0,
-                            ),
-                          ),
-                        ),
                       ),
                       const SizedBox(
                         height: 8,
                       ),
-                      TextField(
-                        cursorColor: AppColors.primaryColorLight,
+                      AuthTextField(
+                        labelText: S.current.password,
                         controller: controllerPassword,
                         focusNode: focusNodePassword,
-                        obscureText: true,
-                        keyboardType: TextInputType.text,
-                        textCapitalization: TextCapitalization.none,
-                        autocorrect: false,
-                        textInputAction: TextInputAction.search,
-                        decoration: InputDecoration(
-                          filled: true,
-                          labelText: 'Пароль',
-                          labelStyle: const TextStyle(color: AppColors.primaryColorLight),
-                          fillColor: AppColors.greyColor,
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
-                            borderSide: const BorderSide(
-                              color: AppColors.greyColor,
-                              width: 1.0,
-                            ),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
-                            borderSide: const BorderSide(
-                              color: AppColors.primaryColorLight,
-                              width: 1.0,
-                            ),
-                          ),
-                        ),
                       ),
                       const SizedBox(
                         height: 16,
@@ -184,7 +137,7 @@ class AuthPageState extends State<AuthPage> {
                               textStyle: const TextStyle(color: Colors.white, fontSize: 18),
                               shape:
                                   RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
-                          child: const Text('ВОЙТИ'),
+                          child: Text(S.current.enter),
                         ),
                       ),
                       const SizedBox(height: 20),
@@ -199,7 +152,7 @@ class AuthPageState extends State<AuthPage> {
                             foregroundColor: Colors.transparent,
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
                         child: Text(
-                          'ЗАРЕГИСТРИРОВАТЬСЯ',
+                          S.current.signUp,
                           style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 18),
                         ),
                       ),

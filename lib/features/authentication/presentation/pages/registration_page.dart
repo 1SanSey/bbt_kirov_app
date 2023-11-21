@@ -1,6 +1,8 @@
-import 'package:bbt_kirov_app/core/assets/app_const.dart';
+import 'package:bbt_kirov_app/core/assets/app_constants.dart';
 import 'package:bbt_kirov_app/core/themes/app_colors.dart';
 import 'package:bbt_kirov_app/features/authentication/presentation/reg_bloc/registration_bloc.dart';
+import 'package:bbt_kirov_app/features/authentication/presentation/widgets/auth_text_field.dart';
+import 'package:bbt_kirov_app/generated/l10n.dart';
 import 'package:bbt_kirov_app/navigation/navigation_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,8 +15,19 @@ class RegistrationPage extends StatefulWidget {
 }
 
 class RegistrationPageState extends State<RegistrationPage> {
-  final controllerUsername = TextEditingController();
-  final controllerPassword = TextEditingController();
+  late final TextEditingController controllerUsername;
+  late final TextEditingController controllerPassword;
+  late final FocusNode focusNodeUsername;
+  late final FocusNode focusNodePassword;
+
+  @override
+  void initState() {
+    controllerUsername = TextEditingController();
+    controllerPassword = TextEditingController();
+    focusNodeUsername = FocusNode();
+    focusNodePassword = FocusNode();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +35,7 @@ class RegistrationPageState extends State<RegistrationPage> {
       onTap: () => FocusManager.instance.primaryFocus!.unfocus(),
       child: Scaffold(
           appBar: AppBar(
-            title: const Text('BBT Kirov App'),
+            title: Text(S.current.BBTKirovApp),
             centerTitle: true,
             automaticallyImplyLeading: false,
           ),
@@ -34,13 +47,13 @@ class RegistrationPageState extends State<RegistrationPage> {
                     context: context,
                     builder: (BuildContext context) {
                       return AlertDialog(
-                        title: const Text("Ошибка!"),
-                        content: const Text('Возникла ошибка при регистрации.'),
+                        title: Text(S.current.error),
+                        content: Text(S.current.regError),
                         actions: <Widget>[
                           TextButton(
-                            child: const Text(
-                              "OK",
-                              style: TextStyle(color: AppColors.primaryColorLight),
+                            child: Text(
+                              S.current.ok,
+                              style: const TextStyle(color: AppColors.primaryColorLight),
                             ),
                             onPressed: () => NavigationManager.instance.pop(),
                           ),
@@ -54,13 +67,13 @@ class RegistrationPageState extends State<RegistrationPage> {
                     context: context,
                     builder: (BuildContext context) {
                       return AlertDialog(
-                        title: const Text("Успешно!"),
-                        content: const Text('Вы успешно зарегистрировались.'),
+                        title: Text(S.current.successfully),
+                        content: Text(S.current.successfullyRegister),
                         actions: <Widget>[
                           TextButton(
-                            child: const Text(
-                              "OK",
-                              style: TextStyle(color: AppColors.primaryColorLight),
+                            child: Text(
+                              S.current.ok,
+                              style: const TextStyle(color: AppColors.primaryColorLight),
                             ),
                             onPressed: () {
                               NavigationManager.instance
@@ -88,108 +101,24 @@ class RegistrationPageState extends State<RegistrationPage> {
                     const SizedBox(
                       height: 16,
                     ),
-                    const Center(
-                      child: Text('Зарегистрируйтесь для входа',
-                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400)),
+                    Center(
+                      child: Text(S.current.registerForEnter,
+                          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400)),
                     ),
                     const SizedBox(
                       height: 16,
                     ),
-                    TextField(
-                      cursorColor: AppColors.primaryColorLight,
-                      controller: controllerUsername,
-                      //enabled: !isLoggedIn,
-                      keyboardType: TextInputType.text,
-                      textCapitalization: TextCapitalization.none,
-                      autocorrect: false,
-                      textInputAction: TextInputAction.search,
-                      decoration: InputDecoration(
-                        filled: true,
-                        labelText: 'Ваш email (логин)',
-                        labelStyle: const TextStyle(color: AppColors.primaryColorLight),
-                        fillColor: AppColors.greyColor,
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: const BorderSide(
-                            color: AppColors.greyColor,
-                            width: 1.0,
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: const BorderSide(
-                            color: AppColors.primaryColorLight,
-                            width: 1.0,
-                          ),
-                        ),
-                      ),
-                    ),
+                    AuthTextField(
+                        controller: controllerUsername,
+                        focusNode: focusNodeUsername,
+                        labelText: S.current.inputEmail),
                     const SizedBox(
                       height: 8,
                     ),
-                    TextField(
-                      cursorColor: AppColors.primaryColorLight,
-                      controller: controllerPassword,
-                      //enabled: !isLoggedIn,
-                      obscureText: true,
-                      keyboardType: TextInputType.text,
-                      textCapitalization: TextCapitalization.none,
-                      autocorrect: false,
-                      textInputAction: TextInputAction.search,
-                      decoration: InputDecoration(
-                        filled: true,
-                        labelText: 'Введите пароль',
-                        labelStyle: const TextStyle(color: AppColors.primaryColorLight),
-                        fillColor: AppColors.greyColor,
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: const BorderSide(
-                            color: AppColors.greyColor,
-                            width: 1.0,
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: const BorderSide(
-                            color: AppColors.primaryColorLight,
-                            width: 1.0,
-                          ),
-                        ),
-                      ),
-                    ),
-                    // const SizedBox(
-                    //   height: 8,
-                    // ),
-                    // TextField(
-                    //   cursorColor: AppColors.primaryColorLight,
-                    //   controller: controllerPassword,
-                    //   //enabled: !isLoggedIn,
-                    //   obscureText: true,
-                    //   keyboardType: TextInputType.text,
-                    //   textCapitalization: TextCapitalization.none,
-                    //   autocorrect: false,
-                    //   textInputAction: TextInputAction.search,
-                    //   decoration: InputDecoration(
-                    //     filled: true,
-                    //     labelText: 'Подтвердите пароль',
-                    //     labelStyle: const TextStyle(color: AppColors.primaryColorLight),
-                    //     fillColor: AppColors.greyColor,
-                    //     enabledBorder: OutlineInputBorder(
-                    //       borderRadius: BorderRadius.circular(12),
-                    //       borderSide: const BorderSide(
-                    //         color: AppColors.greyColor,
-                    //         width: 1.0,
-                    //       ),
-                    //     ),
-                    //     focusedBorder: OutlineInputBorder(
-                    //       borderRadius: BorderRadius.circular(12),
-                    //       borderSide: const BorderSide(
-                    //         color: AppColors.primaryColorLight,
-                    //         width: 1.0,
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ),
+                    AuthTextField(
+                        controller: controllerPassword,
+                        focusNode: focusNodePassword,
+                        labelText: S.current.inputPassword),
                     const SizedBox(
                       height: 16,
                     ),
@@ -208,7 +137,7 @@ class RegistrationPageState extends State<RegistrationPage> {
                             fixedSize: const Size(320, 50),
                             textStyle: const TextStyle(color: Colors.white, fontSize: 18),
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
-                        child: const Text('ЗАРЕГИСТРИРОВАТЬСЯ'),
+                        child: Text(S.current.signUp),
                       ),
                     ),
                     const SizedBox(height: 20),
@@ -224,6 +153,8 @@ class RegistrationPageState extends State<RegistrationPage> {
   void dispose() {
     controllerUsername.dispose();
     controllerPassword.dispose();
+    focusNodeUsername.dispose();
+    focusNodePassword.dispose();
     super.dispose();
   }
 }

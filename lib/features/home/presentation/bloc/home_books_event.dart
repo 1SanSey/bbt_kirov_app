@@ -1,4 +1,4 @@
-part of 'home_bloc.dart';
+part of 'home_books_bloc.dart';
 
 abstract class HomeBooksEvent extends Equatable {
   const HomeBooksEvent();
