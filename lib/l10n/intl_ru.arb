@@ -20,7 +20,7 @@
     "error": "Ошибка!",
     "booksNotLoaded": "Ошибка! Товары не загружены",
     "emptyFavourites": "Список избранных книг пуст",
-    "price": "Цена: {price}",
+    "price": "Цена: {price} ₽",
     "@price": {
         "placeholders": {
             "price": {
@@ -37,7 +37,7 @@
     "orderFrom": "Заказ от ",
     "orderStructure": "Состав заказа",
     "orderDate": "Дата заказа: ",
-    "orderSum": "Сумма заказа: {sum}",
+    "orderSum": "Сумма заказа: {sum} ₽",
     "@orderSum": {
         "placeholders": {
             "sum": {
@@ -49,7 +49,7 @@
         }
     },
     "cartEmpty": "Ваша корзина пуста",
-    "totalSum": "Общая сумма: {sum}",
+    "totalSum": "Общая сумма: {sum} ₽",
     "@totalSum": {
         "placeholders": {
             "sum": {
@@ -60,5 +60,13 @@
             }
         }
     },
-    "sendOrder": "ОТПРАВИТЬ ЗАКАЗ"
+    "sendOrder": "ОТПРАВИТЬ ЗАКАЗ",
+    "addToCart": "ДОБАВИТЬ В КОРЗИНУ",
+    "addToFavourites": "ДОБАВИТЬ В ИЗБРАННОЕ",
+    "exit": "Выход",
+    "applicationVersion": "1.0.0",
+    "applicationLegalese": "Sergey Ogarkov © 2023",
+    "aboutApp": "О приложении",
+    "lightTheme": "Светлая тема",
+    "darkTheme": "Темная тема"
 }

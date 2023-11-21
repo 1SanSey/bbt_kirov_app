@@ -5,9 +5,9 @@ const internetConnectionFailureMessage = 'Internet Connection Failure';
 
 String mapFailureToMessage(Failure failure) {
   switch (failure.runtimeType) {
-    case ServerFailure:
+    case const (ServerFailure):
       return serverFailureMessage;
-    case InternetConnectionFailure:
+    case const (InternetConnectionFailure):
       return internetConnectionFailureMessage;
     default:
       return 'Unexpected Error';

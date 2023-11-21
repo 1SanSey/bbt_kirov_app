@@ -1,29 +1,27 @@
-import 'package:bbt_kirov_app/core/themes/change_theme_bloc.dart';
-import 'package:bbt_kirov_app/core/themes/themes.dart';
-import 'package:bbt_kirov_app/core/datasources/remote_data_source.dart';
-import 'package:bbt_kirov_app/core/datasources/book_hive_datasource.dart';
-import 'package:bbt_kirov_app/features/authentication/presentation/reg_bloc/registration_bloc.dart';
-import 'package:bbt_kirov_app/features/cart/presentation/bloc/cart_bloc.dart';
-import 'package:bbt_kirov_app/features/category/presentation/bloc/category_bloc.dart';
-import 'package:bbt_kirov_app/features/favorites/presentation/bloc/favourites_bloc.dart';
-import 'package:bbt_kirov_app/features/home/presentation/bloc/home_books_bloc.dart';
-import 'package:bbt_kirov_app/features/orders/presentation/bloc/orders_bloc.dart';
+import 'package:bbt_kirov_app/core/init_datasources.dart';
+import 'package:bbt_kirov_app/common/theme/themes.dart';
+import 'package:bbt_kirov_app/features/presentation/bloc/auth_bloc/auth_bloc.dart';
+import 'package:bbt_kirov_app/features/presentation/bloc/cart_bloc/cart_bloc.dart';
+import 'package:bbt_kirov_app/features/presentation/bloc/category_bloc/category_bloc.dart';
+import 'package:bbt_kirov_app/features/presentation/bloc/change_theme_bloc/change_theme_bloc.dart';
+import 'package:bbt_kirov_app/features/presentation/bloc/favourites_bloc/favourites_bloc.dart';
+import 'package:bbt_kirov_app/features/presentation/bloc/home_books_bloc/home_books_bloc.dart';
+import 'package:bbt_kirov_app/features/presentation/bloc/orders_bloc/orders_bloc.dart';
+import 'package:bbt_kirov_app/features/presentation/bloc/reg_bloc/registration_bloc.dart';
 import 'package:bbt_kirov_app/generated/l10n.dart';
-import 'package:bbt_kirov_app/locator_service.dart' as di;
-import 'package:bbt_kirov_app/navigation/navigation_manager.dart';
-import 'package:bbt_kirov_app/navigation/route_builder.dart';
+import 'package:bbt_kirov_app/service_locator.dart' as di;
+import 'package:bbt_kirov_app/features/presentation/navigation/navigation_manager.dart';
+import 'package:bbt_kirov_app/features/presentation/navigation/route_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 
-import 'features/authentication/presentation/auth_bloc/auth_bloc.dart';
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await BookRemoteDataSourceImpl.initParse();
-  await BookHiveDataSourceImpl.initHive();
+  await InitDatasources.initParse();
+  await InitDatasources.initHive();
   await di.init();
 
   HydratedBloc.storage =
@@ -51,7 +49,7 @@ class MyApp extends StatelessWidget {
       child: BlocBuilder<ChangeThemeBloc, ThemeState>(
         builder: (context, state) {
           return MaterialApp(
-            title: 'BBT Kirov App',
+            //title: S.current.BBTKirovApp,
             theme: state.isDark ? darkTheme() : lightTheme(),
             localizationsDelegates: const [
               S.delegate,

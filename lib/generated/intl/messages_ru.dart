@@ -20,15 +20,22 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ru';
 
-  static String m0(sum) => "Сумма заказа: ${sum}";
+  static String m0(sum) => "Сумма заказа: ${sum} ₽";
 
-  static String m1(price) => "Цена: ${price}";
+  static String m1(price) => "Цена: ${price} ₽";
 
-  static String m2(sum) => "Общая сумма: ${sum}";
+  static String m2(sum) => "Общая сумма: ${sum} ₽";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "BBTKirovApp": MessageLookupByLibrary.simpleMessage("BBT Kirov App"),
+        "aboutApp": MessageLookupByLibrary.simpleMessage("О приложении"),
+        "addToCart": MessageLookupByLibrary.simpleMessage("ДОБАВИТЬ В КОРЗИНУ"),
+        "addToFavourites":
+            MessageLookupByLibrary.simpleMessage("ДОБАВИТЬ В ИЗБРАННОЕ"),
+        "applicationLegalese":
+            MessageLookupByLibrary.simpleMessage("Sergey Ogarkov © 2023"),
+        "applicationVersion": MessageLookupByLibrary.simpleMessage("1.0.0"),
         "authError": MessageLookupByLibrary.simpleMessage(
             "Возникла ошибка при авторизации."),
         "authExecute": MessageLookupByLibrary.simpleMessage(
@@ -37,14 +44,17 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Ошибка! Товары не загружены"),
         "cart": MessageLookupByLibrary.simpleMessage("Корзина"),
         "cartEmpty": MessageLookupByLibrary.simpleMessage("Ваша корзина пуста"),
+        "darkTheme": MessageLookupByLibrary.simpleMessage("Темная тема"),
         "emptyFavourites":
             MessageLookupByLibrary.simpleMessage("Список избранных книг пуст"),
         "enter": MessageLookupByLibrary.simpleMessage("ВОЙТИ"),
         "error": MessageLookupByLibrary.simpleMessage("Ошибка!"),
+        "exit": MessageLookupByLibrary.simpleMessage("Выход"),
         "favourites": MessageLookupByLibrary.simpleMessage("Избранное"),
         "inputEmail":
             MessageLookupByLibrary.simpleMessage("Введите email (логин)"),
         "inputPassword": MessageLookupByLibrary.simpleMessage("Введите пароль"),
+        "lightTheme": MessageLookupByLibrary.simpleMessage("Светлая тема"),
         "login": MessageLookupByLibrary.simpleMessage("Логин"),
         "main": MessageLookupByLibrary.simpleMessage("Главная"),
         "myOrders": MessageLookupByLibrary.simpleMessage("Мои заказы"),

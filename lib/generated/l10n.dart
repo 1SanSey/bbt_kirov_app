@@ -260,10 +260,10 @@ class S {
     );
   }
 
-  /// `Цена: {price}`
+  /// `Цена: {price} ₽`
   String price(int price) {
     return Intl.message(
-      'Цена: $price',
+      'Цена: $price ₽',
       name: 'price',
       desc: '',
       args: [price],
@@ -330,10 +330,10 @@ class S {
     );
   }
 
-  /// `Сумма заказа: {sum}`
+  /// `Сумма заказа: {sum} ₽`
   String orderSum(int sum) {
     return Intl.message(
-      'Сумма заказа: $sum',
+      'Сумма заказа: $sum ₽',
       name: 'orderSum',
       desc: '',
       args: [sum],
@@ -350,10 +350,10 @@ class S {
     );
   }
 
-  /// `Общая сумма: {sum}`
+  /// `Общая сумма: {sum} ₽`
   String totalSum(int sum) {
     return Intl.message(
-      'Общая сумма: $sum',
+      'Общая сумма: $sum ₽',
       name: 'totalSum',
       desc: '',
       args: [sum],
@@ -365,6 +365,86 @@ class S {
     return Intl.message(
       'ОТПРАВИТЬ ЗАКАЗ',
       name: 'sendOrder',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ДОБАВИТЬ В КОРЗИНУ`
+  String get addToCart {
+    return Intl.message(
+      'ДОБАВИТЬ В КОРЗИНУ',
+      name: 'addToCart',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ДОБАВИТЬ В ИЗБРАННОЕ`
+  String get addToFavourites {
+    return Intl.message(
+      'ДОБАВИТЬ В ИЗБРАННОЕ',
+      name: 'addToFavourites',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Выход`
+  String get exit {
+    return Intl.message(
+      'Выход',
+      name: 'exit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `1.0.0`
+  String get applicationVersion {
+    return Intl.message(
+      '1.0.0',
+      name: 'applicationVersion',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sergey Ogarkov © 2023`
+  String get applicationLegalese {
+    return Intl.message(
+      'Sergey Ogarkov © 2023',
+      name: 'applicationLegalese',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `О приложении`
+  String get aboutApp {
+    return Intl.message(
+      'О приложении',
+      name: 'aboutApp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Светлая тема`
+  String get lightTheme {
+    return Intl.message(
+      'Светлая тема',
+      name: 'lightTheme',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Темная тема`
+  String get darkTheme {
+    return Intl.message(
+      'Темная тема',
+      name: 'darkTheme',
       desc: '',
       args: [],
     );
