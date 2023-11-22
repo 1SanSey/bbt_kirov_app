@@ -1,7 +1,7 @@
 import 'package:bbt_kirov_app/core/app_constants.dart';
 import 'package:bbt_kirov_app/common/theme/app_colors.dart';
 import 'package:bbt_kirov_app/features/presentation/bloc/auth_bloc/auth_bloc.dart';
-import 'package:bbt_kirov_app/features/presentation/ui/authentication/presentation/widgets/auth_text_field.dart';
+import 'package:bbt_kirov_app/features/presentation/ui/authentication/widgets/auth_text_field.dart';
 import 'package:bbt_kirov_app/generated/l10n.dart';
 import 'package:bbt_kirov_app/features/presentation/navigation/navigation_manager.dart';
 import 'package:flutter/material.dart';
@@ -107,6 +107,7 @@ class AuthPageState extends State<AuthPage> {
                         labelText: S.current.password,
                         controller: controllerPassword,
                         focusNode: focusNodePassword,
+                        obscureText: true
                       ),
                       const SizedBox(
                         height: 16,

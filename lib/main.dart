@@ -21,8 +21,8 @@ import 'package:path_provider/path_provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await InitDatasources.initParse();
-  await InitDatasources.initHive();
+  await InitDatasources.instance.initParse();
+  await InitDatasources.instance.initHive();
   await di.init();
 
   HydratedBloc.storage =

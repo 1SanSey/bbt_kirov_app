@@ -5,8 +5,13 @@ class AuthTextField extends StatelessWidget {
   final TextEditingController controller;
   final FocusNode focusNode;
   final String labelText;
+  final bool obscureText;
   const AuthTextField(
-      {super.key, required this.controller, required this.focusNode, required this.labelText});
+      {super.key,
+      required this.controller,
+      required this.focusNode,
+      required this.labelText,
+      this.obscureText = false});
 
   @override
   Widget build(BuildContext context) {
@@ -17,10 +22,11 @@ class AuthTextField extends StatelessWidget {
       keyboardType: TextInputType.text,
       textCapitalization: TextCapitalization.none,
       autocorrect: false,
+      obscureText: obscureText,
       textInputAction: TextInputAction.search,
       decoration: InputDecoration(
         filled: true,
-        labelText: 'Логин',
+        labelText: labelText,
         labelStyle: const TextStyle(color: AppColors.primaryColorLight),
         fillColor: AppColors.greyColor,
         enabledBorder: OutlineInputBorder(

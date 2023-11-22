@@ -1,7 +1,7 @@
 import 'package:bbt_kirov_app/core/app_constants.dart';
 import 'package:bbt_kirov_app/common/theme/app_colors.dart';
 import 'package:bbt_kirov_app/features/presentation/bloc/reg_bloc/registration_bloc.dart';
-import 'package:bbt_kirov_app/features/presentation/ui/authentication/presentation/widgets/auth_text_field.dart';
+import 'package:bbt_kirov_app/features/presentation/ui/authentication/widgets/auth_text_field.dart';
 import 'package:bbt_kirov_app/generated/l10n.dart';
 import 'package:bbt_kirov_app/features/presentation/navigation/navigation_manager.dart';
 import 'package:flutter/material.dart';
@@ -118,6 +118,7 @@ class RegistrationPageState extends State<RegistrationPage> {
                     AuthTextField(
                         controller: controllerPassword,
                         focusNode: focusNodePassword,
+                        obscureText: true,
                         labelText: S.current.inputPassword),
                     const SizedBox(
                       height: 16,
