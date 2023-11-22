@@ -1,7 +1,9 @@
 import 'package:bbt_kirov_app/features/domain/entities/cart_book_entity.dart';
 import 'package:bbt_kirov_app/features/domain/entities/order_entity.dart';
 import 'package:bbt_kirov_app/features/presentation/bloc/cart_bloc/cart_bloc.dart';
+import 'package:bbt_kirov_app/features/presentation/bloc/orders_bloc/send_order_bloc/send_order_bloc.dart';
 import 'package:bbt_kirov_app/features/presentation/ui/cart/widgets/cart_book_card.dart';
+import 'package:bbt_kirov_app/features/presentation/ui/widgets/current_user_builder.dart';
 import 'package:bbt_kirov_app/features/presentation/ui/widgets/error_text_widget.dart';
 import 'package:bbt_kirov_app/common/theme/app_colors.dart';
 import 'package:bbt_kirov_app/generated/l10n.dart';
@@ -27,9 +29,6 @@ class _CartPageState extends State<CartPage> {
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus!.unfocus(),
       child: BlocBuilder<CartBloc, CartState>(
-        buildWhen: (previous, current) {
-          return previous != current;
-        },
         builder: (context, state) {
           List<CartBookEntity> cartBooks = [];
           int totalSum = 0;
@@ -41,67 +40,68 @@ class _CartPageState extends State<CartPage> {
             for (var value in cartBooks) {
               orderBooks.addAll({value.name: value.quantity});
             }
-            if (cartBooks.isEmpty) {
-              return ErrorTextWidget(errorMessage: S.current.cartEmpty);
-            }
           }
 
-          return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: CustomScrollView(slivers: [
-              SliverPadding(
-                padding: const EdgeInsets.symmetric(vertical: 8),
-                sliver: SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                    (context, index) {
-                      return CartBookCard(
-                        book: cartBooks[index],
-                        index: index,
-                      );
-                    },
-                    childCount: cartBooks.length,
-                  ),
-                ),
-              ),
-              SliverToBoxAdapter(
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 8.0),
-                  child: Text(
-                    S.current.totalSum(totalSum),
-                    style: const TextStyle(
-                        color: AppColors.greyColor2, fontSize: 20, fontWeight: FontWeight.w400),
-                  ),
-                ),
-              ),
-              SliverToBoxAdapter(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 48.0),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      //TODO: исправить
-                      OrderEntity order = OrderEntity(
-                        username: 'a',
-                        dateOrder: DateTime.now(),
-                        sumOrder: totalSum,
-                        books: orderBooks,
-                      );
-
-                      context.read<CartBloc>().add(SendOrderEvent(order: order));
-                      setState(() {
-                        context.read<CartBloc>().add(ShowCartEvent());
-                      });
-                    },
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: Theme.of(context).primaryColor,
-                        fixedSize: const Size(320, 50),
-                        textStyle: const TextStyle(color: Colors.white, fontSize: 18),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
-                    child: Text(S.current.sendOrder),
-                  ),
-                ),
-              ),
-            ]),
-          );
+          return cartBooks.isNotEmpty
+              ? Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: CustomScrollView(slivers: [
+                    SliverPadding(
+                      padding: const EdgeInsets.symmetric(vertical: 8),
+                      sliver: SliverList(
+                        delegate: SliverChildBuilderDelegate(
+                          (context, index) {
+                            return CartBookCard(
+                              book: cartBooks[index],
+                              index: index,
+                            );
+                          },
+                          childCount: cartBooks.length,
+                        ),
+                      ),
+                    ),
+                    SliverToBoxAdapter(
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 8.0),
+                        child: Text(
+                          S.current.totalSum(totalSum),
+                          style: const TextStyle(
+                              color: AppColors.greyColor2,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w400),
+                        ),
+                      ),
+                    ),
+                    CurrentUserBuilder(
+                      builder: (user) => SliverToBoxAdapter(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 48.0),
+                          child: ElevatedButton(
+                            onPressed: () {
+                              context
+                                ..read<SendOrderBloc>().add(SendOrderEvent.send(
+                                    order: OrderEntity(
+                                  userId: user.uid,
+                                  dateOrder: DateTime.now(),
+                                  sumOrder: totalSum,
+                                  books: orderBooks,
+                                )))
+                                ..read<CartBloc>().add(RemoveAllCartEvent());
+                            },
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: Theme.of(context).primaryColor,
+                                fixedSize: const Size(320, 50),
+                                textStyle: const TextStyle(color: Colors.white, fontSize: 18),
+                                shape:
+                                    RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
+                            child: Text(S.current.sendOrder),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ]),
+                )
+              : ErrorTextWidget(errorMessage: S.current.cartEmpty);
         },
       ),
     );

@@ -29,7 +29,6 @@ abstract class RouteBuilder {
     RouteNames.homePage: (context) => const HomePage(),
     RouteNames.authPage: (context) => const AuthPage(),
     RouteNames.registrationPage: (context) => const RegistrationPage(),
-    RouteNames.ordersPage: (context) => const OrdersPage(),
   };
 
   static Route<Object> onGenerateRoute(RouteSettings settings) {
@@ -44,6 +43,11 @@ abstract class RouteBuilder {
         final order = settings.arguments as OrderEntity;
         return MaterialPageRoute(
           builder: (context) => OrderDetailPage(order: order),
+        );
+      case (RouteNames.ordersPage):
+        final userId = settings.arguments as String;
+        return MaterialPageRoute(
+          builder: (context) => OrdersPage(userId: userId),
         );
       default:
         return MaterialPageRoute(

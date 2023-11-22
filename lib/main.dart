@@ -7,6 +7,7 @@ import 'package:bbt_kirov_app/features/presentation/bloc/change_theme_bloc/chang
 import 'package:bbt_kirov_app/features/presentation/bloc/favourites_bloc/favourites_bloc.dart';
 import 'package:bbt_kirov_app/features/presentation/bloc/home_books_bloc/home_books_bloc.dart';
 import 'package:bbt_kirov_app/features/presentation/bloc/orders_bloc/orders_bloc.dart';
+import 'package:bbt_kirov_app/features/presentation/bloc/orders_bloc/send_order_bloc/send_order_bloc.dart';
 import 'package:bbt_kirov_app/features/presentation/bloc/reg_bloc/registration_bloc.dart';
 import 'package:bbt_kirov_app/generated/l10n.dart';
 import 'package:bbt_kirov_app/service_locator.dart' as di;
@@ -45,6 +46,7 @@ class MyApp extends StatelessWidget {
         BlocProvider<CartBloc>(create: (context) => di.sl<CartBloc>()),
         BlocProvider<FavouritesBloc>(create: (context) => di.sl<FavouritesBloc>()),
         BlocProvider<OrdersBloc>(create: (context) => di.sl<OrdersBloc>()),
+        BlocProvider<SendOrderBloc>(create: (context) => di.sl<SendOrderBloc>()),
       ],
       child: BlocBuilder<ChangeThemeBloc, ThemeState>(
         builder: (context, state) {

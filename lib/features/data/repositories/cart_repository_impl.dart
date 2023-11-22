@@ -3,7 +3,6 @@ import 'package:bbt_kirov_app/features/data/i_datasources/i_books_local_datasour
 import 'package:bbt_kirov_app/features/data/i_datasources/i_orders_remote_datasource.dart';
 import 'package:bbt_kirov_app/features/data/models/cart_book_model/cart_book_model.dart';
 import 'package:bbt_kirov_app/features/domain/entities/cart_book_entity.dart';
-import 'package:bbt_kirov_app/features/domain/entities/order_entity.dart';
 import 'package:bbt_kirov_app/features/domain/repositories/i_cart_repository.dart';
 
 class CartRepositoryImpl implements ICartRepository {
@@ -42,11 +41,6 @@ class CartRepositoryImpl implements ICartRepository {
   }
 
   @override
-  void sendOrder(OrderEntity order) {
-    remoteDataSource.sendOrder(order);
-  }
-
-  @override
   int totalSum() {
     return localDataSource.totalSum();
   }
@@ -55,19 +49,4 @@ class CartRepositoryImpl implements ICartRepository {
   void removeAllCart() {
     return localDataSource.removeAllCart();
   }
-
-  /* Future<Either<Failure, List<BookModel>>> _getBooks(
-      Future<List<BookModel>> Function() getBooks) async {
-    if (await networkInfo.isConnected) {
-      try {
-        final remoteBooks = await getBooks();
-
-        return Right(remoteBooks);
-      } on ServerException {
-        return Left(ServerFailure());
-      }
-    } else {
-      return Left(InternetConnectionFailure());
-    }
-  } */
 }

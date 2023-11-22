@@ -11,13 +11,12 @@ class OrdersRepositoryImpl implements IOrdersRepository {
   final IOrdersRemoteDatasource remoteDataSource;
   final NetworkInfo networkInfo;
 
-  OrdersRepositoryImpl(
-      {required this.networkInfo, required this.remoteDataSource});
+  OrdersRepositoryImpl({required this.networkInfo, required this.remoteDataSource});
 
   @override
-  Future<Either<Failure, List<OrderEntity>>> fetchOrders(String username) {
+  Future<Either<Failure, List<OrderEntity>>> fetchOrders(String userId) {
     return _fetchOrders(() {
-      return remoteDataSource.fetchOrders(username);
+      return remoteDataSource.fetchOrders(userId);
     });
   }
 
@@ -28,6 +27,21 @@ class OrdersRepositoryImpl implements IOrdersRepository {
         final remoteOrders = await fetchOrders();
 
         return Right(remoteOrders);
+      } on ServerException {
+        return Left(ServerFailure());
+      }
+    } else {
+      return Left(InternetConnectionFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, String>> sendOrder(OrderEntity order) async {
+    if (await networkInfo.isConnected) {
+      try {
+        final success = await remoteDataSource.sendOrder(order);
+
+        return Right(success);
       } on ServerException {
         return Left(ServerFailure());
       }

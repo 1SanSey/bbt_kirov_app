@@ -30,8 +30,5 @@ class ChangeQuantityCartEvent extends CartEvent {
   const ChangeQuantityCartEvent({required this.index, required this.value});
 }
 
-class SendOrderEvent extends CartEvent {
-  final OrderEntity order;
+class RemoveAllCartEvent extends CartEvent {}
 
-  const SendOrderEvent({required this.order});
-}

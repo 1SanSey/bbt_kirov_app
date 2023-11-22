@@ -9,13 +9,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 class OrdersPage extends StatelessWidget {
-  const OrdersPage({super.key});
+  final String userId;
+  const OrdersPage({super.key, required this.userId});
 
   @override
   Widget build(BuildContext context) {
-    //TODO: исправить
-    context.read<OrdersBloc>().add(const OrdersEvent.fetch(username: 'a'));
-    List<OrderEntity> orders = [];
 
     return Scaffold(
       appBar: AppBar(
@@ -26,8 +24,8 @@ class OrdersPage extends StatelessWidget {
       ),
       body: BlocBuilder<OrdersBloc, OrdersState>(
         builder: ((context, state) {
-          state.maybeMap(
-            orElse: () {},
+          List<OrderEntity> orders = [];
+          state.mapOrNull(
             loaded: (value) {
               orders = value.orders;
             },

@@ -7,7 +7,6 @@ import 'package:bbt_kirov_app/features/presentation/navigation/navigation_manage
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthPage extends StatefulWidget {
   const AuthPage({super.key});
@@ -21,7 +20,6 @@ class AuthPageState extends State<AuthPage> {
   late final TextEditingController controllerPassword;
   late final FocusNode focusNodeUsername;
   late final FocusNode focusNodePassword;
-  late SharedPreferences _userPrefs;
 
   @override
   void initState() {
@@ -29,9 +27,6 @@ class AuthPageState extends State<AuthPage> {
     controllerPassword = TextEditingController();
     focusNodeUsername = FocusNode();
     focusNodePassword = FocusNode();
-    // SharedPreferences.getInstance().then((prefs) {
-    //   setState(() => _userPrefs = prefs);
-    // });
     super.initState();
   }
 
@@ -69,11 +64,6 @@ class AuthPageState extends State<AuthPage> {
                   );
                 },
                 authenticated: (state) {
-                  // _setUserPrefs(
-                  //     loggedIn: true,
-                  //     username: state.user.displayName,
-                  //     email: state.user.email,
-                  //     photo: state.user.photoURL);
                   NavigationManager.instance.goHomePage();
                 },
               );
@@ -166,17 +156,6 @@ class AuthPageState extends State<AuthPage> {
             },
           )),
     );
-  }
-
-  Future<void> _setUserPrefs(
-      {required bool loggedIn,
-      required String username,
-      required String email,
-      required String photo}) async {
-    await _userPrefs.setBool(AppConstants.loggedInPref, loggedIn);
-    await _userPrefs.setString(AppConstants.usernamePref, username);
-    await _userPrefs.setString(AppConstants.photoPref, photo);
-    await _userPrefs.setString(AppConstants.emailPref, email);
   }
 
   @override

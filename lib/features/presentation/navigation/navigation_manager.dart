@@ -24,8 +24,8 @@ class NavigationManager {
     _navigator.pushReplacementNamed(RouteNames.authPage);
   }
 
-  void goOrdersPage() {
-    _navigator.pushNamed(RouteNames.ordersPage);
+  void goOrdersPage(String userId) {
+    _navigator.pushNamed(RouteNames.ordersPage, arguments: userId);
   }
 
   void goCategoryPage(int id) {

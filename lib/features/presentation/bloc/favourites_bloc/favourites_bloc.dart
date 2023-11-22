@@ -25,6 +25,7 @@ class FavouritesBloc extends Bloc<FavouritesEvent, FavouritesState> {
   void _removeFromFavourites(
       RemoveFromFavouritesEvent event, Emitter<FavouritesState> emit) {
     favourites.removeFromFavourites(event.book, event.index);
+    emit(ShowFavouritesState(books: favourites.showFavourites()));
   }
 
   void _showFavourites(

@@ -1,5 +1,4 @@
 import 'package:bbt_kirov_app/features/domain/entities/cart_book_entity.dart';
-import 'package:bbt_kirov_app/features/domain/entities/order_entity.dart';
 import 'package:bbt_kirov_app/features/domain/usecases/cart_usecase.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -15,7 +14,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     on<RemoveFromCartEvent>(_removeFromCart);
     on<ShowCartEvent>(_showCart);
     on<ChangeQuantityCartEvent>(_changeQuantityCart);
-    on<SendOrderEvent>(_sendOrder);
+    on<RemoveAllCartEvent>(_removeAll);
   }
 
   void _addToCart(AddToCartEvent event, Emitter<CartState> emit) {
@@ -39,8 +38,8 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     cart.changeQuantityCart(event.index, event.value);
   }
 
-  void _sendOrder(SendOrderEvent event, Emitter<CartState> emit) {
-    cart.sendOrder(event.order);
+  void _removeAll(RemoveAllCartEvent event, Emitter<CartState> emit) {
     cart.removeAllCart();
+    emit(EmptyCartState());
   }
 }

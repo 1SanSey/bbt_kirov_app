@@ -19,19 +19,19 @@ mixin _$OrdersEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() empty,
-    required TResult Function(String username) fetch,
+    required TResult Function(String userId) fetch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? empty,
-    TResult? Function(String username)? fetch,
+    TResult? Function(String userId)? fetch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? empty,
-    TResult Function(String username)? fetch,
+    TResult Function(String userId)? fetch,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -113,7 +113,7 @@ class _$EmptyOrdersEventImpl extends _EmptyOrdersEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() empty,
-    required TResult Function(String username) fetch,
+    required TResult Function(String userId) fetch,
   }) {
     return empty();
   }
@@ -122,7 +122,7 @@ class _$EmptyOrdersEventImpl extends _EmptyOrdersEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? empty,
-    TResult? Function(String username)? fetch,
+    TResult? Function(String userId)? fetch,
   }) {
     return empty?.call();
   }
@@ -131,7 +131,7 @@ class _$EmptyOrdersEventImpl extends _EmptyOrdersEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? empty,
-    TResult Function(String username)? fetch,
+    TResult Function(String userId)? fetch,
     required TResult orElse(),
   }) {
     if (empty != null) {
@@ -183,7 +183,7 @@ abstract class _$$FetchOrdersEventImplCopyWith<$Res> {
           $Res Function(_$FetchOrdersEventImpl) then) =
       __$$FetchOrdersEventImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String username});
+  $Res call({String userId});
 }
 
 /// @nodoc
@@ -197,12 +197,12 @@ class __$$FetchOrdersEventImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? username = null,
+    Object? userId = null,
   }) {
     return _then(_$FetchOrdersEventImpl(
-      username: null == username
-          ? _value.username
-          : username // ignore: cast_nullable_to_non_nullable
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -211,14 +211,14 @@ class __$$FetchOrdersEventImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$FetchOrdersEventImpl extends _FetchOrdersEvent {
-  const _$FetchOrdersEventImpl({required this.username}) : super._();
+  const _$FetchOrdersEventImpl({required this.userId}) : super._();
 
   @override
-  final String username;
+  final String userId;
 
   @override
   String toString() {
-    return 'OrdersEvent.fetch(username: $username)';
+    return 'OrdersEvent.fetch(userId: $userId)';
   }
 
   @override
@@ -226,12 +226,11 @@ class _$FetchOrdersEventImpl extends _FetchOrdersEvent {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$FetchOrdersEventImpl &&
-            (identical(other.username, username) ||
-                other.username == username));
+            (identical(other.userId, userId) || other.userId == userId));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, username);
+  int get hashCode => Object.hash(runtimeType, userId);
 
   @JsonKey(ignore: true)
   @override
@@ -244,29 +243,29 @@ class _$FetchOrdersEventImpl extends _FetchOrdersEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() empty,
-    required TResult Function(String username) fetch,
+    required TResult Function(String userId) fetch,
   }) {
-    return fetch(username);
+    return fetch(userId);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? empty,
-    TResult? Function(String username)? fetch,
+    TResult? Function(String userId)? fetch,
   }) {
-    return fetch?.call(username);
+    return fetch?.call(userId);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? empty,
-    TResult Function(String username)? fetch,
+    TResult Function(String userId)? fetch,
     required TResult orElse(),
   }) {
     if (fetch != null) {
-      return fetch(username);
+      return fetch(userId);
     }
     return orElse();
   }
@@ -304,11 +303,11 @@ class _$FetchOrdersEventImpl extends _FetchOrdersEvent {
 }
 
 abstract class _FetchOrdersEvent extends OrdersEvent {
-  const factory _FetchOrdersEvent({required final String username}) =
+  const factory _FetchOrdersEvent({required final String userId}) =
       _$FetchOrdersEventImpl;
   const _FetchOrdersEvent._() : super._();
 
-  String get username;
+  String get userId;
   @JsonKey(ignore: true)
   _$$FetchOrdersEventImplCopyWith<_$FetchOrdersEventImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -347,7 +346,7 @@ mixin _$OrdersState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_EmptyOrdersState value) empty,
-    required TResult Function(_LoadingOrdersEvent value) loading,
+    required TResult Function(_LoadingOrdersState value) loading,
     required TResult Function(_LoadedOrdersState value) loaded,
     required TResult Function(_LoadedAllOrdersState value) loadedAll,
     required TResult Function(_ErrorOrdersState value) error,
@@ -356,7 +355,7 @@ mixin _$OrdersState {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_EmptyOrdersState value)? empty,
-    TResult? Function(_LoadingOrdersEvent value)? loading,
+    TResult? Function(_LoadingOrdersState value)? loading,
     TResult? Function(_LoadedOrdersState value)? loaded,
     TResult? Function(_LoadedAllOrdersState value)? loadedAll,
     TResult? Function(_ErrorOrdersState value)? error,
@@ -365,7 +364,7 @@ mixin _$OrdersState {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_EmptyOrdersState value)? empty,
-    TResult Function(_LoadingOrdersEvent value)? loading,
+    TResult Function(_LoadingOrdersState value)? loading,
     TResult Function(_LoadedOrdersState value)? loaded,
     TResult Function(_LoadedAllOrdersState value)? loadedAll,
     TResult Function(_ErrorOrdersState value)? error,
@@ -471,7 +470,7 @@ class _$EmptyOrdersStateImpl extends _EmptyOrdersState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_EmptyOrdersState value) empty,
-    required TResult Function(_LoadingOrdersEvent value) loading,
+    required TResult Function(_LoadingOrdersState value) loading,
     required TResult Function(_LoadedOrdersState value) loaded,
     required TResult Function(_LoadedAllOrdersState value) loadedAll,
     required TResult Function(_ErrorOrdersState value) error,
@@ -483,7 +482,7 @@ class _$EmptyOrdersStateImpl extends _EmptyOrdersState {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_EmptyOrdersState value)? empty,
-    TResult? Function(_LoadingOrdersEvent value)? loading,
+    TResult? Function(_LoadingOrdersState value)? loading,
     TResult? Function(_LoadedOrdersState value)? loaded,
     TResult? Function(_LoadedAllOrdersState value)? loadedAll,
     TResult? Function(_ErrorOrdersState value)? error,
@@ -495,7 +494,7 @@ class _$EmptyOrdersStateImpl extends _EmptyOrdersState {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_EmptyOrdersState value)? empty,
-    TResult Function(_LoadingOrdersEvent value)? loading,
+    TResult Function(_LoadingOrdersState value)? loading,
     TResult Function(_LoadedOrdersState value)? loaded,
     TResult Function(_LoadedAllOrdersState value)? loadedAll,
     TResult Function(_ErrorOrdersState value)? error,
@@ -514,25 +513,25 @@ abstract class _EmptyOrdersState extends OrdersState {
 }
 
 /// @nodoc
-abstract class _$$LoadingOrdersEventImplCopyWith<$Res> {
-  factory _$$LoadingOrdersEventImplCopyWith(_$LoadingOrdersEventImpl value,
-          $Res Function(_$LoadingOrdersEventImpl) then) =
-      __$$LoadingOrdersEventImplCopyWithImpl<$Res>;
+abstract class _$$LoadingOrdersStateImplCopyWith<$Res> {
+  factory _$$LoadingOrdersStateImplCopyWith(_$LoadingOrdersStateImpl value,
+          $Res Function(_$LoadingOrdersStateImpl) then) =
+      __$$LoadingOrdersStateImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$LoadingOrdersEventImplCopyWithImpl<$Res>
-    extends _$OrdersStateCopyWithImpl<$Res, _$LoadingOrdersEventImpl>
-    implements _$$LoadingOrdersEventImplCopyWith<$Res> {
-  __$$LoadingOrdersEventImplCopyWithImpl(_$LoadingOrdersEventImpl _value,
-      $Res Function(_$LoadingOrdersEventImpl) _then)
+class __$$LoadingOrdersStateImplCopyWithImpl<$Res>
+    extends _$OrdersStateCopyWithImpl<$Res, _$LoadingOrdersStateImpl>
+    implements _$$LoadingOrdersStateImplCopyWith<$Res> {
+  __$$LoadingOrdersStateImplCopyWithImpl(_$LoadingOrdersStateImpl _value,
+      $Res Function(_$LoadingOrdersStateImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$LoadingOrdersEventImpl extends _LoadingOrdersEvent {
-  const _$LoadingOrdersEventImpl() : super._();
+class _$LoadingOrdersStateImpl extends _LoadingOrdersState {
+  const _$LoadingOrdersStateImpl() : super._();
 
   @override
   String toString() {
@@ -542,7 +541,7 @@ class _$LoadingOrdersEventImpl extends _LoadingOrdersEvent {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$LoadingOrdersEventImpl);
+        (other.runtimeType == runtimeType && other is _$LoadingOrdersStateImpl);
   }
 
   @override
@@ -592,7 +591,7 @@ class _$LoadingOrdersEventImpl extends _LoadingOrdersEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_EmptyOrdersState value) empty,
-    required TResult Function(_LoadingOrdersEvent value) loading,
+    required TResult Function(_LoadingOrdersState value) loading,
     required TResult Function(_LoadedOrdersState value) loaded,
     required TResult Function(_LoadedAllOrdersState value) loadedAll,
     required TResult Function(_ErrorOrdersState value) error,
@@ -604,7 +603,7 @@ class _$LoadingOrdersEventImpl extends _LoadingOrdersEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_EmptyOrdersState value)? empty,
-    TResult? Function(_LoadingOrdersEvent value)? loading,
+    TResult? Function(_LoadingOrdersState value)? loading,
     TResult? Function(_LoadedOrdersState value)? loaded,
     TResult? Function(_LoadedAllOrdersState value)? loadedAll,
     TResult? Function(_ErrorOrdersState value)? error,
@@ -616,7 +615,7 @@ class _$LoadingOrdersEventImpl extends _LoadingOrdersEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_EmptyOrdersState value)? empty,
-    TResult Function(_LoadingOrdersEvent value)? loading,
+    TResult Function(_LoadingOrdersState value)? loading,
     TResult Function(_LoadedOrdersState value)? loaded,
     TResult Function(_LoadedAllOrdersState value)? loadedAll,
     TResult Function(_ErrorOrdersState value)? error,
@@ -629,9 +628,9 @@ class _$LoadingOrdersEventImpl extends _LoadingOrdersEvent {
   }
 }
 
-abstract class _LoadingOrdersEvent extends OrdersState {
-  const factory _LoadingOrdersEvent() = _$LoadingOrdersEventImpl;
-  const _LoadingOrdersEvent._() : super._();
+abstract class _LoadingOrdersState extends OrdersState {
+  const factory _LoadingOrdersState() = _$LoadingOrdersStateImpl;
+  const _LoadingOrdersState._() : super._();
 }
 
 /// @nodoc
@@ -748,7 +747,7 @@ class _$LoadedOrdersStateImpl extends _LoadedOrdersState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_EmptyOrdersState value) empty,
-    required TResult Function(_LoadingOrdersEvent value) loading,
+    required TResult Function(_LoadingOrdersState value) loading,
     required TResult Function(_LoadedOrdersState value) loaded,
     required TResult Function(_LoadedAllOrdersState value) loadedAll,
     required TResult Function(_ErrorOrdersState value) error,
@@ -760,7 +759,7 @@ class _$LoadedOrdersStateImpl extends _LoadedOrdersState {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_EmptyOrdersState value)? empty,
-    TResult? Function(_LoadingOrdersEvent value)? loading,
+    TResult? Function(_LoadingOrdersState value)? loading,
     TResult? Function(_LoadedOrdersState value)? loaded,
     TResult? Function(_LoadedAllOrdersState value)? loadedAll,
     TResult? Function(_ErrorOrdersState value)? error,
@@ -772,7 +771,7 @@ class _$LoadedOrdersStateImpl extends _LoadedOrdersState {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_EmptyOrdersState value)? empty,
-    TResult Function(_LoadingOrdersEvent value)? loading,
+    TResult Function(_LoadingOrdersState value)? loading,
     TResult Function(_LoadedOrdersState value)? loaded,
     TResult Function(_LoadedAllOrdersState value)? loadedAll,
     TResult Function(_ErrorOrdersState value)? error,
@@ -911,7 +910,7 @@ class _$LoadedAllOrdersStateImpl extends _LoadedAllOrdersState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_EmptyOrdersState value) empty,
-    required TResult Function(_LoadingOrdersEvent value) loading,
+    required TResult Function(_LoadingOrdersState value) loading,
     required TResult Function(_LoadedOrdersState value) loaded,
     required TResult Function(_LoadedAllOrdersState value) loadedAll,
     required TResult Function(_ErrorOrdersState value) error,
@@ -923,7 +922,7 @@ class _$LoadedAllOrdersStateImpl extends _LoadedAllOrdersState {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_EmptyOrdersState value)? empty,
-    TResult? Function(_LoadingOrdersEvent value)? loading,
+    TResult? Function(_LoadingOrdersState value)? loading,
     TResult? Function(_LoadedOrdersState value)? loaded,
     TResult? Function(_LoadedAllOrdersState value)? loadedAll,
     TResult? Function(_ErrorOrdersState value)? error,
@@ -935,7 +934,7 @@ class _$LoadedAllOrdersStateImpl extends _LoadedAllOrdersState {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_EmptyOrdersState value)? empty,
-    TResult Function(_LoadingOrdersEvent value)? loading,
+    TResult Function(_LoadingOrdersState value)? loading,
     TResult Function(_LoadedOrdersState value)? loaded,
     TResult Function(_LoadedAllOrdersState value)? loadedAll,
     TResult Function(_ErrorOrdersState value)? error,
@@ -1068,7 +1067,7 @@ class _$ErrorOrdersStateImpl extends _ErrorOrdersState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_EmptyOrdersState value) empty,
-    required TResult Function(_LoadingOrdersEvent value) loading,
+    required TResult Function(_LoadingOrdersState value) loading,
     required TResult Function(_LoadedOrdersState value) loaded,
     required TResult Function(_LoadedAllOrdersState value) loadedAll,
     required TResult Function(_ErrorOrdersState value) error,
@@ -1080,7 +1079,7 @@ class _$ErrorOrdersStateImpl extends _ErrorOrdersState {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_EmptyOrdersState value)? empty,
-    TResult? Function(_LoadingOrdersEvent value)? loading,
+    TResult? Function(_LoadingOrdersState value)? loading,
     TResult? Function(_LoadedOrdersState value)? loaded,
     TResult? Function(_LoadedAllOrdersState value)? loadedAll,
     TResult? Function(_ErrorOrdersState value)? error,
@@ -1092,7 +1091,7 @@ class _$ErrorOrdersStateImpl extends _ErrorOrdersState {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_EmptyOrdersState value)? empty,
-    TResult Function(_LoadingOrdersEvent value)? loading,
+    TResult Function(_LoadingOrdersState value)? loading,
     TResult Function(_LoadedOrdersState value)? loaded,
     TResult Function(_LoadedAllOrdersState value)? loadedAll,
     TResult Function(_ErrorOrdersState value)? error,

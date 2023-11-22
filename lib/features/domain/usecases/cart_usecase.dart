@@ -1,5 +1,4 @@
 import 'package:bbt_kirov_app/features/domain/entities/cart_book_entity.dart';
-import 'package:bbt_kirov_app/features/domain/entities/order_entity.dart';
 import 'package:bbt_kirov_app/features/domain/repositories/i_cart_repository.dart';
 
 class CartUsecase {
@@ -25,10 +24,6 @@ class CartUsecase {
 
   int totalSum() {
     return cartRepository.totalSum();
-  }
-
-  void sendOrder(OrderEntity order) {
-    cartRepository.sendOrder(order);
   }
 
   void removeAllCart() {

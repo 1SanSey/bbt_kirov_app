@@ -1,5 +1,5 @@
 import 'package:bbt_kirov_app/common/theme/app_colors.dart';
-import 'package:bbt_kirov_app/features/data/models/cart_book_model/cart_book_model.dart';
+import 'package:bbt_kirov_app/features/domain/entities/cart_book_entity.dart';
 import 'package:bbt_kirov_app/features/domain/entities/favorites_book_entity.dart';
 import 'package:bbt_kirov_app/features/presentation/bloc/cart_bloc/cart_bloc.dart';
 import 'package:bbt_kirov_app/generated/l10n.dart';
@@ -71,14 +71,12 @@ class _FavouritesBookCardState extends State<FavouritesBookCard> {
             ),
             IconButton(
                 onPressed: () {
-                  //TODO: исправить.
-
-                  CartBookModel hiveBook = CartBookModel(
-                      name: widget.book.name,
-                      price: widget.book.price,
-                      image: widget.book.image,
-                      quantity: 1);
-                  BlocProvider.of<CartBloc>(context).add(AddToCartEvent(book: hiveBook));
+                  BlocProvider.of<CartBloc>(context).add(AddToCartEvent(
+                      book: CartBookEntity(
+                          name: widget.book.name,
+                          price: widget.book.price,
+                          image: widget.book.image,
+                          quantity: 1)));
                 },
                 icon: Icon(
                   Icons.shopping_cart,

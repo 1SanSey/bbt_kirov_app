@@ -32,6 +32,7 @@ import 'package:bbt_kirov_app/features/presentation/bloc/change_theme_bloc/chang
 import 'package:bbt_kirov_app/features/presentation/bloc/favourites_bloc/favourites_bloc.dart';
 import 'package:bbt_kirov_app/features/presentation/bloc/home_books_bloc/home_books_bloc.dart';
 import 'package:bbt_kirov_app/features/presentation/bloc/orders_bloc/orders_bloc.dart';
+import 'package:bbt_kirov_app/features/presentation/bloc/orders_bloc/send_order_bloc/send_order_bloc.dart';
 import 'package:bbt_kirov_app/features/presentation/bloc/reg_bloc/registration_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
@@ -55,6 +56,7 @@ init() async {
   sl.registerFactory(() => RegistrationBloc(sl()));
   sl.registerFactory(() => ChangeThemeBloc());
   sl.registerFactory(() => OrdersBloc(ordersUseCase: sl()));
+  sl.registerFactory(() => SendOrderBloc(ordersUseCase: sl()));
 
 //UseCases
   sl.registerLazySingleton(() => PopularUsecase(sl()));
@@ -67,6 +69,7 @@ init() async {
   sl.registerLazySingleton(() => CartUsecase(sl()));
   sl.registerLazySingleton(() => FavouritesUsecase(sl()));
   sl.registerLazySingleton(() => OrdersUsecase(sl()));
+  sl.registerLazySingleton(() => SendOrderUsecase(sl()));
 
 //Repositories
   sl.registerLazySingleton<IBooksHomeRepository>(

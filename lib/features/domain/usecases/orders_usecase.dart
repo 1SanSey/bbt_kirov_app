@@ -12,15 +12,35 @@ class OrdersUsecase extends UseCaseByParams<List<OrderEntity>, OrdersParams> {
 
   @override
   Future<Either<Failure, List<OrderEntity>>> call(OrdersParams params) async {
-    return await ordersRepository.fetchOrders(params.username);
+    return await ordersRepository.fetchOrders(params.userId);
+  }
+}
+
+class SendOrderUsecase extends UseCaseByParams<String, OrderParams> {
+  final IOrdersRepository ordersRepository;
+
+  SendOrderUsecase(this.ordersRepository);
+
+  @override
+  Future<Either<Failure, String>> call(OrderParams params) async {
+    return await ordersRepository.sendOrder(params.order);
   }
 }
 
 class OrdersParams extends Equatable {
-  final String username;
+  final String userId;
 
-  const OrdersParams({required this.username});
+  const OrdersParams({required this.userId});
 
   @override
-  List<Object?> get props => [username];
+  List<Object?> get props => [userId];
+}
+
+class OrderParams extends Equatable {
+  final OrderEntity order;
+
+  const OrderParams({required this.order});
+
+  @override
+  List<Object?> get props => [order];
 }

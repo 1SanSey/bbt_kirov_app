@@ -59,10 +59,8 @@ class _FavouritesPageState extends State<FavouritesPage> {
                         ),
                         key: UniqueKey(),
                         onDismissed: (DismissDirection direction) {
-                          setState(() {
-                            context.read<FavouritesBloc>().add(RemoveFromFavouritesEvent(
-                                book: favouritesBooks[index], index: index));
-                          });
+                          context.read<FavouritesBloc>().add(RemoveFromFavouritesEvent(
+                              book: favouritesBooks[index], index: index));
                         },
                         child: FavouritesBookCard(
                           book: favouritesBooks[index],

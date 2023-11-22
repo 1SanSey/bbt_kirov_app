@@ -11,7 +11,7 @@ part 'orders_bloc.freezed.dart';
 class OrdersEvent with _$OrdersEvent {
   const OrdersEvent._();
   const factory OrdersEvent.empty() = _EmptyOrdersEvent;
-  const factory OrdersEvent.fetch({required String username}) =
+  const factory OrdersEvent.fetch({required String userId}) =
       _FetchOrdersEvent;
 }
 
@@ -19,7 +19,7 @@ class OrdersEvent with _$OrdersEvent {
 class OrdersState with _$OrdersState {
   const OrdersState._();
   const factory OrdersState.empty() = _EmptyOrdersState;
-  const factory OrdersState.loading() = _LoadingOrdersEvent;
+  const factory OrdersState.loading() = _LoadingOrdersState;
   const factory OrdersState.loaded({required List<OrderEntity> orders}) =
       _LoadedOrdersState;
   const factory OrdersState.loadedAll({required List<OrderEntity> orders}) =
@@ -46,7 +46,7 @@ class OrdersBloc extends Bloc<OrdersEvent, OrdersState> {
       _FetchOrdersEvent event, Emitter<OrdersState> emitter) async {
     emitter(const OrdersState.loading());
     final failureOrOrders =
-        await ordersUseCase(OrdersParams(username: event.username));
+        await ordersUseCase(OrdersParams(userId: event.userId));
 
     failureOrOrders.fold(
         (failure) =>
