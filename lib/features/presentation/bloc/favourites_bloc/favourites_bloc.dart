@@ -1,7 +1,7 @@
 import 'package:bbt_kirov_app/features/domain/entities/favorites_book_entity.dart';
 import 'package:bbt_kirov_app/features/domain/usecases/favourites_usecase.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'favorites_event.dart';
 part 'favourites_state.dart';
@@ -16,20 +16,20 @@ class FavouritesBloc extends Bloc<FavouritesEvent, FavouritesState> {
   }
 
   void _addToFavourites(
-      AddToFavouritesEvent event, Emitter<FavouritesState> emit) {
-    String message = favourites.addToFavourites(event.book);
+    AddToFavouritesEvent event,
+    Emitter<FavouritesState> emit,
+  ) {
+    final String message = favourites.addToFavourites(event.book);
 
     emit(AddToFavouritesState(book: event.book, message: message));
   }
 
-  void _removeFromFavourites(
-      RemoveFromFavouritesEvent event, Emitter<FavouritesState> emit) {
+  void _removeFromFavourites(RemoveFromFavouritesEvent event, Emitter<FavouritesState> emit) {
     favourites.removeFromFavourites(event.book, event.index);
     emit(ShowFavouritesState(books: favourites.showFavourites()));
   }
 
-  void _showFavourites(
-      ShowFavouritesEvent event, Emitter<FavouritesState> emit) {
+  void _showFavourites(ShowFavouritesEvent event, Emitter<FavouritesState> emit) {
     favourites.showFavourites();
 
     emit(ShowFavouritesState(books: favourites.showFavourites()));

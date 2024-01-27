@@ -12,7 +12,7 @@ class OrdersUsecase extends UseCaseByParams<List<OrderEntity>, OrdersParams> {
 
   @override
   Future<Either<Failure, List<OrderEntity>>> call(OrdersParams params) async {
-    return await ordersRepository.fetchOrders(params.userId);
+    return ordersRepository.fetchOrders(params.userId);
   }
 }
 
@@ -23,7 +23,7 @@ class SendOrderUsecase extends UseCaseByParams<String, OrderParams> {
 
   @override
   Future<Either<Failure, String>> call(OrderParams params) async {
-    return await ordersRepository.sendOrder(params.order);
+    return ordersRepository.sendOrder(params.order);
   }
 }
 

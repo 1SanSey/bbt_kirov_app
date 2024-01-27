@@ -11,8 +11,7 @@ part 'orders_bloc.freezed.dart';
 class OrdersEvent with _$OrdersEvent {
   const OrdersEvent._();
   const factory OrdersEvent.empty() = _EmptyOrdersEvent;
-  const factory OrdersEvent.fetch({required String userId}) =
-      _FetchOrdersEvent;
+  const factory OrdersEvent.fetch({required String userId}) = _FetchOrdersEvent;
 }
 
 @freezed
@@ -20,10 +19,8 @@ class OrdersState with _$OrdersState {
   const OrdersState._();
   const factory OrdersState.empty() = _EmptyOrdersState;
   const factory OrdersState.loading() = _LoadingOrdersState;
-  const factory OrdersState.loaded({required List<OrderEntity> orders}) =
-      _LoadedOrdersState;
-  const factory OrdersState.loadedAll({required List<OrderEntity> orders}) =
-      _LoadedAllOrdersState;
+  const factory OrdersState.loaded({required List<OrderEntity> orders}) = _LoadedOrdersState;
+  const factory OrdersState.loadedAll({required List<OrderEntity> orders}) = _LoadedAllOrdersState;
   const factory OrdersState.error({
     @Default('Произошла ошибка загрузки заказов') String message,
   }) = _ErrorOrdersState;
@@ -42,20 +39,17 @@ class OrdersBloc extends Bloc<OrdersEvent, OrdersState> {
     );
   }
 
-  Future<void> _fetchEvent(
-      _FetchOrdersEvent event, Emitter<OrdersState> emitter) async {
+  Future<void> _fetchEvent(_FetchOrdersEvent event, Emitter<OrdersState> emitter) async {
     emitter(const OrdersState.loading());
-    final failureOrOrders =
-        await ordersUseCase(OrdersParams(userId: event.userId));
+    final failureOrOrders = await ordersUseCase(OrdersParams(userId: event.userId));
 
     failureOrOrders.fold(
-        (failure) =>
-            emitter(OrdersState.error(message: mapFailureToMessage(failure))),
-        (orders) {
-      emitter(OrdersState.loaded(orders: orders));
-    });
+      (failure) => emitter(OrdersState.error(message: mapFailureToMessage(failure))),
+      (orders) {
+        emitter(OrdersState.loaded(orders: orders));
+      },
+    );
   }
 
-  Future<void> _emptyEvent(
-      _EmptyOrdersEvent event, Emitter<OrdersState> emitter) async {}
+  Future<void> _emptyEvent(_EmptyOrdersEvent _, Emitter<OrdersState> __) async {}
 }

@@ -6,20 +6,24 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk_flutter.dart';
 
 class InitDatasources {
-InitDatasources._();
+  InitDatasources._();
 
   static final instance = InitDatasources._();
 
   Future<void> initParse() async {
-    await dotenv.load(fileName: "assets/.env" );
-    await Parse().initialize(dotenv.env['KEY_APPLICATION_ID']!, dotenv.env['API_URI']!,
-        clientKey: dotenv.env['KEY_CLIENT']!, autoSendSessionId: true);
+    await dotenv.load(fileName: 'assets/.env');
+    await Parse().initialize(
+      dotenv.env['KEY_APPLICATION_ID']!,
+      dotenv.env['API_URI']!,
+      clientKey: dotenv.env['KEY_CLIENT'],
+      autoSendSessionId: true,
+    );
   }
 
   Future<void> initHive() async {
     await Hive.initFlutter();
-    Hive.registerAdapter(CartBookModelAdapter());
-    Hive.registerAdapter(FavouritesBookModelAdapter());
+    Hive..registerAdapter(CartBookModelAdapter())
+    ..registerAdapter(FavouritesBookModelAdapter());
     await Hive.openBox<CartBookModel>(HiveBoxes.cart);
     await Hive.openBox<FavouritesBookModel>(HiveBoxes.favourites);
   }

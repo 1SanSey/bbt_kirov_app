@@ -28,99 +28,115 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     required this.searchBooks,
   }) : super(CategoryBooksEmpty()) {
     on<CategoryLoadAllBooksEvent>(_onEventAllBooks, transformer: droppable());
-    on<CategoryLoadBooksBySizeEvent>(_onEventBooksBySize,
-        transformer: droppable());
-    on<CategoryLoadBooksByNameEvent>(_onEventBooksByName,
-        transformer: droppable());
+    on<CategoryLoadBooksBySizeEvent>(
+      _onEventBooksBySize,
+      transformer: droppable(),
+    );
+    on<CategoryLoadBooksByNameEvent>(
+      _onEventBooksByName,
+      transformer: droppable(),
+    );
     on<CategoryLoadBooksSetEvent>(_onEventBooksSet, transformer: droppable());
-    on<CategoryLoadCulinaryBooksEvent>(_onEventCulinaryBooks,
-        transformer: droppable());
+    on<CategoryLoadCulinaryBooksEvent>(
+      _onEventCulinaryBooks,
+      transformer: droppable(),
+    );
     on<CategorySearchBooksEvent>(_onEventSearchBooks, transformer: droppable());
   }
 
   FutureOr<void> _onEventAllBooks(
-      CategoryLoadAllBooksEvent event, Emitter<CategoryState> emit) async {
+    CategoryLoadAllBooksEvent event,
+    Emitter<CategoryState> emit,
+  ) async {
     emit(CategoryBooksLoading());
 
     final failureOrBooks = await allBooks();
 
     failureOrBooks.fold(
-        (failure) =>
-            emit(CategoryBooksError(message: mapFailureToMessage(failure))),
-        (books) {
-      emit(CategoryBooksLoaded(books: books));
-    });
+      (failure) => emit(CategoryBooksError(message: mapFailureToMessage(failure))),
+      (books) {
+        emit(CategoryBooksLoaded(books: books));
+      },
+    );
   }
 
-  FutureOr<void> _onEventBooksBySize(CategoryLoadBooksBySizeEvent event,
-      Emitter<CategoryState> emit) async {
+  FutureOr<void> _onEventBooksBySize(
+    CategoryLoadBooksBySizeEvent event,
+    Emitter<CategoryState> emit,
+  ) async {
     emit(CategoryBooksLoading());
 
     final failureOrBooks = await booksBySize(BookSizeParams(size: event.param));
 
     failureOrBooks.fold(
-        (failure) =>
-            emit(CategoryBooksError(message: mapFailureToMessage(failure))),
-        (books) {
-      emit(CategoryBooksLoaded(books: books));
-    });
+      (failure) => emit(CategoryBooksError(message: mapFailureToMessage(failure))),
+      (books) {
+        emit(CategoryBooksLoaded(books: books));
+      },
+    );
   }
 
-  FutureOr<void> _onEventBooksByName(CategoryLoadBooksByNameEvent event,
-      Emitter<CategoryState> emit) async {
+  FutureOr<void> _onEventBooksByName(
+    CategoryLoadBooksByNameEvent event,
+    Emitter<CategoryState> emit,
+  ) async {
     emit(CategoryBooksLoading());
 
     final failureOrBooks = await booksByName(BookNameParams(name: event.param));
 
     failureOrBooks.fold(
-        (failure) =>
-            emit(CategoryBooksError(message: mapFailureToMessage(failure))),
-        (books) {
-      emit(CategoryBooksLoaded(books: books));
-    });
+      (failure) => emit(CategoryBooksError(message: mapFailureToMessage(failure))),
+      (books) {
+        emit(CategoryBooksLoaded(books: books));
+      },
+    );
   }
 
   FutureOr<void> _onEventBooksSet(
-      CategoryLoadBooksSetEvent event, Emitter<CategoryState> emit) async {
+    CategoryLoadBooksSetEvent event,
+    Emitter<CategoryState> emit,
+  ) async {
     emit(CategoryBooksLoading());
 
-    final failureOrBooks =
-        await setBooks(BookSetParams(singleOrSet: event.param));
+    final failureOrBooks = await setBooks(BookSetParams(singleOrSet: event.param));
 
     failureOrBooks.fold(
-        (failure) =>
-            emit(CategoryBooksError(message: mapFailureToMessage(failure))),
-        (books) {
-      emit(CategoryBooksLoaded(books: books));
-    });
+      (failure) => emit(CategoryBooksError(message: mapFailureToMessage(failure))),
+      (books) {
+        emit(CategoryBooksLoaded(books: books));
+      },
+    );
   }
 
-  FutureOr<void> _onEventCulinaryBooks(CategoryLoadCulinaryBooksEvent event,
-      Emitter<CategoryState> emit) async {
+  FutureOr<void> _onEventCulinaryBooks(
+    CategoryLoadCulinaryBooksEvent event,
+    Emitter<CategoryState> emit,
+  ) async {
     emit(CategoryBooksLoading());
 
     final failureOrBooks = await culinaryBooks();
 
     failureOrBooks.fold(
-        (failure) =>
-            emit(CategoryBooksError(message: mapFailureToMessage(failure))),
-        (books) {
-      emit(CategoryBooksLoaded(books: books));
-    });
+      (failure) => emit(CategoryBooksError(message: mapFailureToMessage(failure))),
+      (books) {
+        emit(CategoryBooksLoaded(books: books));
+      },
+    );
   }
 
   FutureOr<void> _onEventSearchBooks(
-      CategorySearchBooksEvent event, Emitter<CategoryState> emit) async {
+    CategorySearchBooksEvent event,
+    Emitter<CategoryState> emit,
+  ) async {
     emit(CategoryBooksLoading());
 
-    final failureOrBooks =
-        await searchBooks(SearchBooksParams(query: event.query));
+    final failureOrBooks = await searchBooks(SearchBooksParams(query: event.query));
 
     failureOrBooks.fold(
-        (failure) =>
-            emit(CategoryBooksError(message: mapFailureToMessage(failure))),
-        (books) {
-      emit(CategoryBooksLoaded(books: books));
-    });
+      (failure) => emit(CategoryBooksError(message: mapFailureToMessage(failure))),
+      (books) {
+        emit(CategoryBooksLoaded(books: books));
+      },
+    );
   }
 }

@@ -25,17 +25,21 @@ class ChangeThemeBloc extends HydratedBloc<ThemeEvent, ThemeState> {
   ChangeThemeBloc() : super(const _Light()) {
     on<_Change>(
       (event, emit) => emit(
-        state.when(light: () {
-          return const _Dark();
-        }, dark: () {
-          return const _Light();
-        }),
+        state.when(
+          light: () {
+            return const _Dark();
+          },
+          dark: () {
+            return const _Light();
+          },
+        ),
       ),
     );
   }
   @override
   ThemeState? fromJson(Map<String, dynamic> json) {
     final state = ThemeState.fromJson(json);
+
     return state.map(
       light: (_) => const ThemeState.light(),
       dark: (_) => const ThemeState.dark(),

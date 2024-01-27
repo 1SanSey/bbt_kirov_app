@@ -1,10 +1,10 @@
 import 'package:bbt_kirov_app/core/error/exception.dart';
+import 'package:bbt_kirov_app/core/error/failure.dart';
 import 'package:bbt_kirov_app/core/platform/network_info.dart';
 import 'package:bbt_kirov_app/features/data/i_datasources/i_orders_remote_datasource.dart';
 import 'package:bbt_kirov_app/features/data/models/order_model.dart';
 import 'package:bbt_kirov_app/features/domain/entities/order_entity.dart';
 import 'package:bbt_kirov_app/features/domain/repositories/i_orders_repository.dart';
-import 'package:bbt_kirov_app/core/error/failure.dart';
 import 'package:dartz/dartz.dart';
 
 class OrdersRepositoryImpl implements IOrdersRepository {
@@ -21,7 +21,8 @@ class OrdersRepositoryImpl implements IOrdersRepository {
   }
 
   Future<Either<Failure, List<OrderModel>>> _fetchOrders(
-      Future<List<OrderModel>> Function() fetchOrders) async {
+    Future<List<OrderModel>> Function() fetchOrders,
+  ) async {
     if (await networkInfo.isConnected) {
       try {
         final remoteOrders = await fetchOrders();

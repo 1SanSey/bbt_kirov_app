@@ -31,4 +31,3 @@ class ChangeQuantityCartEvent extends CartEvent {
 }
 
 class RemoveAllCartEvent extends CartEvent {}
-

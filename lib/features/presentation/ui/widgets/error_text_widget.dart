@@ -7,11 +7,10 @@ class ErrorTextWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-    child: Text(
-      errorMessage,
-      style: const TextStyle(color: Colors.black, fontSize: 25),
-    ),
-  );
+      child: Text(
+        errorMessage,
+        style: const TextStyle(color: Colors.black, fontSize: 25),
+      ),
+    );
   }
 }
-

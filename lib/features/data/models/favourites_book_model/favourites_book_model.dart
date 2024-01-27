@@ -2,6 +2,7 @@
 
 import 'package:bbt_kirov_app/features/domain/entities/favorites_book_entity.dart';
 import 'package:hive/hive.dart';
+
 part 'favourites_book_model.g.dart';
 
 @HiveType(typeId: 1)
@@ -16,7 +17,9 @@ class FavouritesBookModel extends FavoritesBookEntity {
   @HiveField(2)
   final String image;
 
-  const FavouritesBookModel(
-      {required this.name, required this.price, required this.image})
-      : super(name: name, price: price, image: image);
+  const FavouritesBookModel({
+    required this.name,
+    required this.price,
+    required this.image,
+  }) : super(name: name, price: price, image: image);
 }

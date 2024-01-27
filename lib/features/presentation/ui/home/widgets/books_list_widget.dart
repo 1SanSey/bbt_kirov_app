@@ -1,8 +1,8 @@
+import 'package:bbt_kirov_app/features/domain/entities/book_entity.dart';
 import 'package:bbt_kirov_app/features/presentation/bloc/home_books_bloc/home_books_bloc.dart';
+import 'package:bbt_kirov_app/features/presentation/ui/widgets/book_card_widget.dart';
 import 'package:bbt_kirov_app/features/presentation/ui/widgets/error_text_widget.dart';
 import 'package:bbt_kirov_app/features/presentation/ui/widgets/loading_indicator.dart';
-import 'package:bbt_kirov_app/features/domain/entities/book_entity.dart';
-import 'package:bbt_kirov_app/features/presentation/ui/widgets/book_card_widget.dart';
 import 'package:bbt_kirov_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,7 +15,7 @@ class BooksListWidget extends StatefulWidget {
 }
 
 class _BooksListHomeState extends State<BooksListWidget> {
-@override
+  @override
   void initState() {
     super.initState();
     context.read<HomeBooksBloc>().add(HomeLoadBooksEvent());
@@ -23,7 +23,6 @@ class _BooksListHomeState extends State<BooksListWidget> {
 
   @override
   Widget build(BuildContext context) {
-    
     return BlocBuilder<HomeBooksBloc, HomeBooksState>(builder: (context, state) {
       List<BookEntity> homeBooks = [];
 
@@ -52,8 +51,8 @@ class _BooksListHomeState extends State<BooksListWidget> {
           ),
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
-            mainAxisSpacing: 8.0,
-            crossAxisSpacing: 8.0,
+            mainAxisSpacing: 8,
+            crossAxisSpacing: 8,
             mainAxisExtent: 270,
           ),
         ),

@@ -1,5 +1,5 @@
-import 'package:bbt_kirov_app/features/domain/entities/book_entity.dart';
 import 'package:bbt_kirov_app/core/error/failure.dart';
+import 'package:bbt_kirov_app/features/domain/entities/book_entity.dart';
 import 'package:bbt_kirov_app/features/domain/repositories/i_categories_repository.dart';
 import 'package:bbt_kirov_app/features/domain/usecases/usecases.dart';
 import 'package:dartz/dartz.dart';
@@ -12,7 +12,7 @@ class AllBooksUsecase extends UseCase<List<BookEntity>> {
 
   @override
   Future<Either<Failure, List<BookEntity>>> call() async {
-    return await bookRepository.getAllBooks();
+    return bookRepository.getAllBooks();
   }
 }
 
@@ -23,7 +23,7 @@ class CulinaryBooksUsecase extends UseCase<List<BookEntity>> {
 
   @override
   Future<Either<Failure, List<BookEntity>>> call() async {
-    return await bookRepositoryCulinary.getCulinaryBooks();
+    return bookRepositoryCulinary.getCulinaryBooks();
   }
 }
 
@@ -34,7 +34,7 @@ class BooksBySizeUsecase extends UseCaseByParams<List<BookEntity>, BookSizeParam
 
   @override
   Future<Either<Failure, List<BookEntity>>> call(BookSizeParams params) async {
-    return await bookRepositoryBySize.getBooksBySize(params.size);
+    return bookRepositoryBySize.getBooksBySize(params.size);
   }
 }
 
@@ -54,7 +54,7 @@ class BooksByNameUsecase extends UseCaseByParams<List<BookEntity>, BookNameParam
 
   @override
   Future<Either<Failure, List<BookEntity>>> call(BookNameParams params) async {
-    return await bookRepositoryByName.getBooksByName(params.name);
+    return bookRepositoryByName.getBooksByName(params.name);
   }
 }
 
@@ -74,7 +74,7 @@ class SetBooksUsecase extends UseCaseByParams<List<BookEntity>, BookSetParams> {
 
   @override
   Future<Either<Failure, List<BookEntity>>> call(BookSetParams params) async {
-    return await bookRepositorySetBooks.getSetBooks(params.singleOrSet);
+    return bookRepositorySetBooks.getSetBooks(params.singleOrSet);
   }
 }
 

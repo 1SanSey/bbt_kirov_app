@@ -36,8 +36,9 @@ class _FavouritesPageState extends State<FavouritesPage> {
               return ErrorTextWidget(errorMessage: S.current.emptyFavourites);
             }
           }
+
           return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            padding: const EdgeInsets.symmetric(horizontal: 8),
             child: CustomScrollView(slivers: [
               SliverPadding(
                 padding: const EdgeInsets.symmetric(vertical: 8),
@@ -58,9 +59,11 @@ class _FavouritesPageState extends State<FavouritesPage> {
                           ),
                         ),
                         key: UniqueKey(),
-                        onDismissed: (DismissDirection direction) {
+                        onDismissed: (direction) {
                           context.read<FavouritesBloc>().add(RemoveFromFavouritesEvent(
-                              book: favouritesBooks[index], index: index));
+                                book: favouritesBooks[index],
+                                index: index,
+                              ));
                         },
                         child: FavouritesBookCard(
                           book: favouritesBooks[index],

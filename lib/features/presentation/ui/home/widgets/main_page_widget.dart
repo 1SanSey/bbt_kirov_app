@@ -22,7 +22,11 @@ class MainPageWidget extends StatelessWidget {
               child: Text(
                 S.current.popularBooks,
                 style: const TextStyle(
-               fontFamily: 'Tahoma',     color: AppColors.greyColor2, fontSize: 23, fontWeight: FontWeight.w700),
+                  fontFamily: 'Tahoma',
+                  color: AppColors.greyColor2,
+                  fontSize: 23,
+                  fontWeight: FontWeight.w700,
+                ),
               ),
             ),
           ),

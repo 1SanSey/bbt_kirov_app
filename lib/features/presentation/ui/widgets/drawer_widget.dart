@@ -17,10 +17,14 @@ class DrawerWidget extends StatelessWidget {
       builder: (user) {
         return Drawer(
           backgroundColor: Theme.of(context).primaryColor,
-          width: MediaQuery.of(context).size.width * 0.80,
+          width: MediaQuery.of(context).size.width * 0.8,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.zero,
+          ),
           child: Column(
             children: [
               UserAccountsDrawerHeader(
+                margin: EdgeInsets.zero,
                 decoration: BoxDecoration(
                   color: Theme.of(context).primaryColor,
                 ),
@@ -36,7 +40,7 @@ class DrawerWidget extends StatelessWidget {
                 ),
                 currentAccountPicture: user.photoURL.isNotEmpty
                     ? ClipRRect(
-                        borderRadius: BorderRadius.circular(50.0),
+                        borderRadius: BorderRadius.circular(50),
                         child: Image.network(
                           user.photoURL,
                           fit: BoxFit.fill,
@@ -44,7 +48,9 @@ class DrawerWidget extends StatelessWidget {
                       )
                     : Container(
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(50.0), color: Colors.white),
+                          borderRadius: BorderRadius.circular(50),
+                          color: Colors.white,
+                        ),
                       ),
               ),
               Expanded(
@@ -62,21 +68,22 @@ class DrawerWidget extends StatelessWidget {
                           S.current.main,
                           style: const TextStyle(fontSize: 18),
                         ),
-                        onTap: () => NavigationManager.instance.goHomePage(),
+                        onTap: NavigationManager.instance.goHomePage,
                       ),
                       ListTile(
-                          leading: Icon(
-                            Icons.list_alt,
-                            color: Theme.of(context).primaryColor,
-                          ),
-                          title: Text(
-                            S.current.myOrders,
-                            style: const TextStyle(fontSize: 18),
-                          ),
-                          onTap: () {
-                            context.read<OrdersBloc>().add(OrdersEvent.fetch(userId: user.uid));
-                            NavigationManager.instance.goOrdersPage(user.uid);
-                          }),
+                        leading: Icon(
+                          Icons.list_alt,
+                          color: Theme.of(context).primaryColor,
+                        ),
+                        title: Text(
+                          S.current.myOrders,
+                          style: const TextStyle(fontSize: 18),
+                        ),
+                        onTap: () {
+                          context.read<OrdersBloc>().add(OrdersEvent.fetch(userId: user.uid));
+                          NavigationManager.instance.goOrdersPage(user.uid);
+                        },
+                      ),
                       ListTile(
                         leading: Icon(
                           Icons.exit_to_app,
@@ -116,16 +123,17 @@ class DrawerWidget extends StatelessWidget {
                       BlocBuilder<ChangeThemeBloc, ThemeState>(
                         builder: (context, state) {
                           return ListTile(
-                              leading: Icon(
-                                state.isDark ? Icons.nightlight_round : Icons.wb_sunny,
-                                color: Theme.of(context).primaryColor,
-                              ),
-                              title: Text(
-                                state.isDark ? S.current.darkTheme : S.current.lightTheme,
-                                style: const TextStyle(fontSize: 15),
-                              ),
-                              onTap: () =>
-                                  context.read<ChangeThemeBloc>().add(const ThemeEvent.change()));
+                            leading: Icon(
+                              state.isDark ? Icons.nightlight_round : Icons.wb_sunny,
+                              color: Theme.of(context).primaryColor,
+                            ),
+                            title: Text(
+                              state.isDark ? S.current.darkTheme : S.current.lightTheme,
+                              style: const TextStyle(fontSize: 15),
+                            ),
+                            onTap: () =>
+                                context.read<ChangeThemeBloc>().add(const ThemeEvent.change()),
+                          );
                         },
                       ),
                     ],

@@ -1,5 +1,5 @@
-import 'package:bbt_kirov_app/features/domain/entities/book_entity.dart';
 import 'package:bbt_kirov_app/common/theme/app_colors.dart';
+import 'package:bbt_kirov_app/features/domain/entities/book_entity.dart';
 import 'package:bbt_kirov_app/features/presentation/ui/widgets/book_card_widget.dart';
 import 'package:bbt_kirov_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 class BuilderCategoryWidget extends StatefulWidget {
   final List<BookEntity> categoryBooks;
 
-  const BuilderCategoryWidget(BuildContext context, {super.key, required this.categoryBooks});
+  const BuilderCategoryWidget({super.key, required this.categoryBooks});
 
   @override
   State<BuilderCategoryWidget> createState() => _BuilderWidgetCategoryState();
@@ -26,13 +26,7 @@ class _BuilderWidgetCategoryState extends State<BuilderCategoryWidget> {
 
   void _runFilter(String enteredKeyword) {
     List<BookEntity> resultsBooks = [];
-    if (enteredKeyword.isEmpty) {
-      resultsBooks = widget.categoryBooks;
-    } else {
-      resultsBooks = widget.categoryBooks
-          .where((book) => book.name.toLowerCase().contains(enteredKeyword.toLowerCase()))
-          .toList();
-    }
+    resultsBooks = enteredKeyword.isEmpty ? widget.categoryBooks : widget.categoryBooks.where((book) => book.name.toLowerCase().contains(enteredKeyword.toLowerCase())).toList();
 
     setState(() {
       _foundBooks = resultsBooks;
@@ -75,7 +69,7 @@ class _BuilderWidgetCategoryState extends State<BuilderCategoryWidget> {
                   borderRadius: BorderRadius.circular(12),
                   borderSide: const BorderSide(
                     color: AppColors.greyColor,
-                    width: 1.0,
+                    width: 1,
                   ),
                 ),
                 focusedBorder: OutlineInputBorder(
@@ -84,11 +78,11 @@ class _BuilderWidgetCategoryState extends State<BuilderCategoryWidget> {
                     color: focusNode!.hasFocus
                         ? Theme.of(context).primaryColor
                         : Theme.of(context).primaryColorDark,
-                    width: 1.0,
+                    width: 1,
                   ),
                 ),
               ),
-              onChanged: (text) => _runFilter(text),
+              onChanged: _runFilter,
             ),
           ),
         ),
@@ -104,8 +98,8 @@ class _BuilderWidgetCategoryState extends State<BuilderCategoryWidget> {
                   ),
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
-                    mainAxisSpacing: 8.0,
-                    crossAxisSpacing: 8.0,
+                    mainAxisSpacing: 8,
+                    crossAxisSpacing: 8,
                     mainAxisExtent: 270,
                   ),
                 )

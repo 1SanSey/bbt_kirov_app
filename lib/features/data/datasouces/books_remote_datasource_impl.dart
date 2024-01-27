@@ -1,18 +1,15 @@
 import 'package:bbt_kirov_app/core/error/exception.dart';
-import 'package:bbt_kirov_app/features/data/models/book_model.dart';
 import 'package:bbt_kirov_app/features/data/i_datasources/i_books_remote_datasource.dart';
+import 'package:bbt_kirov_app/features/data/models/book_model.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk_flutter.dart';
 
-
-
 class BooksRemoteDatasourceImpl extends IBooksRemoteDatasource {
-
   @override
   Future<List<BookModel>> getAllBooks() async {
-    List<BookModel> books = [];
+    final books = <BookModel>[];
     final apiResponse = await ParseObject('Books').getAll();
     if (apiResponse.success && apiResponse.results != null) {
-      for (var object in apiResponse.results as List<ParseObject>) {
+      for (final object in apiResponse.results as List<ParseObject>) {
         books.add(BookModel.fromDb(object));
       }
     } else {
@@ -24,13 +21,13 @@ class BooksRemoteDatasourceImpl extends IBooksRemoteDatasource {
 
   @override
   Future<List<BookModel>> getBooksByName(String name) async {
-    List<BookModel> books = [];
-    final QueryBuilder<ParseObject> parseQuery = QueryBuilder<ParseObject>(ParseObject('Books'));
-    parseQuery.whereContains('name', name);
+    final books = <BookModel>[];
+    final QueryBuilder<ParseObject> parseQuery = QueryBuilder<ParseObject>(ParseObject('Books'))
+      ..whereContains('name', name);
     final apiResponse = await parseQuery.query();
 
     if (apiResponse.success && apiResponse.results != null) {
-      for (var object in apiResponse.results as List<ParseObject>) {
+      for (final object in apiResponse.results as List<ParseObject>) {
         books.add(BookModel.fromDb(object));
       }
     } else {
@@ -61,13 +58,13 @@ class BooksRemoteDatasourceImpl extends IBooksRemoteDatasource {
   }
 
   Future<List<BookModel>> _getBooksByQuery(String field, var query) async {
-    List<BookModel> books = [];
-    final QueryBuilder<ParseObject> parseQuery = QueryBuilder<ParseObject>(ParseObject('Books'));
-    parseQuery.whereEqualTo(field, query);
+    final List<BookModel> books = [];
+    final QueryBuilder<ParseObject> parseQuery = QueryBuilder<ParseObject>(ParseObject('Books'))
+      ..whereEqualTo(field, query);
     final apiResponse = await parseQuery.query();
 
     if (apiResponse.success && apiResponse.results != null) {
-      for (var object in apiResponse.results as List<ParseObject>) {
+      for (final object in apiResponse.results as List<ParseObject>) {
         books.add(BookModel.fromDb(object));
       }
     } else {

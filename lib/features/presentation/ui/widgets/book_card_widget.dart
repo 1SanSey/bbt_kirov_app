@@ -13,81 +13,76 @@ class BookCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: Colors.white,
-      elevation: 1,
-      shape: RoundedRectangleBorder(
-        side: const BorderSide(
-          color: AppColors.greyColor,
-          width: 1,
-        ),
-        borderRadius: BorderRadius.circular(8.0),
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        border: Border.all(width: 1, color: AppColors.greyColor),
+        borderRadius: const BorderRadius.all(Radius.circular(8)),
       ),
-      child: SizedBox(
-        height: 300,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            GestureDetector(
-              onTap: () => NavigationManager.instance.goBookDetailPage(book),
-              child: Column(
-                children: [
-                  Image.network(
-                    book.image ?? 'https://master-kraski.ru/images/no-image.jpg',
-                    height: 180,
-                  ),
-                  SizedBox(
-                    height: 35,
-                    child: Padding(
-                      padding: const EdgeInsets.only(right: 8, left: 8),
-                      child: Text(
-                        book.name,
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.bodyMedium,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Expanded(
-              child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: <Widget>[
-                Text(
-                  '${book.price} ₽',
-                  style: TextStyle(
-                    color: Theme.of(context).primaryColor,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          GestureDetector(
+            onTap: () => NavigationManager.instance.goBookDetailPage(book),
+            child: Column(
+              children: [
+                Image.network(
+                  book.image ?? 'https://master-kraski.ru/images/no-image.jpg',
+                  height: 180,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: Text(
+                    book.name,
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.bodyMedium,
                   ),
                 ),
-                IconButton(
-                    onPressed: () {
-                      //TODO: исправить
-                      CartBookModel hiveBook = CartBookModel(
-                          name: book.name, price: book.price, image: book.image!, quantity: 1);
-                      BlocProvider.of<CartBloc>(context).add(AddToCartEvent(book: hiveBook));
-                      //showSnackBarAddToCart(context);
-                    },
-                    icon: Icon(
-                      Icons.shopping_cart,
-                      color: Theme.of(context).primaryColor,
-                      size: 30,
-                    )),
-
-                /* BlocListener<CartBloc, CartState>(
-                      listener: ((context, state) {
-                        if (state is AddToCartState) {
-                          String message = state.message;
-
-                          
-                        }
-                      }),
-                      child: const SizedBox.shrink(),
-                    ),  */
-              ]),
+              ],
             ),
-          ],
-        ),
+          ),
+          Expanded(
+            child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: <Widget>[
+              Text(
+                '${book.price} ₽',
+                style: TextStyle(
+                  color: Theme.of(context).primaryColor,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              IconButton(
+                onPressed: () {
+                  //TODO: исправить
+                  final CartBookModel hiveBook = CartBookModel(
+                    name: book.name,
+                    price: book.price,
+                    image: book.image!,
+                    quantity: 1,
+                  );
+                  BlocProvider.of<CartBloc>(context).add(AddToCartEvent(book: hiveBook));
+                  //showSnackBarAddToCart(context);
+                },
+                icon: Icon(
+                  Icons.shopping_cart,
+                  color: Theme.of(context).primaryColor,
+                  size: 30,
+                ),
+              ),
+
+              /* BlocListener<CartBloc, CartState>(
+                    listener: ((context, state) {
+                      if (state is AddToCartState) {
+                        String message = state.message;
+          
+                        
+                      }
+                    }),
+                    child: const SizedBox.shrink(),
+                  ),  */
+            ]),
+          ),
+        ],
       ),
     );
   }

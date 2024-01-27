@@ -51,7 +51,10 @@ abstract class RouteBuilder {
         );
       default:
         return MaterialPageRoute(
-            builder: (context) => const Center(child: Text('Navigation Error')));
+          builder: (context) => const Center(
+            child: Text('Navigation Error'),
+          ),
+        );
     }
   }
 }

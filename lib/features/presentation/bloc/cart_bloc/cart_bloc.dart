@@ -1,7 +1,7 @@
 import 'package:bbt_kirov_app/features/domain/entities/cart_book_entity.dart';
 import 'package:bbt_kirov_app/features/domain/usecases/cart_usecase.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'cart_event.dart';
 part 'cart_state.dart';
@@ -18,7 +18,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
   }
 
   void _addToCart(AddToCartEvent event, Emitter<CartState> emit) {
-    String message = cart.addToCart(event.book);
+    final message = cart.addToCart(event.book);
     emit(AddToCartState(book: event.book, message: message));
     emit(EmptyCartState());
   }
@@ -28,8 +28,8 @@ class CartBloc extends Bloc<CartEvent, CartState> {
   }
 
   void _showCart(ShowCartEvent event, Emitter<CartState> emit) {
-    List<CartBookEntity> books = cart.showCart();
-    int totalSum = cart.totalSum();
+    final List<CartBookEntity> books = cart.showCart();
+    final totalSum = cart.totalSum();
 
     emit(ShowCartState(books: books, totalSum: totalSum));
   }

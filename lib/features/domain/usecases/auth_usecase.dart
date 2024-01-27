@@ -12,8 +12,10 @@ class AuthUsecase extends UseCaseByParams<UserEntity, UserParams> {
 
   @override
   Future<Either<Failure, UserEntity>> call(UserParams params) async {
-    return await authRepository.login(
-        login: params.login, password: params.password);
+    return authRepository.login(
+      login: params.login,
+      password: params.password,
+    );
   }
 }
 

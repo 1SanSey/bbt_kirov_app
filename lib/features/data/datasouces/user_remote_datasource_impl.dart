@@ -6,14 +6,14 @@ import 'package:bbt_kirov_app/features/domain/entities/user_entity/user_entity.d
 import 'package:parse_server_sdk_flutter/parse_server_sdk_flutter.dart';
 
 class UserRemoteDatasourceImpl extends IUserRemoteDatasource {
-
   @override
   Future<String> userRegister(String username, String password, String email) async {
     final parseUser = ParseUser.createUser(username, password, email);
-    var response = await parseUser.signUp();
+    final response = await parseUser.signUp();
 
     if (response.success) {
-      log("User was successfully register!");
+      log('User was successfully register!');
+
       return 'Success';
     } else {
       log(response.error!.message);
@@ -26,11 +26,11 @@ class UserRemoteDatasourceImpl extends IUserRemoteDatasource {
     final parseUser = ParseUser(username, password, null);
     final UserEntity user;
 
-    var response = await parseUser.login();
+    final response = await parseUser.login();
 
     if (response.success) {
       user = UserEntity.fromDb(parseUser);
-      log("User was successfully login!");
+      log('User was successfully login!');
       log(user.toString());
     } else {
       log(response.error!.message);
@@ -43,15 +43,15 @@ class UserRemoteDatasourceImpl extends IUserRemoteDatasource {
   @override
   Future<UserEntity> userLogout() async {
     final parseUser = await ParseUser.currentUser() as ParseUser;
-    var response = await parseUser.logout();
+    final response = await parseUser.logout();
     final user = UserEntity.empty();
 
     if (response.success) {
-      log("User was successfully logout!");
+      log('User was successfully logout!');
     } else {
       log(response.error!.message);
     }
+
     return user;
   }
-
 }

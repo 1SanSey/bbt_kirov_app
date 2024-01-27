@@ -2,6 +2,7 @@
 
 import 'package:bbt_kirov_app/features/domain/entities/cart_book_entity.dart';
 import 'package:hive/hive.dart';
+
 part 'cart_book_model.g.dart';
 
 @HiveType(typeId: 0)
@@ -19,10 +20,10 @@ class CartBookModel extends CartBookEntity {
   @HiveField(3)
   int quantity;
 
-  CartBookModel(
-      {required this.name,
-      required this.price,
-      required this.quantity,
-      required this.image})
-      : super(quantity: quantity, name: name, price: price, image: image);
+  CartBookModel({
+    required this.name,
+    required this.price,
+    required this.quantity,
+    required this.image,
+  }) : super(quantity: quantity, name: name, price: price, image: image);
 }

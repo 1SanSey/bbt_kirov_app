@@ -6,8 +6,12 @@ class OrderEntity extends Equatable {
   final int sumOrder;
   final Map<String, dynamic> books;
 
-  const OrderEntity(
-      {required this.userId, required this.dateOrder, required this.sumOrder, required this.books});
+  const OrderEntity({
+    required this.userId,
+    required this.dateOrder,
+    required this.sumOrder,
+    required this.books,
+  });
 
   @override
   List<Object?> get props => [userId, dateOrder, sumOrder, books];

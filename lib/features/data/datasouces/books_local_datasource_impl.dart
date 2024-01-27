@@ -5,7 +5,6 @@ import 'package:bbt_kirov_app/features/data/models/favourites_book_model/favouri
 import 'package:hive_flutter/hive_flutter.dart';
 
 class BooksLocalDatasourceImpl extends IBooksLocalDatasource {
-
   Box<CartBookModel> cartBox = Hive.box<CartBookModel>(HiveBoxes.cart);
 
   @override
@@ -14,7 +13,7 @@ class BooksLocalDatasourceImpl extends IBooksLocalDatasource {
     String message = '';
 
     if (cartBox.values.isNotEmpty) {
-      for (var item in cartBox.values) {
+      for (final item in cartBox.values) {
         if (item.name == book.name) {
           isExist = true;
           message = 'Товар уже есть в корзине!';
@@ -23,19 +22,21 @@ class BooksLocalDatasourceImpl extends IBooksLocalDatasource {
       }
       if (!isExist) {
         cartBox.add(CartBookModel(
-            name: book.name,
-            price: book.price,
-            image: book.image,
-            quantity: book.quantity));
+          name: book.name,
+          price: book.price,
+          image: book.image,
+          quantity: book.quantity,
+        ));
 
         message = 'Товар добавлен в корзину!';
       }
     } else {
       cartBox.add(CartBookModel(
-          name: book.name,
-          price: book.price,
-          image: book.image,
-          quantity: book.quantity));
+        name: book.name,
+        price: book.price,
+        image: book.image,
+        quantity: book.quantity,
+      ));
 
       message = 'Товар добавлен в корзину!';
     }
@@ -56,15 +57,16 @@ class BooksLocalDatasourceImpl extends IBooksLocalDatasource {
   @override
   int totalSum() {
     int sum = 0;
-    for (var value in cartBox.values) {
+    for (final value in cartBox.values) {
       sum = sum + value.price * value.quantity;
     }
+
     return sum;
   }
 
   @override
-  void changeQuantityCart(int index, int value) async {
-    var currentItem = cartBox.getAt(index);
+  Future<void> changeQuantityCart(int index, int value) async {
+    final currentItem = cartBox.getAt(index);
     currentItem?.quantity = value;
     await cartBox.putAt(index, currentItem!);
   }
@@ -74,8 +76,7 @@ class BooksLocalDatasourceImpl extends IBooksLocalDatasource {
     cartBox.clear();
   }
 
-  Box<FavouritesBookModel> favouritesBox =
-      Hive.box<FavouritesBookModel>(HiveBoxes.favourites);
+  Box<FavouritesBookModel> favouritesBox = Hive.box<FavouritesBookModel>(HiveBoxes.favourites);
 
   @override
   String addToFavourites(FavouritesBookModel book) {
@@ -83,7 +84,7 @@ class BooksLocalDatasourceImpl extends IBooksLocalDatasource {
     String message = '';
 
     if (favouritesBox.values.isNotEmpty) {
-      for (var item in favouritesBox.values) {
+      for (final item in favouritesBox.values) {
         if (item.name == book.name) {
           isExist = true;
           message = 'Товар уже есть в Избранном!';

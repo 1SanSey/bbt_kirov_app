@@ -1,3 +1,5 @@
+// ignore_for_file: type_annotate_public_apis
+
 import 'package:bbt_kirov_app/core/platform/network_info.dart';
 import 'package:bbt_kirov_app/features/data/datasouces/books_local_datasource_impl.dart';
 import 'package:bbt_kirov_app/features/data/datasouces/books_remote_datasource_impl.dart';
@@ -41,59 +43,74 @@ final sl = GetIt.instance;
 
 init() async {
 //BLoC & Cubit
-  sl.registerFactory(() => HomeBooksBloc(popularBooks: sl()));
-  sl.registerFactory(() => CategoryBloc(
-        allBooks: sl(),
-        booksBySize: sl(),
-        booksByName: sl(),
-        setBooks: sl(),
-        culinaryBooks: sl(),
-        searchBooks: sl(),
-      ));
-  sl.registerFactory(() => CartBloc(cart: sl()));
-  sl.registerFactory(() => FavouritesBloc(favourites: sl()));
-  sl.registerFactory(() => AuthBloc(repository: sl()));
-  sl.registerFactory(() => RegistrationBloc(sl()));
-  sl.registerFactory(() => ChangeThemeBloc());
-  sl.registerFactory(() => OrdersBloc(ordersUseCase: sl()));
-  sl.registerFactory(() => SendOrderBloc(ordersUseCase: sl()));
+  sl
+    ..registerFactory(() => HomeBooksBloc(popularBooks: sl()))
+    ..registerFactory(() => CategoryBloc(
+          allBooks: sl(),
+          booksBySize: sl(),
+          booksByName: sl(),
+          setBooks: sl(),
+          culinaryBooks: sl(),
+          searchBooks: sl(),
+        ))
+    ..registerFactory(() => CartBloc(cart: sl()))
+    ..registerFactory(() => FavouritesBloc(favourites: sl()))
+    ..registerFactory(() => AuthBloc(repository: sl()))
+    ..registerFactory(() => RegistrationBloc(sl()))
+    ..registerFactory(ChangeThemeBloc.new)
+    ..registerFactory(() => OrdersBloc(ordersUseCase: sl()))
+    ..registerFactory(() => SendOrderBloc(ordersUseCase: sl()))
 
 //UseCases
-  sl.registerLazySingleton(() => PopularUsecase(sl()));
-  sl.registerLazySingleton(() => AllBooksUsecase(sl()));
-  sl.registerLazySingleton(() => BooksBySizeUsecase(sl()));
-  sl.registerLazySingleton(() => BooksByNameUsecase(sl()));
-  sl.registerLazySingleton(() => SetBooksUsecase(sl()));
-  sl.registerLazySingleton(() => CulinaryBooksUsecase(sl()));
-  sl.registerLazySingleton(() => SearchBooksUsecase(sl()));
-  sl.registerLazySingleton(() => CartUsecase(sl()));
-  sl.registerLazySingleton(() => FavouritesUsecase(sl()));
-  sl.registerLazySingleton(() => OrdersUsecase(sl()));
-  sl.registerLazySingleton(() => SendOrderUsecase(sl()));
+    ..registerLazySingleton(() => PopularUsecase(sl()))
+    ..registerLazySingleton(() => AllBooksUsecase(sl()))
+    ..registerLazySingleton(() => BooksBySizeUsecase(sl()))
+    ..registerLazySingleton(() => BooksByNameUsecase(sl()))
+    ..registerLazySingleton(() => SetBooksUsecase(sl()))
+    ..registerLazySingleton(() => CulinaryBooksUsecase(sl()))
+    ..registerLazySingleton(() => SearchBooksUsecase(sl()))
+    ..registerLazySingleton(() => CartUsecase(sl()))
+    ..registerLazySingleton(() => FavouritesUsecase(sl()))
+    ..registerLazySingleton(() => OrdersUsecase(sl()))
+    ..registerLazySingleton(() => SendOrderUsecase(sl()))
 
 //Repositories
-  sl.registerLazySingleton<IBooksHomeRepository>(
-      () => BooksHomeRepositoryImpl(remoteDataSource: sl(), networkInfo: sl()));
-  sl.registerLazySingleton<ICategoriesRepository>(
-      () => CategoriesRepositoryImpl(remoteDataSource: sl(), networkInfo: sl()));
-  sl.registerLazySingleton<ICartRepository>(() =>
-      CartRepositoryImpl(localDataSource: sl(), remoteDataSource: sl(), networkInfo: sl()));
-  sl.registerLazySingleton<IFavouritesRepository>(
-      () => FavouritesRepositoryImpl(hiveDataSource: sl(), networkInfo: sl()));
-  sl.registerLazySingleton<IAuthRepository>(
-      () => AuthRepositoryImpl(remoteDataSource: sl(), networkInfo: sl()));
-  sl.registerLazySingleton<IOrdersRepository>(
-      () => OrdersRepositoryImpl(remoteDataSource: sl(), networkInfo: sl()));
+    ..registerLazySingleton<IBooksHomeRepository>(
+      () => BooksHomeRepositoryImpl(remoteDataSource: sl(), networkInfo: sl()),
+    )
+    ..registerLazySingleton<ICategoriesRepository>(
+      () => CategoriesRepositoryImpl(remoteDataSource: sl(), networkInfo: sl()),
+    )
+    ..registerLazySingleton<ICartRepository>(
+      () => CartRepositoryImpl(localDataSource: sl(), remoteDataSource: sl(), networkInfo: sl()),
+    )
+    ..registerLazySingleton<IFavouritesRepository>(
+      () => FavouritesRepositoryImpl(hiveDataSource: sl(), networkInfo: sl()),
+    )
+    ..registerLazySingleton<IAuthRepository>(
+      () => AuthRepositoryImpl(remoteDataSource: sl(), networkInfo: sl()),
+    )
+    ..registerLazySingleton<IOrdersRepository>(
+      () => OrdersRepositoryImpl(remoteDataSource: sl(), networkInfo: sl()),
+    )
 
 //Datasources
-  sl.registerLazySingleton<IUserRemoteDatasource>(() => UserRemoteDatasourceImpl());
-  sl.registerLazySingleton<IBooksRemoteDatasource>(() => BooksRemoteDatasourceImpl());
-  sl.registerLazySingleton<IOrdersRemoteDatasource>(() => OrdersRemoteDatasourceImpl());
-  sl.registerLazySingleton<IBooksLocalDatasource>(() => BooksLocalDatasourceImpl());
+    ..registerLazySingleton<IUserRemoteDatasource>(
+      UserRemoteDatasourceImpl.new,
+    )
+    ..registerLazySingleton<IBooksRemoteDatasource>(
+      BooksRemoteDatasourceImpl.new,
+    )
+    ..registerLazySingleton<IOrdersRemoteDatasource>(
+      OrdersRemoteDatasourceImpl.new,
+    )
+    ..registerLazySingleton<IBooksLocalDatasource>(
+      BooksLocalDatasourceImpl.new,
+    )
 
 //Core
-  sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
+    ..registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()))
 
 //External
-  sl.registerLazySingleton(() => InternetConnectionChecker());
+    ..registerLazySingleton(InternetConnectionChecker.new);
 }

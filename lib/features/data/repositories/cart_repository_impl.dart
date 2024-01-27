@@ -10,18 +10,21 @@ class CartRepositoryImpl implements ICartRepository {
   final IOrdersRemoteDatasource remoteDataSource;
   final NetworkInfo networkInfo;
 
-  CartRepositoryImpl(
-      {required this.remoteDataSource,
-      required this.networkInfo,
-      required this.localDataSource});
+  CartRepositoryImpl({
+    required this.remoteDataSource,
+    required this.networkInfo,
+    required this.localDataSource,
+  });
 
   @override
   String addToCart(CartBookEntity book) {
     final hiveBook = CartBookModel(
-        name: book.name,
-        price: book.price,
-        quantity: book.quantity,
-        image: book.image);
+      name: book.name,
+      price: book.price,
+      quantity: book.quantity,
+      image: book.image,
+    );
+
     return localDataSource.addToCart(hiveBook);
   }
 

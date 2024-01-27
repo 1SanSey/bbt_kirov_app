@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_final_parameters
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk_flutter.dart';
 

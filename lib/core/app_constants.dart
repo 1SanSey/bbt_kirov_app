@@ -15,15 +15,10 @@ class AppConstants {
   static const List<String> imagesList = [
     'assets/images/slides/1_quote.jpg',
     'assets/images/slides/2_quote.jpg',
-    'assets/images/slides/3_quote.jpg'
+    'assets/images/slides/3_quote.jpg',
   ];
 
   static const String bbtLogo = 'assets/images/logo/bbt_logo.webp';
-
-  static const loggedInPref = "loggedInPref";
-  static const usernamePref = "usernamePref";
-  static const emailPref = "emailPref";
-  static const photoPref = "photoPref";
 }
 
 class AppCategories {

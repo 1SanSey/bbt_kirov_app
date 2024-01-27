@@ -1,6 +1,6 @@
 import 'package:bbt_kirov_app/core/error/exception.dart';
-import 'package:bbt_kirov_app/core/platform/network_info.dart';
 import 'package:bbt_kirov_app/core/error/failure.dart';
+import 'package:bbt_kirov_app/core/platform/network_info.dart';
 import 'package:bbt_kirov_app/features/data/i_datasources/i_user_remote_datasorce.dart';
 import 'package:bbt_kirov_app/features/domain/entities/user_entity/user_entity.dart';
 import 'package:bbt_kirov_app/features/domain/repositories/i_auth_repository.dart';
@@ -13,8 +13,10 @@ class AuthRepositoryImpl implements IAuthRepository {
   AuthRepositoryImpl({required this.networkInfo, required this.remoteDataSource});
 
   @override
-  Future<Either<Failure, UserEntity>> login(
-      {required String login, required String password}) async {
+  Future<Either<Failure, UserEntity>> login({
+    required String login,
+    required String password,
+  }) async {
     if (await networkInfo.isConnected) {
       try {
         final authenticatedUser = await remoteDataSource.userLogin(login, password);
@@ -29,8 +31,11 @@ class AuthRepositoryImpl implements IAuthRepository {
   }
 
   @override
-  Future<Either<Failure, String>> register(
-      {required String login, required String password, required String email}) async {
+  Future<Either<Failure, String>> register({
+    required String login,
+    required String password,
+    required String email,
+  }) async {
     if (await networkInfo.isConnected) {
       try {
         final registeredUser = await remoteDataSource.userRegister(login, password, email);
@@ -49,6 +54,7 @@ class AuthRepositoryImpl implements IAuthRepository {
     if (await networkInfo.isConnected) {
       try {
         final notAuthenticatedUser = await remoteDataSource.userLogout();
+
         return Right(notAuthenticatedUser);
       } on ServerException {
         return Left(ServerFailure());

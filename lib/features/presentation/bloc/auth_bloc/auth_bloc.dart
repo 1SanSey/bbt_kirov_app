@@ -44,24 +44,24 @@ class AuthState with _$AuthState {
       );
 
   const factory AuthState.authenticated({
-    required final UserEntity user,
+    required UserEntity user,
   }) = _AuthenticatedAuthState;
 
   const factory AuthState.inProcess({
-    required final UserEntity user,
+    required UserEntity user,
   }) = _InProcessAuthState;
 
   const factory AuthState.notAuthenticated({
-    required final UserEntity user,
+    required UserEntity user,
   }) = _NotAuthenticatedAuthState;
 
   const factory AuthState.error({
-    required final UserEntity user,
+    required UserEntity user,
     @Default('Произошла ошибка') String message,
   }) = _ErrorAuthState;
 
   const factory AuthState.successful({
-    required final UserEntity user,
+    required UserEntity user,
   }) = _SuccessfulAuthState;
 
   factory AuthState.fromJson(Map<String, dynamic> json) => _$AuthStateFromJson(json);
@@ -71,15 +71,16 @@ class AuthBloc extends HydratedBloc<AuthEvent, AuthState> {
   final IAuthRepository _repository;
 
   AuthBloc({
-    required final IAuthRepository repository,
+    required IAuthRepository repository,
   })  : _repository = repository,
-        super(AuthState.notAuthenticated(user: UserEntity.empty())
-            // userEntity?.when<AuthState>(
-            //       authenticated: (user) => AuthState.authenticated(user: user),
-            //       notAuthenticated: () => const AuthState.notAuthenticated(),
-            //     ) ??
-            //     const AuthState.notAuthenticated(),
-            ) {
+        super(
+          AuthState.notAuthenticated(user: UserEntity.empty()),
+          // userEntity?.when<AuthState>(
+          //       authenticated: (user) => AuthState.authenticated(user: user),
+          //       notAuthenticated: () => const AuthState.notAuthenticated(),
+          //     ) ??
+          //     const AuthState.notAuthenticated(),
+        ) {
     on<AuthEvent>(
       (event, emitter) => event.map<Future<void>>(
         logIn: (event) => _logIn(event, emitter),
@@ -107,14 +108,18 @@ class AuthBloc extends HydratedBloc<AuthEvent, AuthState> {
       final newUser = await _repository.login(login: event.login, password: event.password);
 
       newUser.fold(
-          (failure) => emitter(
-              AuthState.error(user: UserEntity.empty(), message: mapFailureToMessage(failure))),
-          (user) {
-        emitter(AuthState.successful(user: user));
-      });
+        (failure) => emitter(
+          AuthState.error(user: UserEntity.empty(), message: mapFailureToMessage(failure)),
+        ),
+        (user) {
+          emitter(AuthState.successful(user: user));
+        },
+      );
     } on FormatException {
       emitter(AuthState.error(
-          user: UserEntity.empty(), message: 'Нельзя залогиниться - нет интернета'));
+        user: UserEntity.empty(),
+        message: 'Нельзя залогиниться - нет интернета',
+      ));
     } on Object {
       emitter(AuthState.error(user: UserEntity.empty(), message: 'Ошибка аутентификации'));
       // без rethrow будет замалчивание ошибок
@@ -129,16 +134,18 @@ class AuthBloc extends HydratedBloc<AuthEvent, AuthState> {
     }
   }
 
-  Future<void> _logOut(_LogOutAuthEvent event, Emitter<AuthState> emitter) async {
+  Future<void> _logOut(_, Emitter<AuthState> emitter) async {
     try {
       emitter(AuthState.inProcess(user: state.user));
       final notAuthenticatedUser = await _repository.logout();
       notAuthenticatedUser.fold(
-          (failure) => emitter(
-              AuthState.error(user: UserEntity.empty(), message: mapFailureToMessage(failure))),
-          (notAuthenticatedUser) {
-        emitter(AuthState.successful(user: notAuthenticatedUser));
-      });
+        (failure) => emitter(
+          AuthState.error(user: UserEntity.empty(), message: mapFailureToMessage(failure)),
+        ),
+        (notAuthenticatedUser) {
+          emitter(AuthState.successful(user: notAuthenticatedUser));
+        },
+      );
     } on FormatException {
       emitter(AuthState.error(user: state.user, message: 'Нельзя залогиниться - нет интернета'));
     } on Object {
@@ -159,8 +166,9 @@ class AuthBloc extends HydratedBloc<AuthEvent, AuthState> {
     final state = AuthState.fromJson(json);
 
     return state.maybeMap(
-        authenticated: (state) => AuthState.authenticated(user: state.user),
-        orElse: () => AuthState.notAuthenticated(user: UserEntity.empty()));
+      authenticated: (state) => AuthState.authenticated(user: state.user),
+      orElse: () => AuthState.notAuthenticated(user: UserEntity.empty()),
+    );
   }
 
   @override

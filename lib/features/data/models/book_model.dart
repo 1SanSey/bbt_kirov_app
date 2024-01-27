@@ -13,24 +13,24 @@ class BookModel extends BookEntity {
   final String? singleOrSet;
   final int? quantity;
 
-  const BookModel(
-      {required this.name,
-      required this.price,
-      required this.isPopular,
-      required this.image,
-      required this.description,
-      required this.size,
-      required this.singleOrSet,
-      this.quantity, 
-      })
-      : super(
-            name: name,
-            price: price,
-            isPopular: isPopular,
-            image: image,
-            description: description,
-            size: size,
-            singleOrSet: singleOrSet);
+  const BookModel({
+    required this.name,
+    required this.price,
+    required this.isPopular,
+    required this.image,
+    required this.description,
+    required this.size,
+    required this.singleOrSet,
+    this.quantity,
+  }) : super(
+          name: name,
+          price: price,
+          isPopular: isPopular,
+          image: image,
+          description: description,
+          size: size,
+          singleOrSet: singleOrSet,
+        );
 
   factory BookModel.fromDb(ParseObject object) {
     return BookModel(

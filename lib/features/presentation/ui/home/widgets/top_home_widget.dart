@@ -13,13 +13,13 @@ class TopHomeWidget extends StatelessWidget {
         delegate: SliverChildBuilderDelegate(
           (context, index) {
             return OutlinedButton(
-              style: ButtonStyle(
-                side: MaterialStateProperty.all(
-                  BorderSide(
-                    color: Theme.of(context).primaryColor,
-                    width: 2,
-                  ),
+              style: OutlinedButton.styleFrom(
+                side: BorderSide(
+                  color: Theme.of(context).primaryColor,
+                  width: 2,
                 ),
+                foregroundColor: Colors.transparent,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
               ),
               onPressed: () => NavigationManager.instance.goCategoryPage(index),
               child: Center(
@@ -27,9 +27,10 @@ class TopHomeWidget extends StatelessWidget {
                   AppConstants.category[index]!.$1,
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                      color: Theme.of(context).primaryColor,
-                      fontSize: 15,
-                      fontWeight: FontWeight.w700),
+                    color: Theme.of(context).primaryColor,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
               ),
             );
@@ -38,8 +39,8 @@ class TopHomeWidget extends StatelessWidget {
         ),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
-          mainAxisSpacing: 8.0,
-          crossAxisSpacing: 8.0,
+          mainAxisSpacing: 8,
+          crossAxisSpacing: 8,
           mainAxisExtent: 50,
         ),
       ),

@@ -1,4 +1,4 @@
 class HiveBoxes {
-  static String cart = 'cartBox';
-  static String favourites = 'favouritesBox';
+  static const String cart = 'cartBox';
+  static const String favourites = 'favouritesBox';
 }

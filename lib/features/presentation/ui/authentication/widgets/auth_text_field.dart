@@ -6,12 +6,13 @@ class AuthTextField extends StatelessWidget {
   final FocusNode focusNode;
   final String labelText;
   final bool obscureText;
-  const AuthTextField(
-      {super.key,
-      required this.controller,
-      required this.focusNode,
-      required this.labelText,
-      this.obscureText = false});
+  const AuthTextField({
+    super.key,
+    required this.controller,
+    required this.focusNode,
+    required this.labelText,
+    this.obscureText = false,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -33,14 +34,14 @@ class AuthTextField extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
           borderSide: const BorderSide(
             color: AppColors.greyColor,
-            width: 1.0,
+            width: 1,
           ),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
           borderSide: const BorderSide(
             color: AppColors.primaryColorLight,
-            width: 1.0,
+            width: 1,
           ),
         ),
       ),

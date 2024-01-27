@@ -7,15 +7,14 @@ class LoadingIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-    padding: const EdgeInsets.all(8.0),
-    child: Center(
-      child: SpinKitDualRing(
-        color: Theme.of(context).primaryColor,
-        size: 60.0,
-        duration: const Duration(milliseconds: 400),
+      padding: const EdgeInsets.all(8),
+      child: Center(
+        child: SpinKitDualRing(
+          color: Theme.of(context).primaryColor,
+          size: 60,
+          duration: const Duration(milliseconds: 400),
+        ),
       ),
-    ),
-  );
+    );
   }
 }
-

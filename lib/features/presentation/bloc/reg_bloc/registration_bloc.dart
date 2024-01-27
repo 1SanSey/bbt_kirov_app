@@ -52,13 +52,17 @@ class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
     try {
       emitter(const RegistrationState.inProcess());
       final registerUser = await _repository.register(
-          login: event.login, password: event.password, email: event.login);
+        login: event.login,
+        password: event.password,
+        email: event.login,
+      );
 
       registerUser.fold(
-          (failure) => emitter(RegistrationState.error(message: mapFailureToMessage(failure))),
-          (user) {
-        emitter(const RegistrationState.successful());
-      });
+        (failure) => emitter(RegistrationState.error(message: mapFailureToMessage(failure))),
+        (user) {
+          emitter(const RegistrationState.successful());
+        },
+      );
     } on FormatException {
       emitter(const RegistrationState.error(message: 'Нельзя залогиниться - нет интернета'));
     } on Object {
@@ -67,7 +71,7 @@ class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
     }
   }
 
-  void _onToInitial(_ToInitialRegistrationEvent event, Emitter<RegistrationState> emitter) async {
+  void _onToInitial(_ToInitialRegistrationEvent _, Emitter<RegistrationState> emitter) {
     emitter(const RegistrationState.initial());
   }
 }
