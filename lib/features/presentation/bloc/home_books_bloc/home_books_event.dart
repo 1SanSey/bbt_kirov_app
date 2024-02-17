@@ -9,4 +9,8 @@ abstract class HomeBooksEvent extends Equatable {
 
 class HomeBooksEmptyEvent extends HomeBooksEvent {}
 
-class HomeLoadBooksEvent extends HomeBooksEvent {}
+class HomeLoadBooksEvent extends HomeBooksEvent {
+  final bool isFirstFetch;
+
+  const HomeLoadBooksEvent({required this.isFirstFetch});
+}

@@ -15,18 +15,21 @@ class BuilderCategoryWidget extends StatefulWidget {
 
 class _BuilderWidgetCategoryState extends State<BuilderCategoryWidget> {
   final FocusNode? focusNode = FocusNode();
-
-  List<BookEntity> _foundBooks = [];
+  late List<BookEntity> _foundBooks;
 
   @override
   void initState() {
-    super.initState();
     _foundBooks = widget.categoryBooks;
+    super.initState();
   }
 
   void _runFilter(String enteredKeyword) {
     List<BookEntity> resultsBooks = [];
-    resultsBooks = enteredKeyword.isEmpty ? widget.categoryBooks : widget.categoryBooks.where((book) => book.name.toLowerCase().contains(enteredKeyword.toLowerCase())).toList();
+    resultsBooks = enteredKeyword.isEmpty
+        ? widget.categoryBooks
+        : widget.categoryBooks
+            .where((book) => book.name.toLowerCase().contains(enteredKeyword.toLowerCase()))
+            .toList();
 
     setState(() {
       _foundBooks = resultsBooks;

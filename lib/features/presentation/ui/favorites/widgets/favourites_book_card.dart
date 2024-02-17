@@ -6,7 +6,7 @@ import 'package:bbt_kirov_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class FavouritesBookCard extends StatefulWidget {
+class FavouritesBookCard extends StatelessWidget {
   final FavoritesBookEntity book;
   final int index;
 
@@ -16,11 +16,6 @@ class FavouritesBookCard extends StatefulWidget {
     required this.index,
   });
 
-  @override
-  State<FavouritesBookCard> createState() => _FavouritesBookCardState();
-}
-
-class _FavouritesBookCardState extends State<FavouritesBookCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -39,7 +34,7 @@ class _FavouritesBookCardState extends State<FavouritesBookCard> {
             child: Row(
               children: [
                 Image.network(
-                  widget.book.image,
+                  book.image,
                   height: 40,
                 ),
                 const SizedBox(
@@ -52,11 +47,11 @@ class _FavouritesBookCardState extends State<FavouritesBookCard> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        widget.book.name,
+                        book.name,
                         style: Theme.of(context).textTheme.bodyLarge,
                       ),
                       Text(
-                        S.current.price(widget.book.price),
+                        S.current.price(book.price),
                         style: Theme.of(context).textTheme.bodyLarge,
                       ),
                     ],
@@ -69,9 +64,9 @@ class _FavouritesBookCardState extends State<FavouritesBookCard> {
             onPressed: () {
               BlocProvider.of<CartBloc>(context).add(AddToCartEvent(
                 book: CartBookEntity(
-                  name: widget.book.name,
-                  price: widget.book.price,
-                  image: widget.book.image,
+                  name: book.name,
+                  price: book.price,
+                  image: book.image,
                   quantity: 1,
                 ),
               ));

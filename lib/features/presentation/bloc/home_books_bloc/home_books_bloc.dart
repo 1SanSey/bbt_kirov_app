@@ -12,7 +12,7 @@ part 'home_books_state.dart';
 class HomeBooksBloc extends Bloc<HomeBooksEvent, HomeBooksState> {
   final PopularUsecase popularBooks;
 
-  HomeBooksBloc({required this.popularBooks}) : super(HomeBooksEmpty()) {
+  HomeBooksBloc({required this.popularBooks}) : super(const HomeBooksEmpty()) {
     on<HomeLoadBooksEvent>(_onEvent);
     on<HomeBooksEmptyEvent>(_onEmptyEvent);
   }
@@ -21,7 +21,7 @@ class HomeBooksBloc extends Bloc<HomeBooksEvent, HomeBooksState> {
     HomeLoadBooksEvent event,
     Emitter<HomeBooksState> emit,
   ) async {
-    emit(HomeBooksLoading());
+    emit(HomeBooksLoading(books: state.books));
 
     final failureOrBooks = await popularBooks();
 
@@ -34,6 +34,6 @@ class HomeBooksBloc extends Bloc<HomeBooksEvent, HomeBooksState> {
   }
 
   FutureOr<void> _onEmptyEvent(HomeBooksEmptyEvent event, Emitter<HomeBooksState> emit) {
-    emit(HomeBooksEmpty());
+    emit(const HomeBooksEmpty());
   }
 }

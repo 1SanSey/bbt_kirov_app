@@ -53,14 +53,14 @@ class BookCard extends StatelessWidget {
               ),
               IconButton(
                 onPressed: () {
-                  //TODO: исправить
-                  final CartBookModel hiveBook = CartBookModel(
-                    name: book.name,
-                    price: book.price,
-                    image: book.image!,
-                    quantity: 1,
-                  );
-                  BlocProvider.of<CartBloc>(context).add(AddToCartEvent(book: hiveBook));
+                  BlocProvider.of<CartBloc>(context).add(AddToCartEvent(
+                    book: CartBookModel(
+                      name: book.name,
+                      price: book.price,
+                      image: book.image!,
+                      quantity: 1,
+                    ),
+                  ));
                   //showSnackBarAddToCart(context);
                 },
                 icon: Icon(

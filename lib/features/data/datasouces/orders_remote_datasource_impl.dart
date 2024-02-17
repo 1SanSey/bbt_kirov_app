@@ -4,6 +4,8 @@ import 'package:bbt_kirov_app/core/error/exception.dart';
 import 'package:bbt_kirov_app/features/data/i_datasources/i_orders_remote_datasource.dart';
 import 'package:bbt_kirov_app/features/data/models/order_model.dart';
 import 'package:bbt_kirov_app/features/domain/entities/order_entity.dart';
+import 'package:dio/dio.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk_flutter.dart';
 
 class OrdersRemoteDatasourceImpl extends IOrdersRemoteDatasource {
@@ -20,6 +22,8 @@ class OrdersRemoteDatasourceImpl extends IOrdersRemoteDatasource {
     if (parseResponse.success) {
       final objectId = (parseResponse.results!.first as ParseObject).objectId!;
       log('Object created: $objectId');
+
+      await sendTelegramMessage(order);
 
       return objectId;
     } else {
@@ -46,5 +50,19 @@ class OrdersRemoteDatasourceImpl extends IOrdersRemoteDatasource {
     }
 
     return orders;
+  }
+
+  @override
+  Future<void> sendTelegramMessage(OrderEntity order) async {
+    await dotenv.load(fileName: 'assets/.env');
+    try {
+      final dio = Dio();
+      await dio.post(
+        '${dotenv.env['TELEGRAM_URI']}${dotenv.env['TELEGRAM_TOKEN']}/sendMessage?chat_id=${dotenv.env['CHAT_ID']}&text=$order',
+      );
+// ignore: avoid_catches_without_on_clauses
+    } catch (e) {
+      log(e.toString());
+    }
   }
 }

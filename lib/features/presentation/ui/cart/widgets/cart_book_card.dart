@@ -58,10 +58,7 @@ class _CartBookCardState extends State<CartBookCard> {
                     Row(
                       children: [
                         IconButton(
-                          onPressed: () {
-                            decrement(widget.index, widget.book.quantity);
-                            context.read<CartBloc>().add(ShowCartEvent());
-                          },
+                          onPressed: () => decrement(widget.index, widget.book.quantity),
                           icon: const Icon(Icons.remove),
                           iconSize: 20,
                           color: Theme.of(context).primaryColor,
@@ -75,10 +72,7 @@ class _CartBookCardState extends State<CartBookCard> {
                           ),
                         ),
                         IconButton(
-                          onPressed: () {
-                            increment(widget.index, widget.book.quantity);
-                            context.read<CartBloc>().add(ShowCartEvent());
-                          },
+                          onPressed: () => increment(widget.index, widget.book.quantity),
                           icon: const Icon(Icons.add),
                           iconSize: 20,
                           color: Theme.of(context).primaryColor,
@@ -86,12 +80,8 @@ class _CartBookCardState extends State<CartBookCard> {
                       ],
                     ),
                     IconButton(
-                      onPressed: () {
-                        setState(() {
-                          context.read<CartBloc>().add(RemoveFromCartEvent(index: widget.index));
-                        });
-                        context.read<CartBloc>().add(ShowCartEvent());
-                      },
+                      onPressed: () =>
+                          context.read<CartBloc>().add(RemoveFromCartEvent(index: widget.index)),
                       icon: const Icon(Icons.delete),
                       iconSize: 20,
                       color: Theme.of(context).primaryColor,
@@ -107,20 +97,12 @@ class _CartBookCardState extends State<CartBookCard> {
   }
 
   void increment(int index, int value) {
-    setState(() {
-      ++value;
-      context.read<CartBloc>().add(ChangeQuantityCartEvent(index: index, value: value));
-    });
+    final newValue = value + 1;
+    context.read<CartBloc>().add(ChangeQuantityCartEvent(index: index, value: newValue));
   }
 
   void decrement(int index, int value) {
-    setState(() {
-      if (value > 1) {
-        --value;
-      } else {
-        value;
-      }
-      context.read<CartBloc>().add(ChangeQuantityCartEvent(index: index, value: value));
-    });
+    final newValue = value > 1 ? value - 1 : value;
+    context.read<CartBloc>().add(ChangeQuantityCartEvent(index: index, value: newValue));
   }
 }

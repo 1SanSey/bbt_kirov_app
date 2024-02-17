@@ -14,13 +14,12 @@ class FavouritesPage extends StatefulWidget {
 }
 
 class _FavouritesPageState extends State<FavouritesPage> {
-  late List<FavoritesBookEntity> favouritesBooks;
+  List<FavoritesBookEntity> favouritesBooks = [];
 
   @override
   void initState() {
     super.initState();
     context.read<FavouritesBloc>().add(ShowFavouritesEvent());
-    favouritesBooks = [];
   }
 
   @override

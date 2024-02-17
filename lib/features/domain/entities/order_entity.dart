@@ -15,4 +15,9 @@ class OrderEntity extends Equatable {
 
   @override
   List<Object?> get props => [userId, dateOrder, sumOrder, books];
+
+  @override
+  String toString() {
+    return '(userId: $userId, dateOrder: $dateOrder, sumOrder: $sumOrder, books: $books)';
+  }
 }

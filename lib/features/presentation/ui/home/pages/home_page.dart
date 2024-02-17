@@ -1,11 +1,13 @@
 import 'dart:io';
 
+import 'package:bbt_kirov_app/features/presentation/bloc/home_books_bloc/home_books_bloc.dart';
 import 'package:bbt_kirov_app/features/presentation/ui/cart/pages/cart_page.dart';
 import 'package:bbt_kirov_app/features/presentation/ui/favorites/pages/favourites_page.dart';
 import 'package:bbt_kirov_app/features/presentation/ui/home/widgets/main_page_widget.dart';
 import 'package:bbt_kirov_app/features/presentation/ui/widgets/drawer_widget.dart';
 import 'package:bbt_kirov_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -25,6 +27,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     titles = [S.current.BBTKirovApp, S.current.favourites, S.current.cart];
     titleHandler = titles.first;
     tabController.addListener(changeTitle);
+    context.read<HomeBooksBloc>().add(
+          const HomeLoadBooksEvent(isFirstFetch: true),
+        );
   }
 
   void changeTitle() {

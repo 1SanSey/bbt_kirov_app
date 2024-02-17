@@ -25,6 +25,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
 
   void _removeFromCart(RemoveFromCartEvent event, Emitter<CartState> emit) {
     cart.removeFromCart(event.index);
+    add(ShowCartEvent());
   }
 
   void _showCart(ShowCartEvent event, Emitter<CartState> emit) {
@@ -36,6 +37,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
 
   void _changeQuantityCart(ChangeQuantityCartEvent event, Emitter<CartState> emit) {
     cart.changeQuantityCart(event.index, event.value);
+    add(ShowCartEvent());
   }
 
   void _removeAll(RemoveAllCartEvent event, Emitter<CartState> emit) {

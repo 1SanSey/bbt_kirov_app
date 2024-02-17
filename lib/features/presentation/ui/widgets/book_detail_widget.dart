@@ -130,15 +130,14 @@ class _BookDetailPageState extends State<BookDetailPage> {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                //TODO: исправить
-                final CartBookModel hiveBook = CartBookModel(
-                  name: widget.book.name,
-                  price: widget.book.price,
-                  image: widget.book.image!,
-                  quantity: _count,
-                );
-
-                BlocProvider.of<CartBloc>(context).add(AddToCartEvent(book: hiveBook));
+                BlocProvider.of<CartBloc>(context).add(AddToCartEvent(
+                  book: CartBookModel(
+                    name: widget.book.name,
+                    price: widget.book.price,
+                    image: widget.book.image!,
+                    quantity: _count,
+                  ),
+                ));
               },
               style: ElevatedButton.styleFrom(
                 foregroundColor: Colors.white,
