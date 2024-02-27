@@ -1,5 +1,6 @@
 // ignore_for_file: type_annotate_public_apis
 
+import 'package:bbt_kirov_app/core/logger/logger_service.dart';
 import 'package:bbt_kirov_app/core/platform/network_info.dart';
 import 'package:bbt_kirov_app/features/data/datasouces/books_local_datasource_impl.dart';
 import 'package:bbt_kirov_app/features/data/datasouces/books_remote_datasource_impl.dart';
@@ -110,6 +111,7 @@ init() async {
 
 //Core
     ..registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()))
+    ..registerLazySingleton(() => LoggerService.inject)
 
 //External
     ..registerLazySingleton(InternetConnectionChecker.new);

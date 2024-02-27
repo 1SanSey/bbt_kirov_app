@@ -1,5 +1,7 @@
-import 'package:bbt_kirov_app/core/init_datasources.dart';
+import 'dart:async';
+
 import 'package:bbt_kirov_app/common/theme/themes.dart';
+import 'package:bbt_kirov_app/core/init_datasources.dart';
 import 'package:bbt_kirov_app/features/presentation/bloc/auth_bloc/auth_bloc.dart';
 import 'package:bbt_kirov_app/features/presentation/bloc/cart_bloc/cart_bloc.dart';
 import 'package:bbt_kirov_app/features/presentation/bloc/category_bloc/category_bloc.dart';
@@ -9,26 +11,38 @@ import 'package:bbt_kirov_app/features/presentation/bloc/home_books_bloc/home_bo
 import 'package:bbt_kirov_app/features/presentation/bloc/orders_bloc/orders_bloc.dart';
 import 'package:bbt_kirov_app/features/presentation/bloc/orders_bloc/send_order_bloc/send_order_bloc.dart';
 import 'package:bbt_kirov_app/features/presentation/bloc/reg_bloc/registration_bloc.dart';
-import 'package:bbt_kirov_app/generated/l10n.dart';
-import 'package:bbt_kirov_app/service_locator.dart' as di;
 import 'package:bbt_kirov_app/features/presentation/navigation/navigation_manager.dart';
 import 'package:bbt_kirov_app/features/presentation/navigation/route_builder.dart';
+import 'package:bbt_kirov_app/generated/l10n.dart';
+import 'package:bbt_kirov_app/service_locator.dart' as di;
+import 'package:bbt_kirov_app/service_locator.dart';
+import 'package:bbt_kirov_app/utils/app_bloc_observer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:logger/logger.dart';
 import 'package:path_provider/path_provider.dart';
 
-Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await InitDatasources.instance.initParse();
-  await InitDatasources.instance.initHive();
-  await di.init();
+void main() {
+  runZonedGuarded<void>(
+    () async {
+      WidgetsFlutterBinding.ensureInitialized();
+      await InitDatasources.instance.initParse();
+      await InitDatasources.instance.initHive();
+      await di.init();
 
-  HydratedBloc.storage =
-      await HydratedStorage.build(storageDirectory: await getApplicationDocumentsDirectory());
+      HydratedBloc.storage =
+          await HydratedStorage.build(storageDirectory: await getApplicationDocumentsDirectory());
 
-  runApp(const MyApp());
+      Bloc.observer = AppBlocObserver.instance();
+
+      runApp(const MyApp());
+    },
+    (error, stackTrace) {
+      sl<Logger>().e('$error\n$stackTrace');
+    },
+  );
 }
 
 class MyApp extends StatelessWidget {
