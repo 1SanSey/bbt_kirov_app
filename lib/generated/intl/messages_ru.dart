@@ -33,6 +33,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addToCart": MessageLookupByLibrary.simpleMessage("ДОБАВИТЬ В КОРЗИНУ"),
         "addToFavourites":
             MessageLookupByLibrary.simpleMessage("ДОБАВИТЬ В ИЗБРАННОЕ"),
+        "allOrders": MessageLookupByLibrary.simpleMessage("Все заказы"),
         "applicationLegalese":
             MessageLookupByLibrary.simpleMessage("Sergey Ogarkov © 2023"),
         "applicationVersion": MessageLookupByLibrary.simpleMessage("1.0.0"),

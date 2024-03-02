@@ -24,14 +24,26 @@ class UserRemoteDatasourceImpl extends IUserRemoteDatasource {
   @override
   Future<UserEntity> userLogin(String username, String password) async {
     final parseUser = ParseUser(username, password, null);
-    final UserEntity user;
+    UserEntity user = UserEntity.empty();
 
     final response = await parseUser.login();
 
     if (response.success) {
-      user = UserEntity.fromDb(parseUser);
-      log('User was successfully login!');
-      log(user.toString());
+      final roleId = parseUser.get<ParseObject>('Role')!.objectId;
+      final queryRole = QueryBuilder<ParseObject>(ParseObject('_Role'))
+        ..whereEqualTo('objectId', roleId);
+
+      final ParseResponse roleResponse = await queryRole.query();
+
+      if (roleResponse.success && roleResponse.result != null) {
+        final res = roleResponse.results!.first as ParseObject;
+
+        final role = res.get<String>('name')!;
+
+        user = UserEntity.fromDb(parseUser, role);
+      } else {
+        log(roleResponse.error!.message);
+      }
     } else {
       log(response.error!.message);
       throw ServerException();
@@ -47,7 +59,6 @@ class UserRemoteDatasourceImpl extends IUserRemoteDatasource {
     final user = UserEntity.empty();
 
     if (response.success) {
-      log('User was successfully logout!');
     } else {
       log(response.error!.message);
     }

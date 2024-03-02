@@ -45,9 +45,9 @@ abstract class RouteBuilder {
           builder: (context) => OrderDetailPage(order: order),
         );
       case (RouteNames.ordersPage):
-        final userId = settings.arguments as String;
+        final name = settings.arguments as String;
         return MaterialPageRoute(
-          builder: (context) => OrdersPage(userId: userId),
+          builder: (context) => OrdersPage(name: name),
         );
       default:
         return MaterialPageRoute(

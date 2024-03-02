@@ -300,6 +300,16 @@ class S {
     );
   }
 
+  /// `Все заказы`
+  String get allOrders {
+    return Intl.message(
+      'Все заказы',
+      name: 'allOrders',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Заказ от `
   String get orderFrom {
     return Intl.message(

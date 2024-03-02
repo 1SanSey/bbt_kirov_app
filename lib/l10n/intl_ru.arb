@@ -34,6 +34,7 @@
     "searchFromName": "Поиск по названию",
     "resultsNotFound": "Результаты не найдены",
     "myOrders": "Мои заказы",
+    "allOrders": "Все заказы",
     "orderFrom": "Заказ от ",
     "orderStructure": "Состав заказа",
     "orderDate": "Дата заказа: ",

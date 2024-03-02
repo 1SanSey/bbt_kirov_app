@@ -59,7 +59,7 @@ init() async {
     ..registerFactory(() => AuthBloc(repository: sl()))
     ..registerFactory(() => RegistrationBloc(sl()))
     ..registerFactory(ChangeThemeBloc.new)
-    ..registerFactory(() => OrdersBloc(ordersUseCase: sl()))
+    ..registerFactory(() => OrdersBloc(sl(), sl()))
     ..registerFactory(() => SendOrderBloc(ordersUseCase: sl()))
 
 //UseCases

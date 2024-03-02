@@ -13,6 +13,7 @@ class UserEntity with _$UserEntity {
     required final String displayName,
     required final String photoURL,
     required final String email,
+    required final String role,
   }) = _UserEntity;
 
   factory UserEntity.fromJson(Map<String, dynamic> json) => _$UserEntityFromJson(json);
@@ -23,15 +24,17 @@ class UserEntity with _$UserEntity {
       displayName: '',
       photoURL: '',
       email: '',
+      role: '',
     );
   }
 
-  factory UserEntity.fromDb(ParseUser user) {
+  factory UserEntity.fromDb(ParseUser user, String role) {
     return UserEntity(
       uid: user.get<String>('objectId')!,
       displayName: user.get<String>('username') ?? '',
       photoURL: user.get<ParseFile>('userphoto')?.url ?? '',
       email: user.get<String>('email') ?? '',
+      role: role,
     );
   }
 }

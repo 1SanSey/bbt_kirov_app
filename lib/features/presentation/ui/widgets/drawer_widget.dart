@@ -81,7 +81,22 @@ class DrawerWidget extends StatelessWidget {
                         ),
                         onTap: () {
                           context.read<OrdersBloc>().add(OrdersEvent.fetch(userId: user.uid));
-                          NavigationManager.instance.goOrdersPage(user.uid);
+                          NavigationManager.instance.goOrdersPage(S.current.myOrders);
+                        },
+                      ),
+                      if(user.role == 'admin')
+                      ListTile(
+                        leading: Icon(
+                          Icons.view_list,
+                          color: Theme.of(context).primaryColor,
+                        ),
+                        title: Text(
+                          S.current.allOrders,
+                          style: const TextStyle(fontSize: 18),
+                        ),
+                        onTap: () {
+                          context.read<OrdersBloc>().add(const OrdersEvent.fetchAll());
+                          NavigationManager.instance.goOrdersPage(S.current.allOrders);
                         },
                       ),
                       ListTile(

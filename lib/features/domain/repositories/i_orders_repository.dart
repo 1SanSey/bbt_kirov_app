@@ -5,4 +5,5 @@ import 'package:dartz/dartz.dart';
 abstract class IOrdersRepository {
   Future<Either<Failure, String>> sendOrder(OrderEntity order);
   Future<Either<Failure, List<OrderEntity>>> fetchOrders(String userId);
+  Future<Either<Failure, List<OrderEntity>>> fetchAllOrders();
 }

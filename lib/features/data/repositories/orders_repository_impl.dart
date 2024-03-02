@@ -50,4 +50,19 @@ class OrdersRepositoryImpl implements IOrdersRepository {
       return Left(InternetConnectionFailure());
     }
   }
+  
+  @override
+  Future<Either<Failure, List<OrderEntity>>> fetchAllOrders() async{
+   if (await networkInfo.isConnected) {
+      try {
+        final remoteOrders = await remoteDataSource.fetchAllOrders();
+
+        return Right(remoteOrders);
+      } on ServerException {
+        return Left(ServerFailure());
+      }
+    } else {
+      return Left(InternetConnectionFailure());
+    }
+  }
 }

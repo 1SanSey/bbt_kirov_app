@@ -34,7 +34,6 @@ class OrdersRemoteDatasourceImpl extends IOrdersRemoteDatasource {
 
   @override
   Future<List<OrderModel>> fetchOrders(String userId) async {
-    log('fetchOrders');
     final orders = <OrderModel>[];
     final QueryBuilder<ParseObject> parseQuery = QueryBuilder<ParseObject>(ParseObject('Orders'))
       ..whereEqualTo('user', (ParseObject('_User')..objectId = userId).toPointer());
@@ -64,5 +63,24 @@ class OrdersRemoteDatasourceImpl extends IOrdersRemoteDatasource {
     } catch (e) {
       log(e.toString());
     }
+  }
+  
+  @override
+  Future<List<OrderModel>> fetchAllOrders() async {
+    log('fetchAllOrders');
+    final orders = <OrderModel>[];
+    final QueryBuilder<ParseObject> parseQuery = QueryBuilder<ParseObject>(ParseObject('Orders'));
+    final apiResponse = await parseQuery.query();
+
+    if (apiResponse.success && apiResponse.results != null) {
+      for (final object in apiResponse.results as List<ParseObject>) {
+        log('Object: $object');
+        orders.add(OrderModel.fromDb(object));
+      }
+    } else {
+      throw ServerException();
+    }
+
+    return orders;
   }
 }

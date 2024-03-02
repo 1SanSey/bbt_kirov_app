@@ -8,8 +8,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 class OrdersPage extends StatelessWidget {
-  final String userId;
-  const OrdersPage({super.key, required this.userId});
+  final String name;
+  const OrdersPage({super.key, required this.name});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class OrdersPage extends StatelessWidget {
           onPressed: NavigationManager.instance.pop,
           icon: const Icon(Icons.arrow_back),
         ),
-        title: Text(S.current.myOrders),
+        title: Text(name),
         centerTitle: true,
       ),
       body: BlocBuilder<OrdersBloc, OrdersState>(
@@ -27,6 +27,9 @@ class OrdersPage extends StatelessWidget {
           List<OrderEntity> orders = [];
           state.mapOrNull(
             loaded: (value) {
+              orders = value.orders;
+            },
+            loadedAll: (value) {
               orders = value.orders;
             },
           );

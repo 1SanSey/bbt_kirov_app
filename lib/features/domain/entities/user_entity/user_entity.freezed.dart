@@ -24,6 +24,7 @@ mixin _$UserEntity {
   String get displayName => throw _privateConstructorUsedError;
   String get photoURL => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
+  String get role => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -37,7 +38,12 @@ abstract class $UserEntityCopyWith<$Res> {
           UserEntity value, $Res Function(UserEntity) then) =
       _$UserEntityCopyWithImpl<$Res, UserEntity>;
   @useResult
-  $Res call({String uid, String displayName, String photoURL, String email});
+  $Res call(
+      {String uid,
+      String displayName,
+      String photoURL,
+      String email,
+      String role});
 }
 
 /// @nodoc
@@ -57,6 +63,7 @@ class _$UserEntityCopyWithImpl<$Res, $Val extends UserEntity>
     Object? displayName = null,
     Object? photoURL = null,
     Object? email = null,
+    Object? role = null,
   }) {
     return _then(_value.copyWith(
       uid: null == uid
@@ -75,6 +82,10 @@ class _$UserEntityCopyWithImpl<$Res, $Val extends UserEntity>
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
+      role: null == role
+          ? _value.role
+          : role // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -87,7 +98,12 @@ abstract class _$$UserEntityImplCopyWith<$Res>
       __$$UserEntityImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String uid, String displayName, String photoURL, String email});
+  $Res call(
+      {String uid,
+      String displayName,
+      String photoURL,
+      String email,
+      String role});
 }
 
 /// @nodoc
@@ -105,6 +121,7 @@ class __$$UserEntityImplCopyWithImpl<$Res>
     Object? displayName = null,
     Object? photoURL = null,
     Object? email = null,
+    Object? role = null,
   }) {
     return _then(_$UserEntityImpl(
       uid: null == uid
@@ -123,6 +140,10 @@ class __$$UserEntityImplCopyWithImpl<$Res>
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
+      role: null == role
+          ? _value.role
+          : role // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -134,7 +155,8 @@ class _$UserEntityImpl implements _UserEntity {
       {required this.uid,
       required this.displayName,
       required this.photoURL,
-      required this.email});
+      required this.email,
+      required this.role});
 
   factory _$UserEntityImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserEntityImplFromJson(json);
@@ -147,10 +169,12 @@ class _$UserEntityImpl implements _UserEntity {
   final String photoURL;
   @override
   final String email;
+  @override
+  final String role;
 
   @override
   String toString() {
-    return 'UserEntity(uid: $uid, displayName: $displayName, photoURL: $photoURL, email: $email)';
+    return 'UserEntity(uid: $uid, displayName: $displayName, photoURL: $photoURL, email: $email, role: $role)';
   }
 
   @override
@@ -163,13 +187,14 @@ class _$UserEntityImpl implements _UserEntity {
                 other.displayName == displayName) &&
             (identical(other.photoURL, photoURL) ||
                 other.photoURL == photoURL) &&
-            (identical(other.email, email) || other.email == email));
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.role, role) || other.role == role));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, uid, displayName, photoURL, email);
+      Object.hash(runtimeType, uid, displayName, photoURL, email, role);
 
   @JsonKey(ignore: true)
   @override
@@ -190,7 +215,8 @@ abstract class _UserEntity implements UserEntity {
       {required final String uid,
       required final String displayName,
       required final String photoURL,
-      required final String email}) = _$UserEntityImpl;
+      required final String email,
+      required final String role}) = _$UserEntityImpl;
 
   factory _UserEntity.fromJson(Map<String, dynamic> json) =
       _$UserEntityImpl.fromJson;
@@ -203,6 +229,8 @@ abstract class _UserEntity implements UserEntity {
   String get photoURL;
   @override
   String get email;
+  @override
+  String get role;
   @override
   @JsonKey(ignore: true)
   _$$UserEntityImplCopyWith<_$UserEntityImpl> get copyWith =>

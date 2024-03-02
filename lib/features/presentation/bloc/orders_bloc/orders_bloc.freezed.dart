@@ -20,18 +20,21 @@ mixin _$OrdersEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() empty,
     required TResult Function(String userId) fetch,
+    required TResult Function() fetchAll,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? empty,
     TResult? Function(String userId)? fetch,
+    TResult? Function()? fetchAll,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? empty,
     TResult Function(String userId)? fetch,
+    TResult Function()? fetchAll,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -39,18 +42,21 @@ mixin _$OrdersEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_EmptyOrdersEvent value) empty,
     required TResult Function(_FetchOrdersEvent value) fetch,
+    required TResult Function(_FetchAllOrdersEvent value) fetchAll,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_EmptyOrdersEvent value)? empty,
     TResult? Function(_FetchOrdersEvent value)? fetch,
+    TResult? Function(_FetchAllOrdersEvent value)? fetchAll,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_EmptyOrdersEvent value)? empty,
     TResult Function(_FetchOrdersEvent value)? fetch,
+    TResult Function(_FetchAllOrdersEvent value)? fetchAll,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -114,6 +120,7 @@ class _$EmptyOrdersEventImpl extends _EmptyOrdersEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() empty,
     required TResult Function(String userId) fetch,
+    required TResult Function() fetchAll,
   }) {
     return empty();
   }
@@ -123,6 +130,7 @@ class _$EmptyOrdersEventImpl extends _EmptyOrdersEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? empty,
     TResult? Function(String userId)? fetch,
+    TResult? Function()? fetchAll,
   }) {
     return empty?.call();
   }
@@ -132,6 +140,7 @@ class _$EmptyOrdersEventImpl extends _EmptyOrdersEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? empty,
     TResult Function(String userId)? fetch,
+    TResult Function()? fetchAll,
     required TResult orElse(),
   }) {
     if (empty != null) {
@@ -145,6 +154,7 @@ class _$EmptyOrdersEventImpl extends _EmptyOrdersEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_EmptyOrdersEvent value) empty,
     required TResult Function(_FetchOrdersEvent value) fetch,
+    required TResult Function(_FetchAllOrdersEvent value) fetchAll,
   }) {
     return empty(this);
   }
@@ -154,6 +164,7 @@ class _$EmptyOrdersEventImpl extends _EmptyOrdersEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_EmptyOrdersEvent value)? empty,
     TResult? Function(_FetchOrdersEvent value)? fetch,
+    TResult? Function(_FetchAllOrdersEvent value)? fetchAll,
   }) {
     return empty?.call(this);
   }
@@ -163,6 +174,7 @@ class _$EmptyOrdersEventImpl extends _EmptyOrdersEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_EmptyOrdersEvent value)? empty,
     TResult Function(_FetchOrdersEvent value)? fetch,
+    TResult Function(_FetchAllOrdersEvent value)? fetchAll,
     required TResult orElse(),
   }) {
     if (empty != null) {
@@ -244,6 +256,7 @@ class _$FetchOrdersEventImpl extends _FetchOrdersEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() empty,
     required TResult Function(String userId) fetch,
+    required TResult Function() fetchAll,
   }) {
     return fetch(userId);
   }
@@ -253,6 +266,7 @@ class _$FetchOrdersEventImpl extends _FetchOrdersEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? empty,
     TResult? Function(String userId)? fetch,
+    TResult? Function()? fetchAll,
   }) {
     return fetch?.call(userId);
   }
@@ -262,6 +276,7 @@ class _$FetchOrdersEventImpl extends _FetchOrdersEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? empty,
     TResult Function(String userId)? fetch,
+    TResult Function()? fetchAll,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -275,6 +290,7 @@ class _$FetchOrdersEventImpl extends _FetchOrdersEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_EmptyOrdersEvent value) empty,
     required TResult Function(_FetchOrdersEvent value) fetch,
+    required TResult Function(_FetchAllOrdersEvent value) fetchAll,
   }) {
     return fetch(this);
   }
@@ -284,6 +300,7 @@ class _$FetchOrdersEventImpl extends _FetchOrdersEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_EmptyOrdersEvent value)? empty,
     TResult? Function(_FetchOrdersEvent value)? fetch,
+    TResult? Function(_FetchAllOrdersEvent value)? fetchAll,
   }) {
     return fetch?.call(this);
   }
@@ -293,6 +310,7 @@ class _$FetchOrdersEventImpl extends _FetchOrdersEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_EmptyOrdersEvent value)? empty,
     TResult Function(_FetchOrdersEvent value)? fetch,
+    TResult Function(_FetchAllOrdersEvent value)? fetchAll,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -311,6 +329,116 @@ abstract class _FetchOrdersEvent extends OrdersEvent {
   @JsonKey(ignore: true)
   _$$FetchOrdersEventImplCopyWith<_$FetchOrdersEventImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$FetchAllOrdersEventImplCopyWith<$Res> {
+  factory _$$FetchAllOrdersEventImplCopyWith(_$FetchAllOrdersEventImpl value,
+          $Res Function(_$FetchAllOrdersEventImpl) then) =
+      __$$FetchAllOrdersEventImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$FetchAllOrdersEventImplCopyWithImpl<$Res>
+    extends _$OrdersEventCopyWithImpl<$Res, _$FetchAllOrdersEventImpl>
+    implements _$$FetchAllOrdersEventImplCopyWith<$Res> {
+  __$$FetchAllOrdersEventImplCopyWithImpl(_$FetchAllOrdersEventImpl _value,
+      $Res Function(_$FetchAllOrdersEventImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$FetchAllOrdersEventImpl extends _FetchAllOrdersEvent {
+  const _$FetchAllOrdersEventImpl() : super._();
+
+  @override
+  String toString() {
+    return 'OrdersEvent.fetchAll()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$FetchAllOrdersEventImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() empty,
+    required TResult Function(String userId) fetch,
+    required TResult Function() fetchAll,
+  }) {
+    return fetchAll();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? empty,
+    TResult? Function(String userId)? fetch,
+    TResult? Function()? fetchAll,
+  }) {
+    return fetchAll?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? empty,
+    TResult Function(String userId)? fetch,
+    TResult Function()? fetchAll,
+    required TResult orElse(),
+  }) {
+    if (fetchAll != null) {
+      return fetchAll();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_EmptyOrdersEvent value) empty,
+    required TResult Function(_FetchOrdersEvent value) fetch,
+    required TResult Function(_FetchAllOrdersEvent value) fetchAll,
+  }) {
+    return fetchAll(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_EmptyOrdersEvent value)? empty,
+    TResult? Function(_FetchOrdersEvent value)? fetch,
+    TResult? Function(_FetchAllOrdersEvent value)? fetchAll,
+  }) {
+    return fetchAll?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_EmptyOrdersEvent value)? empty,
+    TResult Function(_FetchOrdersEvent value)? fetch,
+    TResult Function(_FetchAllOrdersEvent value)? fetchAll,
+    required TResult orElse(),
+  }) {
+    if (fetchAll != null) {
+      return fetchAll(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _FetchAllOrdersEvent extends OrdersEvent {
+  const factory _FetchAllOrdersEvent() = _$FetchAllOrdersEventImpl;
+  const _FetchAllOrdersEvent._() : super._();
 }
 
 /// @nodoc

@@ -1,5 +1,6 @@
 import 'package:bbt_kirov_app/common/failure_to_message.dart';
 import 'package:bbt_kirov_app/features/domain/entities/order_entity.dart';
+import 'package:bbt_kirov_app/features/domain/repositories/i_orders_repository.dart';
 import 'package:bbt_kirov_app/features/domain/usecases/orders_usecase.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -12,6 +13,7 @@ class OrdersEvent with _$OrdersEvent {
   const OrdersEvent._();
   const factory OrdersEvent.empty() = _EmptyOrdersEvent;
   const factory OrdersEvent.fetch({required String userId}) = _FetchOrdersEvent;
+  const factory OrdersEvent.fetchAll() = _FetchAllOrdersEvent;
 }
 
 @freezed
@@ -28,12 +30,15 @@ class OrdersState with _$OrdersState {
 
 class OrdersBloc extends Bloc<OrdersEvent, OrdersState> {
   final OrdersUsecase ordersUseCase;
+  final IOrdersRepository ordersRepository;
 
-  OrdersBloc({required this.ordersUseCase}) : super(const OrdersState.empty()) {
+
+  OrdersBloc(this.ordersRepository, this.ordersUseCase) : super(const OrdersState.empty()) {
     on<OrdersEvent>(
       (event, emitter) => event.map<Future<void>>(
         empty: (event) => _emptyEvent(event, emitter),
         fetch: (event) => _fetchEvent(event, emitter),
+        fetchAll: (event) => _fetchAllEvent(event, emitter),
       ),
       transformer: bloc_concurrency.droppable(),
     );
@@ -47,6 +52,18 @@ class OrdersBloc extends Bloc<OrdersEvent, OrdersState> {
       (failure) => emitter(OrdersState.error(message: mapFailureToMessage(failure))),
       (orders) {
         emitter(OrdersState.loaded(orders: orders));
+      },
+    );
+  }
+
+  Future<void> _fetchAllEvent(_FetchAllOrdersEvent _, Emitter<OrdersState> emitter) async {
+    emitter(const OrdersState.loading());
+    final failureOrOrders = await ordersRepository.fetchAllOrders();
+
+    failureOrOrders.fold(
+      (failure) => emitter(OrdersState.error(message: mapFailureToMessage(failure))),
+      (orders) {
+        emitter(OrdersState.loadedAll(orders: orders));
       },
     );
   }

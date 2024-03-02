@@ -12,6 +12,7 @@ _$UserEntityImpl _$$UserEntityImplFromJson(Map<String, dynamic> json) =>
       displayName: json['displayName'] as String,
       photoURL: json['photoURL'] as String,
       email: json['email'] as String,
+      role: json['role'] as String,
     );
 
 Map<String, dynamic> _$$UserEntityImplToJson(_$UserEntityImpl instance) =>
@@ -20,4 +21,5 @@ Map<String, dynamic> _$$UserEntityImplToJson(_$UserEntityImpl instance) =>
       'displayName': instance.displayName,
       'photoURL': instance.photoURL,
       'email': instance.email,
+      'role': instance.role,
     };
